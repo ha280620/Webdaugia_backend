@@ -1,0 +1,95 @@
+﻿@model Webdaugia.Models.User
+@{
+    ViewBag.Title = "DangKi";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iofrm</title>
+    <link rel="icon" href="~/img/logo-title.png" type="~/image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/fonteawesome.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/iofrm-style.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/iofrm-theme7.css" />
+</head>
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="index.html">
+                <div class="logo">
+                    <img class="logo-size" src="~/img/logo-light.svg" alt="" />
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="~/img/graphic3.svg" alt="" />
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <div class="page-links">
+                            <a href="~/dang-nhap">Đăng nhập</a><a href="~/dang-ki" class="active">Đăng ký</a>
+                        </div>
+                        <form id="member-registration" action="/Login/DangKi" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data"> @*chú ý*@
+                            <input class="form-control"
+                                   type="text"
+                                   name="username"
+                                   placeholder="Tên tài khoản"
+                                   required />
+                            @ViewData["error-1"]
+                            <input class="form-control"
+                                   type="text"
+                                   name="name"
+                                   placeholder="Họ và tên"
+                                   required />
+                            @ViewData["error-2"]
+                            <input class="form-control"
+                                   type="email"
+                                   name="email"
+                                   placeholder="Email"
+                                   required />
+                            @ViewData["error-3"]
+                            <input class="form-control"
+                                   type="text"
+                                   name="sdt"
+                                   placeholder="sdt"
+                                   required />
+                            @ViewData["error-4"]
+                            <input class="form-control"
+                                   type="password"
+                                   name="password"
+                                   placeholder="Mật khẩu"
+                                   required />
+                            @ViewData["error-5"]
+                            <input class="form-control"
+                                   type="password"
+                                   name="confirmpassword"
+                                   placeholder="Xác nhận mật khẩu"
+                                   required />
+                            @ViewData["error-6"]
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">
+                                    Đăng ký
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+

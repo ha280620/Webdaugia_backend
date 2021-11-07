@@ -1,31 +1,271 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
+<main>
+    <!-- BEGIN CATEGORY -->
+    <section id="category">
+        <div class="container">
+            <div class="category-title"><h3>Danh Mục</h3></div>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <a class="swiper-slide" href="#">
+                        <img src="~/img/city.jpg" class="img-fluid" alt="" />
+                        <div class="swiper-slide-content">
+                            <p>Bất động sản</p>
+                        </div>
+                    </a>
+                    <a class="swiper-slide" href="#">
+                        <img src="~/img/car.jpg" class="img-fluid" alt="" />
+                        <div class="swiper-slide-content">
+                            <p>Ô tô</p>
+                        </div>
+                    </a>
+                    <a class="swiper-slide" href="#">
+                        <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                        <div class="swiper-slide-content">
+                            <p>Hàng hiệu</p>
+                        </div>
+                    </a>
+                    <a class="swiper-slide" href="#">
+                        <img src="~/img/suutam.jpg" class="img-fluid" alt="" />
+                        <div class="swiper-slide-content">
+                            <p>
+                                Sưu tầm <br />
+                                Nghệ thuật
+                            </p>
+                        </div>
+                    </a>
+                    <a class="swiper-slide" href="#">
+                        <img src="~/img/pc.jpg" class="img-fluid" alt="" />
+                        <div class="swiper-slide-content">
+                            <p>Tài sản thanh lý</p>
+                        </div>
+                    </a>
+                    <a class="swiper-slide" href="#">
+                        <img src="~/img/taisankhac.jpg" class="img-fluid" alt="" />
+                        <div class="swiper-slide-content">
+                            <p>Tài sản khác</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+    <!-- END CATEGORY -->
+    <!-- BEGIN AUCTIONING -->
+    <section id="auctioning">
+        <div class="container">
+            <div class="auctioning-title">
+                <i class="bx bxs-circle mr-2"></i>
+                <h3>Tài sản đang đấu giá</h3>
+            </div>
+            <div class="row mx-2">
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+            </div>
+        </div>
+    </section>
+    <!-- END AUCTIONING -->
+    <!-- BEGIN GOING AUCTION -->
+    <section id="going">
+        <div class="container">
+            <div class="going-title">
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END GOING AUCTION  -->
+</main>
+

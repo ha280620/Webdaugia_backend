@@ -48,6 +48,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -121,8 +122,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dbQLDG.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbQLDG.dbml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -194,15 +201,24 @@
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\bootstrap.rtl.css" />
+    <Content Include="assets\css\boxicon.css" />
     <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\fonteawesome.css" />
     <Content Include="assets\css\icons-rtl.min.css" />
     <Content Include="assets\css\icons.css" />
     <Content Include="assets\css\icons.min.css" />
     <Content Include="assets\css\icons.rtl.css" />
+    <Content Include="assets\css\iofrm-style.css" />
+    <Content Include="assets\css\iofrm-theme7.css" />
     <Content Include="assets\css\main.css" />
+    <Content Include="assets\css\multiplestep.css" />
     <Content Include="assets\css\preloader-rtl.min.css" />
     <Content Include="assets\css\preloader.css" />
     <Content Include="assets\css\preloader.min.css" />
+    <Content Include="assets\css\reset.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\swiper.css" />
+    <Content Include="assets\css\taisansapdaugia.css" />
     <Content Include="assets\fonts\boxicons.svg" />
     <Content Include="assets\fonts\dripicons-v2.svg" />
     <Content Include="assets\fonts\fa-brands-400.svg" />
@@ -1565,6 +1581,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\boxicon.css" />
+    <Content Include="css\fonteawesome.css" />
+    <Content Include="css\iofrm-style.css" />
+    <Content Include="css\iofrm-theme7.css" />
+    <Content Include="css\multiplestep.css" />
+    <Content Include="css\reset.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\swiper.css" />
+    <Content Include="css\taisansapdaugia.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1601,6 +1627,46 @@
     <Content Include="images\img\user-image.jpg" />
     <Content Include="images\img\UserSideBanner.png" />
     <Content Include="images\img\VisitorSideBanner.png" />
+    <Content Include="img\200lab-education-golang-flutter-software-engineer-1.jpg" />
+    <Content Include="img\auction.jpg" />
+    <Content Include="img\bag.jpg" />
+    <Content Include="img\bag.png" />
+    <Content Include="img\Can-reforms-in-property-auctions-help-real-estate-during-COVID-19-FB-1200x700-compressed.jpg" />
+    <Content Include="img\car.jpg" />
+    <Content Include="img\city.jpg" />
+    <Content Include="img\CMNDBack.png" />
+    <Content Include="img\CMNDFront.png" />
+    <Content Include="img\DJI-0357-1603422122.jpg" />
+    <Content Include="img\footer.png" />
+    <Content Include="img\form7.jpg" />
+    <Content Include="img\graphic3.svg" />
+    <Content Include="img\graphic7.svg" />
+    <Content Include="img\hammer.png" />
+    <Content Include="img\img1.jpg" />
+    <Content Include="img\logo-dark.svg" />
+    <Content Include="img\logo-dark2.svg" />
+    <Content Include="img\logo-light.svg" />
+    <Content Include="img\logo-title.png" />
+    <Content Include="img\logo-white.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\pc.jpg" />
+    <Content Include="img\product-1-450x450.jpg" />
+    <Content Include="img\product-2-450x450.jpg" />
+    <Content Include="img\product-3-450x450.jpg" />
+    <Content Include="img\product-4-450x450.jpg" />
+    <Content Include="img\suutam.jpg" />
+    <Content Include="img\taisankhac.jpg" />
+    <Content Include="img\user-image.jpg" />
+    <Content Include="img\UserSideBanner.png" />
+    <Content Include="img\VisitorSideBanner.png" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\multiplestep.js" />
+    <Content Include="js\nganhang.js" />
+    <Content Include="js\numbertomoney.js" />
+    <Content Include="js\popper.js" />
+    <Content Include="js\userhover.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="assets\css\app-rtl.min.css.map" />
@@ -1690,6 +1756,14 @@
     <Content Include="assets\libs\twitter-bootstrap-wizard\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\libs\twitter-bootstrap-wizard\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\libs\wnumb\LICENSE.MD" />
+    <Content Include="Models\dbQLDG.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>dbQLDG.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Models\dbQLDG.dbml.layout">
+      <DependentUpon>dbQLDG.dbml</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1716,12 +1790,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Login\DangKi.cshtml" />
+    <Content Include="Views\Login\DangNhap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
     <Folder Include="DAO\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
@@ -1736,6 +1812,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
