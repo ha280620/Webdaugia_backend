@@ -1793,6 +1793,7 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Login\DangKi.cshtml" />
     <Content Include="Views\Login\DangNhap.cshtml" />
+    <Content Include="Views\Login\Quenmatkhau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

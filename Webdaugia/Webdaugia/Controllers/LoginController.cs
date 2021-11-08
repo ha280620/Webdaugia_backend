@@ -120,6 +120,12 @@ namespace Webdaugia.Controllers
             Session["USERNAME"] = null;
             return RedirectToAction("DangNhap", "Login");
         }
+        [HttpGet]
+
+        public ActionResult Quenmatkhau()
+        {
+            return View();
+        }
         public ActionResult Index()
         {
             return View();

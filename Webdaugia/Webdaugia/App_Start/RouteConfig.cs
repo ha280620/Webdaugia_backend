@@ -22,6 +22,11 @@ namespace Webdaugia
                 url: "dang-ki",
                 defaults: new { controller = "Login", action = "DangKi" }
             );
+            routes.MapRoute(
+                 name: "Quenmatkhau",
+                 url: "Quenmatkhau",
+                 defaults: new { controller = "Login", action = "Quenmatkhau" }
+                );
 
             routes.MapRoute(
                 name: "Default",

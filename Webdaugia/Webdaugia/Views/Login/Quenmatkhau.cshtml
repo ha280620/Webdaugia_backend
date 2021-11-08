@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Quenmatkhau";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<form id="member-forgotpassword" action="/Login/Quenmatkhau" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
+    <h3>Lấy lại mật khẩu</h3>
+    <p>
+        Để lấy lại mật khẩu của bạn, hãy nhập địa chỉ email mà bạn đã
+        đăng ký vào DSG
+    </p>
+    <form>
+        <input class="form-control"
+               type="text"
+               name="username"
+               placeholder="Email"
+               required />
+        <div class="form-button full-width">
+            <button id="submit" type="submit" class="ibtn btn-forget">
+                Send Reset Link
+            </button>
+        </div>
+    </form>
+</form>
