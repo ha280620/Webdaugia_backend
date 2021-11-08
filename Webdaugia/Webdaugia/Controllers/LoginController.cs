@@ -106,7 +106,7 @@ namespace Webdaugia.Controllers
 
                     ViewBag.Thongbao = "chúc mừng đăng nhập thành công";
                     Session["USERNAME"] = tk;
-                        return RedirectToAction("DangKi", "Login");
+                        return RedirectToAction("Index", "Home");
                 }
                 else
                     ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
@@ -114,6 +114,11 @@ namespace Webdaugia.Controllers
 
             }
             return View();
+        }
+        public ActionResult DangXuat()
+        {
+            Session["USERNAME"] = null;
+            return RedirectToAction("DangNhap", "Login");
         }
         public ActionResult Index()
         {
