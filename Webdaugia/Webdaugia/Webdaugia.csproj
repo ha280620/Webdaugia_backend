@@ -1794,6 +1794,8 @@
     <Content Include="Views\Login\DangKi.cshtml" />
     <Content Include="Views\Login\DangNhap.cshtml" />
     <Content Include="Views\Login\Quenmatkhau.cshtml" />
+    <Content Include="Views\Shared\_LayoutAddinfo.cshtml" />
+    <Content Include="Views\Login\Themthongtin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

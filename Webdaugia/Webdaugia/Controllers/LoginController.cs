@@ -23,7 +23,7 @@ namespace Webdaugia.Controllers
         [ActionName("DangKi")]
 
         [HttpPost]
-        public ActionResult DangKiPost(FormCollection collection)
+        public ActionResult DangKi(FormCollection collection)
         {
             User tk = new User();
             dbQLDGDataContext data = new dbQLDGDataContext();
@@ -33,7 +33,7 @@ namespace Webdaugia.Controllers
             var email = collection["email"];
             var sdt = collection["sdt"];
             var password = collection["password"];
-            var confirmpassword = collection["confirmpassword"];
+            var confirmpassword = collection["confirmpassword"];   
 
                if (String.IsNullOrEmpty(username))
                   {
@@ -72,7 +72,7 @@ namespace Webdaugia.Controllers
                 tk.Password = encryptorPass(password);
                 data.Users.InsertOnSubmit(tk);
                 data.SubmitChanges();
-                return RedirectToAction("DangNhap", "Login");
+                return RedirectToAction("Themthongtin", "Login");
             }
             return View(this.DangKi());
         }
@@ -92,7 +92,7 @@ namespace Webdaugia.Controllers
             var password = collection["password"];
             if (String.IsNullOrEmpty(username))
             {
-                ViewData["error-1"] = "Vui lòng điền đầy đủ  tên!";
+                ViewData["error-1"] = "Vui lòng điền đầy đủ tên!";
             }
             else if (String.IsNullOrEmpty(password))
             {
@@ -103,26 +103,29 @@ namespace Webdaugia.Controllers
                 User tk = data.Users.SingleOrDefault(n => n.Username == username && n.Password == encryptorPass(password));
                 if (tk != null)
                 {
-
                     ViewBag.Thongbao = "chúc mừng đăng nhập thành công";
-                    Session["USERNAME"] = tk;
+                    Session["username"] = tk;
                         return RedirectToAction("Index", "Home");
                 }
                 else
                     ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
-
-
             }
             return View();
         }
         public ActionResult DangXuat()
         {
-            Session["USERNAME"] = null;
+            Session["username"] = null;
             return RedirectToAction("DangNhap", "Login");
         }
         [HttpGet]
 
         public ActionResult Quenmatkhau()
+        {
+            return View();
+        }
+        [HttpGet]
+
+        public ActionResult Themthongtin()
         {
             return View();
         }

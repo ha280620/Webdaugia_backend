@@ -1,0 +1,369 @@
+﻿
+@{
+    ViewBag.Title = "Themthongtin";
+    Layout = "~/Views/Shared/_LayoutAddinfo.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="~/img/logo-title.png" type="image/x-icon" />
+    <title>Đông Sài Gòn</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <!-- BOXICON -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+          rel="stylesheet" />
+
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.3.0-beta.2/css/lightgallery.min.css" />
+    <link rel="stylesheet" href="~/css/fonteawesome.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="~/css/swiper.css" />
+    <!-- RESET CSS  -->
+    <link rel="stylesheet" href="~/css/reset.css" />
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/taisansapdaugia.css" />
+    <link rel="stylesheet" href="~/css/multiplestep.css" />
+</head>
+<body>
+    <!-- BEGIN NAV -->
+    <header>
+        <div class="container p-0">
+            <nav id="nav" class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="/">
+                    <img src="~/img/logo-white.png"
+                         class="img-fluid"
+                         style="width: 350px"
+                         alt="logo" />
+                </a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Đấu giá
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Tài sàn đang đấu giá</a>
+                                <a class="dropdown-item" href="#">Tài sản sắp đấu giá</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item w-25">
+                            @*<a class="btn btn-sign-in mr-1" href="#">Đăng nhập </a>
+                                <a class="btn btn-sign-up" href="#">Đăng ký</a>*@
+                            <div class="user-info pl-2">
+                                <div class="img-user">
+                                    <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
+                                </div>
+                                <div class="user_dropdown">
+                                    <div class="my-2 p-0">
+                                        <ul>
+                                            <li><a href="">Thông tin tài khoản</a></li>
+                                            <li>
+                                                <a href="">Đơn hàng</a>
+                                            </li>
+                                            <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- END NAV -->
+    <main>
+        <!-- multistep form -->
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="
+              col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5
+              text-center
+              p-0
+              mt-3
+              mb-2
+            ">
+                    <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                        <h2 id="heading">Đăng ký thông tin cho tài khoản của bạn</h2>
+                        <p>Điền tất cả trường biểu mẫu</p>
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="bx active" id="account">
+                                    <strong>Thông tin</strong>
+                                </li>
+                                <li class="bx" id="personal"><strong>CMND</strong></li>
+                                <li class="bx" id="payment"><strong>Hình ảnh</strong></li>
+                                <li class="bx" id="confirm"><strong>Ngân hàng</strong></li>
+                            </ul>
+                            <div class="progress">
+                                <div class="
+                      progress-bar progress-bar-striped progress-bar-animated
+                    "
+                                     role="progressbar"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100"></div>
+                            </div>
+                            <br />
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">Thông tin cá nhân:</h2>
+                                        </div>
+                                    </div>
+                                    <label class="fieldlabels">Địa chỉ thường trú: *</label>
+                                    <input type="text"
+                                           name="diachi"
+                                           placeholder="Địa chỉ ghi trên cmnd/cccd" />
+                                    <label class="fieldlabels">Ngày sinh: *</label>
+                                    <input type="date" name="uname" />
+                                    <label class="fieldlabels">Giới tính: *</label>
+                                    <div class="ml-0 row">
+                                        <div class="form-check col-3 col-md-2 ml-0">
+                                            <input class="form-check-input radio"
+                                                   type="radio"
+                                                   name="exampleRadios"
+                                                   id="radio-1"
+                                                   value="option1"
+                                                   checked />
+                                            <label class="form-check-label" for="radio-1">
+                                                Nam
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-3 col-md-2">
+                                            <input class="form-check-input radio"
+                                                   type="radio"
+                                                   name="exampleRadios"
+                                                   id="radio-2"
+                                                   value="option2" />
+                                            <label class="form-check-label" for="radio-2">
+                                                Nữ
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        name="next"
+                                        class="next action-button"
+                                        value="Next">
+                                    Tiếp tục
+                                </button>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">CMND / CCCD:</h2>
+                                        </div>
+                                    </div>
+                                    <label class="fieldlabels">Số CMND/CCCD: *</label>
+                                    <input type="number"
+                                           name="cmnd"
+                                           placeholder="9 số hoặc 12 số" />
+
+                                    <label class="fieldlabels">Ngày cấp CMND/CCCD: *</label>
+                                    <input type="date" name="cpwd" placeholder="" />
+
+                                    <label class="fieldlabels">Nơi cấp CMND/CCCD *</label>
+                                    <input type="text"
+                                           name="cpwd"
+                                           placeholder="vd: Hồ Chí Minh, Hà Nội,..." />
+                                </div>
+                                <button type="button"
+                                        name="next"
+                                        class="next action-button"
+                                        value="Next">
+                                    Tiếp tục
+                                </button>
+                                <button type="button"
+                                        name="previous"
+                                        class="previous action-button-previous"
+                                        value="Previous">
+                                    Quay lại
+                                </button>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">Hình ảnh CMND/CCCD:</h2>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6">
+                                            <p>Ảnh CMND/CCCD mặt trước:</p>
+                                            <label for="cmndfront" class="fieldlabels w-100">
+                                                <img id="imgcmndfront"
+                                                     src="~/img/CMNDFront.png"
+                                                     class="img-fluid w-100"
+                                                     alt="" />
+                                            </label>
+                                            <input onchange="readURL(this,'imgcmndfront')"
+                                                   style="display: none"
+                                                   type="file"
+                                                   id="cmndfront"
+                                                   name="cmndfront"
+                                                   accept="image/*" />
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <p>Ảnh CMND/CCCD mặt sau:</p>
+                                            <label for="cmndback" class="fieldlabels w-100">
+                                                <img id="imgcmndback"
+                                                     src="~/img/CMNDBack.png"
+                                                     class="img-fluid w-100"
+                                                     alt="" />
+                                            </label>
+                                            <input onchange="readURL(this,'imgcmndback')"
+                                                   style="display: none"
+                                                   type="file"
+                                                   id="cmndback"
+                                                   name="cmndback"
+                                                   accept="image/*" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        name="next"
+                                        class="next action-button"
+                                        value="Next">
+                                    Tiếp tục
+                                </button>
+                                <button type="button"
+                                        name="previous"
+                                        class="previous action-button-previous"
+                                        value="Previous">
+                                    Quay lại
+                                </button>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h2 class="fs-title">Ngân hàng:</h2>
+                                        </div>
+                                    </div>
+                                    <label class="fieldlabels">Tên ngân hàng: *</label>
+                                    <select type="number"
+                                            name="cmnd"
+                                            placeholder="9 số hoặc 12 số">
+                                        <option value="0" selected>Chọn ngân hàng</option>
+                                        <option value="1">This is select number 1</option>
+                                        <option value="2">This is select number 2</option>
+                                        <option value="3">This is select number 3</option>
+                                        <option value="4">This is select number 4</option>
+                                        <option value="5">This is select number 5</option>
+                                        <option value="6">This is select number 6</option>
+                                        <option value="7">This is select number 7</option>
+                                        <option value="8">This is select number 8</option>
+                                        <option value="9">This is select number 9</option>
+                                        <option value="10">This is select number 10</option>
+                                        <option value="11">This is select number 11</option>
+                                        <option value="12">This is select number 12</option>
+                                    </select>
+
+                                    <label class="fieldlabels">Số tài khoản: *</label>
+                                    <input type="number"
+                                           name="cpwd"
+                                           placeholder="vd:1910234234" />
+
+                                    <label class="fieldlabels">Tên chủ tài khoản *</label>
+                                    <input type="text"
+                                           name="cpwd"
+                                           placeholder="vd: Nguyễn Văn A" />
+
+                                    <div class="ml-0 row">
+                                        <div class="form-checkbox col-12 ml-0 position-relative">
+                                            <input class="form-check-input radio"
+                                                   type="checkbox"
+                                                   name="exampleRadios"
+                                                   id="radio-1"
+                                                   value="option1" />
+                                            <label class="form-check-label pl-1" for="">
+                                                Tôi cam kết tự chịu trách nhiệm với các thông tin nhập
+                                                đăng ký tài khoản Tôi cam kết tuân thủ
+                                                <a href="">ĐIỀU KHOẢN VÀ CHÍNH SÁCH</a> tại website
+                                                đấu giá trực tuyến
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                        name="next"
+                                        class="next action-button"
+                                        value="submit">
+                                    Hoàn tất
+                                </button>
+                                <button type="button"
+                                        name="previous"
+                                        class="previous action-button-previous"
+                                        value="Previous">
+                                    Quay lại
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="~/js/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/userhover.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
+    <!-- begin js danh mục -->
+    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+    <script src="~/js/multiplestep.js"></script>
+    <script>
+        function readURL(input, img) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(`#${img}`).attr("src", e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+    <!-- end js danh mục  -->
+</body>
+</html>
+

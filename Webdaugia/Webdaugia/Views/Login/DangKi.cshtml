@@ -3,6 +3,9 @@
     ViewBag.Title = "DangKi";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
+<div class="page-links">
+    <a href="~/dang-nhap">Đăng nhập</a><a href="~/dang-ki" class="active">Đăng ký</a>
+</div>
 <form id="member-registration" action="/Login/DangKi" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
     @*chú ý*@
     <input class="form-control"
