@@ -1,31 +1,59 @@
-﻿@model Webdaugia.Models.User
+﻿@model Webdaugia.Models.LoginModel
 @{
     ViewBag.Title = "DangNhap";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 <div class="page-links">
-    <a href="~/dang-nhap" class="active">Đăng nhập</a><a href="~/dang-ki" >Đăng ký</a>
+    <a href="~/dang-nhap" class="active">Đăng nhập</a><a href="~/dang-ki">Đăng ký</a>
 </div>
-<form id="member-login" action="/Login/DangNhap" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
-    <input class="form-control"
-           type="text"
-           name="username"
-           placeholder="Tên đăng nhập"
-           required 
-           @ViewData["error-1"]
-           />
+@*<form id="member-login" action="/Login/DangNhap" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
+        <input class="form-control"
+               type="text"
+               name="username"
+               placeholder="Tên đăng nhập"
+               required
+               @ViewData["error-1"]
+               />
 
-    <input class="form-control"
-           type="password"
-           name="password"
-           placeholder="Mât khẩu"
-           required 
-           @ViewData["error-2"]
-           />
-    <div class="form-button">
-        <button id="submit" type="submit" class="ibtn">
-            Đăng nhập
-        </button>
-        <a href="~/Quenmatkhau">Quên mật khẩu?</a>
+        <input class="form-control"
+               type="password"
+               name="password"
+               placeholder="Mât khẩu"
+               required
+               @ViewData["error-2"]
+               />
+        <div class="form-button">
+            <button id="submit" type="submit" class="ibtn">
+                Đăng nhập
+            </button>
+            <a href="~/Quenmatkhau">Quên mật khẩu?</a>
+        </div>
+    </form>*@
+<div class="text-danger" style="height:24px">
+    @Html.ValidationSummary()
+</div>
+@using (Html.BeginForm("DangNhap", "Login", FormMethod.Post))
+{
+    <div class="form_control">
+        @*@Html.TextBoxFor(model => model.Username)*@
+        <input required name="Username" type="text" placeholder="Tên đăng nhập" />
     </div>
-</form>
+
+    <div class="form_control">
+        @*@Html.TextBoxFor(model => model.Password)*@
+        <input required name="Password" type="password" placeholder="Mật khẩu"/>
+        @*<div class="input-group-append cursor-pointer">
+            <span class="input-group-text">
+                    <i class="fa fa-eye"></i>
+                </span>
+        </div>*@
+    </div>
+    <div class="row mt-10">
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
+        </div>
+        <div class="col-6 d-flex align-items-center justify-content-end">
+            <a href="~/Quenmatkhau">Quên mật khẩu?</a>
+        </div>
+    </div>
+}

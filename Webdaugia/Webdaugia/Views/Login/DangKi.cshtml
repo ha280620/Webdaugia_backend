@@ -1,4 +1,4 @@
-﻿@model Webdaugia.Models.User
+﻿@model Webdaugia.Models.RegisterModel
 @{
     ViewBag.Title = "DangKi";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
@@ -6,49 +6,45 @@
 <div class="page-links">
     <a href="~/dang-nhap">Đăng nhập</a><a href="~/dang-ki" class="active">Đăng ký</a>
 </div>
-<form id="member-registration" action="/Login/DangKi" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
-    @*chú ý*@
-    <input class="form-control"
-           type="text"
-           name="username"
-           placeholder="Tên tài khoản"
-           required />
-    @ViewData["error-1"]
-    <input class="form-control"
-           type="text"
-           name="name"
-           placeholder="Họ và tên"
-           required />
-    @ViewData["error-2"]
-    <input class="form-control"
-           type="email"
-           name="email"
-           placeholder="Email"
-           required />
-    @ViewData["error-3"]
-    <input class="form-control"
-           type="text"
-           name="sdt"
-           placeholder="sdt"
-           required />
-    @ViewData["error-4"]
-    <input class="form-control"
-           type="password"
-           name="password"
-           placeholder="Mật khẩu"
-           required />
-    @ViewData["error-5"]
-    <input class="form-control"
-           type="password"
-           name="confirmpassword"
-           placeholder="Xác nhận mật khẩu"
-           required />
-    @ViewData["error-6"]
+@if (ViewBag.Success != null)
+{
+    <div class="text-success">@ViewBag.Success</div>
+}
+@using (Html.BeginForm("DangKi", "Login", FormMethod.Post))
+{
+    <div class="form_control">
+        @Html.TextBoxFor(model => model.username, htmlAttributes: new { name = "username", type = "text", required = "required", placeholder = "Tên tài khoản" })
+        @*<input required name="username" type="text" />*@
+        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+    </div>
+    <div class="form_control">
+        @Html.TextBoxFor(model => model.name, htmlAttributes: new { name = "name", type = "text", required = "required", placeholder = "Họ và tên" })
+        @*<input required name="name" type="text" />*@
+    </div>
+    <div class="form_control">
+        @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", required = "required" ,placeholder = "Email" })
+        @*<input required name="email" type="email" />*@
+        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+    </div>
+    <div class="form_control">
+        @Html.TextBoxFor(model => model.phone, htmlAttributes: new { name = "phone", type = "text", required = "required" ,placeholder = "Sdt" })
+        @*<input required name="phone" type="phone" />*@
+        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form_control">
+        @Html.TextBoxFor(model => model.password, htmlAttributes: new { name = "password", type = "password", required = "required", placeholder = "Mật khẩu" })
+        @*<input required name="password" type="password" />*@
+        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form_control">
+        @Html.TextBoxFor(model => model.confirmpassword, htmlAttributes: new { name = "confirmpassword", type = "password", required = "required", placeholder = "Xác nhận mật khẩu" })
+        @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
+    </div>
     <div class="form-button">
         <button id="submit" type="submit" class="ibtn">
             Đăng ký
         </button>
     </div>
-</form>
 
-
+}

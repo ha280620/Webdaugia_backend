@@ -6,112 +6,109 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Webdaugia.Models;
+using Webdaugia.DAO;
+using Webdaugia.Models.Common;
 
 namespace Webdaugia.Controllers
 {
     public class LoginController : Controller
     {
         // GET: Login
-        AuctionDBContext data = new AuctionDBContext();
+        //AuctionDBContext data = new AuctionDBContext();
 
         [HttpGet]
-
         public ActionResult DangKi()
         {
             return View();
         }
-        [ActionName("DangKi")]
-
         [HttpPost]
-        public ActionResult DangKi(FormCollection collection)
+        public ActionResult DangKi(RegisterModel model)
         {
-            User tk = new User();
-            AuctionDBContext data = new AuctionDBContext();
-            //gán giá trị từ các ô đến các biến
-            var username = collection["username"];
-            var name = collection["name"];
-            var email = collection["email"];
-            var sdt = collection["sdt"];
-            var password = collection["password"];
-            var confirmpassword = collection["confirmpassword"];   
-
-               if (String.IsNullOrEmpty(username))
-                  {
-                      ViewData["error-1"] = "Vui lòng điền đầy đủ tên tài khoản!";
-                  }
-                  else if (String.IsNullOrEmpty(name))
-                  {
-                      ViewData["error-2"] = "Vui lòng không bỏ trống Họ và tên!";
-                  }
-                  else if (String.IsNullOrEmpty(email))
-                  {
-                      ViewData["error-3"] = "Vui lòng nhập email!";
-                  }
-                  else if (String.IsNullOrEmpty(sdt))
-                  {
-                      ViewData["error-4"] = "Vui lòng nhập số điện thoại!";
-                  }
-                  else if (String.IsNullOrEmpty(password))
-                  {
-                      ViewData["error-5"] = "Vui lòng điền mật khẩu!";
-                  }
-                  else if (String.IsNullOrEmpty(confirmpassword))
-                  {
-                      ViewData["error-6"] = "Vui lòng nhập xác nhận mật khẩu!";
-                  }
-
-                  else
-
+            var dao = new UserDao();
+            if (ModelState.IsValid)
             {
-                //gan gia tri ve doi tuong de luu vao database
-                tk.Username = username;
-                tk.RoleID = 3;
-                tk.FullName = name;
-                tk.Email = email;
-                tk.Phone = sdt;
-                tk.Password = encryptorPass(password);
-                data.Users.Add(tk);
-                data.SaveChanges();
-                return RedirectToAction("Themthongtin", "Login");
+                var temp = dao.getByUserName(model.username);
+                if (temp != null)
+                {
+                    ModelState.AddModelError("username", "Tên đăng nhập đã tồn tại!");
+                }
+                else
+                {
+                    User user = new User();
+                    user.Username = model.username.Trim();
+                    user.FullName = model.name;
+                    user.Password = MD5Encryptor.MD5Hash(model.password).Trim();
+                    user.RoleID = 3;
+                    user.Email = model.email;
+                    user.Phone = model.phone;
+                    user.Status = true;
+                    var result = dao.Insert(user);
+                    if (result > 0)
+                    {
+                        ViewBag.Success = "Đăng ký thành công mời đăng nhập lại!";
+                        model = new RegisterModel();
+                        return View("Themthongtin");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Đăng ký không thành công!");
+                    }
+                }
             }
-            return View(this.DangKi());
+
+            return View(model);
         }
 
         // GET: Login
 
-        [HttpGet]
+        //[HttpGet]
         public ActionResult DangNhap()
         {
-
             return View();
         }
         [HttpPost]
-        public ActionResult DangNhap(FormCollection collection)
+        public ActionResult DangNhap(LoginModel model)
         {
-            var username = collection["username"];
-            var password = collection["password"];
-            if (String.IsNullOrEmpty(username))
+            var dao = new UserDao();
+            if (ModelState.IsValid)
             {
-                ViewData["error-1"] = "Vui lòng điền đầy đủ tên!";
-            }
-            else if (String.IsNullOrEmpty(password))
-            {
-                ViewData["error-2"] = "Vui lòng không bỏ trống mật khẩu !";
-            }
-            else
-            {
-                User tk = data.Users.SingleOrDefault(n => n.Username == username && n.Password == encryptorPass(password));
-                if (tk != null)
+                var result = dao.Login(model.Username, MD5Encryptor.MD5Hash(model.Password), 3);
+                if (result == 1)
                 {
-                    ViewBag.Thongbao = "chúc mừng đăng nhập thành công";
-                    Session["username"] = tk;
-                        return RedirectToAction("Index", "Home");
+                    var user = dao.getByUserName(model.Username);
+                    var userSession = new UserLogin();
+                    userSession.UserID = user.ID;
+                    userSession.UserName = user.Username;
+                    userSession.Name = user.FullName;
+                    //userSession.ProfileImage = user.ProfileImage;
+                    Session.Add("USER", userSession);
+                if (user.RoleID == 3)
+                        return RedirectToAction("Index","Home");
+                }
+                else if (result == 0)
+                {
+                    ModelState.AddModelError("", "Tài khoản không tồn tại!");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Tài khoản đã bị khóa!");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mật khẩu không đúng!");
                 }
                 else
-                    ViewBag.Thongbao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                {
+                    ModelState.AddModelError("", "Đăng nhập không đúng!");
+                }
+
             }
-            return View();
+
+            return View("DangNhap");
         }
+
+
+
         public ActionResult DangXuat()
         {
             Session["username"] = null;
@@ -131,23 +128,11 @@ namespace Webdaugia.Controllers
         }
         public ActionResult Index()
         {
+            if (Session["USER"] != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
-        }
-        //mã hóa md5
-        public static string encryptorPass(string originalPassword)
-        {
-            //Declarations
-            Byte[] originalBytes;
-            Byte[] encodedBytes;
-            MD5 md5;
-
-            //Instantiate MD5CryptoServiceProvider, get bytes for original password and compute hash (encoded password)
-            md5 = new MD5CryptoServiceProvider();
-            originalBytes = ASCIIEncoding.Default.GetBytes(originalPassword);
-            encodedBytes = md5.ComputeHash(originalBytes);
-
-            //Convert encoded bytes back to a 'readable' string
-            return BitConverter.ToString(encodedBytes);
         }
     }
 }
