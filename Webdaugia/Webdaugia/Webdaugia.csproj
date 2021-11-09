@@ -45,11 +45,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,11 +134,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\dbQLDG.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbQLDG.dbml</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\ATM.cs" />
+    <Compile Include="Models\Auction.cs" />
+    <Compile Include="Models\AuctionDBContext.cs" />
+    <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Lot.cs" />
+    <Compile Include="Models\LotAttachment.cs" />
+    <Compile Include="Models\Organization.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductsAttachment.cs" />
+    <Compile Include="Models\ProductsImage.cs" />
+    <Compile Include="Models\RegisterBid.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UsersImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1756,14 +1775,6 @@
     <Content Include="assets\libs\twitter-bootstrap-wizard\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\libs\twitter-bootstrap-wizard\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\libs\wnumb\LICENSE.MD" />
-    <Content Include="Models\dbQLDG.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>dbQLDG.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="Models\dbQLDG.dbml.layout">
-      <DependentUpon>dbQLDG.dbml</DependentUpon>
-    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
