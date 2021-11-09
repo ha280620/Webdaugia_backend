@@ -12,7 +12,7 @@ namespace Webdaugia.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        dbQLDGDataContext data = new dbQLDGDataContext();
+        AuctionDBContext data = new AuctionDBContext();
 
         [HttpGet]
 
@@ -26,7 +26,7 @@ namespace Webdaugia.Controllers
         public ActionResult DangKi(FormCollection collection)
         {
             User tk = new User();
-            dbQLDGDataContext data = new dbQLDGDataContext();
+            AuctionDBContext data = new AuctionDBContext();
             //gán giá trị từ các ô đến các biến
             var username = collection["username"];
             var name = collection["name"];
@@ -70,8 +70,8 @@ namespace Webdaugia.Controllers
                 tk.Email = email;
                 tk.Phone = sdt;
                 tk.Password = encryptorPass(password);
-                data.Users.InsertOnSubmit(tk);
-                data.SubmitChanges();
+                data.Users.Add(tk);
+                data.SaveChanges();
                 return RedirectToAction("Themthongtin", "Login");
             }
             return View(this.DangKi());
