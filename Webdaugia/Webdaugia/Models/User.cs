@@ -1,4 +1,4 @@
-namespace Webdaugia.Models
+﻿namespace Webdaugia.Models
 {
     using System;
     using System.Collections.Generic;
@@ -28,23 +28,28 @@ namespace Webdaugia.Models
 
         public int? RoleID { get; set; }
 
-        [StringLength(100)]
+        //[StringLength(100)]
+        [Required]
+        [StringLength(100, ErrorMessage = "Họ tên không được quá 50 kí tự!")]
         public string FullName { get; set; }
 
         public bool? Gender { get; set; }
 
         [StringLength(100)]
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail không hợp lệ")]
         public string Email { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date, ErrorMessage = "Vui lòng nhập Ngày hợp lệ!")]
         public DateTime? Birthday { get; set; }
 
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = "Địa chỉ không được quá 100 kí tự!")]
         public string Address { get; set; }
 
-        public int? Status { get; set; }
+        //  public int? Status { get; set; }
+        public bool? Status { get; set; }
 
-        [StringLength(11)]
+        [StringLength(11, ErrorMessage = "Số điện thoại không được quá 11 kí tự!")]
         public string Phone { get; set; }
 
         [StringLength(13)]
