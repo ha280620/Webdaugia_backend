@@ -41,23 +41,19 @@
 
     <div class="form_control">
         @*@Html.TextBoxFor(model => model.Password)*@
-        <input required name="Password" type="password" placeholder="Mật khẩu" />
+        <input required name="Password" type="password" placeholder="Mật khẩu"/>
         @*<div class="input-group-append cursor-pointer">
-                <span class="input-group-text">
-                        <i class="fa fa-eye"></i>
-                    </span>
-            </div>*@
+            <span class="input-group-text">
+                    <i class="fa fa-eye"></i>
+                </span>
+        </div>*@
     </div>
     <div class="row mt-10">
         <div class="col-6">
             <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
         </div>
-        @*<div class="col-6 d-flex align-items-center justify-content-end">
+        <div class="col-6 d-flex align-items-center justify-content-end">
             <a href="~/Quenmatkhau">Quên mật khẩu?</a>
-        </div>*@
+        </div>
     </div>
-    <div>
-        @Html.ActionLink("Forgot Password?", "Quenmatkhau", "Login")
-    </div>
-
 }
