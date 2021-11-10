@@ -60,8 +60,9 @@ namespace Webdaugia.DAO
                 return 0;
             }
             else
-            {
-                if (result.Status == false)
+            {   
+
+                if (result.Status == 2)
                     return -1;
                 else
                 {
@@ -81,7 +82,7 @@ namespace Webdaugia.DAO
             }
             else
             {
-                if (result.Status == false)
+                if (result.Status == 2)
                     return -1;
                 else
                 {

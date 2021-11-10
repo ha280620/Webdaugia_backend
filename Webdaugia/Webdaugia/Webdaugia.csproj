@@ -144,6 +144,7 @@
     <Compile Include="Models\Common\MD5Encryptor.cs" />
     <Compile Include="Models\Common\UserLogin.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Login\ResetPasswordModel.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Models\LotAttachment.cs" />
     <Compile Include="Models\Organization.cs" />
@@ -1812,6 +1813,7 @@
     <Content Include="Views\Login\Quenmatkhau.cshtml" />
     <Content Include="Views\Shared\_LayoutAddinfo.cshtml" />
     <Content Include="Views\Login\Themthongtin.cshtml" />
+    <Content Include="Views\Login\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
