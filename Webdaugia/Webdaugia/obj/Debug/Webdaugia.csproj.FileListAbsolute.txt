@@ -150,9 +150,7 @@ C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\b
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Newtonsoft.Json.xml
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Antlr3.Runtime.pdb
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
-C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.dll
@@ -245,3 +243,4 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreC
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

@@ -63,34 +63,41 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Giới thiệu</a>
                         </li>
-                        <li class="nav-item" style="width: 30%;">
-                            <a class="btn btn-sign-in mr-1" href="@Url.Action("DangNhap","Login")">Đăng nhập </a>
-
-                            <a class="btn btn-sign-up" href="@Url.Action("DangKi","Login")">Đăng ký</a>
-                        </li>
+                        @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
+                        @if (user == null)
+                        {
+                            <li class="nav-item" style="width: 30%;">
+                                <a class="btn btn-sign-in mr-1" href="@Url.Action("DangNhap","Login")">Đăng nhập </a>
+                                <a class="btn btn-sign-up" href="@Url.Action("DangKi","Login")">Đăng ký</a>
+                            </li>
+                        }
 
                     </ul>
-
                 </div>
-                <div class="user-info pl-2">
-                    <div class="img-user">
-                        <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
-                    </div>
-                    <div class="user_dropdown">
-                        <div class="my-2 p-0">
-                            <ul>
-                                <li><a href="">Thông tin tài khoản</a></li>
-                                <li>
-                                    <a href="">Đơn hàng</a>
-                                </li>
-                                <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
-                            </ul>
+                @if (user != null)
+                {
+                    <div class="user-info pl-2">
+                        <div class="img-user">
+                            <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
+                        </div>
+                        <div class="user_dropdown">
+                            <div class="my-2 p-0">
+                                <ul>
+                                    <li><a href="">Thông tin tài khoản</a></li>
+                                    <li>
+                                        <a href="">Đơn hàng</a>
+                                    </li>
+                                    <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+
             </nav>
         </div>
     </header>
+
 
     <div>
         @RenderBody()
@@ -124,7 +131,7 @@
                 </div>
                 <div class="col-12 col-md-4 footer-item">
                     <h4>HỖ TRỢ KHÁCH HÀNG</h4>
-                    <p>Liên hệ hỡ trợ</p>
+                    <p>Liên hệ hỖ trợ</p>
                     <p>Những câu hỏi thường gặp</p>
                     <p>Chính sách bảo mật thông tin</p>
                     <p></p>
