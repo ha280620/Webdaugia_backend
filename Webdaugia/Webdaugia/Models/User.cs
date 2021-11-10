@@ -47,7 +47,7 @@
         public string Address { get; set; }
 
         //  public int? Status { get; set; }
-        public bool? Status { get; set; }
+        public int? Status { get; set; }
 
         [StringLength(11, ErrorMessage = "Số điện thoại không được quá 11 kí tự!")]
         public string Phone { get; set; }
@@ -73,5 +73,6 @@
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersImage> UsersImages { get; set; }
+        public string ResetPasswordCode { get; internal set; }
     }
 }
