@@ -5,7 +5,9 @@
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
-
+@{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
 <main>
     <section id="detail-link ">
         <div class="breadcrumb-noheading container">
@@ -28,65 +30,42 @@
                     <div class="product__name mb-3">
                         <h2>
                             @foreach (var item in listAttributes)
-            {
-                @item.Name
-            }
+                            {
+                                @item.Name
+                            }
                         </h2>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="slide-for" id="lightgallery">
-                        <a class="slide-for-item" href="img/product-1-450x450.jpg">
-                            <img class="img-fluid w-100"
-                                 src="img/product-1-450x450.jpg"
-                                 alt="" />
-                        </a>
-                        <a class="slide-for-item" href="img/product-2-450x450.jpg">
-                            <img class="img-fluid w-100"
-                                 src="img/product-2-450x450.jpg"
-                                 alt="" />
-                        </a>
-                        <a class="slide-for-item" href="img/product-3-450x450.jpg">
-                            <img class="img-fluid w-100"
-                                 src="img/product-3-450x450.jpg"
-                                 alt="" />
-                        </a>
-                        <a class="slide-for-item" href="img/product-4-450x450.jpg">
-                            <img class="img-fluid w-100"
-                                 src="img/product-4-450x450.jpg"
-                                 alt="" />
-                        </a>
+                        @foreach (var item in listAttributes)
+                        {
+                            foreach (var img in @item.ProductsImages)
+                            {
+                                <a class="slide-for-item" href="@img.Image">
+                                    <img class="img-fluid w-100"
+                                         src="@img.Image"
+                                         alt="anh" />
+                                </a>
+                            }
+                        }
                     </div>
                     <div class="bg_slide-nav">
                         <div class="slide-nav">
-                            <div class="slide-nav-item">
-                                <div class="slide-nav-item-img">
-                                    <img class="img-fluid"
-                                         src="img/product-1-450x450.jpg"
-                                         alt="" />
-                                </div>
-                            </div>
-                            <div class="slide-nav-item">
-                                <div class="slide-nav-item-img">
-                                    <img class="img-fluid"
-                                         src="img/product-2-450x450.jpg"
-                                         alt="" />
-                                </div>
-                            </div>
-                            <div class="slide-nav-item">
-                                <div class="slide-nav-item-img">
-                                    <img class="img-fluid"
-                                         src="img/product-3-450x450.jpg"
-                                         alt="" />
-                                </div>
-                            </div>
-                            <div class="slide-nav-item">
-                                <div class="slide-nav-item-img">
-                                    <img class="img-fluid"
-                                         src="img/product-4-450x450.jpg"
-                                         alt="" />
-                                </div>
-                            </div>
+                            @foreach (var item in listAttributes)
+                            {
+                                foreach (var img in @item.ProductsImages)
+                                {
+                                    <div class="slide-nav-item">
+                                        <div class="slide-nav-item-img">
+                                            <img class="img-fluid"
+                                                 src="@img.Image"
+                                                 alt="" />
+                                        </div>
+                                    </div>
+
+                                }
+                            }
                         </div>
                     </div>
                 </div>
@@ -94,7 +73,7 @@
                     <div class="product-content">
                         <div class="product-time">
                             <p>Đấu giá kết thúc trong trong:</p>
-                            <h2>1 ngày 1 giờ 1 phút 1 giây</h2>
+                            <h2 id="TimeForBidEnd"></h2>
                         </div>
                         <div class="product-starting p-2">
                             <table class="table m-0">
@@ -103,11 +82,11 @@
                                         <th class="border-0" style="width: 40%" scope="row">
                                             Giá khởi điểm:
                                         </th>
-                                        <td class="border-0">@Model.StartingPrice</td>
+                                        <td class="border-0">@string.Format(info, "{0:0,0}", @Model.StartingPrice) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th class="border-0" scope="row">Bước giá:</th>
-                                        <td class="border-0">@Model.MiniumBid</td>
+                                        <td class="border-0">@string.Format(info, "{0:0,0}", @Model.MiniumBid) VNĐ</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -119,10 +98,21 @@
                                         <th class="border-0" style="width: 40%" scope="row">
                                             Giá cao nhất hiện tại
                                         </th>
-                                        <td class="border-0"
-                                            style="color: var(--btn-danger); font-weight: 700">
-                                            @Model.HighBid VNĐ
-                                        </td>
+                                        @if (Model.HighBid == null)
+                                        {
+                                            <td class="border-0"
+                                                style="color: var(--btn-danger); font-weight: 700">
+                                                @string.Format(info, "{0:0,0}", @Model.StartingPrice) VNĐ
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td class="border-0"
+                                                style="color: var(--btn-danger); font-weight: 700">
+                                                @string.Format(info, "{0:0,0}", @Model.HighBid) VNĐ
+                                            </td>
+                                        }
+
                                     </tr>
                                     <tr>
                                         <th class="border-0" scope="row">
@@ -144,9 +134,9 @@
                                     <input class="d-none"
                                            type="number"
                                            id="number"
-                                           value="2000000000"
-                                           min="2000000000"
-                                           step="50000000"
+                                           value="@string.Format(info, "{0:0,0}", @Model.StartingPrice)"
+                                           min="@string.Format(info, "{0:0,0}", @Model.StartingPrice)"
+                                           step="@string.Format(info, "{0:0,0}", @Model.MiniumBid)"
                                            max=""
                                            pattern="([0-9]{1,3}).([0-9]{1,3})" />
                                     <input type="text"
@@ -184,68 +174,68 @@
                                         <th scope="col">Giá đặt</th>
                                     </tr>
                                 </thead>
-                                @*<tbody>
+                                <tbody>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">1</th>
                                         <td>Mark</td>
                                         <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">2</th>
                                         <td>Jacob</td>
                                         <td>Thornton</td>
-                                        <td>@fat</td>
+                                        <td>10000</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">3</th>
                                         <td>Larry</td>
                                         <td>the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>10000</td>
                                     </tr>
-                                </tbody>*@
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -285,60 +275,10 @@
                      id="nav-home"
                      role="tabpanel"
                      aria-labelledby="nav-home-tab">
-                    Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
-                    do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
-                    aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
-                    eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
-                    Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
-                    labore cillum elit enim. Consequat aliquip incididunt ipsum et
-                    minim laborum laborum laborum et cillum labore. Deserunt
-                    adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
-                    Laboris consequat consequat commodo non ut non aliquip
-                    reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
-                    irure ea ullamco Lorem aute nostrud magna. esse do quis dolor esse
-                    fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum
-                    occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt
-                    officia id Lorem nostrud aute id commodo elit eiusmod enim irure
-                    amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum
-                    excepteur in aliqua non et quis aliquip ad irure in labore cillum
-                    elit enim. Consequat aliquip incididunt ipsum et minim laborum
-                    laborum laborum et cillum labore. Deserunt adipisicing cillum id
-                    nulla minim nostrud labore eiusmod et amet. Laboris consequat
-                    consequat commodo non ut non aliquip reprehenderit nulla anim
-                    occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem
-                    aute nostrud magna. esse do quis dolor esse fugiat sunt do. Eu ex
-                    commodo veniam Lorem aliquip laborum occaecat qui Lorem esse
-                    mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud
-                    aute id commodo elit eiusmod enim irure amet eiusmod qui
-                    reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non
-                    et quis aliquip ad irure in labore cillum elit enim. Consequat
-                    aliquip incididunt ipsum et minim laborum laborum laborum et
-                    cillum labore. Deserunt adipisicing cillum id nulla minim nostrud
-                    labore eiusmod et amet. Laboris consequat consequat commodo non ut
-                    non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                    reprehenderit irure ea ullamco Lorem aute nostrud magna. esse do
-                    quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip
-                    laborum occaecat qui Lorem esse mollit dolore anim cupidatat.
-                    Deserunt officia id Lorem nostrud aute id commodo elit eiusmod
-                    enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat
-                    ipsum excepteur in aliqua non et quis aliquip ad irure in labore
-                    cillum elit enim. Consequat aliquip incididunt ipsum et minim
-                    laborum laborum laborum et cillum labore. Deserunt adipisicing
-                    cillum id nulla minim nostrud labore eiusmod et amet. Laboris
-                    consequat consequat commodo non ut non aliquip reprehenderit nulla
-                    anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco
-                    Lorem aute nostrud magna. esse do quis dolor esse fugiat sunt do.
-                    Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse
-                    mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud
-                    aute id commodo elit eiusmod enim irure amet eiusmod qui
-                    reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non
-                    et quis aliquip ad irure in labore cillum elit enim. Consequat
-                    aliquip incididunt ipsum et minim laborum laborum laborum et
-                    cillum labore. Deserunt adipisicing cillum id nulla minim nostrud
-                    labore eiusmod et amet. Laboris consequat consequat commodo non ut
-                    non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                    @foreach (var item in listAttributes)
+                    {
+                        @item.Description
+                    }
                 </div>
                 <div class="tab-pane fade"
                      id="nav-profile"
@@ -479,3 +419,83 @@
     </section>
 </main>
 
+<script>
+     var countDownDate = new Date("@Model.TimeForBidEnd").getTime();
+         console.log(countDownDate);
+    var x = setInterval(function () {
+        // Nhận ngày và giờ hôm nay
+        var now = new Date().getTime();
+
+        // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+        var distance = countDownDate - now;
+
+
+        // Tính toán thời gian cho ngày, giờ, phút và giây
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        hours = `0${hours}`.slice(-2);
+        minutes = `0${minutes}`.slice(-2);
+        seconds = `0${seconds}`.slice(-2);
+        // Xuất kết quả trong phần tử có id = "demo"
+        document.getElementById("TimeForBidEnd").innerHTML = days + " Ngày " + hours + " Giờ "
+            + minutes + " Phút " + seconds + " Giây ";
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("TimeForBidEnd").innerHTML = "Thời gian đấu giá đã kết thúc";
+        }
+        // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+    }, 1000);
+      var x = setInterval(function () {
+          // Nhận ngày và giờ hôm nay
+          var now = new Date().getTime();
+
+          // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+          var distance = countDownDate - now;
+
+
+          // Tính toán thời gian cho ngày, giờ, phút và giây
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          hours = `0${hours}`.slice(-2);
+          minutes = `0${minutes}`.slice(-2);
+          seconds = `0${seconds}`.slice(-2);
+
+      }, 1000);
+</script>
+@section Lot{
+    <script type="text/javascript">
+        lightGallery(document.getElementById("lightgallery"), {
+            speed: 300,
+        });
+    </script>
+    <!-- end js danh mục  -->
+    <script>
+        $(".slide-for").slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: "60px",
+            arrows: false,
+            fade: true,
+            asNavFor: ".slide-nav",
+        });
+        $(".slide-nav").slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: false,
+            nextArrow: false,
+            asNavFor: ".slide-for",
+            dots: false,
+            centerMode: false,
+            focusOnSelect: true,
+            centerPadding: "0px",
+            prevArrow: '<i class="bx bx-chevron-left left"></i>',
+            nextArrow: '<i class="bx bx-chevron-right right"></i>',
+        });
+    </script>
+}
