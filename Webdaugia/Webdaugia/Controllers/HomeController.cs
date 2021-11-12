@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Webdaugia.DAO;
 using Webdaugia.Models.Common;
 
-namespace PetStore.Controllers
+namespace Webdaugia.Controllers
 {
     public class HomeController : Controller
     {

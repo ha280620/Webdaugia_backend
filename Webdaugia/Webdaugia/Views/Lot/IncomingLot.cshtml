@@ -1,0 +1,460 @@
+﻿@model Webdaugia.Models.Lot
+@{
+    ViewBag.Title = "IncomingLot";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var listReadyLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
+    var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
+    //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
+}
+
+<<main>
+
+    <section id="detail-link ">
+        <div class="breadcrumb-noheading container">
+            <div class="breadcrumb" style="background-color: #fff">
+                <a href="/">Trang Chủ</a><i class="bx bx-chevron-right"></i>
+                <a href="/thuong-hieu">Mèo Cảnh</a><i class="bx bx-chevron-right"></i>
+                <a href="/thuong-hieu">Nhà, Chuồng, Nệm</a><i class="bx bx-chevron-right"></i>
+                <a href="#">Nhà mèo &amp; Nhà cây Cattree</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row product">
+                <div class="col-12">
+                    <div class="product-title">
+                        <i class="bx bxs-right-arrow mr-2"></i>
+                        <h3>Tài sản sắp đấu giá</h3>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="product__name mb-3">
+                        <h2>
+                            @Model.Name
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+
+                    <div class="slide-for" id="lightgallery">
+                        @foreach (var item in listAttributes)
+                        {
+                            foreach (var img in @item.ProductsImages)
+                            {
+                                <a class="slide-for-item" href="@img.Image">
+                                    <img class="img-fluid w-100"
+                                         src="@img.Image"
+                                         alt="anh" />
+                                </a>
+                            }
+                        }
+                        @*    <a class="slide-for-item" href="img/product-1-450x450.jpg">
+                                <img class="img-fluid w-100"
+                                     src="img/product-1-450x450.jpg"
+                                     alt="" />
+                            </a>
+                            <a class="slide-for-item" href="img/product-2-450x450.jpg">
+                                <img class="img-fluid w-100"
+                                     src="img/product-2-450x450.jpg"
+                                     alt="" />
+                            </a>
+                            <a class="slide-for-item" href="img/product-3-450x450.jpg">
+                                <img class="img-fluid w-100"
+                                     src="img/product-3-450x450.jpg"
+                                     alt="" />
+                            </a>
+                            <a class="slide-for-item" href="img/product-4-450x450.jpg">
+                                <img class="img-fluid w-100"
+                                     src="img/product-4-450x450.jpg"
+                                     alt="" />
+                            </a>*@
+
+                    </div>
+                    <div class="bg_slide-nav">
+                        <div class="slide-nav">
+                            @foreach (var item in listAttributes)
+                            {
+                                foreach (var img in @item.ProductsImages)
+                                {
+                                    <div class="slide-nav-item">
+                                        <div class="slide-nav-item-img">
+                                            <img class="img-fluid"
+                                                 src="@img.Image"
+                                                 alt="" />
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+
+                            @*    <div class="slide-nav-item">
+                                    <div class="slide-nav-item-img">
+                                        <img class="img-fluid"
+                                             src="img/product-2-450x450.jpg"
+                                             alt="" />
+                                    </div>
+                                </div>
+                                <div class="slide-nav-item">
+                                    <div class="slide-nav-item-img">
+                                        <img class="img-fluid"
+                                             src="img/product-3-450x450.jpg"
+                                             alt="" />
+                                    </div>
+                                </div>
+                                <div class="slide-nav-item">
+                                    <div class="slide-nav-item-img">
+                                        <img class="img-fluid"
+                                             src="img/product-4-450x450.jpg"
+                                             alt="" />
+                                    </div>
+                                </div>*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="product-content">
+                        <div class="product-time">
+                            <p>
+                                Bắt đầu đấu giá trong: </h3>
+                                <h2 id="TimeForBidStart"></h2>
+                        </div>
+                        <div class="product-detail">
+                            <table class="table m-0">
+
+                                <tbody>
+                                    <tr>
+                                        <th style="width: 40%;" scope="row">Mã tài sản</th>
+                                        <td>@Model.ID</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian mở đăng ký:</th>
+                                        <td>@Model.TimeForRegisterStart</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian kết thúc đăng ký:</th>
+                                        <td>@Model.TimeForRegisterEnd</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Phí đăng ký tham gia đấu giá:</th>
+                                        <td>@Model.ParticipationFee VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tiền đặt trước:</th>
+                                        <td>@Model.AdvanceDesposit VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Bước giá:</th>
+                                        <td>@Model.MiniumBid VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tên chủ tài sản:</th>
+                                        <td>@Model.HostName</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Nơi xem tài sản:</th>
+                                        <td>@Model.Location</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian xem tài sản:</th>
+                                        <td>@Model.ViewInTime</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian bắt đầu trả giá:</th>
+                                        <td>@Model.TimeForBidStart</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian kết thúc trả giá:</th>
+                                        <td>@Model.TimeForBidEnd</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Giá khởi điểm</th>
+                                        <td style="color:var(--btn-danger); font-weight: 700; ">@Model.StartingPrice VNĐ</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <button class="btn btn-sign-up w-100">Đăng ký đấu giá</button>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center align-items-center">
+                            <p class="time-register" id="TimeForRegisterEnd">1 NGÀY 1 GIỜ 1 PHÚT 1 GIÂY</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="detail-description mb-5">
+        <div class="container">
+            <nav>
+                <div class="nav nav-pills" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active"
+                       id="nav-home-tab"
+                       data-toggle="tab"
+                       href="#nav-home"
+                       role="tab"
+                       aria-controls="nav-home"
+                       aria-selected="true">Thông tin tài sản</a>
+                    <a class="nav-item nav-link"
+                       id="nav-profile-tab"
+                       data-toggle="tab"
+                       href="#nav-profile"
+                       role="tab"
+                       aria-controls="nav-profile"
+                       aria-selected="false">Tài liệu liên quan</a>
+                    <a class="nav-item nav-link"
+                       id="nav-contact-tab"
+                       data-toggle="tab"
+                       href="#nav-contact"
+                       role="tab"
+                       aria-controls="nav-contact"
+                       aria-selected="false">Bình luận</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active"
+                     id="nav-home"
+                     role="tabpanel"
+                     aria-labelledby="nav-home-tab">
+                    @foreach (var item in listAttributes)
+                    {
+                        @item.Description
+                    }
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-profile"
+                     role="tabpanel"
+                     aria-labelledby="nav-profile-tab">
+                    Sint sit mollit irure quis est nostrud cillum consequat Lorem
+                    esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam
+                    Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim
+                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo
+                    elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud
+                    tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad
+                    irure in labore cillum elit enim. Consequat aliquip incididunt
+                    ipsum et minim laborum laborum laborum et cillum labore.
+                    Deserunt adipisicing cillum id nulla minim nostrud labore
+                    eiusmod et amet. Laboris consequat consequat commodo non ut non
+                    aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
+                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-contact"
+                     role="tabpanel"
+                     aria-labelledby="nav-contact-tab">
+                    Sint sit mollit irure quis est nostrud cillum consequat Lorem
+                    esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam
+                    Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim
+                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo
+                    elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud
+                    tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad
+                    irure in labore cillum elit enim. Consequat aliquip incididunt
+                    ipsum et minim laborum laborum laborum et cillum labore.
+                    Deserunt adipisicing cillum id nulla minim nostrud labore
+                    eiusmod et amet. Laboris consequat consequat commodo non ut non
+                    aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
+                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="going">
+        <div class="container mt-2">
+            <div class="going-title">
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
+            </div>
+            <div class="row">
+                <div class="col-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+     var countDownDate = new Date("@Model.TimeForBidStart").getTime();
+     var countDownDateEnd = new Date("@Model.TimeForRegisterEnd").getTime();
+         console.log(countDownDate);
+    var x = setInterval(function () {
+        // Nhận ngày và giờ hôm nay
+        var now = new Date().getTime();
+
+        // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+        var distance = countDownDate - now;
+
+
+        // Tính toán thời gian cho ngày, giờ, phút và giây
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        hours = `0${hours}`.slice(-2);
+        minutes = `0${minutes}`.slice(-2);
+        seconds = `0${seconds}`.slice(-2);
+        // Xuất kết quả trong phần tử có id = "demo"
+        document.getElementById("TimeForBidStart").innerHTML = days + " Ngày " + hours + " Giờ "
+            + minutes + " Phút " + seconds + " Giây ";
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("TimeForBidStart").innerHTML = "Thời gian đấu giá đã bắt đầu";
+        }
+        // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+    }, 1000);
+      var x = setInterval(function () {
+          // Nhận ngày và giờ hôm nay
+          var now = new Date().getTime();
+
+          // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+          var distance = countDownDateEnd - now;
+
+
+          // Tính toán thời gian cho ngày, giờ, phút và giây
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          hours = `0${hours}`.slice(-2);
+          minutes = `0${minutes}`.slice(-2);
+          seconds = `0${seconds}`.slice(-2);
+
+          // Xuất kết quả trong phần tử có id = "demo"
+          document.getElementById("TimeForRegisterEnd").innerHTML = days + " Ngày " + hours + " Giờ "
+              + minutes + " Phút " + seconds + " Giây ";
+          if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("TimeForRegisterEnd").innerHTML = "Thời gian đăng ký kết thúc";
+          }
+          // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+      }, 1000);
+</script>
+@section Lot{
+    <script type="text/javascript">
+        lightGallery(document.getElementById("lightgallery"), {
+            speed: 300,
+        });
+    </script>
+    <!-- end js danh mục  -->
+    <script>
+        $(".slide-for").slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: "60px",
+            arrows: false,
+            fade: true,
+            asNavFor: ".slide-nav",
+        });
+        $(".slide-nav").slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: false,
+            nextArrow: false,
+            asNavFor: ".slide-for",
+            dots: false,
+            centerMode: false,
+            focusOnSelect: true,
+            centerPadding: "0px",
+            prevArrow: '<i class="bx bx-chevron-left left"></i>',
+            nextArrow: '<i class="bx bx-chevron-right right"></i>',
+        });
+    </script>
+}

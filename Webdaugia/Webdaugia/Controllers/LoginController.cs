@@ -144,28 +144,28 @@ namespace Webdaugia.Controllers
         }
 
         [HttpGet]
-        public ActionResult VerifyAccount(string id)
-        {
-            int Status = 0;
-            using (AuctionDBContext dc = new AuctionDBContext())
-            {
-                dc.Configuration.ValidateOnSaveEnabled = false; // This line I have added here to avoid 
-                                                                // Confirm password does not match issue on save changes
-                var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
-                if (v != null)
-                {
-                    v.IsEmailVerified = true;
-                    dc.SaveChanges();
-                    Status = 1;
-                }
-                else
-                {
-                    ViewBag.Message = "Invalid Request";
-                }
-            }
-            ViewBag.Status = Status;
-            return View();
-        }
+        //public ActionResult VerifyAccount(string id)
+        //{
+        //    int Status = 0;
+        //    using (AuctionDBContext dc = new AuctionDBContext())
+        //    {
+        //        dc.Configuration.ValidateOnSaveEnabled = false; // This line I have added here to avoid 
+        //                                                        // Confirm password does not match issue on save changes
+        //        var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
+        //        if (v != null)
+        //        {
+        //            v.IsEmailVerified = true;
+        //            dc.SaveChanges();
+        //            Status = 1;
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = "Invalid Request";
+        //        }
+        //    }
+        //    ViewBag.Status = Status;
+        //    return View();
+        //}
 
         [NonAction]
         public bool IsEmailExist(string emailID)
@@ -226,91 +226,91 @@ namespace Webdaugia.Controllers
 
         [HttpPost]
 
-        public ActionResult Quenmatkhau(string EmailID)
-        {
-            //Verify Email ID
-            //Generate Reset password link 
-            //Send Email 
-            string message = "";
-            int Status = 0;
+        //public ActionResult Quenmatkhau(string EmailID)
+        //{
+        //    //Verify Email ID
+        //    //Generate Reset password link 
+        //    //Send Email 
+        //    string message = "";
+        //    int Status = 0;
 
-            using (AuctionDBContext dc = new AuctionDBContext())
-            {
-                var account = dc.Users.Where(a => a.Email == EmailID).FirstOrDefault();
-                if (account != null)
-                {
-                    //Send email for reset password
-                    string resetCode = Guid.NewGuid().ToString();
-                    SendVerificationLinkEmail(account.Email, resetCode, "ResetPassword");
-                    account.ResetPasswordCode = resetCode;
-                    //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
-                    //in our model class in part 1
-                    dc.Configuration.ValidateOnSaveEnabled = false;
-                    dc.SaveChanges();
-                    message = "Reset password link has been sent to your email id.";
-                }
-                else
-                {
-                    message = "Account not found";
-                }
-            }
-            ViewBag.Message = message;
-            return View();
-        }
+        //    using (AuctionDBContext dc = new AuctionDBContext())
+        //    {
+        //        var account = dc.Users.Where(a => a.Email == EmailID).FirstOrDefault();
+        //        if (account != null)
+        //        {
+        //            //Send email for reset password
+        //            string resetCode = Guid.NewGuid().ToString();
+        //            SendVerificationLinkEmail(account.Email, resetCode, "ResetPassword");
+        //            account.ResetPasswordCode = resetCode;
+        //            //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
+        //            //in our model class in part 1
+        //            dc.Configuration.ValidateOnSaveEnabled = false;
+        //            dc.SaveChanges();
+        //            message = "Reset password link has been sent to your email id.";
+        //        }
+        //        else
+        //        {
+        //            message = "Account not found";
+        //        }
+        //    }
+        //    ViewBag.Message = message;
+        //    return View();
+        //}
 
-        public ActionResult ResetPassword(string id)
-        {
-            //Verify the reset password link
-            //Find account associated with this link
-            //redirect to reset password page
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return HttpNotFound();
-            }
+        //public ActionResult ResetPassword(string id)
+        //{
+        //    //Verify the reset password link
+        //    //Find account associated with this link
+        //    //redirect to reset password page
+        //    if (string.IsNullOrWhiteSpace(id))
+        //    {
+        //        return HttpNotFound();
+        //    }
 
-            using (AuctionDBContext dc = new AuctionDBContext())
-            {
-                var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
-                if (user != null)
-                {
-                    ResetPasswordModel model = new ResetPasswordModel();
-                    model.ResetCode = id;
-                    return View(model);
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
-            }
-        }
+        //    using (AuctionDBContext dc = new AuctionDBContext())
+        //    {
+        //        var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
+        //        if (user != null)
+        //        {
+        //            ResetPasswordModel model = new ResetPasswordModel();
+        //            model.ResetCode = id;
+        //            return View(model);
+        //        }
+        //        else
+        //        {
+        //            return HttpNotFound();
+        //        }
+        //    }
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult ResetPassword(ResetPasswordModel model)
-        {
-            var message = "";
-            if (ModelState.IsValid)
-            {
-                using (AuctionDBContext dc = new AuctionDBContext())
-                {
-                    var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
-                    if (user != null)
-                    {
-                        user.Password = Crypto.Hash(model.NewPassword);
-                        user.ResetPasswordCode = "";
-                        dc.Configuration.ValidateOnSaveEnabled = false;
-                        dc.SaveChanges();
-                        message = "New password updated successfully";
-                    }
-                }
-            }
-            else
-            {
-                message = "Something invalid";
-            }
-            ViewBag.Message = message;
-            return View(model);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ResetPassword(ResetPasswordModel model)
+        //{
+        //    var message = "";
+        //    if (ModelState.IsValid)
+        //    {
+        //        using (AuctionDBContext dc = new AuctionDBContext())
+        //        {
+        //            var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+        //            if (user != null)
+        //            {
+        //                user.Password = Crypto.Hash(model.NewPassword);
+        //                user.ResetPasswordCode = "";
+        //                dc.Configuration.ValidateOnSaveEnabled = false;
+        //                dc.SaveChanges();
+        //                message = "New password updated successfully";
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        message = "Something invalid";
+        //    }
+        //    ViewBag.Message = message;
+        //    return View(model);
+        //}
 
 
       

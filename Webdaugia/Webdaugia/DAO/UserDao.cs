@@ -54,7 +54,7 @@ namespace Webdaugia.DAO
         //
         public int Login(string userName, string passWord, int role)
         {
-            var result = db.Users.SingleOrDefault(x => x.Username == userName && x.RoleID== role);
+            var result = db.Users.SingleOrDefault(x => x.Username == userName && x.RoleID == role);
             if (result == null)
             {
                 return 0;

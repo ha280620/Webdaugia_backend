@@ -36,71 +36,8 @@
 <body>
     <!-- BEGIN NAV -->
     <header>
-        <div class="container p-0">
-            <nav id="nav" class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="/">
-                    <img src="~/img/logo-white.png"
-                         class="img-fluid"
-                         style="width: 350px"
-                         alt="logo" />
-                </a>
-                <button class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto w-100 justify-content-end">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"
-                               href="#"
-                               id="navbarDropdown"
-                               role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                Đấu giá
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Tài sàn đang đấu giá</a>
-                                <a class="dropdown-item" href="#">Tài sản sắp đấu giá</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Liên hệ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Giới thiệu</a>
-                        </li>
-                        <li class="nav-item w-25">
-                            @*<a class="btn btn-sign-in mr-1" href="#">Đăng nhập </a>
-                                <a class="btn btn-sign-up" href="#">Đăng ký</a>*@
-                            <div class="user-info pl-2">
-                                <div class="img-user">
-                                    <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
-                                </div>
-                                <div class="user_dropdown">
-                                    <div class="my-2 p-0">
-                                        <ul>
-                                            <li><a href="">Thông tin tài khoản</a></li>
-                                            <li>
-                                                <a href="">Đơn hàng</a>
-                                            </li>
-                                            <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+        @Html.Action("Header", "Home")
+        
     </header>
     <!-- END NAV -->
     <main>
