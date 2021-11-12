@@ -6,6 +6,9 @@
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
 }
+@{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
 
 <<main>
 
@@ -140,15 +143,15 @@
 
                                     <tr>
                                         <th scope="row">Phí đăng ký tham gia đấu giá:</th>
-                                        <td>@Model.ParticipationFee VNĐ</td>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.ParticipationFee) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Tiền đặt trước:</th>
-                                        <td>@Model.AdvanceDesposit VNĐ</td>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.AdvanceDesposit) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Bước giá:</th>
-                                        <td>@Model.MiniumBid VNĐ</td>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.MiniumBid) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Tên chủ tài sản:</th>
@@ -172,7 +175,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Giá khởi điểm</th>
-                                        <td style="color:var(--btn-danger); font-weight: 700; ">@Model.StartingPrice VNĐ</td>
+                                        <td style="color:var(--btn-danger); font-weight: 700; ">@string.Format(info, "{0:0,0}", @Model.StartingPrice) VNĐ</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -185,7 +188,7 @@
                             <button class="btn btn-sign-up w-100">Đăng ký đấu giá</button>
                         </div>
                         <div class="col-6 d-flex justify-content-center align-items-center">
-                            <p class="time-register" id="TimeForRegisterEnd">1 NGÀY 1 GIỜ 1 PHÚT 1 GIÂY</p>
+                            <p class="time-register" id="TimeForRegisterEnd"></p>
                         </div>
                     </div>
                 </div>

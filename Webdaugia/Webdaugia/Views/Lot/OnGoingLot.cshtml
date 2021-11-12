@@ -1,646 +1,481 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="img/logo-title.png" type="image/x-icon" />
-    <title>Đông Sài Gòn</title>
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <!-- BOXICON -->
-    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
-          rel="stylesheet" />
+﻿@model Webdaugia.Models.Lot
+@{
+    ViewBag.Title = "OnGoingLot";
+    var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listOnGoingLot;
+    var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
 
-    <link rel="stylesheet"
-          type="text/css"
-          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.3.0-beta.2/css/lightgallery.min.css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
-    <!-- SWIPER -->
-    <link rel="stylesheet" href="css/swiper.css" />
-    <!-- RESET CSS  -->
-    <link rel="stylesheet" href="css/reset.css" />
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/taisansapdaugia.css" />
-</head>
-<body>
-    <!-- BEGIN NAV -->
-    <header>
-        <div class="container p-0">
-            <nav id="nav" class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="/">
-                    <img src="img/logo-white.png"
-                         class="img-fluid"
-                         style="width: 350px"
-                         alt="logo" />
-                </a>
-                <button class="navbar-toggler"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto w-100 justify-content-end">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle"
-                               href="#"
-                               id="navbarDropdown"
-                               role="button"
-                               data-toggle="dropdown"
-                               aria-haspopup="true"
-                               aria-expanded="false">
-                                Đấu giá
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Tài sàn đang đấu giá</a>
-                                <a class="dropdown-item" href="#">Tài sản sắp đấu giá</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Liên hệ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Giới thiệu</a>
-                        </li>
-                        <li class="nav-item w-25">
-                            <a class="btn btn-sign-in mr-1" href="#">Đăng nhập </a>
-                            <a class="btn btn-sign-up" href="#">Đăng ký</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
-    <!-- END NAV -->
-    <main>
-        <section id="detail-link ">
-            <div class="breadcrumb-noheading container">
-                <div class="breadcrumb" style="background-color: #fff">
-                    <a href="/">Trang Chủ</a><i class="bx bx-chevron-right"></i>
-                    <a href="/thuong-hieu">Mèo Cảnh</a><i class="bx bx-chevron-right"></i>
-                    <a href="/thuong-hieu">Nhà, Chuồng, Nệm</a><i class="bx bx-chevron-right"></i>
-                    <a href="#">Nhà mèo &amp; Nhà cây Cattree</a>
-                </div>
+<main>
+    <section id="detail-link ">
+        <div class="breadcrumb-noheading container">
+            <div class="breadcrumb" style="background-color: #fff">
+                <a href="/">Trang Chủ</a><i class="bx bx-chevron-right"></i>
+                <a href="/thuong-hieu">Mèo Cảnh</a><i class="bx bx-chevron-right"></i>
+                <a href="/thuong-hieu">Nhà, Chuồng, Nệm</a><i class="bx bx-chevron-right"></i>
+                <a href="#">Nhà mèo &amp; Nhà cây Cattree</a>
             </div>
-            <div class="container">
-                <div class="row product">
-                    <div class="col-12">
-                        <div class="product-title-start">
-                            <i class="bx bxs-circle mr-2"></i>
-                            <h3>Tài sản đang đấu giá</h3>
+        </div>
+        <div class="container">
+            <div class="row product">
+                <div class="col-12">
+                    <div class="product-title-start">
+                        <i class="bx bxs-circle mr-2"></i>
+                        <h3>Tài sản đang đấu giá</h3>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="product__name mb-3">
+                        <h2>
+                            @foreach (var item in listAttributes)
+            {
+                @item.Name
+            }
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="slide-for" id="lightgallery">
+                        <a class="slide-for-item" href="img/product-1-450x450.jpg">
+                            <img class="img-fluid w-100"
+                                 src="img/product-1-450x450.jpg"
+                                 alt="" />
+                        </a>
+                        <a class="slide-for-item" href="img/product-2-450x450.jpg">
+                            <img class="img-fluid w-100"
+                                 src="img/product-2-450x450.jpg"
+                                 alt="" />
+                        </a>
+                        <a class="slide-for-item" href="img/product-3-450x450.jpg">
+                            <img class="img-fluid w-100"
+                                 src="img/product-3-450x450.jpg"
+                                 alt="" />
+                        </a>
+                        <a class="slide-for-item" href="img/product-4-450x450.jpg">
+                            <img class="img-fluid w-100"
+                                 src="img/product-4-450x450.jpg"
+                                 alt="" />
+                        </a>
+                    </div>
+                    <div class="bg_slide-nav">
+                        <div class="slide-nav">
+                            <div class="slide-nav-item">
+                                <div class="slide-nav-item-img">
+                                    <img class="img-fluid"
+                                         src="img/product-1-450x450.jpg"
+                                         alt="" />
+                                </div>
+                            </div>
+                            <div class="slide-nav-item">
+                                <div class="slide-nav-item-img">
+                                    <img class="img-fluid"
+                                         src="img/product-2-450x450.jpg"
+                                         alt="" />
+                                </div>
+                            </div>
+                            <div class="slide-nav-item">
+                                <div class="slide-nav-item-img">
+                                    <img class="img-fluid"
+                                         src="img/product-3-450x450.jpg"
+                                         alt="" />
+                                </div>
+                            </div>
+                            <div class="slide-nav-item">
+                                <div class="slide-nav-item-img">
+                                    <img class="img-fluid"
+                                         src="img/product-4-450x450.jpg"
+                                         alt="" />
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="product__name mb-3">
-                            <h2>
-                                Xe ô tô con mang biển số 92A-167.22, nhãn hiệu Mazda, số khung
-                                RN2G47A6KM012921
-                            </h2>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="product-content">
+                        <div class="product-time">
+                            <p>Đấu giá kết thúc trong trong:</p>
+                            <h2>1 ngày 1 giờ 1 phút 1 giây</h2>
                         </div>
+                        <div class="product-starting p-2">
+                            <table class="table m-0">
+                                <tbody>
+                                    <tr>
+                                        <th class="border-0" style="width: 40%" scope="row">
+                                            Giá khởi điểm:
+                                        </th>
+                                        <td class="border-0">@Model.StartingPrice</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0" scope="row">Bước giá:</th>
+                                        <td class="border-0">@Model.MiniumBid</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="product-highest p-2">
+                            <table class="table m-0">
+                                <tbody>
+                                    <tr>
+                                        <th class="border-0" style="width: 40%" scope="row">
+                                            Giá cao nhất hiện tại
+                                        </th>
+                                        <td class="border-0"
+                                            style="color: var(--btn-danger); font-weight: 700">
+                                            @Model.HighBid VNĐ
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0" scope="row">
+                                            Số lượng người tham gia
+                                        </th>
+                                        <td class="border-0">20 <i class="bx bxs-user"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <form class="p-2">
+                            <div class="row m-0">
+                                <div class="quantity col-12 col-sm-7">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); handleChangeNumber()"
+                                            type="button"
+                                            class="plus">
+                                        +
+                                    </button>
+                                    <input class="d-none"
+                                           type="number"
+                                           id="number"
+                                           value="2000000000"
+                                           min="2000000000"
+                                           step="50000000"
+                                           max=""
+                                           pattern="([0-9]{1,3}).([0-9]{1,3})" />
+                                    <input type="text"
+                                           value=""
+                                           id="display"
+                                           readonly="False" />
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); handleChangeNumber()"
+                                            type="button"
+                                            class="minus">
+                                        -
+                                    </button>
+                                </div>
+                                <div class="col-12 col-sm-5 px-0 pl-sm-1 pl-md-1  h-100">
+                                    <button type="submit" class="btn btn-sign-up w-100">
+                                        Đặt Giá
+                                    </button>
+                                </div>
+                            </div>
+                            <p id="word-money"></p>
+                        </form>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <div class="slide-for" id="lightgallery">
-                            <a class="slide-for-item" href="img/product-1-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-1-450x450.jpg"
-                                     alt="" />
-                            </a>
-                            <a class="slide-for-item" href="img/product-2-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-2-450x450.jpg"
-                                     alt="" />
-                            </a>
-                            <a class="slide-for-item" href="img/product-3-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-3-450x450.jpg"
-                                     alt="" />
-                            </a>
-                            <a class="slide-for-item" href="img/product-4-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-4-450x450.jpg"
-                                     alt="" />
-                            </a>
+                    <div class="product-content mt-2">
+                        <div class="product-bid">
+                            <h2>Lịch sử đấu giá</h2>
                         </div>
-                        <div class="bg_slide-nav">
-                            <div class="slide-nav">
-                                <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-1-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>
-                                <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-2-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>
-                                <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-3-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>
-                                <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-4-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="product-content">
-                            <div class="product-time">
-                                <p>Đấu giá kết thúc trong trong:</p>
-                                <h2>1 ngày 1 giờ 1 phút 1 giây</h2>
-                            </div>
-                            <div class="product-starting p-2">
-                                <table class="table m-0">
-                                    <tbody>
-                                        <tr>
-                                            <th class="border-0" style="width: 40%" scope="row">
-                                                Giá khởi điểm:
-                                            </th>
-                                            <td class="border-0">1.000.000.000</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="border-0" scope="row">Bước giá:</th>
-                                            <td class="border-0">50.000.000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="product-highest p-2">
-                                <table class="table m-0">
-                                    <tbody>
-                                        <tr>
-                                            <th class="border-0" style="width: 40%" scope="row">
-                                                Giá cao nhất hiện tại
-                                            </th>
-                                            <td class="border-0"
-                                                style="color: var(--btn-danger); font-weight: 700">
-                                                2.000.000.000 VNĐ
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="border-0" scope="row">
-                                                Số lượng người tham gia
-                                            </th>
-                                            <td class="border-0">20 <i class="bx bxs-user"></i></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <form class="p-2">
-                                <div class="row m-0">
-                                    <div class="quantity col-12 col-sm-7">
-                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); handleChangeNumber()"
-                                                type="button"
-                                                class="plus">
-                                            +
-                                        </button>
-                                        <input class="d-none"
-                                               type="number"
-                                               id="number"
-                                               value="2000000000"
-                                               min="2000000000"
-                                               step="50000000"
-                                               max=""
-                                               pattern="([0-9]{1,3}).([0-9]{1,3})" />
-                                        <input type="text"
-                                               value=""
-                                               id="display"
-                                               readonly="False" />
-                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); handleChangeNumber()"
-                                                type="button"
-                                                class="minus">
-                                            -
-                                        </button>
-                                    </div>
-                                    <div class="col-12 col-sm-5 px-0 pl-sm-1 pl-md-1  h-100">
-                                        <button type="submit" class="btn btn-sign-up w-100">
-                                            Đặt Giá
-                                        </button>
-                                    </div>
-                                </div>
-                                <p id="word-money"></p>
-                            </form>
-                        </div>
-                        <div class="product-content mt-2">
-                            <div class="product-bid">
-                                <h2>Lịch sử đấu giá</h2>
-                            </div>
-                            <div style="
+                        <div style="
                 height: 320px;
                 overflow: auto;" ">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Mã tài khoản</th>
-                                            <th scope="col">Thời gian</th>
-                                            <th scope="col">Giá đặt</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>1000</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>1000</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Mã tài khoản</th>
+                                        <th scope="col">Thời gian</th>
+                                        <th scope="col">Giá đặt</th>
+                                    </tr>
+                                </thead>
+                                @*<tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@twitter</td>
+                                    </tr>
+                                </tbody>*@
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="detail-description mb-5">
-            <div class="container">
-                <nav>
-                    <div class="nav nav-pills" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active"
-                           id="nav-home-tab"
-                           data-toggle="tab"
-                           href="#nav-home"
-                           role="tab"
-                           aria-controls="nav-home"
-                           aria-selected="true">Thông tin tài sản</a>
-                        <a class="nav-item nav-link"
-                           id="nav-profile-tab"
-                           data-toggle="tab"
-                           href="#nav-profile"
-                           role="tab"
-                           aria-controls="nav-profile"
-                           aria-selected="false">Tài liệu liên quan</a>
-                        <a class="nav-item nav-link"
-                           id="nav-contact-tab"
-                           data-toggle="tab"
-                           href="#nav-contact"
-                           role="tab"
-                           aria-controls="nav-contact"
-                           aria-selected="false">Bình luận</a>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active"
-                         id="nav-home"
-                         role="tabpanel"
-                         aria-labelledby="nav-home-tab">
-                        Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
-                        do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
-                        aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                        cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
-                        eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
-                        Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
-                        labore cillum elit enim. Consequat aliquip incididunt ipsum et
-                        minim laborum laborum laborum et cillum labore. Deserunt
-                        adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
-                        Laboris consequat consequat commodo non ut non aliquip
-                        reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
-                        irure ea ullamco Lorem aute nostrud magna. esse do quis dolor esse
-                        fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum
-                        occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt
-                        officia id Lorem nostrud aute id commodo elit eiusmod enim irure
-                        amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum
-                        excepteur in aliqua non et quis aliquip ad irure in labore cillum
-                        elit enim. Consequat aliquip incididunt ipsum et minim laborum
-                        laborum laborum et cillum labore. Deserunt adipisicing cillum id
-                        nulla minim nostrud labore eiusmod et amet. Laboris consequat
-                        consequat commodo non ut non aliquip reprehenderit nulla anim
-                        occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem
-                        aute nostrud magna. esse do quis dolor esse fugiat sunt do. Eu ex
-                        commodo veniam Lorem aliquip laborum occaecat qui Lorem esse
-                        mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud
-                        aute id commodo elit eiusmod enim irure amet eiusmod qui
-                        reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non
-                        et quis aliquip ad irure in labore cillum elit enim. Consequat
-                        aliquip incididunt ipsum et minim laborum laborum laborum et
-                        cillum labore. Deserunt adipisicing cillum id nulla minim nostrud
-                        labore eiusmod et amet. Laboris consequat consequat commodo non ut
-                        non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                        reprehenderit irure ea ullamco Lorem aute nostrud magna. esse do
-                        quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip
-                        laborum occaecat qui Lorem esse mollit dolore anim cupidatat.
-                        Deserunt officia id Lorem nostrud aute id commodo elit eiusmod
-                        enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat
-                        ipsum excepteur in aliqua non et quis aliquip ad irure in labore
-                        cillum elit enim. Consequat aliquip incididunt ipsum et minim
-                        laborum laborum laborum et cillum labore. Deserunt adipisicing
-                        cillum id nulla minim nostrud labore eiusmod et amet. Laboris
-                        consequat consequat commodo non ut non aliquip reprehenderit nulla
-                        anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco
-                        Lorem aute nostrud magna. esse do quis dolor esse fugiat sunt do.
-                        Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse
-                        mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud
-                        aute id commodo elit eiusmod enim irure amet eiusmod qui
-                        reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non
-                        et quis aliquip ad irure in labore cillum elit enim. Consequat
-                        aliquip incididunt ipsum et minim laborum laborum laborum et
-                        cillum labore. Deserunt adipisicing cillum id nulla minim nostrud
-                        labore eiusmod et amet. Laboris consequat consequat commodo non ut
-                        non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                        reprehenderit irure ea ullamco Lorem aute nostrud magna.
-                    </div>
-                    <div class="tab-pane fade"
-                         id="nav-profile"
-                         role="tabpanel"
-                         aria-labelledby="nav-profile-tab">
-                        Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
-                        do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
-                        aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                        cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
-                        eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
-                        Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
-                        labore cillum elit enim. Consequat aliquip incididunt ipsum et
-                        minim laborum laborum laborum et cillum labore. Deserunt
-                        adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
-                        Laboris consequat consequat commodo non ut non aliquip
-                        reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
-                        irure ea ullamco Lorem aute nostrud magna.
-                    </div>
-                    <div class="tab-pane fade"
-                         id="nav-contact"
-                         role="tabpanel"
-                         aria-labelledby="nav-contact-tab">
-                        Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
-                        do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
-                        aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                        cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
-                        eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
-                        Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
-                        labore cillum elit enim. Consequat aliquip incididunt ipsum et
-                        minim laborum laborum laborum et cillum labore. Deserunt
-                        adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
-                        Laboris consequat consequat commodo non ut non aliquip
-                        reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
-                        irure ea ullamco Lorem aute nostrud magna.
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="going">
-            <div class="container mt-2">
-                <div class="going-title">
-                    <i class="bx bxs-right-arrow mr-2"></i>
-                    <h3>Tài sản sắp đấu giá</h3>
-                </div>
-                <div class="row">
-                    <div class="col-4 p-2">
-                        <div class="going-item">
-                            <div class="going-item-img">
-                                <img src="img/bag.png" class="img-fluid" alt="" />
-                                <div class="going__overlay"></div>
-                                <div class="going__play">
-                                    <a href="#">
-                                        <h5>Thời kết thúc đăng ký</h5>
-                                        <p>21/12/2021 08:30</p>
-                                        <h5>Thời gian bắt đầu đấu giá</h5>
-                                        <p>21/01/2022 08:30</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="going-content">
-                                <p>Hàng Hiệu</p>
-                                <h3>
-                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
-                                    thông Cần Thơ
-                                </h3>
-
-                                <div class="going-starting-price mt-1">
-                                    <h4>2.000.0000.000đ</h4>
-                                </div>
-                                <a class="btn btn-sign-up going_btn" href="#">
-                                    Đăng Ký tham gia đấu giá
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 p-2">
-                        <div class="going-item">
-                            <div class="going-item-img">
-                                <img src="img/bag.png" class="img-fluid" alt="" />
-                                <div class="going__overlay"></div>
-                                <div class="going__play">
-                                    <a href="#">
-                                        <h5>Thời kết thúc đăng ký</h5>
-                                        <p>21/12/2021 08:30</p>
-                                        <h5>Thời gian bắt đầu đấu giá</h5>
-                                        <p>21/01/2022 08:30</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="going-content">
-                                <p>Hàng Hiệu</p>
-                                <h3>
-                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
-                                    thông Cần Thơ
-                                </h3>
-
-                                <div class="going-starting-price mt-1">
-                                    <h4>2.000.0000.000đ</h4>
-                                </div>
-                                <a class="btn btn-sign-up going_btn" href="#">
-                                    Đăng Ký tham gia đấu giá
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-4 p-2">
-                        <div class="going-item">
-                            <div class="going-item-img">
-                                <img src="img/bag.png" class="img-fluid" alt="" />
-                                <div class="going__overlay"></div>
-                                <div class="going__play">
-                                    <a href="#">
-                                        <h5>Thời kết thúc đăng ký</h5>
-                                        <p>21/12/2021 08:30</p>
-                                        <h5>Thời gian bắt đầu đấu giá</h5>
-                                        <p>21/01/2022 08:30</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="going-content">
-                                <p>Hàng Hiệu</p>
-                                <h3>
-                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
-                                    thông Cần Thơ
-                                </h3>
-
-                                <div class="going-starting-price mt-1">
-                                    <h4>2.000.0000.000đ</h4>
-                                </div>
-                                <a class="btn btn-sign-up going_btn" href="#">
-                                    Đăng Ký tham gia đấu giá
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer>
+        </div>
+    </section>
+    <section class="detail-description mb-5">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-4 pr-5 footer-contact">
-                    <img class="w-100 mb-3" src="img/logo-white.png" alt="" />
-                    <p class="mb-3">
-                        Nếu bạn có bất kì câu hỏi nào, hãy liên hệ với chúng tôi quá địa
-                        chỉ <span class="footer-email">dgdongsaigon@gmail.com</span>
-                    </p>
-                    <div class="footer-address mb-3">
-                        <i class="bx bx-map"></i>
-                        <p class="">693 Kha Vạn Cân, Linh Tây, Thủ Đức, TP.HCM</p>
-                    </div>
-                    <div class="footer-address mb-3">
-                        <i class="bx bx-mobile"></i>
-                        <p class="">028 66865120</p>
-                    </div>
-                    <div class="footer-social mb-3">
-                        <a href="#" class="footer-social-item">
-                            <i class="bx bxl-facebook"></i>
-                        </a>
-                        <a href="#" class="footer-social-item">
-                            <i class="bx bxl-instagram"></i>
-                        </a>
-                    </div>
+            <nav>
+                <div class="nav nav-pills" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active"
+                       id="nav-home-tab"
+                       data-toggle="tab"
+                       href="#nav-home"
+                       role="tab"
+                       aria-controls="nav-home"
+                       aria-selected="true">Thông tin tài sản</a>
+                    <a class="nav-item nav-link"
+                       id="nav-profile-tab"
+                       data-toggle="tab"
+                       href="#nav-profile"
+                       role="tab"
+                       aria-controls="nav-profile"
+                       aria-selected="false">Tài liệu liên quan</a>
+                    <a class="nav-item nav-link"
+                       id="nav-contact-tab"
+                       data-toggle="tab"
+                       href="#nav-contact"
+                       role="tab"
+                       aria-controls="nav-contact"
+                       aria-selected="false">Bình luận</a>
                 </div>
-                <div class="col-12 col-md-4 footer-item">
-                    <h4>HỖ TRỢ KHÁCH HÀNG</h4>
-                    <p>Liên hệ hỡ trợ</p>
-                    <p>Những câu hỏi thường gặp</p>
-                    <p>Chính sách bảo mật thông tin</p>
-                    <p></p>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active"
+                     id="nav-home"
+                     role="tabpanel"
+                     aria-labelledby="nav-home-tab">
+                    Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
+                    do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
+                    aliquip laborum occaecat qui Lorem esse mollit dolore anim
+                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
+                    eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
+                    Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
+                    labore cillum elit enim. Consequat aliquip incididunt ipsum et
+                    minim laborum laborum laborum et cillum labore. Deserunt
+                    adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
+                    Laboris consequat consequat commodo non ut non aliquip
+                    reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
+                    irure ea ullamco Lorem aute nostrud magna. esse do quis dolor esse
+                    fugiat sunt do. Eu ex commodo veniam Lorem aliquip laborum
+                    occaecat qui Lorem esse mollit dolore anim cupidatat. Deserunt
+                    officia id Lorem nostrud aute id commodo elit eiusmod enim irure
+                    amet eiusmod qui reprehenderit nostrud tempor. Fugiat ipsum
+                    excepteur in aliqua non et quis aliquip ad irure in labore cillum
+                    elit enim. Consequat aliquip incididunt ipsum et minim laborum
+                    laborum laborum et cillum labore. Deserunt adipisicing cillum id
+                    nulla minim nostrud labore eiusmod et amet. Laboris consequat
+                    consequat commodo non ut non aliquip reprehenderit nulla anim
+                    occaecat. Sunt sit ullamco reprehenderit irure ea ullamco Lorem
+                    aute nostrud magna. esse do quis dolor esse fugiat sunt do. Eu ex
+                    commodo veniam Lorem aliquip laborum occaecat qui Lorem esse
+                    mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud
+                    aute id commodo elit eiusmod enim irure amet eiusmod qui
+                    reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non
+                    et quis aliquip ad irure in labore cillum elit enim. Consequat
+                    aliquip incididunt ipsum et minim laborum laborum laborum et
+                    cillum labore. Deserunt adipisicing cillum id nulla minim nostrud
+                    labore eiusmod et amet. Laboris consequat consequat commodo non ut
+                    non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
+                    reprehenderit irure ea ullamco Lorem aute nostrud magna. esse do
+                    quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem aliquip
+                    laborum occaecat qui Lorem esse mollit dolore anim cupidatat.
+                    Deserunt officia id Lorem nostrud aute id commodo elit eiusmod
+                    enim irure amet eiusmod qui reprehenderit nostrud tempor. Fugiat
+                    ipsum excepteur in aliqua non et quis aliquip ad irure in labore
+                    cillum elit enim. Consequat aliquip incididunt ipsum et minim
+                    laborum laborum laborum et cillum labore. Deserunt adipisicing
+                    cillum id nulla minim nostrud labore eiusmod et amet. Laboris
+                    consequat consequat commodo non ut non aliquip reprehenderit nulla
+                    anim occaecat. Sunt sit ullamco reprehenderit irure ea ullamco
+                    Lorem aute nostrud magna. esse do quis dolor esse fugiat sunt do.
+                    Eu ex commodo veniam Lorem aliquip laborum occaecat qui Lorem esse
+                    mollit dolore anim cupidatat. Deserunt officia id Lorem nostrud
+                    aute id commodo elit eiusmod enim irure amet eiusmod qui
+                    reprehenderit nostrud tempor. Fugiat ipsum excepteur in aliqua non
+                    et quis aliquip ad irure in labore cillum elit enim. Consequat
+                    aliquip incididunt ipsum et minim laborum laborum laborum et
+                    cillum labore. Deserunt adipisicing cillum id nulla minim nostrud
+                    labore eiusmod et amet. Laboris consequat consequat commodo non ut
+                    non aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
+                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
                 </div>
-                <div class="col-12 col-md-4 footer-item">
-                    <h4>Về chúng tôi</h4>
-                    <p>Giới thiệu</p>
-                    <p>Tuyển dụng</p>
-                    <p>Quy chế hoạt động</p>
-                    <p></p>
+                <div class="tab-pane fade"
+                     id="nav-profile"
+                     role="tabpanel"
+                     aria-labelledby="nav-profile-tab">
+                    Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
+                    do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
+                    aliquip laborum occaecat qui Lorem esse mollit dolore anim
+                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
+                    eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
+                    Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
+                    labore cillum elit enim. Consequat aliquip incididunt ipsum et
+                    minim laborum laborum laborum et cillum labore. Deserunt
+                    adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
+                    Laboris consequat consequat commodo non ut non aliquip
+                    reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
+                    irure ea ullamco Lorem aute nostrud magna.
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-contact"
+                     role="tabpanel"
+                     aria-labelledby="nav-contact-tab">
+                    Sint sit mollit irure quis est nostrud cillum consequat Lorem esse
+                    do quis dolor esse fugiat sunt do. Eu ex commodo veniam Lorem
+                    aliquip laborum occaecat qui Lorem esse mollit dolore anim
+                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo elit
+                    eiusmod enim irure amet eiusmod qui reprehenderit nostrud tempor.
+                    Fugiat ipsum excepteur in aliqua non et quis aliquip ad irure in
+                    labore cillum elit enim. Consequat aliquip incididunt ipsum et
+                    minim laborum laborum laborum et cillum labore. Deserunt
+                    adipisicing cillum id nulla minim nostrud labore eiusmod et amet.
+                    Laboris consequat consequat commodo non ut non aliquip
+                    reprehenderit nulla anim occaecat. Sunt sit ullamco reprehenderit
+                    irure ea ullamco Lorem aute nostrud magna.
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <p class="m-0">
-                2021 © Công ty Đấu giá hợp danh Đông Sài Gòn /
-                <a href="https://www.facebook.com/truongbien.qh">Web design by <span> Zuradel</span></a>
-            </p>
+    </section>
+    <section id="going">
+        <div class="container mt-2">
+            <div class="going-title">
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
+            </div>
+            <div class="row">
+                <div class="col-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá</h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá</h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá</h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="js/jquery.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.js"></script>
+    </section>
+</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
-    <!-- begin js danh mục -->
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-    <script type="text/javascript"
-            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.3.0-beta.2/lightgallery.umd.min.js"></script>
-
-    <script type="text/javascript">
-        lightGallery(document.getElementById("lightgallery"), {
-            speed: 300,
-        });
-    </script>
-    <script>
-        $(".slide-for").slick({
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            centerMode: true,
-            centerPadding: "60px",
-            arrows: false,
-            fade: true,
-            asNavFor: ".slide-nav",
-        });
-        $(".slide-nav").slick({
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            prevArrow: false,
-            nextArrow: false,
-            asNavFor: ".slide-for",
-            dots: false,
-            centerMode: false,
-            focusOnSelect: true,
-            centerPadding: "0px",
-            prevArrow: '<i class="bx bx-chevron-left left"></i>',
-            nextArrow: '<i class="bx bx-chevron-right right"></i>',
-        });
-    </script>
-    <!-- end js danh mục  -->
-    <script src="js/numbertomoney.js"></script>
-</body>
-</html>
