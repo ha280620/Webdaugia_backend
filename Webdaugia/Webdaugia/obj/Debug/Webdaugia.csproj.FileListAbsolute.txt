@@ -161,7 +161,6 @@ C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\b
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
-C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll.config
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll
@@ -250,3 +249,9 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Net.Http.Formatting.dll
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.dll
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.WebHost.dll
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Net.Http.Formatting.xml
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.xml
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.WebHost.xml

@@ -21,7 +21,7 @@ namespace Webdaugia.Controllers
         {
             db = new AuctionDBContext();
             var Lot = db.Lots.Where(x => x.ID == LotId).FirstOrDefault();
-            var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).ToList();
+            var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).Take(3).ToList();
             var listLotAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var listAttributes = db.Products.Where(x => x.LotID == LotId).ToList();
            
