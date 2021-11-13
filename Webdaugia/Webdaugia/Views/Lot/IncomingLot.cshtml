@@ -8,7 +8,9 @@
 }
 
 <<main>
+    @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];
 
+    }
     <section id="detail-link ">
         <div class="breadcrumb-noheading container">
             <div class="breadcrumb" style="background-color: #fff">
@@ -20,12 +22,16 @@
         </div>
         <div class="container">
             <div class="row product">
-                <div class="col-12">
-                    <div class="product-title">
-                        <i class="bx bxs-right-arrow mr-2"></i>
-                        <h3>Tài sản sắp đấu giá</h3>
+                @if (@Model.TimeForRegisterEnd >= DateTime.Now)
+                {
+                    <div class="col-12">
+                        <div class="product-title">
+                            <i class="bx bxs-right-arrow mr-2"></i>
+                            <h3>Tài sản sắp đấu giá</h3>
+                        </div>
                     </div>
-                </div>
+                }
+
                 <div class="col-12">
                     <div class="product__name mb-3">
                         <h2>
@@ -114,9 +120,29 @@
                 <div class="col-12 col-md-6">
                     <div class="product-content">
                         <div class="product-time">
-                            <p>
-                                Bắt đầu đấu giá trong: </h3>
-                                <h2 id="TimeForBidStart"></h2>
+
+
+                            @if (@Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
+                            {
+                                <p>
+                                    Thời gian đăng ký còn lại:
+                                </p>
+                                <h2 id="TimeForRegisterEnd"></h2>
+                            }
+                            else if (@Model.TimeForRegisterStart > DateTime.Now)
+                            {
+                                <p>
+                                    Thời gian đăng ký sắp đầu:
+                                </p>
+                                <h2 id="TimeForRegisterStart"></h2>
+                            }
+                            else
+                            { <p>
+                                    Thời gian đăng ký còn lại:
+                                </p>
+                                <h2 class="text-danger">Thời gian đăng ký kết thúc</h2>
+                            }
+
                         </div>
                         <div class="product-detail">
                             <table class="table m-0">
@@ -167,6 +193,7 @@
                                         <td>@Model.TimeForBidStart</td>
                                     </tr>
                                     <tr>
+                                    <tr>
                                         <th scope="row">Thời gian kết thúc trả giá:</th>
                                         <td>@Model.TimeForBidEnd</td>
                                     </tr>
@@ -174,19 +201,80 @@
                                         <th scope="row">Giá khởi điểm</th>
                                         <td style="color:var(--btn-danger); font-weight: 700; ">@Model.StartingPrice VNĐ</td>
                                     </tr>
+
+                                    <tr>
+                                        <th scope="row">Bắt đầu đấu giá trong:</th>
+
+                                        @if (@Model.TimeForBidStart <= DateTime.Now && @Model.TimeForBidEnd >= DateTime.Now)
+                                        {
+
+
+                                            <td class="text-success time-register">Đấu giá đã bắt đầu</td>
+                                        }
+                                        else if (@Model.TimeForBidStart >= DateTime.Now)
+                                        {
+
+
+                                            <td class="time-register" id="TimeForBidStart"></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-danger time-register">Đấu giá đã kết thúc</td>
+                                        }
+
+
+                                    </tr>
                                 </tbody>
                             </table>
 
                         </div>
 
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-6">
-                            <button class="btn btn-sign-up w-100">Đăng ký đấu giá</button>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center align-items-center">
-                            <p class="time-register" id="TimeForRegisterEnd">1 NGÀY 1 GIỜ 1 PHÚT 1 GIÂY</p>
-                        </div>
+                    <div class="row mt-2 mx-0">
+
+                        @if (user != null && @ViewBag.register == null && @Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now && user.Status == 1)
+                        {
+                            <div class="col-12 px-0 mb-1">
+                                <button type="button" class="btn btn-sign-up w-100" data-toggle="modal" data-target="#dangkydaugia">
+                                    Đăng ký đấu giá
+                                </button>
+                            </div>
+                        }
+                        else if (@Model.TimeForRegisterEnd < DateTime.Now && ViewBag.register == null && user != null)
+                        {
+                            <div class="col-12 d-flex justify-content-center align-items-center alert alert-danger" role="alert">
+                                <p class="time-register">Đã hết thời gian đăng ký</p>
+                            </div>
+                        }
+                        else if (@Model.TimeForBidEnd < DateTime.Now  && user != null)
+                        {
+                            <div class="col-12">
+                             
+                            </div>
+                        }
+                        else if (user != null && user.Status == 0)
+                        {
+                            <div class="col-12 d-flex justify-content-center align-items-center alert alert-warning" role="alert">
+                                <p class="time-register">Bạn vui lòng đợi xác minh tài khoản</p>
+                            </div>
+                        }
+                        else
+                        {
+                            if (ViewBag.register == false)
+                            {
+                                <div class="col-12 d-flex justify-content-center align-items-center alert alert-primary" role="alert">
+                                    <p class="time-register">Bạn vui lòng đợi duyệt, chúng tôi sẽ liên hệ bạn</p>
+                                </div>
+                            }
+                            else if (ViewBag.register == true)
+                            {
+                                <div class="col-12 d-flex justify-content-center align-items-center alert alert-success" role="alert">
+                                    <p class="text-success">Đăng ký đấu giá thành công</p>
+                                </div>
+                            }
+
+                        }
+
                     </div>
                 </div>
             </div>
@@ -295,7 +383,7 @@
                             </h3>
 
                             <div class="going-starting-price mt-1">
-                                <h4>2.000.0000.000đ</span></h4>
+                                <h4>2.000.0000.000đ</h4>
                             </div>
                             <a class="btn btn-sign-up going_btn" href="#">
                                 Đăng Ký tham gia đấu giá
@@ -325,7 +413,7 @@
                             </h3>
 
                             <div class="going-starting-price mt-1">
-                                <h4>2.000.0000.000đ</span></h4>
+                                <h4>2.000.0000.000đ</h4>
                             </div>
                             <a class="btn btn-sign-up going_btn" href="#">
                                 Đăng Ký tham gia đấu giá
@@ -355,7 +443,7 @@
                             </h3>
 
                             <div class="going-starting-price mt-1">
-                                <h4>2.000.0000.000đ</span></h4>
+                                <h4>2.000.0000.000đ</h4>
                             </div>
                             <a class="btn btn-sign-up going_btn" href="#">
                                 Đăng Ký tham gia đấu giá
@@ -368,64 +456,172 @@
     </section>
 </main>
 
+<!-- Modal -->
+@if (user != null && @ViewBag.register == null && @Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
+{
+    <div class="modal fade" id="dangkydaugia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Đăng ký đấu giá</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h4">Số tiền cần phải nộp</p>
+                    <table class="table m-0">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Phí đăng ký tham gia đấu giá:</th>
+                                <td>@Model.ParticipationFee VNĐ</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tiền đặt trước:</th>
+                                <td>@Model.AdvanceDesposit VNĐ</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tổng tiền</th>
+                                <td class="color:var(--btn-danger); font-weight: 700;"> @ViewBag.total VNĐ</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <hr />
+                    <p class="h4">Thực hiện Chuyển khoản</p>
+                    <table class="table m-0">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Ngần hàng</th>
+                                <td>Techcombank</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số tài khoản</th>
+                                <td>8347538457983</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tên người hưởng</th>
+                                <td>Công ty Đông Sài Gòn VNĐ</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Chi Nhanh</th>
+                                <td> Hồ Chí Minh</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nội dung chuyển khoản</th>
+                                <td>@Model.ID @user.UserName.ToString()</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-sign-up w-100" href="/dang-ky-dau-gia?lotId=@Model.ID&userID=@user.UserID.ToString()&url=@Request.Url.ToString()"> Đăng ký </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (@Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
+{
+    <script>
+
+            var countDownDateEnd = new Date("@Model.TimeForRegisterEnd").getTime();
+            var y = setInterval(function () {
+            // Nhận ngày và giờ hôm nay
+            var now = new Date().getTime();
+            // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+            var distance = countDownDateEnd - now;
+            // Tính toán thời gian cho ngày, giờ, phút và giây
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            hours = `0${hours}`.slice(-2);
+            minutes = `0${minutes}`.slice(-2);
+            seconds = `0${seconds}`.slice(-2);
+
+            // Xuất kết quả trong phần tử có id = "demo"
+            document.getElementById("TimeForRegisterEnd").innerHTML = days + " Ngày " + hours + " Giờ "
+                + minutes + " Phút " + seconds + " Giây ";
+            if (distance < 0) {
+                clearInterval(y);
+
+            }
+            // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+        }, 1000);
+    </script>
+
+
+}
+else if (@Model.TimeForRegisterStart > DateTime.Now)
+{
+    <script>
+
+            var countDownDateEnd = new Date("@Model.TimeForRegisterStart").getTime();
+            var y = setInterval(function () {
+            // Nhận ngày và giờ hôm nay
+            var now = new Date().getTime();
+            // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+            var distance = countDownDateEnd - now;
+            // Tính toán thời gian cho ngày, giờ, phút và giây
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            hours = `0${hours}`.slice(-2);
+            minutes = `0${minutes}`.slice(-2);
+            seconds = `0${seconds}`.slice(-2);
+
+            // Xuất kết quả trong phần tử có id = "demo"
+                document.getElementById("TimeForRegisterStart").innerHTML = days + " Ngày " + hours + " Giờ "
+                + minutes + " Phút " + seconds + " Giây ";
+            if (distance < 0) {
+                clearInterval(y);
+
+            }
+            // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+        }, 1000);
+    </script>
+}
+if (@Model.TimeForBidStart >= DateTime.Now)
+{
 <script>
-     var countDownDate = new Date("@Model.TimeForBidStart").getTime();
-     var countDownDateEnd = new Date("@Model.TimeForRegisterEnd").getTime();
-         console.log(countDownDate);
+    var countDownDate = new Date("@Model.TimeForBidStart").getTime();
+
     var x = setInterval(function () {
-        // Nhận ngày và giờ hôm nay
-        var now = new Date().getTime();
+    // Nhận ngày và giờ hôm nay
+    var now = new Date().getTime();
 
-        // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
-        var distance = countDownDate - now;
+    // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+    var distance = countDownDate - now;
+    var distanceEnd = countDownDate - now;
 
+    // Tính toán thời gian cho ngày, giờ, phút và giây
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    hours = `0${hours}`.slice(-2);
+    minutes = `0${minutes}`.slice(-2);
+    seconds = `0${seconds}`.slice(-2);
+    // Xuất kết quả trong phần tử có id = "demo"
+    document.getElementById("TimeForBidStart").innerHTML = days + " Ngày " + hours + " Giờ "
+    + minutes + " Phút " + seconds + " Giây ";
 
-        // Tính toán thời gian cho ngày, giờ, phút và giây
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        hours = `0${hours}`.slice(-2);
-        minutes = `0${minutes}`.slice(-2);
-        seconds = `0${seconds}`.slice(-2);
-        // Xuất kết quả trong phần tử có id = "demo"
-        document.getElementById("TimeForBidStart").innerHTML = days + " Ngày " + hours + " Giờ "
-            + minutes + " Phút " + seconds + " Giây ";
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("TimeForBidStart").innerHTML = "Thời gian đấu giá đã bắt đầu";
-        }
-        // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+    if (distance < 0) {
+    clearInterval(x);
+
+    }
+    // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
 
     }, 1000);
-      var x = setInterval(function () {
-          // Nhận ngày và giờ hôm nay
-          var now = new Date().getTime();
 
-          // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
-          var distance = countDownDateEnd - now;
-
-
-          // Tính toán thời gian cho ngày, giờ, phút và giây
-          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-          hours = `0${hours}`.slice(-2);
-          minutes = `0${minutes}`.slice(-2);
-          seconds = `0${seconds}`.slice(-2);
-
-          // Xuất kết quả trong phần tử có id = "demo"
-          document.getElementById("TimeForRegisterEnd").innerHTML = days + " Ngày " + hours + " Giờ "
-              + minutes + " Phút " + seconds + " Giây ";
-          if (distance < 0) {
-              clearInterval(x);
-              document.getElementById("TimeForRegisterEnd").innerHTML = "Thời gian đăng ký kết thúc";
-          }
-          // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
-
-      }, 1000);
 </script>
+}
+
 @section Lot{
     <script type="text/javascript">
         lightGallery(document.getElementById("lightgallery"), {

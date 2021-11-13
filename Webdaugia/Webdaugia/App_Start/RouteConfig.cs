@@ -11,7 +11,21 @@ namespace Webdaugia
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+               name: "Lot Details",
+               url: "phien-dau/{LotId}",
+               defaults: new { controller = "Lot", action = "IncomingLot", id = UrlParameter.Optional }
+
+           );
+            routes.MapRoute(
+               name: "Dang Ky Dau Gia",
+               url: "dang-ky-dau-gia",
+               defaults: new { controller = "Lot", action = "RegisterBid", id = UrlParameter.Optional }
+
+           );
+
             routes.MapRoute(
                 name: "Login",
                 url: "dang-nhap",
@@ -27,12 +41,13 @@ namespace Webdaugia
                  url: "Quenmatkhau",
                  defaults: new { controller = "Login", action = "Quenmatkhau" }
                 );
-
+           
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+           
         }
     }
 }
