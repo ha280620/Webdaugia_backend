@@ -1,7 +1,9 @@
-﻿
+﻿@model Webdaugia.Models.Login.AddInfoModel
+
 @{
     ViewBag.Title = "Themthongtin";
     Layout = "~/Views/Shared/_LayoutAddinfo.cshtml";
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -54,7 +56,8 @@
                     <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
                         <h2 id="heading">Đăng ký thông tin cho tài khoản của bạn</h2>
                         <p>Điền tất cả trường biểu mẫu</p>
-                        <form id="msform">
+                        @using (Html.BeginForm("Themthongtin", "Login", FormMethod.Post, new { id = "msform" }))
+                        {
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="bx active" id="account">
@@ -74,6 +77,7 @@
                             </div>
                             <br />
                             <!-- fieldsets -->
+
                             <fieldset>
                                 <div class="form-card">
                                     <div class="row">
@@ -82,30 +86,40 @@
                                         </div>
                                     </div>
                                     <label class="fieldlabels">Địa chỉ thường trú: *</label>
-                                    <input type="text"
-                                           name="diachi"
-                                           placeholder="Địa chỉ ghi trên cmnd/cccd" />
+                                    @*<div class="form_control">
+                                            <input required name="username" type="text" />
+                                        </div>*@
+                                    @Html.TextBoxFor(model => model.diachi, htmlAttributes: new { name = "diachi", type = "text", required = "required", placeholder = "Địa chỉ ghi trên cmnd/cccd" })
+                                    @*<input type="text"
+                                        name="diachi"
+                                        placeholder="Địa chỉ ghi trên cmnd/cccd" />*@
                                     <label class="fieldlabels">Ngày sinh: *</label>
-                                    <input type="date" name="uname" />
+                                    @Html.TextBoxFor(model => model.ns, htmlAttributes: new { name = "ns", type = "date", required = "required" })
+                                    @*<input type="date" name="ns" />*@
                                     <label class="fieldlabels">Giới tính: *</label>
                                     <div class="ml-0 row">
                                         <div class="form-check col-3 col-md-2 ml-0">
+                                            @*@Html.RadioButtonFor(m => m.gt, "Nam")*@
+                                            @*@Html.TextBoxFor(model => model.gt, htmlAttributes: new { name = "gt", type = "radio", value = "option1", required = "required" })*@
                                             <input class="form-check-input radio"
                                                    type="radio"
-                                                   name="exampleRadios"
+                                                   name="gt"
                                                    id="radio-1"
-                                                   value="option1"
+                                                   value="1"
                                                    checked />
                                             <label class="form-check-label" for="radio-1">
                                                 Nam
                                             </label>
                                         </div>
                                         <div class="form-check col-3 col-md-2">
+
+                                            @*@Html.RadioButtonFor(m => m.gt, "Nữ")*@
+                                            @*@Html.TextBoxFor(model => model.gt, htmlAttributes: new { name = "gt", type = "radio", value = "option2", required = "required" })*@
                                             <input class="form-check-input radio"
                                                    type="radio"
-                                                   name="exampleRadios"
+                                                   name="gt"
                                                    id="radio-2"
-                                                   value="option2" />
+                                                   value="0" />
                                             <label class="form-check-label" for="radio-2">
                                                 Nữ
                                             </label>
@@ -127,17 +141,19 @@
                                         </div>
                                     </div>
                                     <label class="fieldlabels">Số CMND/CCCD: *</label>
-                                    <input type="number"
-                                           name="cmnd"
-                                           placeholder="9 số hoặc 12 số" />
-
+                                    @Html.TextBoxFor(model => model.cmnd, htmlAttributes: new { name = "cmnd", type = "number", required = "required", placeholder = "9 số hoặc 12 số" })
+                                    @*<input type="number"
+                                        name="cmnd"
+                                        placeholder="9 số hoặc 12 số" />*@
                                     <label class="fieldlabels">Ngày cấp CMND/CCCD: *</label>
-                                    <input type="date" name="cpwd" placeholder="" />
+                                    @Html.TextBoxFor(model => model.ngaycapcmnd, htmlAttributes: new { name = "ngaycapcmnd", type = "date", required = "required", placeholder = "Ngày cấp CMND/CCCD:" })
+                                    @*<input type="date" name="ngaycapcmnd" placeholder="" />*@
 
                                     <label class="fieldlabels">Nơi cấp CMND/CCCD *</label>
-                                    <input type="text"
-                                           name="cpwd"
-                                           placeholder="vd: Hồ Chí Minh, Hà Nội,..." />
+                                    @Html.TextBoxFor(model => model.noicapcmnd, htmlAttributes: new { name = "noicapcmnd", type = "text", required = "required", placeholder = "vd: Hồ Chí Minh, Hà Nội,..." })
+                                    @*<input type="text"
+                                        name="noicapcmnd"
+                                        placeholder="vd: Hồ Chí Minh, Hà Nội,..." />*@
                                 </div>
                                 <button type="button"
                                         name="next"
@@ -214,7 +230,7 @@
                                     </div>
                                     <label class="fieldlabels">Tên ngân hàng: *</label>
                                     <select type="number"
-                                            name="cmnd"
+                                            name="tennganhang"
                                             placeholder="9 số hoặc 12 số">
                                         <option value="0" selected>Chọn ngân hàng</option>
                                         <option value="1">This is select number 1</option>
@@ -232,14 +248,16 @@
                                     </select>
 
                                     <label class="fieldlabels">Số tài khoản: *</label>
-                                    <input type="number"
-                                           name="cpwd"
-                                           placeholder="vd:1910234234" />
+                                    @Html.TextBoxFor(model => model.atmcode, htmlAttributes: new { name = "atmcode", type = "number", required = "required", placeholder = "vd:1910234234" })
+                                    @*<input type="number"
+                                        name="atmcode"
+                                        placeholder="vd:1910234234" />*@
 
                                     <label class="fieldlabels">Tên chủ tài khoản *</label>
-                                    <input type="text"
-                                           name="cpwd"
-                                           placeholder="vd: Nguyễn Văn A" />
+                                    @Html.TextBoxFor(model => model.atmfullname, htmlAttributes: new { name = "atmfullname", type = "text", required = "required", placeholder = "vd: Nguyễn Văn A" })
+                                    @*<input type="text"
+                                        name="atmfullname"
+                                        placeholder="vd: Nguyễn Văn A" />*@
 
                                     <div class="ml-0 row">
                                         <div class="form-checkbox col-12 ml-0 position-relative">
@@ -270,7 +288,9 @@
                                     Quay lại
                                 </button>
                             </fieldset>
-                        </form>
+
+
+                        }
                     </div>
                 </div>
             </div>

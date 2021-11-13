@@ -10,8 +10,11 @@ using Webdaugia.DAO;
 using Webdaugia.Models.Common;
 using System.Net.Mail;
 using System.Net;
-using Webdaugia.Models.Login;
 using System.Web.Helpers;
+using System.Configuration;
+using System.Data.Entity.Migrations;
+using Webdaugia.Models.Login;
+using System.IO;
 
 namespace Webdaugia.Controllers
 {
@@ -34,12 +37,27 @@ namespace Webdaugia.Controllers
         {
             var dao = new UserDao();
             if (ModelState.IsValid)
-            {
+            {   
                 var temp = dao.getByUserName(model.username);
+                var em = dao.getByUserEmail(model.email);
+                var pw = dao.getByUserPhone(model.phone);
+                if (pw != null)
+                {
+                    ModelState.AddModelError("phone", "Số điện thoại đã tồn tại!");
+                }
+                if (em != null)
+                {
+                    ModelState.AddModelError("email", "Email đã tồn tại!");
+                }
                 if (temp != null)
                 {
                     ModelState.AddModelError("username", "Tên đăng nhập đã tồn tại!");
+
                 }
+                if (pw != null || em != null || temp != null)
+                {
+                    return View(model);
+                }    
                 else
                 {
                     User user = new User();
@@ -55,7 +73,8 @@ namespace Webdaugia.Controllers
                     {
                         ViewBag.Success = "Đăng ký thành công mời đăng nhập lại!";
                         model = new RegisterModel();
-                        return View("Themthongtin");
+                        return RedirectToAction("Themthongtin", "Login");
+                        //return View("Themthongtin");
                     }
                     else
                     {
@@ -85,8 +104,10 @@ namespace Webdaugia.Controllers
             if (ModelState.IsValid)
             {
                 var result = dao.Login(model.Username, MD5Encryptor.MD5Hash(model.Password), 3);
+
                 if (result == 1)
                 {
+
                     var user = dao.getByUserName(model.Username);
                     var userSession = new UserLogin();
                     userSession.UserID = user.ID;
@@ -95,15 +116,30 @@ namespace Webdaugia.Controllers
                     userSession.Status = user.Status;
                     //userSession.ProfileImage = user.ProfileImage;
                     Session.Add("USER", userSession);
-
-                    if (user.CMND == null)
+                    if(user.RoleID == 3)
                     {
-                        return View("Themthongtin");
+                        if (user.CMND == null)
+                        {
+                     
+                            //return View("Themthongtin");
+                            return RedirectToAction("Themthongtin", "Login");
+                            //return RedirectToAction("DangKi", "Login");
+                        }
                     }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    } 
+                        
+                    //if (user.CMND == null)
+                    //{
+                    //    //return View("Themthongtin");
+                    //    return RedirectToAction("DangKi", "Login");
+                    //}
 
-                    if (user.RoleID == 3)
-                        return RedirectToAction("Index","Home");
-                } 
+                    //if (user.RoleID == 3)
+                    //    return RedirectToAction("Index", "Home");
+                }
                 else if (result == 0)
                 {
                     ModelState.AddModelError("", "Tài khoản không tồn tại!");
@@ -125,9 +161,68 @@ namespace Webdaugia.Controllers
 
             return View("DangNhap");
         }
+        //----------------------------------------------------------------------------
+        [HttpGet]
+        public ActionResult Themthongtin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Themthongtin(AddInfoModel model)
+        {
+            var dao = new UserDao();
+            if (Session["USER"] != null)
+            {
+                
+                UserLogin userid = (UserLogin)Session["USER"];
+                User user = dao.getUserById(userid.UserID);
+                AuctionDBContext db = new AuctionDBContext();
+                user.Address = model.diachi;
+                user.CMND = model.cmnd;
+                user.LocationCMND = model.noicapcmnd;
+                user.DayCMND = model.ngaycapcmnd;
+                user.Birthday = model.ns;
+                //user.Gender = model.gt;
+                db.Users.AddOrUpdate(user);
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        //[HttpPost]
+        //public ActionResult ThemthongtinID(FormCollection form)
+        //{
+        //    var dao = new UserDao();
+        //    if (Session["USER"] != null)
+        //    {
+        //        UserLogin userid = (UserLogin)Session["USER"];
+        //        User user = dao.getUserById(userid.UserID);
+        //        //ATM atm = dao.getATMById(userid.UserID);
+        //        //Bank bank = dao.getBankById(userid.UserID);
+        //        AuctionDBContext db = new AuctionDBContext();
+        //        user.Address = form["diachi"];
+        //        user.CMND = form["cmnd"];
+        //        user.LocationCMND = form["noicapcmnd"];
+        //        user.ImageFront = form["cmndfront"];
+        //        user.ImageBack = form["imgcmndback"];
+        //        //MemoryStream stream = new MemoryStream();
+        //        //user.DayCMND = form["ngaycapcmnd"];
+        //        //user.Gender = form["gt"];
+        //        //user.Birthday = form["ns"];
+        //        //atm.ATMCode = form["atmcode"];
+        //        //atm.ATMFullName = form["atmfullname"];
+        //        //bank.Name = form["tennganhang"];
+        //        dao.Update(user);
+        //        //dao.Update(bank);
+        //        //dao.Update(atm);
 
 
 
+        //    }
+        //    return View("Index","Login");
+        //}
+        //-----------------------------------------------------------------------------------------------------------
         public ActionResult DangXuat()
         {
             Session["USER"] = null;
@@ -143,31 +238,51 @@ namespace Webdaugia.Controllers
             //}
             return View();
         }
+        public string CreatePassword(int length)
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return res.ToString();
+        }
+        [HttpPost]
+        [ActionName("Quenmatkhau")]
+        public ActionResult Quenmatkhau(string email)
+        {
+            var emailexist = IsEmailExist(email);
+            if (emailexist)
+            {
+                AuctionDBContext db = new AuctionDBContext();
+                var User = db.Users.Where(a => a.Email == email).FirstOrDefault();
+                var resetPassword = CreatePassword(10);
+                User.Password = MD5Encryptor.MD5Hash(resetPassword);
+                db.Users.AddOrUpdate(User);
+                db.SaveChanges();
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/neworder.html"));
+                    content = content.Replace("{{CustomerName}}", resetPassword);
+                    content = content.Replace("{{Email}}", email);
+                    var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                    new MailHelper().SendMail(email, "Thông báo từ web đấu giá", content);
+                    new MailHelper().SendMail(toEmail, "Thông báo từ web đấu giá", content);
+                }
+                catch (Exception ex)
+                {
+                    return View("DangNhap");
+                }
+            }
+            else
+            {
+                return View("DangKi");
+            }
 
-        [HttpGet]
-        //public ActionResult VerifyAccount(string id)
-        //{
-        //    int Status = 0;
-        //    using (AuctionDBContext dc = new AuctionDBContext())
-        //    {
-        //        dc.Configuration.ValidateOnSaveEnabled = false; // This line I have added here to avoid 
-        //                                                        // Confirm password does not match issue on save changes
-        //        var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
-        //        if (v != null)
-        //        {
-        //            v.IsEmailVerified = true;
-        //            dc.SaveChanges();
-        //            Status = 1;
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = "Invalid Request";
-        //        }
-        //    }
-        //    ViewBag.Status = Status;
-        //    return View();
-        //}
-
+            return View("DangNhap");
+        }
         [NonAction]
         public bool IsEmailExist(string emailID)
         {
@@ -177,152 +292,9 @@ namespace Webdaugia.Controllers
                 return v != null;
             }
         }
-
-        [NonAction]
-        public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
-        {
-            var verifyUrl = "/User/" + emailFor + "/" + activationCode;
-            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
-
-            var fromEmail = new MailAddress("dotnetawesome@gmail.com", "Dotnet Awesome");
-            var toEmail = new MailAddress(emailID);
-            var fromEmailPassword = "******"; // Replace with actual password
-
-            string subject = "";
-            string body = "";
-            if (emailFor == "VerifyAccount")
-            {
-                subject = "Your account is successfully created!";
-                body = "<br/><br/>We are excited to tell you that your Dotnet Awesome account is" +
-                    " successfully created. Please click on the below link to verify your account" +
-                    " <br/><br/><a href='" + link + "'>" + link + "</a> ";
-
-            }
-            else if (emailFor == "ResetPassword")
-            {
-                subject = "Reset Password";
-                body = "Hi,<br/>br/>We got request for reset your account password. Please click on the below link to reset your password" +
-                    "<br/><br/><a href=" + link + ">Reset Password link</a>";
-            }
-
-
-            var smtp = new SmtpClient
-            {
-                Host = "smtp.gmail.com",
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
-            };
-
-            using (var message = new MailMessage(fromEmail, toEmail)
-            {
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
-            })
-                smtp.Send(message);
-        }
-
-        [HttpPost]
-
-        //public ActionResult Quenmatkhau(string EmailID)
-        //{
-        //    //Verify Email ID
-        //    //Generate Reset password link 
-        //    //Send Email 
-        //    string message = "";
-        //    int Status = 0;
-
-        //    using (AuctionDBContext dc = new AuctionDBContext())
-        //    {
-        //        var account = dc.Users.Where(a => a.Email == EmailID).FirstOrDefault();
-        //        if (account != null)
-        //        {
-        //            //Send email for reset password
-        //            string resetCode = Guid.NewGuid().ToString();
-        //            SendVerificationLinkEmail(account.Email, resetCode, "ResetPassword");
-        //            account.ResetPasswordCode = resetCode;
-        //            //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property 
-        //            //in our model class in part 1
-        //            dc.Configuration.ValidateOnSaveEnabled = false;
-        //            dc.SaveChanges();
-        //            message = "Reset password link has been sent to your email id.";
-        //        }
-        //        else
-        //        {
-        //            message = "Account not found";
-        //        }
-        //    }
-        //    ViewBag.Message = message;
-        //    return View();
-        //}
-
-        //public ActionResult ResetPassword(string id)
-        //{
-        //    //Verify the reset password link
-        //    //Find account associated with this link
-        //    //redirect to reset password page
-        //    if (string.IsNullOrWhiteSpace(id))
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    using (AuctionDBContext dc = new AuctionDBContext())
-        //    {
-        //        var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
-        //        if (user != null)
-        //        {
-        //            ResetPasswordModel model = new ResetPasswordModel();
-        //            model.ResetCode = id;
-        //            return View(model);
-        //        }
-        //        else
-        //        {
-        //            return HttpNotFound();
-        //        }
-        //    }
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult ResetPassword(ResetPasswordModel model)
-        //{
-        //    var message = "";
-        //    if (ModelState.IsValid)
-        //    {
-        //        using (AuctionDBContext dc = new AuctionDBContext())
-        //        {
-        //            var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
-        //            if (user != null)
-        //            {
-        //                user.Password = Crypto.Hash(model.NewPassword);
-        //                user.ResetPasswordCode = "";
-        //                dc.Configuration.ValidateOnSaveEnabled = false;
-        //                dc.SaveChanges();
-        //                message = "New password updated successfully";
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        message = "Something invalid";
-        //    }
-        //    ViewBag.Message = message;
-        //    return View(model);
-        //}
-
-
-      
         //--------------------------------------------------------------------------------
 
-        [HttpGet]
 
-        public ActionResult Themthongtin()
-        {
-            return View();
-        }
         public ActionResult Index()
         {
             if (Session["USER"] != null)
