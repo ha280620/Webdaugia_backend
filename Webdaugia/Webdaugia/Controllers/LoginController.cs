@@ -92,6 +92,7 @@ namespace Webdaugia.Controllers
                     userSession.UserID = user.ID;
                     userSession.UserName = user.Username;
                     userSession.Name = user.FullName;
+                    userSession.Status = user.Status;
                     //userSession.ProfileImage = user.ProfileImage;
                     Session.Add("USER", userSession);
 
