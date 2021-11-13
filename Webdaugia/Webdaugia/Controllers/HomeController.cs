@@ -30,12 +30,17 @@ namespace Webdaugia.Controllers
 
             if (Session["USER"] != null)
             {
-                int userid = ((UserLogin)Session["USER"]).UserID;
          
-
+                int userid = ((UserLogin)Session["USER"]).UserID;
+              
+               
                 var imguser = db.UsersImages.Where(x=> x.UsersID == userid).FirstOrDefault();
                 ViewBag.imguser = imguser.Image;
-                
+                ViewBag.user = true;
+            }
+            else
+            {
+                ViewBag.user = false;
             }
         
             return PartialView();

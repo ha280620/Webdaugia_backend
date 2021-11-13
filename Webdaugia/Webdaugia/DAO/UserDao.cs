@@ -26,15 +26,15 @@ namespace Webdaugia.DAO
         //getById
         public User getByUserName(string username)
         {
-            return db.Users.SingleOrDefault(x => x.Username == username.Trim());
+            return db.Users.SingleOrDefault(x => x.Username.Trim() == username.Trim());
         }
         public User getByUserEmail(string email)
         {
-            return db.Users.SingleOrDefault(x => x.Email == email.Trim());
+            return db.Users.SingleOrDefault(x => x.Email.Trim() == email.Trim());
         }
         public User getByUserPhone(string phone)
         {
-            return db.Users.SingleOrDefault(x => x.Phone == phone.Trim());
+            return db.Users.SingleOrDefault(x => x.Phone.Trim() == phone.Trim());
         }
         // 
         public User getUserById(int ID)
@@ -85,7 +85,7 @@ namespace Webdaugia.DAO
                     return -1;
                 else
                 {
-                    if (result.Password.Trim() == passWord)
+                    if (result.Password.Trim() == passWord.Trim())
                         return 1;
                     else
                         return -2;
@@ -105,7 +105,7 @@ namespace Webdaugia.DAO
                     return -1;
                 else
                 {
-                    if (result.Password == passWord)
+                    if (result.Password.Trim() == passWord)
                         return 1;
                     else
                         return -2;

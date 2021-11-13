@@ -221,10 +221,7 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.dl
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.Web.Infrastructure.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Newtonsoft.Json.dll
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Net.Http.Formatting.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Helpers.dll
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.dll
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.WebHost.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Mvc.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Optimization.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Razor.dll
@@ -234,9 +231,6 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.WebPages.Razor.dl
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\WebGrease.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.xml
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Net.Http.Formatting.xml
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.xml
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Http.WebHost.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Helpers.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Mvc.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Optimization.xml
@@ -250,3 +244,4 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

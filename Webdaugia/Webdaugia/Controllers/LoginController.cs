@@ -22,7 +22,7 @@ namespace Webdaugia.Controllers
     {
         // GET: Login
         //AuctionDBContext data = new AuctionDBContext();
-
+        AuctionDBContext db = null;
         [HttpGet]
         public ActionResult DangKi()
         {
@@ -60,19 +60,37 @@ namespace Webdaugia.Controllers
                 }    
                 else
                 {
+                    db = new AuctionDBContext();
+                   
                     User user = new User();
+                  
                     user.Username = model.username.Trim();
                     user.FullName = model.name;
                     user.Password = MD5Encryptor.MD5Hash(model.password).Trim();
                     user.RoleID = 3;
                     user.Email = model.email;
                     user.Phone = model.phone;
+                    
                     user.Status = 0;
+                
                     var result = dao.Insert(user);
                     if (result > 0)
                     {
-                        ViewBag.Success = "Đăng ký thành công mời đăng nhập lại!";
+                        ViewBag.Success = "Đăng ký thành công !";
                         model = new RegisterModel();
+                        var userSession = new UserLogin();
+                        userSession.UserID = result;
+                        userSession.UserName = user.Username;
+                        userSession.Name = user.FullName;
+                        userSession.Status = user.Status;
+
+                        var img = "Content\\User\\User00.png";
+                        UsersImage usersImage = new UsersImage();
+                        usersImage.UsersID = result;
+                        usersImage.Image = img;
+                        db.UsersImages.Add(usersImage);
+                        db.SaveChanges();
+                        Session.Add("USER", userSession);
                         return RedirectToAction("Themthongtin", "Login");
                         //return View("Themthongtin");
                     }
@@ -103,7 +121,7 @@ namespace Webdaugia.Controllers
             var dao = new UserDao();
             if (ModelState.IsValid)
             {
-                var result = dao.Login(model.Username, MD5Encryptor.MD5Hash(model.Password), 3);
+                var result = dao.Login(model.Username.Trim(), MD5Encryptor.MD5Hash(model.Password), 3);
 
                 if (result == 1)
                 {
@@ -124,6 +142,10 @@ namespace Webdaugia.Controllers
                             //return View("Themthongtin");
                             return RedirectToAction("Themthongtin", "Login");
                             //return RedirectToAction("DangKi", "Login");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
                         }
                     }
                     else
