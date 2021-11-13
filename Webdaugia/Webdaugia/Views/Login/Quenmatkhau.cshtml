@@ -1,44 +1,21 @@
-﻿
+﻿@model Webdaugia.Models.Login.LoginModel
 @{
     ViewBag.Title = "Quenmatkhau";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
-<!--<form id="member-forgotpassword" action="/Login/Quenmatkhau" method="post" class="form-validate form-horizontal well" enctype="multipart/form-data">
+@using (Html.BeginForm("Quenmatkhau", "Login", FormMethod.Post))
+{
+    @Html.ValidationSummary()
     <h3>Lấy lại mật khẩu</h3>
     <p>
         Để lấy lại mật khẩu của bạn, hãy nhập địa chỉ email mà bạn đã
         đăng ký vào DSG
     </p>
-    <form>
-        <input class="form-control"
-               type="text"
-               name="username"
-               placeholder="Email"
-               required />
-        <div class="form-button full-width">-->
-@*<button id="submit" type="submit" class="ibtn btn-forget">
-        Send Reset Link
-    </button>*@
-<!--<asp:Button ID="Submitbtn" runat="server" Text="Submit" Onclick="Submitbtn_Click"/>
-        </div>
-    </form>
-</form>-->
-@using (Html.BeginForm())
-{
-    <div class="form-horizontal">
-        <hr />
-        <div class="text-success">
-            @ViewBag.Message
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">Email ID</label>
-            @Html.TextBox("EmailID", "", new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit" class="btn btn-success" />
-            </div>
-        </div>
+    <div class="form-group">
+        <input type="email" name="email" required class="form-control" placeholder="Email" />
     </div>
+    <button id="submit" type="submit" class="btn btn-forget">
+        Send Reset Link
+    </button>
 }
 

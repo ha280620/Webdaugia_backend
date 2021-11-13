@@ -26,11 +26,30 @@ namespace Webdaugia.DAO
         //getById
         public User getByUserName(string username)
         {
-            return db.Users.SingleOrDefault(x => x.Username == username);
+            return db.Users.SingleOrDefault(x => x.Username == username.Trim());
         }
+        public User getByUserEmail(string email)
+        {
+            return db.Users.SingleOrDefault(x => x.Email == email.Trim());
+        }
+        public User getByUserPhone(string phone)
+        {
+            return db.Users.SingleOrDefault(x => x.Phone == phone.Trim());
+        }
+        // 
         public User getUserById(int ID)
         {
             return db.Users.Find(ID);
+        }
+        //
+        public ATM getATMById(int UserID)
+        {
+            return db.ATMs.Find(UserID);
+        }
+        //
+        public Bank getBankById(int ID)
+        {
+            return db.Banks.Find(ID);
         }
         //Update
         public bool Update(User entity)
@@ -52,7 +71,7 @@ namespace Webdaugia.DAO
             }
         }
         //
-        public int Login(string userName, string passWord, int role)
+        public int Login(string userName, string passWord, int role )
         {
             var result = db.Users.SingleOrDefault(x => x.Username == userName && x.RoleID== role);
             if (result == null)
@@ -94,5 +113,6 @@ namespace Webdaugia.DAO
             }
 
         }
+
     }
 }

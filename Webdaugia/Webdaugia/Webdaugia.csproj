@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Models\Login\AddInfoModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="DAO\UserDao.cs" />
@@ -141,10 +142,10 @@
     <Compile Include="Models\AuctionDBContext.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Common\MailHelper.cs" />
     <Compile Include="Models\Common\MD5Encryptor.cs" />
     <Compile Include="Models\Common\UserLogin.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\Login\ResetPasswordModel.cs" />
+    <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Models\LotAttachment.cs" />
     <Compile Include="Models\Organization.cs" />
@@ -152,7 +153,7 @@
     <Compile Include="Models\ProductsAttachment.cs" />
     <Compile Include="Models\ProductsImage.cs" />
     <Compile Include="Models\RegisterBid.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\Login\RegisterModel.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersImage.cs" />
@@ -1606,6 +1607,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\template\neworder.html" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\boxicon.css" />
     <Content Include="css\fonteawesome.css" />
@@ -1813,7 +1815,6 @@
     <Content Include="Views\Login\Quenmatkhau.cshtml" />
     <Content Include="Views\Shared\_LayoutAddinfo.cshtml" />
     <Content Include="Views\Login\Themthongtin.cshtml" />
-    <Content Include="Views\Login\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

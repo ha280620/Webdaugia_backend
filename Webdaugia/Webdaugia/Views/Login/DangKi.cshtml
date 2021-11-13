@@ -1,4 +1,4 @@
-﻿@model Webdaugia.Models.RegisterModel
+﻿@model Webdaugia.Models.Login.RegisterModel
 @{
     ViewBag.Title = "DangKi";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
@@ -22,12 +22,12 @@
         @*<input required name="name" type="text" />*@
     </div>
     <div class="form_control">
-        @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", required = "required" ,placeholder = "Email" })
+        @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", required = "required", placeholder = "Email" })
         @*<input required name="email" type="email" />*@
         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
     </div>
     <div class="form_control">
-        @Html.TextBoxFor(model => model.phone, htmlAttributes: new { name = "phone", type = "text", required = "required" ,placeholder = "Sdt" })
+        @Html.TextBoxFor(model => model.phone, htmlAttributes: new { name = "phone", type = "text", required = "required", placeholder = "Sdt" })
         @*<input required name="phone" type="phone" />*@
         @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
     </div>
