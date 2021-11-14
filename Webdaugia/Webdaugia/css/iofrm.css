@@ -64,15 +64,15 @@ body {
   display: inline-block;
 }
 
-.website-logo .logo {
-  display: inline-block;
-  background-image: url("../img/logo-light.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+    .website-logo .logo {
+        display: inline-block;
+        background-image: url("../img/logo-title.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 
 .website-logo .logo img {
-  width: 100px;
+  width: 60px;
 }
 
 .website-logo .logo img.logo-size {
@@ -91,12 +91,12 @@ body {
   display: inline-block;
 }
 
-.website-logo-inside .logo {
-  display: inline-block;
-  background-image: url("../img/logo-light.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
+    .website-logo-inside .logo {
+        display: inline-block;
+        background-image: url("../img/logo-title.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 
 .website-logo-inside .logo img {
   width: 100px;
@@ -1907,16 +1907,16 @@ input.sm-content {
   }
 
   .website-logo .logo {
-    background-image: url("../img/logo-light.svg");
+    background-image: url("../img/logo-title.png");
   }
 
   .form-body.without-side .img-holder {
     display: inline-block;
   }
 
-  .form-body.without-side .website-logo .logo {
-    background-image: url("../img/logo-light.svg");
-  }
+    .form-body.without-side .website-logo .logo {
+        background-image: url("../img/logo-title.png");
+    }
 
   .form-body.without-side .form-holder .form-content {
     padding: 125px 30px 60px;

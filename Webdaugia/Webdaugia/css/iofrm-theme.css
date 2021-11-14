@@ -34,25 +34,25 @@
   width: 100px;
 }
 
-.website-logo .logo {
-  background-image: url("../img/logo-light.svg");
-}
+    .website-logo .logo {
+        background-image: url("../img/logo-title.png");
+    }
 
 .website-logo .logo img {
-  width: 100px;
+  width: 60px;
 }
 
 .website-logo-inside img {
-  width: 100px;
+    width: 60px;
 }
 
 .website-logo-inside .logo {
-  background-image: url("../img/logo-light.svg");
+  background-image: url("../img/logo-title.png");
 }
 
-.website-logo-inside .logo img {
-  width: 100px;
-}
+    .website-logo-inside .logo img {
+        width: 60px;
+    }
 
 .img-holder {
   width: 550px;
@@ -512,10 +512,10 @@
   }
 
   .website-logo .logo {
-    background-image: url("../img/logo-dark2.svg");
+    background-image: url("../img/logo-title.png");
   }
 
-  .form-body.without-side .website-logo .logo {
-    background-image: url("../img/logo-light.svg");
-  }
+    .form-body.without-side .website-logo .logo {
+        background-image: url("../img/logo-title.png");
+    }
 }
