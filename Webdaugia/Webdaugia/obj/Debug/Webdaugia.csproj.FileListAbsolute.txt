@@ -163,3 +163,4 @@ D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.dll
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.dll
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.xml
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.xml
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

@@ -36,20 +36,15 @@ namespace Webdaugia.DAO
         {
             return db.Users.SingleOrDefault(x => x.Phone == phone.Trim());
         }
+        //them thong tin
+        public User getByUserCmnd(string cmnd)
+        {
+            return db.Users.SingleOrDefault(x => x.Phone == cmnd.Trim());
+        }
         // 
         public User getUserById(int ID)
         {
             return db.Users.Find(ID);
-        }
-        //
-        public ATM getATMById(int UserID)
-        {
-            return db.ATMs.Find(UserID);
-        }
-        //
-        public Bank getBankById(int ID)
-        {
-            return db.Banks.Find(ID);
         }
         //Update
         public bool Update(User entity)

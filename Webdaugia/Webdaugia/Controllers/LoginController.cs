@@ -38,6 +38,7 @@ namespace Webdaugia.Controllers
             var dao = new UserDao();
             if (ModelState.IsValid)
             {   
+
                 var temp = dao.getByUserName(model.username);
                 var em = dao.getByUserEmail(model.email);
                 var pw = dao.getByUserPhone(model.phone);
@@ -164,15 +165,20 @@ namespace Webdaugia.Controllers
         [HttpGet]
         public ActionResult Themthongtin()
         {
+            AuctionDBContext db = new AuctionDBContext();          
+            var banks = db.Banks.ToList();
+            ViewBag.banks = new SelectList(banks, "Id", "Name");
             return View();
+
         }
         [HttpPost]
-        public ActionResult Themthongtin(AddInfoModel model)
+        public ActionResult Themthongtin(AddInfoModel model, HttpPostedFileBase cmndfront, HttpPostedFileBase cmndback)
         {
             var dao = new UserDao();
             if (Session["USER"] != null)
             {
-                
+                ATM atm = new ATM();
+                //Bank bank = new Bank();
                 UserLogin userid = (UserLogin)Session["USER"];
                 User user = dao.getUserById(userid.UserID);
                 AuctionDBContext db = new AuctionDBContext();
@@ -181,7 +187,38 @@ namespace Webdaugia.Controllers
                 user.LocationCMND = model.noicapcmnd;
                 user.DayCMND = model.ngaycapcmnd;
                 user.Birthday = model.ns;
-                //user.Gender = model.gt;
+                user.Gender = model.gt;
+                atm.ATMCode = model.atmcode;
+                atm.ATMFullName = model.atmfullname;
+                atm.UserID = user.ID;
+                //var bakid = model.tennganhang;
+                atm.BankId = model.tennganhang;
+          
+
+
+
+                var fileName = Path.GetFileName(cmndfront.FileName);
+                        var fileName1 = Path.GetFileName(cmndback.FileName);
+          
+                        var path = Path.Combine(Server.MapPath("~/images"), fileName);
+                        var path1 = Path.Combine(Server.MapPath("~/images"), fileName1);
+     
+                        if (System.IO.File.Exists(path))
+                            ViewBag.Thongbao = "Hình ảnh đã tồn tại";
+                        else
+                        {
+                  
+                            cmndfront.SaveAs(path);
+                            cmndback.SaveAs(path1);
+                            }
+                        user.ImageFront = fileName;
+                        user.ImageBack = fileName1;
+                
+                                                 
+                              
+                
+                db.ATMs.AddOrUpdate(atm);
+                //db.Banks.AddOrUpdate(bank);
                 db.Users.AddOrUpdate(user);
                 db.SaveChanges();
 
@@ -228,7 +265,6 @@ namespace Webdaugia.Controllers
             return RedirectToAction("DangNhap", "Login");
         }
         [HttpGet]
-
         public ActionResult Quenmatkhau()
         {
             //if (Session["USER"] != null)

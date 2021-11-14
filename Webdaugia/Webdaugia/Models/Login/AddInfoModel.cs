@@ -15,8 +15,8 @@ namespace Webdaugia.Models.Login
         public bool gt { set; get; }
         public string cmndfront { set; get; }
         public string imgcmndback { set; get; }
-        public string atmcode { set; get; }
+        public int atmcode { set; get; }
         public string atmfullname { set; get; }
-        public string tennganhang { set; get; }
+        public int tennganhang { set; get; }
     }
 }
