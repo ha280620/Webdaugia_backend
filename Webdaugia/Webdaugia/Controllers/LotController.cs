@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webdaugia.Models;
+using Webdaugia.Models.Common;
 //using PagedList;
 
 namespace Webdaugia.Controllers
@@ -17,24 +19,64 @@ namespace Webdaugia.Controllers
         // GET: Lot
         AuctionDBContext db = null;
         //Lot Detail
-        public ActionResult OnGoingLot(int LotId = 1000016)
+        public ActionResult OnGoingLot(int LotId)
         {
+            var user = (Models.Common.UserLogin)Session["USER"];
             db = new AuctionDBContext();
             var Lot = db.Lots.Where(x => x.ID == LotId).FirstOrDefault();
+            
+            if(Lot.HighBid != null)
+            {
+                var total = Lot.HighBid + Lot.MiniumBid;
+                ViewBag.highBid = total;
+            }
             var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).Take(3).ToList();
             var listLotAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var listAttributes = db.Products.Where(x => x.LotID == LotId).ToList();
-           
+            ViewBag.bidRegister = null;
+            if (user != null)
+            {
+                RegisterBid UserRegisterBid = db.RegisterBids.Where(x => x.LotID == LotId && x.UserID == user.UserID && x.Status == true).SingleOrDefault();
+                if (UserRegisterBid != null)
+                {
 
+                    ViewBag.bidRegister = UserRegisterBid.ID;
+                }
+            }
+            
+            var listRegisterBid = db.RegisterBids.Where(x => x.LotID == LotId && x.Status == true).ToList();
+            List<Auction> listAuctioned = new List<Auction>();
+            if (listRegisterBid != null)
+            {
+                foreach(var item in listRegisterBid)
+                {
+                    List<Auction> listAuction = db.Auctions.Where(x => x.RegisterBidID == item.ID).OrderByDescending(x => x.BidTime).ToList();
+                    if(listAuction != null)
+                    {
+                        listAuctioned.AddRange(listAuction);
+                    }
+                  
+                }
+                listAuctioned = listAuctioned.OrderByDescending(o => o.BidTime).ToList();
+
+            }
+           if(listAuctioned != null)
+            {
+                ViewBag.listAuctioned = listAuctioned;
+            }
+           
 
             ViewBag.listAttributes = listAttributes;
             ViewBag.listLotAttachment = listLotAttachment;
             ViewBag.listOnGoingLot = listOnGoingLot;
 
+            ViewBag.listRegisterBid = listRegisterBid.Count();
+
+
             return View(Lot);
         }
 
-        public ActionResult IncomingLot(int LotId)
+        public ActionResult IncomingLot(int LotId = 1000016)
 
         {
             /*if (LotId == null)
@@ -49,7 +91,7 @@ namespace Webdaugia.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
+            var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).Take(3).ToList();
             //var listLotAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var listAttributes = db.Products.Where(x => x.LotID == LotId).ToList();
           
@@ -120,6 +162,40 @@ namespace Webdaugia.Controllers
                 register.UserID = userID;
                 register.Status = false;
                 db.RegisterBids.Add(register);
+                db.SaveChanges();
+            }
+
+            return Redirect(url);
+        }
+
+        public ActionResult PlaceBid(int lotId, int registerBidID, long priceBid, string url)
+        { 
+            if (Session["USER"] == null)
+            {
+                return Redirect(url);
+            }
+
+            db = new AuctionDBContext();
+            var lot = db.Lots.Find(lotId);
+           
+            if (lot == null)
+            {
+                return Redirect(url);
+            }
+            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true)
+            {
+                return Redirect(url);
+            }
+            else 
+            {
+                lot.HighBid = priceBid;
+                db.Lots.AddOrUpdate(lot);
+                Auction item = new Auction();
+                item.RegisterBidID = registerBidID;
+                item.PriceBid = priceBid;
+                item.BidTime = DateTime.Now;
+                item.Status = false;
+                db.Auctions.Add(item);
                 db.SaveChanges();
             }
 

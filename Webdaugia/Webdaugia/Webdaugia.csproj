@@ -151,6 +151,7 @@
     <Compile Include="Models\AuctionDBContext.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Common\AuctionItem.cs" />
     <Compile Include="Models\Common\MD5Encryptor.cs" />
     <Compile Include="Models\Common\UserLogin.cs" />
     <Compile Include="Models\HomeModel.cs" />

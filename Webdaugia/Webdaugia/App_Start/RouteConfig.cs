@@ -19,12 +19,29 @@ namespace Webdaugia
                defaults: new { controller = "Lot", action = "IncomingLot", id = UrlParameter.Optional }
 
            );
+
+            routes.MapRoute(
+               name: "Ongoing Lot",
+               url: "phien-dang-dien-ra/{LotId}",
+               defaults: new { controller = "Lot", action = "OnGoingLot", id = UrlParameter.Optional }
+
+           );
+
             routes.MapRoute(
                name: "Dang Ky Dau Gia",
                url: "dang-ky-dau-gia",
                defaults: new { controller = "Lot", action = "RegisterBid", id = UrlParameter.Optional }
 
            );
+            
+            routes.MapRoute(
+               name: "Dat Gia Dau Gia",
+               url: "dat-gia-dau-gia",
+               defaults: new { controller = "Lot", action = "PlaceBid", id = UrlParameter.Optional }
+
+           );
+
+
 
             routes.MapRoute(
                 name: "Login",

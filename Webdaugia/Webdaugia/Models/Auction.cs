@@ -20,5 +20,6 @@ namespace Webdaugia.Models
         public bool? Status { get; set; }
 
         public virtual RegisterBid RegisterBid { get; set; }
+      
     }
 }
