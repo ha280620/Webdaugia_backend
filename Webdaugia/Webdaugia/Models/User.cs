@@ -56,9 +56,9 @@ namespace Webdaugia.Models
         [Column(TypeName = "date")]
         public DateTime? DayCMND { get; set; }
 
-   /*     public string ImageFront { get; set; }
+        public string ImageFront { get; set; }
 
-        public string ImageBack { get; set; }*/
+        public string ImageBack { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ATM> ATMs { get; set; }
@@ -70,6 +70,5 @@ namespace Webdaugia.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersImage> UsersImages { get; set; }
-       
     }
 }

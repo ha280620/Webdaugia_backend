@@ -46,7 +46,6 @@ namespace Webdaugia.Models
 
         public int? CateID { get; set; }
 
-
         [StringLength(200)]
         public string HostName { get; set; }
 
@@ -58,9 +57,6 @@ namespace Webdaugia.Models
 
         [StringLength(128)]
         public string SiteTile { get; set; }
-
-        [StringLength(250)]
-        public string LotImage { get; set; }
 
         public long? HighBid { get; set; }
 

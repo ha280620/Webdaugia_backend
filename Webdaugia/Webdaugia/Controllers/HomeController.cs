@@ -1,56 +1,30 @@
-﻿using Webdaugia.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Webdaugia.DAO;
-using Webdaugia.Models.Common;
 
 namespace Webdaugia.Controllers
 {
     public class HomeController : Controller
     {
-        AuctionDBContext db = null;
         public ActionResult Index()
         {
-            var dao = new UserDao();
-            db = new AuctionDBContext();
-            var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).ToList();
-            HomeModel homemodel = new HomeModel();
-            homemodel.listOnGoingLot = listOnGoingLot;
-            var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
-            homemodel.listReadyLot = listReadyLot;
-            return View(homemodel);
+            return View();
         }
 
-        public ActionResult Header()
+        public ActionResult About()
         {
-            db = new AuctionDBContext();
+            ViewBag.Message = "Your application description page.";
 
-            if (Session["USER"] != null)
-            {
-         
-                int userid = ((UserLogin)Session["USER"]).UserID;
-              
-               
-                var imguser = db.UsersImages.Where(x=> x.UsersID == userid).FirstOrDefault();
-                ViewBag.imguser = imguser.Image;
-                ViewBag.user = true;
-            }
-            else
-            {
-                ViewBag.user = false;
-            }
-        
-            return PartialView();
+            return View();
         }
 
-        public ActionResult Categories()
+        public ActionResult Contact()
         {
-            db = new AuctionDBContext();
-            var listCategory = db.Categories.ToList();
-            return View(listCategory);
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }

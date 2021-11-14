@@ -12,95 +12,85 @@
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
           rel="stylesheet" />
 
-    <link rel="stylesheet" href="~/css/slick.css" />
-    <link rel="stylesheet" href="~/css/lightgallery.css" />
     <!-- SWIPER -->
     <link rel="stylesheet" href="~/css/swiper.css" />
     <!-- RESET CSS  -->
     <link rel="stylesheet" href="~/css/reset.css" />
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/css/style.css" />
-    <link rel="stylesheet" href="~/css/taisansapdaugia.css" />
+
 </head>
 <body>
     <!-- BEGIN NAV -->
     <header>
-        @Html.Action("Header", "Home")
-        @*<div class="container">
-                <nav id="nav" class="navbar navbar-expand-lg navbar-light px-0">
-                    <a class="navbar-brand" href="/">
-                        <img src="~/img/logo-white.png"
-                             class="img-fluid"
-                             alt="logo" />
-                    </a>
-                    <button class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        <div class="container">
+            <nav id="nav" class="navbar navbar-expand-lg navbar-light px-0">
+                <a class="navbar-brand" href="/">
+                    <img src="~/img/logo-white.png"
+                         class="img-fluid"
+                         alt="logo" />
+                </a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto w-100 justify-content-end">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle"
-                                   href="#"
-                                   id="navbarDropdown"
-                                   role="button"
-                                   data-toggle="dropdown"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">
-                                    Đấu giá
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Tài sàn đang đấu giá</a>
-                                    <a class="dropdown-item" href="#">Tài sản sắp đấu giá</a>
-                                </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Liên hệ</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Giới thiệu</a>
-                            </li>
-                            @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
-                            @if (user == null)
-                            {
-                                <li class="nav-item" style="width: 30%;">
-                                    <a class="btn btn-sign-in mr-1" href="@Url.Action("DangNhap","Login")">Đăng nhập </a>
-                                    <a class="btn btn-sign-up" href="@Url.Action("DangKi","Login")">Đăng ký</a>
-                                </li>
-                            }
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="navbarDropdown"
+                               role="button"
+                               data-toggle="dropdown"
+                               aria-haspopup="true"
+                               aria-expanded="false">
+                                Đấu giá
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Tài sàn đang đấu giá</a>
+                                <a class="dropdown-item" href="#">Tài sản sắp đấu giá</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Liên hệ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Giới thiệu</a>
+                        </li>
+                        <li class="nav-item" style="width: 30%;">
+                            <a class="btn btn-sign-in mr-1" href="@Url.Action("DangNhap","Login")">Đăng nhập </a>
 
-                        </ul>
+                            <a class="btn btn-sign-up" href="@Url.Action("DangKi","Login")">Đăng ký</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="user-info pl-2">
+                    <div class="img-user">
+                        <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
                     </div>
-                    @if (user != null)
-                    {
-                        <div class="user-info pl-2">
-                            <div class="img-user">
-                                <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
-                            </div>
-                            <div class="user_dropdown">
-                                <div class="my-2 p-0">
-                                    <ul>
-                                        <li><a href="">Thông tin tài khoản</a></li>
-                                        <li>
-                                            <a href="">Đơn hàng</a>
-                                        </li>
-                                        <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <div class="user_dropdown">
+                        <div class="my-2 p-0">
+                            <ul>
+                                <li><a href="">Thông tin tài khoản</a></li>
+                                <li>
+                                    <a href="">Đơn hàng</a>
+                                </li>
+                                <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
+                            </ul>
                         </div>
-                    }
-
-                </nav>
-            </div>*@
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
-
 
     <div>
         @RenderBody()
@@ -134,7 +124,7 @@
                 </div>
                 <div class="col-12 col-md-4 footer-item">
                     <h4>HỖ TRỢ KHÁCH HÀNG</h4>
-                    <p>Liên hệ hỖ trợ</p>
+                    <p>Liên hệ hỡ trợ</p>
                     <p>Những câu hỏi thường gặp</p>
                     <p>Chính sách bảo mật thông tin</p>
                     <p></p>
@@ -160,14 +150,7 @@
     <script src="~/js/jquery.js"></script>
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.js"></script>
-    @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
-    @if (user != null)
-    {
-        <script src="~/js/userhover.js"></script>
-    }
-    <script type="text/javascript"
-            src="~/js/slick.js"></script>
-    <script src="~/js/lightGallery.js"></script>
+    <script src="~/js/userhover.js"></script>
     <!-- begin js danh mục -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
     <script>
@@ -193,7 +176,7 @@
             return direction;
         }
     </script>
-    @RenderSection("Lot", required: false)
+    <!-- end js danh mục  -->
 
 </body>
 </html>

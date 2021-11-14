@@ -1,4 +1,4 @@
-﻿@model Webdaugia.Models.HomeModel
+﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -92,35 +92,104 @@
                 <h3>Tài sản đang đấu giá</h3>
             </div>
             <div class="row mx-2">
-
-                @foreach (var item in Model.listOnGoingLot)
-                {
-                    <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
-                        <div class="auctioning-item">
-                            <div class="row">
-                                <a class="col-12 col-sm-4" href="#">
-                                    <img src="@item.LotImage" class="img-fluid" alt="" />
-                                </a>
-                                <div class="col-12 col-sm-8">
-                                    <p>@item.Category.Name</p>
-                                    <h3 class="auctioning-name">
-                                        @item.Name
-                                    </h3>
-                                    <div class="auctioning-content">
-                                        <div class="auctioning-highest">
-                                            <a href="#">
-                                                <img src="~/img/hammer.png" class="img-fluid" alt="" />
-                                            </a>
-                                            @item.StartingPrice
-                                        </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
+                </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 px-0 px-md-2 py-2">
+                    <div class="auctioning-item">
+                        <div class="row">
+                            <a class="col-12 col-sm-4" href="#">
+                                <img src="~/img/bag.jpg" class="img-fluid" alt="" />
+                            </a>
+                            <div class="col-12 col-sm-8">
+                                <p>Hàng Hiệu</p>
+                                <h3 class="auctioning-name">
+                                    Cáp đồng viễn thông các loại thanh lý dạng phế liệu của
+                                    Viễn thông Cần Thơ.
+                                </h3>
+                                <div class="auctioning-content">
+                                    <div class="auctioning-highest">
+                                        <a href="#">
+                                            <img src="~/img/hammer.png" class="img-fluid" alt="" />
+                                        </a>
+                                        1.000.000.000đ
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-                 
         </div>
     </section>
     <!-- END AUCTIONING -->
@@ -132,38 +201,96 @@
                 <h3>Tài sản sắp đấu giá</h3>
             </div>
             <div class="row">
-                @foreach (var item in Model.listReadyLot)
-                {
-                    <div class="col-12 col-md-6 col-lg-4 p-2">
-                        <div class="going-item">
-                            <div class="going-item-img">
-                                <img src="@item.LotImage" class="img-fluid" alt="" />
-                                <div class="going__overlay"></div>
-                                <div class="going__play">
-                                    <a href="#">
-                                        <h5>Thời kết thúc đăng ký</h5>
-                                        <p>@item.TimeForRegisterEnd</p>
-                                        <h5>Thời gian bắt đầu đấu giá </h5>
-                                        <p>@item.TimeForBidStart</p>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="going-content">
-                                <p>@item.Category.Name</p>
-                                <h3>
-                                    @item.Name
-                                </h3>
-
-                                <div class="going-starting-price mt-1">
-                                    <h4><span>@item.StartingPrice</span></h4>
-                                </div>
-                                <a class="btn btn-sign-up going_btn" href="#">
-                                    Đăng Ký tham gia đấu giá
+                <div class="col-12 col-md-6 col-lg-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
                                 </a>
                             </div>
                         </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
                     </div>
-                }
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 p-2">
+                    <div class="going-item">
+                        <div class="going-item-img">
+                            <img src="~/img/bag.png" class="img-fluid" alt="" />
+                            <div class="going__overlay"></div>
+                            <div class="going__play">
+                                <a href="#">
+                                    <h5>Thời kết thúc đăng ký</h5>
+                                    <p>21/12/2021 08:30</p>
+                                    <h5>Thời gian bắt đầu đấu giá </h5>
+                                    <p>21/01/2022 08:30</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="going-content">
+                            <p>Hàng Hiệu</p>
+                            <h3>
+                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
+                                thông Cần Thơ
+                            </h3>
+
+                            <div class="going-starting-price mt-1">
+                                <h4>2.000.0000.000đ</span></h4>
+                            </div>
+                            <a class="btn btn-sign-up going_btn" href="#">
+                                Đăng Ký tham gia đấu giá
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
