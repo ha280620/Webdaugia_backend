@@ -163,6 +163,7 @@ C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\o
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\WebGrease.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll.config
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.pdb
@@ -228,7 +229,6 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Razor.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.WebPages.Deployment.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.WebPages.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.WebPages.Razor.dll
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\WebGrease.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.Helpers.xml
