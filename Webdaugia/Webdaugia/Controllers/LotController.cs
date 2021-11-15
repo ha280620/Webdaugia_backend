@@ -8,6 +8,7 @@ using Webdaugia.Models;
 
 namespace Webdaugia.Controllers
 {
+    [HandleError]
     public class LotController : Controller
     {
         public ActionResult Index()

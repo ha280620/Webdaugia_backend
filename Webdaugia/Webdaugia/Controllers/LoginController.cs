@@ -18,6 +18,7 @@ using System.IO;
 
 namespace Webdaugia.Controllers
 {
+    [HandleError]
     public class LoginController : Controller
     {
         // GET: Login

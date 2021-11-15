@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LotController.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Login\AddInfoModel.cs" />
@@ -1769,6 +1770,7 @@
     <Content Include="img\CMNDBack.png" />
     <Content Include="img\CMNDFront.png" />
     <Content Include="img\DJI-0357-1603422122.jpg" />
+    <Content Include="img\error-img.png" />
     <Content Include="img\footer.png" />
     <Content Include="img\form7.jpg" />
     <Content Include="img\graphic3.svg" />
@@ -1910,7 +1912,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -1925,6 +1926,7 @@
     <Content Include="Views\Lot\IncomingLot.cshtml" />
     <Content Include="Views\Lot\OnGoingLot.cshtml" />
     <Content Include="Views\Home\Header.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

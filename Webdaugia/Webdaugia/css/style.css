@@ -11,6 +11,26 @@
     --bg-item: #eee;
     --border-radius: 10px;
 }
+.btn-primary {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.text-primary {
+    --bs-text-opacity: 1;
+    color: var(--primary-color) !important;
+}
 /* ------nav------ */
 
 header #nav .nav-link {
@@ -935,6 +955,7 @@ input[type="number"] {
     text-transform: uppercase;
 }
 /* ----footer---- */
+
 
 footer .footer-contact {
     display: flex;

@@ -9,8 +9,10 @@ using Webdaugia.Models.Common;
 
 namespace Webdaugia.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
+
         AuctionDBContext db = null;
         public ActionResult Index()
         {
