@@ -156,13 +156,13 @@
                                         {
 
                                             <input class="d-none"
-                                            type="number"
-                                            id="number"
-                                            value="@ViewBag.highBid"
-                                            min="@ViewBag.highBid"
-                                            step=" @Model.MiniumBid"
-                                            max=""
-                                            pattern="([0-9]{1,3}).([0-9]{1,3})" />
+                                                   type="number"
+                                                   id="number"
+                                                   value="@ViewBag.highBid"
+                                                   min="@ViewBag.highBid"
+                                                   step=" @Model.MiniumBid"
+                                                   max=""
+                                                   pattern="([0-9]{1,3}).([0-9]{1,3})" />
                                         }
                                         <input type="text"
                                                value=""
@@ -181,7 +181,7 @@
                                         }
                                         else
                                         {
-                                            <a class="btn btn-sign-up w-100 dau-gia" style=" height: 50px; display: flex; align-items: center; justify-content: center;"  href="/Lot/PlaceBid?lotId=@Model.ID&registerBidID=@ViewBag.bidRegister&priceBid=@ViewBag.highBid&url=@Request.Url.ToString()"> Đặt Giá </a>
+                                            <a class="btn btn-sign-up w-100 dau-gia" style=" height: 50px; display: flex; align-items: center; justify-content: center;" href="/Lot/PlaceBid?lotId=@Model.ID&registerBidID=@ViewBag.bidRegister&priceBid=@ViewBag.highBid&url=@Request.Url.ToString()"> Đặt Giá </a>
                                         }
 
 
@@ -308,7 +308,7 @@
     else
     {
         <section id="going">
-            <div class="container mt-2">
+            <div class="container">
                 <div class="going-title">
                     <i class="bx bxs-circle mr-2"></i>
                     <h3>Tài sản đang đấu giá</h3>
@@ -351,6 +351,7 @@
                 </div>
             </div>
         </section>
+
     }
 
 
