@@ -36,11 +36,6 @@ namespace Webdaugia.DAO
         {
             return db.Users.SingleOrDefault(x => x.Phone.Trim() == phone.Trim());
         }
-        //them thong tin
-        public User getByUserCmnd(string cmnd)
-        {
-            return db.Users.SingleOrDefault(x => x.Phone == cmnd.Trim());
-        }
         // 
         public User getUserById(int ID)
         {

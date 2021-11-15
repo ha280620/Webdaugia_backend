@@ -1720,7 +1720,7 @@
     <Content Include="css\multiplestep.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\slick.css" />
-    <Content Include="css\style.css" />
+    <Content Include="css\style1.css" />
     <Content Include="css\swiper.css" />
     <Content Include="css\taisansapdaugia.css" />
     <Content Include="favicon.ico" />
@@ -1929,6 +1929,7 @@
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
+    <Folder Include="imgcmnd\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
