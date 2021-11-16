@@ -26,7 +26,7 @@ namespace Webdaugia.Models
         [StringLength(100)]
         public string Password { get; set; }
 
-        public int? RoleID { get; set; }
+        public int RoleID { get; set; }
 
         [StringLength(100)]
         public string FullName { get; set; }

@@ -163,4 +163,3 @@ D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreComp
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
-D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
