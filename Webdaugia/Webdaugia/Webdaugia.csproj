@@ -129,7 +129,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdLoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Models\PasswordModel.cs" />
     <Compile Include="Controllers\LotController.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Login\AddInfoModel.cs" />
@@ -1606,6 +1611,21 @@
     <Content Include="assets\libs\twitter-bootstrap-wizard\prettify.css" />
     <Content Include="assets\libs\twitter-bootstrap-wizard\prettify.js" />
     <Content Include="assets\libs\wnumb\wNumb.min.js" />
+    <Content Include="Content\Admin\css\app.css" />
+    <Content Include="Content\Admin\css\grid.css" />
+    <Content Include="Content\Admin\css\login.css" />
+    <Content Include="Content\Admin\css\loginadmin.css" />
+    <Content Include="Content\Admin\img\backpack.jpg" />
+    <Content Include="Content\Admin\img\bg-07.svg" />
+    <Content Include="Content\Admin\img\headphone.jpg" />
+    <Content Include="Content\Admin\img\logo-lg.png" />
+    <Content Include="Content\Admin\img\logo-mb.png" />
+    <Content Include="Content\Admin\img\sneaker.jpg" />
+    <Content Include="Content\Admin\img\thumb-7.jpg" />
+    <Content Include="Content\Admin\img\user-image-2.png" />
+    <Content Include="Content\Admin\img\user-image-3.png" />
+    <Content Include="Content\Admin\img\user-image.jpg" />
+    <Content Include="Content\Admin\js\app.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -1721,7 +1741,7 @@
     <Content Include="css\multiplestep.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\slick.css" />
-    <Content Include="css\style.css" />
+    <Content Include="css\style1.css" />
     <Content Include="css\swiper.css" />
     <Content Include="css\taisansapdaugia.css" />
     <Content Include="favicon.ico" />
@@ -1770,7 +1790,6 @@
     <Content Include="img\CMNDBack.png" />
     <Content Include="img\CMNDFront.png" />
     <Content Include="img\DJI-0357-1603422122.jpg" />
-    <Content Include="img\error-img.png" />
     <Content Include="img\footer.png" />
     <Content Include="img\form7.jpg" />
     <Content Include="img\graphic3.svg" />
@@ -1892,6 +1911,12 @@
     <Content Include="assets\libs\twitter-bootstrap-wizard\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\libs\twitter-bootstrap-wizard\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="assets\libs\wnumb\LICENSE.MD" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\AdLogin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ListAccount.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Profile.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1912,6 +1937,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -1922,15 +1948,17 @@
     <Content Include="Views\Login\DangNhap.cshtml" />
     <Content Include="Views\Login\Quenmatkhau.cshtml" />
     <Content Include="Views\Shared\_LayoutAddinfo.cshtml" />
-    <Content Include="Views\Login\Themthongtin.cshtml" />
     <Content Include="Views\Lot\IncomingLot.cshtml" />
     <Content Include="Views\Lot\OnGoingLot.cshtml" />
     <Content Include="Views\Home\Header.cshtml" />
-    <Content Include="Views\Error\PageNotFound.cshtml" />
+    <Content Include="Views\Login\Themthongtin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="imgcmnd\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>

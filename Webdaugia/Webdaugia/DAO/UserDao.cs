@@ -41,16 +41,6 @@ namespace Webdaugia.DAO
         {
             return db.Users.Find(ID);
         }
-        //
-        public ATM getATMById(int UserID)
-        {
-            return db.ATMs.Find(UserID);
-        }
-        //
-        public Bank getBankById(int ID)
-        {
-            return db.Banks.Find(ID);
-        }
         //Update
         public bool Update(User entity)
         {
