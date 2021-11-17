@@ -56,9 +56,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -67,12 +64,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -138,9 +129,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\LotController.cs" />
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\Login\AddInfoModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\LotController.cs" />
     <Compile Include="DAO\UserDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,12 +145,10 @@
     <Compile Include="Models\AuctionDBContext.cs" />
     <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Common\AuctionItem.cs" />
+    <Compile Include="Models\Common\MailHelper.cs" />
     <Compile Include="Models\Common\MD5Encryptor.cs" />
     <Compile Include="Models\Common\UserLogin.cs" />
-    <Compile Include="Models\HomeModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\Login\ResetPasswordModel.cs" />
+    <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Models\LotAttachment.cs" />
     <Compile Include="Models\Organization.cs" />
@@ -164,7 +156,7 @@
     <Compile Include="Models\ProductsAttachment.cs" />
     <Compile Include="Models\ProductsImage.cs" />
     <Compile Include="Models\RegisterBid.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\Login\RegisterModel.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersImage.cs" />
@@ -1711,6 +1703,7 @@
     <Content Include="Content\Product\P164.jpg" />
     <Content Include="Content\Product\P165.jpg" />
     <Content Include="Content\Product\P166.jpg" />
+    <Content Include="Content\template\neworder.html" />
     <Content Include="Content\User\User00.png" />
     <Content Include="Content\User\User01.jpg" />
     <Content Include="Content\User\User02.jpg" />
@@ -1722,13 +1715,13 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\boxicon.css" />
     <Content Include="css\fonteawesome.css" />
-    <Content Include="css\iofrm-style.css" />
-    <Content Include="css\iofrm-theme7.css" />
+    <Content Include="css\iofrm.css" />
+    <Content Include="css\iofrm-theme.css" />
     <Content Include="css\lightgallery.css" />
     <Content Include="css\multiplestep.css" />
     <Content Include="css\reset.css" />
-    <Content Include="css\style.css" />
     <Content Include="css\slick.css" />
+    <Content Include="css\style.css" />
     <Content Include="css\swiper.css" />
     <Content Include="css\taisansapdaugia.css" />
     <Content Include="favicon.ico" />
@@ -1777,6 +1770,7 @@
     <Content Include="img\CMNDBack.png" />
     <Content Include="img\CMNDFront.png" />
     <Content Include="img\DJI-0357-1603422122.jpg" />
+    <Content Include="img\error-img.png" />
     <Content Include="img\footer.png" />
     <Content Include="img\form7.jpg" />
     <Content Include="img\graphic3.svg" />
@@ -1800,8 +1794,8 @@
     <Content Include="img\UserSideBanner.png" />
     <Content Include="img\VisitorSideBanner.png" />
     <Content Include="js\bootstrap.js" />
-    <Content Include="js\lightGallery.js" />
     <Content Include="js\jquery.js" />
+    <Content Include="js\lightGallery.js" />
     <Content Include="js\main.js" />
     <Content Include="js\multiplestep.js" />
     <Content Include="js\nganhang.js" />
@@ -1918,7 +1912,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -1930,10 +1923,10 @@
     <Content Include="Views\Login\Quenmatkhau.cshtml" />
     <Content Include="Views\Shared\_LayoutAddinfo.cshtml" />
     <Content Include="Views\Login\Themthongtin.cshtml" />
-    <Content Include="Views\Login\ResetPassword.cshtml" />
-    <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Lot\IncomingLot.cshtml" />
     <Content Include="Views\Lot\OnGoingLot.cshtml" />
+    <Content Include="Views\Home\Header.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

@@ -10,6 +10,7 @@ using Webdaugia.Models.Common;
 
 namespace Webdaugia.Controllers
 {
+    [HandleError]
     public class LotController : Controller
     {
         public ActionResult Index()

@@ -26,11 +26,30 @@ namespace Webdaugia.DAO
         //getById
         public User getByUserName(string username)
         {
-            return db.Users.SingleOrDefault(x => x.Username == username);
+            return db.Users.SingleOrDefault(x => x.Username.Trim() == username.Trim());
         }
+        public User getByUserEmail(string email)
+        {
+            return db.Users.SingleOrDefault(x => x.Email.Trim() == email.Trim());
+        }
+        public User getByUserPhone(string phone)
+        {
+            return db.Users.SingleOrDefault(x => x.Phone.Trim() == phone.Trim());
+        }
+        // 
         public User getUserById(int ID)
         {
             return db.Users.Find(ID);
+        }
+        //
+        public ATM getATMById(int UserID)
+        {
+            return db.ATMs.Find(UserID);
+        }
+        //
+        public Bank getBankById(int ID)
+        {
+            return db.Banks.Find(ID);
         }
         //Update
         public bool Update(User entity)
@@ -52,7 +71,7 @@ namespace Webdaugia.DAO
             }
         }
         //
-        public int Login(string userName, string passWord, int role)
+        public int Login(string userName, string passWord, int role )
         {
             var result = db.Users.SingleOrDefault(x => x.Username == userName && x.RoleID == role);
             if (result == null)
@@ -66,7 +85,7 @@ namespace Webdaugia.DAO
                     return -1;
                 else
                 {
-                    if (result.Password.Trim() == passWord)
+                    if (result.Password.Trim() == passWord.Trim())
                         return 1;
                     else
                         return -2;
@@ -86,7 +105,7 @@ namespace Webdaugia.DAO
                     return -1;
                 else
                 {
-                    if (result.Password == passWord)
+                    if (result.Password.Trim() == passWord)
                         return 1;
                     else
                         return -2;
@@ -94,5 +113,6 @@ namespace Webdaugia.DAO
             }
 
         }
+
     }
 }

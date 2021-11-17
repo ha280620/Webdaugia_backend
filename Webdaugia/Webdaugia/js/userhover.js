@@ -6,9 +6,4 @@ user_info.addEventListener("mouseenter", () => {
 user_info.addEventListener("mouseleave", () => {
   user_dropdown.classList.remove("active");
 });
-header_category.addEventListener("mouseenter", () => {
-  header_category_content.classList.add("active");
-});
-header_category.addEventListener("mouseleave", () => {
-  header_category_content.classList.remove("active");
-});
+
