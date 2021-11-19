@@ -5,8 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Webdaugia.Models;
-using PagedList;
-using PagedList.Mvc;
 using Webdaugia.Models.Common;
 //using PagedList;
 
@@ -130,32 +128,14 @@ namespace Webdaugia.Controllers
         }
 
         //List Lot By Categories
-        public ActionResult ListLotByCate(int CateId, int page = 1, int pageSize = 9)
+        public ActionResult ListLotByCate(int CateId, int page = 1, int pageSize = 10)
         {
             db = new AuctionDBContext();
             ViewBag.CateName = db.Categories.Where(x => x.ID == CateId).FirstOrDefault().Name;
             var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
 
-            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd).ToPagedList(page, pageSize));
+            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd)); /*.ToPagedList(page, pageSize));*/
         }
-        //List Ongoing Lots
-        public ActionResult ListOngoingLots(/*int page = 1, int pageSize = 10*/)
-        {
-            db = new AuctionDBContext();
-            var listOngoingLots = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).ToList();
-
-            return View(listOngoingLots.OrderBy(x => x.TimeForBidEnd)/*.ToPagedList(page, pageSize)*/);
-        }
-
-        //Lists Incoming Lots
-        public ActionResult ListIncomingLots(int page = 1, int pageSize = 10)
-        {
-            db = new AuctionDBContext();
-            var listIncomingLots = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
-
-            return View(listIncomingLots.OrderBy(x => x.TimeForRegisterEnd).ToPagedList(page, pageSize));
-        }
-
 
         public ActionResult RegisterBid(int lotId, int userID, string url)
         {
