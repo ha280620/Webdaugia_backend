@@ -73,9 +73,7 @@ C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\b
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Newtonsoft.Json.xml
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Antlr3.Runtime.pdb
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
-C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.dll
@@ -163,3 +161,8 @@ D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreComp
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.dll
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.dll
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.xml
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.xml
+C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

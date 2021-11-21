@@ -1,0 +1,94 @@
+﻿@model PagedList.IPagedList<Webdaugia.Models.Lot>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListLot";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ListLot</h2>
+
+<div class="row">
+    <div class="col-12">
+        <!-- ORDERS TABLE -->
+        <div class="box">
+            <div class="box-header title">
+                <h2>Danh sách phiên đấu giá</h2>
+
+                <div>
+                    <a href="/admin/adproduct/createproduct" class="btn btn-success" style="display:inline-block">
+                        <i class="fa fa-plus-circle"></i>
+                        Thêm phiên đấu giá mới
+                    </a>
+                    @*<a href="#" class="btn btn-danger" style="display:inline-block">
+                            <i class="fa fa-trash"></i>
+                            Xóa SP đã chọn
+                        </a>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4" style="margin-bottom:0">
+                    @using (Html.BeginForm("ListLot", "AdLot", FormMethod.Get, new { @class = "navbar-search" }))
+                    {
+                        <input type="text"
+                               name="searchString"
+                               class="navbar-search-input"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               value="@ViewBag.searchString" />
+                        <button type="submit"><i class="fas fa-search"></i></button>}
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="40px">
+                            STT
+                        </th>
+                        <th width="80px"></th>
+                        <th width="300px">Tên phiên</th>
+                        <th width="70px">Danh mục</th>
+                        <th width="100px">Đấu giá viên</th>
+                        <th width="100px">Giá khởi điểm</th>
+                        <th width="100px">Bước giá</th>
+                        <th width="100px">Tiền cọc</th>
+                        <th>Ngày bắt đầu phiên</th>
+                        <th>Ngày kết thúc phiên</th>
+                        <th>Ngày bắt đầu đăng ký</th>
+                        <th>Ngày kết thúc đăng ký</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int count = 1;}
+                    @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@count</td>
+                        @{ count++;}
+                        <td><img src="@item.LotImage" width="50px" /></td>
+                        <td width="250px">@item.Name</td>
+                        <td width="70px">@item.Category.Name</td>
+                        <td width="100px">@item.HostName</td>
+                        <td> @string.Format(info, "{0:0,0}", item.StartingPrice) đ</td>
+                        <td> @string.Format(info, "{0:0,0}", item.MiniumBid) đ</td>
+                        <td> @string.Format(info, "{0:0,0}", item.AdvanceDesposit) đ</td>
+                        <td width="150px">@item.TimeForBidStart</td>
+                        <td width="150px">@item.TimeForBidEnd</td>
+                        <td width="150px">@item.TimeForRegisterStart</td>
+                        <td width="150px">@item.TimeForRegisterEnd</td>
+                        <td>
+                            <a href="/admin/adlot/editlot/@item.ID" style="padding-left:15px">
+                                <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                            </a>
+                            <a href="/admin/adlot/deletelot/@item.ID" style="padding-left:15px" onclick="return confirm('Bạn có chắc chắc muốn xóa phiên đấu giá này?\nID: @item.ID\nTên Phiên: @item.Name')">
+                                <i class="fas fa-trash-alt" style="color:red"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
+        </div>
+    </div>
+</div>
