@@ -1931,6 +1931,10 @@
     <Content Include="Areas\Admin\Views\Account\Profile.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\ListLot.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\EditLot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\CreateLot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\ListProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\CreateProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\EditProduct.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1971,7 +1975,6 @@
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\AdProduct\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="imgcmnd\" />
     <Folder Include="Views\Admin\" />

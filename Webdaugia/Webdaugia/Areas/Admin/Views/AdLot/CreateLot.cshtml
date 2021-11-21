@@ -1,17 +1,18 @@
 ﻿@model Webdaugia.Models.Lot
+
 @{
-    ViewBag.Title = "EditLot";
+    ViewBag.Title = "AddProduct";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Chỉnh Sửa Thông Tin Phiên Đấu Giá</h2>
+<h2>Thêm Sản Phẩm Mới</h2>
 <div class="box">
-    @using (Html.BeginForm("EditLot", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateProduct", "AdProduct", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="col-6">
-            <a href="/admin/adlot/listlot" class="btn btn-info" style="display:inline-block">
-                Danh Sách Phiên Đấu Giá
+            <a href="/admin/adproduct/listproduct" class="btn btn-info" style="display:inline-block">
+                Danh Sách Sản phẩm
             </a>
         </div>
         <div class="col-6">
@@ -22,24 +23,16 @@
             <div class="form_control">
                 <input required
                        name="Name"
-                       type="text"
-                       value="@Model.Name" />
+                       type="text" />
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*<div class="col-6">
-                <label>Loại sản phầm của phiên</label>
-                <div class="form_control">
-                    @Html.DropDownList("Categoriíes", ViewBag.category as SelectList, "--Chọn Danh Mục-- ", new { @Name = "CateID" })
-                </div>
-            </div>*@
         <div class="col-6">
             <label>Giá khởi điểm</label>
             <div class="form_control">
                 <input required
                        name="StartingPrice"
-                       type="number"
-                       value="@Model.StartingPrice" />
+                       type="number" />
                 @Html.ValidationMessageFor(model => model.StartingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -48,8 +41,7 @@
             <div class="form_control">
                 <input required
                        name="MiniumBid"
-                       type="number"
-                       value="@Model.MiniumBid" />
+                       type="number" />
                 @Html.ValidationMessageFor(model => model.MiniumBid, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -58,8 +50,7 @@
             <div class="form_control">
                 <input required
                        name="AdvanceDesposit"
-                       type="number"
-                       value="@Model.AdvanceDesposit" />
+                       type="number" />
                 @Html.ValidationMessageFor(model => model.AdvanceDesposit, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -68,8 +59,7 @@
             <div class="form_control">
                 <input required
                        name="ParticipationFee"
-                       type="number"
-                       value="@Model.ParticipationFee" />
+                       type="number" />
                 @Html.ValidationMessageFor(model => model.ParticipationFee, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,8 +68,7 @@
             <div class="form_control">
                 <input required
                        name="HostName"
-                       type="text"
-                       value="@Model.HostName" />
+                       type="text" />
                 @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -88,8 +77,7 @@
             <div class="form_control">
                 <input required
                        name="HostLot"
-                       type="text"
-                       value="@Model.HostLot" />
+                       type="text" />
                 @Html.ValidationMessageFor(model => model.HostLot, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -98,8 +86,7 @@
             <div class="form_control">
                 <input required
                        name="Location"
-                       type="text"
-                       value="@Model.Location" />
+                       type="text" />
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -108,8 +95,7 @@
             <div class="form_control">
                 <input required
                        name="ViewInTime"
-                       type="datetime"
-                       value="@Model.ViewInTime" />
+                       type="datetime" />
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -118,8 +104,7 @@
             <div class="form_control">
                 <input required
                        name="TimeForBidStart"
-                       type="datetime"
-                       value="@Model.TimeForBidStart" />
+                       type="datetime" />
                 @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -128,8 +113,7 @@
             <div class="form_control">
                 <input required
                        name="TimeForBidEnd"
-                       type="datetime"
-                       value="@Model.TimeForBidEnd" />
+                       type="datetime" />
                 @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -138,8 +122,7 @@
             <div class="form_control">
                 <input required
                        name="TimeForRegisterStart"
-                       type="datetime"
-                       value="@Model.TimeForRegisterStart" />
+                       type="datetime" />
                 @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -148,23 +131,20 @@
             <div class="form_control">
                 <input required
                        name="TTimeForRegisterEnd"
-                       type="datetime"
-                       value="@Model.TimeForRegisterEnd" />
+                       type="datetime" />
                 @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
         <div class="col-6">
             <label>Hình ảnh đại diện Phiên</label>
             <div class="form_control">
                 <input required type="file" name="file1" />
             </div>
         </div>
-
+        
         <div class="col-6 col-12">
             <a href="">
-                <button class="btn btn-success" type="submit">Thêm phiên đáu giá mới</button>
+                <button class="btn btn-success" type="submit">Thêm mới phiên đấu giá</button>
             </a>
         </div>
     }
@@ -176,7 +156,7 @@
             $.get("/admin/adproduct/GetCate1", { Id: $("#Cate0").val() }, function (data) {
                 $("#Cate1").empty();
                 $.each(data, function (index, row) {
-                    $("#Cate1").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
+                    $("#Cate1").append("<option value='" + row.Id +"'>" + row.Name + "</option>")
                 });
             });
         })
@@ -190,3 +170,4 @@
         })
     });
 </script>
+

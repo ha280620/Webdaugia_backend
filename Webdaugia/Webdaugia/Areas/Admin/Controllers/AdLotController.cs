@@ -33,7 +33,7 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CreateLot([Bind(Include = "Name,CateID,StartingPrice,MiniumBid,AdvanceDeposit,ParticipationFee,HostLot,Location,ViewInTime")] Lot lot, HttpPostedFileBase file1)
+        public ActionResult CreateLot([Bind(Include = "Name,CateID,StartingPrice,MiniumBid,AdvanceDeposit,ParticipationFee,HostLot,Location,ViewInTime,TimeForBidStart,TimeForBidEnd,TimeForRegisterStart,TimeForRegisterEnd")] Lot lot, HttpPostedFileBase file1)
         {
             SetViewBag();
             if (ModelState.IsValid)
@@ -41,7 +41,6 @@ namespace Webdaugia.Areas.Admin.Controllers
                 db = new AuctionDBContext();
                 lot.SiteTile = FriendlyURL.URLFriendly(lot.Name);
                 lot.Status = true;
-                lot.TimeForRegisterStart = DateTime.Now;
                 db.Lots.Add(lot);
                 db.SaveChanges();
                 int LotId = db.Lots.Max(x => x.ID);//Lấy Id của sản phẩm mới vừa thêm vào
@@ -108,7 +107,7 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditLot([Bind(Include = "Name,CateID,StartingPrice,MiniumBid,AdvanceDeposit,ParticipationFee,HostLot,Location,ViewInTime")] Lot lot, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public ActionResult EditLot([Bind(Include = "Name,CateID,StartingPrice,MiniumBid,AdvanceDeposit,ParticipationFee,HostLot,Location,ViewInTime,TimeForBidStart,TimeForBidEnd,TimeForRegisterStart,TimeForRegisterEnd")] Lot lot, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             SetViewBag();
             db = new AuctionDBContext();
