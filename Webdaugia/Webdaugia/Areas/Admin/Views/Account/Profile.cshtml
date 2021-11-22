@@ -1,5 +1,6 @@
 ﻿
 @model Webdaugia.Models.User
+@{ 
     ViewBag.Title = "Profile";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -87,7 +88,7 @@
                             </div>
                             <div class="col-6 col-sm-12">
                                 <div class="form_control">
-                                    <input required name="Birthday" value="@Model.Birthday.Value.ToString("yyyy/MM/dd")" type="date" />
+                                    <input required name="Birthday" value="@Model.Birthday.Value.ToString("yyyy-MM-dd")" type="date" />
                                     <label>Ngày Sinh</label>
                                     @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
                                 </div>

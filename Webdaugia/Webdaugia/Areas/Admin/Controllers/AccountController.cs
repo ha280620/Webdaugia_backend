@@ -22,15 +22,19 @@ namespace Webdaugia.Areas.Admin.Controllers
                 List<User> listUser = db.Users.ToList();
                 return View(listUser);
             }
-            //View UpdateProfile
-            [HttpGet]
-            public ActionResult Profile()
+        //View UpdateProfile
+        [HttpGet]
+        public ActionResult Profile()
+        {
+            if (Session["AD"] == null)
             {
-                int userid = ((UserLogin)Session["AD"]).UserID;
-                var dao = new UserDao();
-                var user = dao.getUserById(userid);
-                return View(user);
+                return RedirectToAction("Index", "AdLogin");
             }
+            int userid = ((UserLogin)Session["AD"]).UserID;
+            var dao = new UserDao();
+            var user = dao.getUserById(userid);
+            return View(user);
+        }
             //Update Profile
             [HttpPost]
             [ValidateAntiForgeryToken]
