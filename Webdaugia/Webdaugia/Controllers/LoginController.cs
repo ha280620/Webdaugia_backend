@@ -15,6 +15,7 @@ using System.Configuration;
 using System.Data.Entity.Migrations;
 using Webdaugia.Models.Login;
 using System.IO;
+using System.Web.Services.Description;
 
 namespace Webdaugia.Controllers
 {
@@ -23,6 +24,7 @@ namespace Webdaugia.Controllers
     {
         // GET: Login
         //AuctionDBContext data = new AuctionDBContext();
+        string FilePath = "";
         AuctionDBContext db = null;
         [HttpGet]
         public ActionResult DangKi()
@@ -39,6 +41,7 @@ namespace Webdaugia.Controllers
             var dao = new UserDao();
             if (ModelState.IsValid)
             {   
+
                 var temp = dao.getByUserName(model.username);
                 var em = dao.getByUserEmail(model.email);
                 var pw = dao.getByUserPhone(model.phone);
@@ -78,7 +81,7 @@ namespace Webdaugia.Controllers
                     if (result > 0)
                     {
                         ViewBag.Success = "Đăng ký thành công !";
-                        model = new RegisterModel();
+                        //model = new RegisterModel();
                         var userSession = new UserLogin();
                         userSession.UserID = result;
                         userSession.UserName = user.Username;
@@ -188,29 +191,94 @@ namespace Webdaugia.Controllers
         [HttpGet]
         public ActionResult Themthongtin()
         {
-            return View();
+           db = new AuctionDBContext();
+            AddInfoModel objbank = new AddInfoModel();
+         
+            
+            //ViewBag.banks = new SelectList(banks, "Id", "Name");
+            objbank.ListCategory = db.Banks.ToList(); 
+            return View(objbank);
         }
+
+        protected string UploadFile(HttpPostedFileBase file)
+        {
+            string fileName = null;
+            string fileExtension = null;
+            string strDate = DateTime.Now.ToString("MM_dd_yyyy_hh_mm_ss");
+
+            SetFilePath();
+
+            fileExtension = Path.GetExtension(file.FileName).Replace(".", "");
+            fileName = file.FileName.Substring(file.FileName.LastIndexOf("\\\\") + 1);
+            fileName = fileName.Substring(0, fileName.LastIndexOf(fileExtension)) + strDate + "." + fileExtension;
+
+            FilePath = FilePath + fileName;
+            file.SaveAs(FilePath);
+            return fileName;
+        }
+
+        private void SetFilePath()
+        {
+            FilePath = Server.MapPath("~/imgcmnd/");
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
+        }
+
         [HttpPost]
-        public ActionResult Themthongtin(AddInfoModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Themthongtin(AddInfoModel model, HttpPostedFileBase cmndfront, HttpPostedFileBase cmndback)
         {
             var dao = new UserDao();
+            ModelState.Remove("cmndfront");
+            ModelState.Remove("cmndback");
+            ModelState.Remove("gt");
+            if (!ModelState.IsValid)
+            {
+                db = new AuctionDBContext();
+                model.ListCategory = db.Banks.ToList();
+                return View(model);
+            }
             if (Session["USER"] != null)
             {
-                
+                ATM atm = new ATM();
+                //Bank bank = new Bank();
                 UserLogin userid = (UserLogin)Session["USER"];
                 User user = dao.getUserById(userid.UserID);
                 AuctionDBContext db = new AuctionDBContext();
                 user.Address = model.diachi;
-                user.CMND = model.cmnd;
+                user.CMND = model.cmnd.ToString();
                 user.LocationCMND = model.noicapcmnd;
                 user.DayCMND = model.ngaycapcmnd;
                 user.Birthday = model.ns;
-                //user.Gender = model.gt;
+                user.Gender = model.gt;
+                atm.ATMCode = model.atmcode;
+                atm.ATMFullName = model.atmfullname;
+                atm.UserID = user.ID;
+                //var bakid = model.tennganhang;
+                atm.BankId = model.tennganhang;
+                //var fileName = Path.GetFileName(cmndfront.FileName);
+                //var fileName1 = Path.GetFileName(cmndback.FileName);
+
+                //var path = Path.Combine(Server.MapPath("~/images"), fileName);
+                //var path1 = Path.Combine(Server.MapPath("~/images"), fileName1);
+
+                string fileName = UploadFile(cmndfront);
+                string fileName1 = UploadFile(cmndback);
+                //cmndfront.SaveAs(path);
+                //cmndback.SaveAs(path1);
+                user.ImageFront = fileName;
+                user.ImageBack = fileName1;
+                db.ATMs.AddOrUpdate(atm);
+                //db.Banks.AddOrUpdate(bank);
                 db.Users.AddOrUpdate(user);
                 db.SaveChanges();
+                return RedirectToAction("Index", "Home");
 
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("DangXuat", "Login");
+            //return View(model);
         }
 
         //[HttpPost]
@@ -252,7 +320,6 @@ namespace Webdaugia.Controllers
             return RedirectToAction("DangNhap", "Login");
         }
         [HttpGet]
-
         public ActionResult Quenmatkhau()
         {
             //if (Session["USER"] != null)
