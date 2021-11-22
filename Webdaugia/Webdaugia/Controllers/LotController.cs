@@ -80,10 +80,7 @@ namespace Webdaugia.Controllers
         public ActionResult IncomingLot(int LotId = 1000016)
 
         {
-            /*if (LotId == null)
-            {
-                return RedirectToAction("Index", "Home");
-            }*/
+           
             db = new AuctionDBContext();
             var user = (Models.Common.UserLogin)Session["USER"];
     
@@ -133,8 +130,7 @@ namespace Webdaugia.Controllers
             db = new AuctionDBContext();
             ViewBag.CateName = db.Categories.Where(x => x.ID == CateId).FirstOrDefault().Name;
             var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
-
-            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd)); /*.ToPagedList(page, pageSize));*/
+            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd)); 
         }
 
         public ActionResult RegisterBid(int lotId, int userID, string url)
@@ -199,7 +195,6 @@ namespace Webdaugia.Controllers
                 db.Auctions.Add(item);
                 db.SaveChanges();
             }
-
             return Redirect(url);
         }
     }
