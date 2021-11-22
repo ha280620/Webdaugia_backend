@@ -13,7 +13,9 @@ using System.IO;
 namespace Webdaugia.Areas.Admin.Controllers
 {
     public class AdLotController : Controller
+
     {
+        string FilePath = "";
         public ActionResult Index()
         {
             if (Session["AD"] == null)
@@ -49,11 +51,18 @@ namespace Webdaugia.Areas.Admin.Controllers
         {
             if (Session["AD"] == null)
             {
+                
                 return RedirectToAction("Index", "AdLogin");
             }
             else
-            { 
-                return View();
+            {
+                db = new AuctionDBContext();
+                Lot objLot = new Lot();
+
+
+                //ViewBag.banks = new SelectList(banks, "Id", "Name");
+                objLot.ListCategory = db.Categories.ToList();
+                return View(objLot);
             }
             
         }
@@ -82,28 +91,47 @@ namespace Webdaugia.Areas.Admin.Controllers
                 lot1.TimeForBidStart = lot.TimeForBidStart;
                 lot1.TimeForBidEnd = lot.TimeForBidEnd;
                 lot1.HostName = lot.HostName;
-                db.Lots.Add(lot);
+                string fileName = UploadFile(file1);
+                lot1.LotImage = fileName;
+                db.Lots.Add(lot1);
                 db.SaveChanges();
-                int LotId = db.Lots.Max(x => x.ID);//Lấy Id của sản phẩm mới vừa thêm vào
-                if (file1 != null)
-                {
-                    string fileName1 = SaveImage(file1);
-                    var img1 = new Lot();
-                    img1.ID = LotId;
-                    img1.LotImage = fileName1;
-                    db.Lots.Add(img1);
-                    db.SaveChanges();
-                }
 
                 ViewBag.success = "Tạo phiên đấu giá mới thành công!";
                 return View(lot);
             }
             else
             {
+                db = new AuctionDBContext();
+                //ViewBag.banks = new SelectList(banks, "Id", "Name");
+                lot.ListCategory = db.Categories.ToList();
                 return View(lot);
             }
         }
-        
+        protected string UploadFile(HttpPostedFileBase file)
+        {
+            string fileName = null;
+            string fileExtension = null;
+            string strDate = DateTime.Now.ToString("MM_dd_yyyy_hh_mm_ss");
+
+            SetFilePath();
+
+            fileExtension = Path.GetExtension(file.FileName).Replace(".", "");
+            fileName = file.FileName.Substring(file.FileName.LastIndexOf("\\\\") + 1);
+            fileName = fileName.Substring(0, fileName.LastIndexOf(fileExtension)) + strDate + "." + fileExtension;
+
+            FilePath = FilePath + fileName;
+            file.SaveAs(FilePath);
+            return fileName;
+        }
+
+        private void SetFilePath()
+        {
+            FilePath = Server.MapPath("~/Content/Images/Lot/");
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
+        }
         public string SaveImage(HttpPostedFileBase fileUpload)
         {
             //Image

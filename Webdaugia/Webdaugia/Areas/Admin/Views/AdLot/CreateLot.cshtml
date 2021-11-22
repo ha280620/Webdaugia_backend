@@ -10,156 +10,146 @@
     @using (Html.BeginForm("CreateLot", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <a href="/admin/adlot/listlot" class="btn btn-info" style="display:inline-block">
                 Danh Sách Sản phẩm
             </a>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <div class="text-success" style="font-size:large">@ViewBag.success</div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Tên Sản phẩm</label>
             <div class="form_control">
-                <input  
-                       name="Name"
-                       type="text" />
+                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { name = "Name", type = "text" })
+             @*   <input name="Name"
+                       type="text" />*@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+
+        <div class="col-6 col-sm-12">
+            <label>Chọn loại đấu giá</label>
+            <div class="form_control">
+                @Html.DropDownList("CateID", new SelectList(Model.ListCategory, "Id", "Name"), "--Chọn thể loại-- ")
+                @*@Html.DropDownListFor(m => m.ListCategory, Model.ListCategory ?? new List<SelectListItem>(), "--Chọn Ngân hàng--")*@
+                @*@Html.DropDownList("tennganhang", ViewBag.banks as SelectList, "--Chọn Ngân hàng-- ", new { @Name = "tennganhang" })*@
+                @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6 col-sm-12">
             <label>Giá khởi điểm</label>
             <div class="form_control">
-                <input  
-                       name="StartingPrice"
-                       type="number" />
+                @Html.TextBoxFor(model => model.StartingPrice, htmlAttributes: new { name = "StartingPrice", type = "number" })
+              @*  <input name="StartingPrice"
+                       type="number" />*@
                 @Html.ValidationMessageFor(model => model.StartingPrice, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Bước giá</label>
             <div class="form_control">
-                <input  
-                       name="MiniumBid"
-                       type="number" />
+                @Html.TextBoxFor(model => model.MiniumBid, htmlAttributes: new { name = "MiniumBid", type = "number" })
+       @*         <input name="MiniumBid"
+                       type="number" />*@
                 @Html.ValidationMessageFor(model => model.MiniumBid, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Giá đặt cọc</label>
             <div class="form_control">
-                <input  
-                       name="AdvanceDesposit"
-                       type="number" />
+                @Html.TextBoxFor(model => model.AdvanceDesposit, htmlAttributes: new { name = "AdvanceDesposit", type = "number" })
+               @* <input name="AdvanceDesposit"
+                       type="number" />*@
                 @Html.ValidationMessageFor(model => model.AdvanceDesposit, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Giá đặt cọc</label>
             <div class="form_control">
-                <input  
-                       name="ParticipationFee"
-                       type="number" />
+                @Html.TextBoxFor(model => model.ParticipationFee, htmlAttributes: new { name = "ParticipationFee", type = "number" })
+           @*     <input name="ParticipationFee"
+                       type="number" />*@
                 @Html.ValidationMessageFor(model => model.ParticipationFee, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Chủ tài sản</label>
             <div class="form_control">
-                <input  
-                       name="HostName"
-                       type="text" />
+                @Html.TextBoxFor(model => model.HostName, htmlAttributes: new { name = "ParticipationFee", type = "text" })
+    @*            <input name="HostName"
+                       type="text" />*@
                 @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Địa điểm</label>
             <div class="form_control">
-                <input  
-                       name="Location"
-                       type="text" />
+                @Html.TextBoxFor(model => model.Location, htmlAttributes: new { name = "Location", type = "text" })
+     @*           <input name="Location"
+                       type="text" />*@
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Thời gian xem sản phẩm đấu giá</label>
             <div class="form_control">
-                <input  
-                       name="ViewInTime"
-                       type="text" />
+                @Html.TextBoxFor(model => model.ViewInTime, htmlAttributes: new { name = "ViewInTime", type = "text" })
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Ngày bắt đầu phiên</label>
             <div class="form_control">
-                <input  
-                       name="TimeForBidStart"
-
-                       type="datetime-local" />
+                @Html.TextBoxFor(model => model.TimeForBidStart, htmlAttributes: new { name = "TimeForBidStart", type = "datetime-local" })
+       @*         <input name="TimeForBidStart"
+                       type="datetime-local" />*@
                 @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Ngày kết thúc phiên</label>
             <div class="form_control">
-                <input  
-                       name="TimeForBidEnd"
-                       type="datetime-local" />
+                @Html.TextBoxFor(model => model.TimeForBidEnd, htmlAttributes: new { name = "TimeForBidEnd", type = "datetime-local" })
+       @*         <input name="TimeForBidEnd"
+                       type="datetime-local" />*@
                 @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Ngày bắt đầu dăng ký phiên</label>
             <div class="form_control">
-                <input  
-                       name="TimeForRegisterStart"
-                       type="datetime-local" />
+                @Html.TextBoxFor(model => model.TimeForRegisterStart, htmlAttributes: new { name = "TimeForRegisterStart", type = "datetime-local" })
+             @*   <input name="TimeForRegisterStart"
+                       type="datetime-local" />*@
                 @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Ngày kết thúc đăng ký phiên</label>
             <div class="form_control">
-                <input  
-                       name="TimeForRegisterEnd"
-                       type="datetime-local" />
+                @Html.TextBoxFor(model => model.TimeForRegisterEnd, htmlAttributes: new { name = "TimeForRegisterEnd", type = "datetime-local" })
+            @*    <input name="TimeForRegisterEnd"
+                       type="datetime-local" />*@
                 @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 col-sm-12">
             <label>Hình ảnh đại diện Phiên</label>
+            
             <div class="form_control">
-                <input   type="file" name="file1" />
+                @Html.TextBoxFor(model => model.file1, htmlAttributes: new { name = "file1", type = "file1" })
+                <input type="file" name="file1" />
+                @Html.ValidationMessageFor(model => model.file1, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-        <div class="col-6 col-12">
-            <a href="">
+
+        <div class="col-6 col-sm-12 col-12">
+
                 <button class="btn btn-success" type="submit">Thêm mới phiên đấu giá</button>
-            </a>
+
         </div>
     }
 </div>
-<script>tinymce.init({ selector: 'textarea' });</script>
-<script>
-    $(document).ready(function () {
-        $("#Cate0").change(function () {
-            $.get("/admin/adproduct/GetCate1", { Id: $("#Cate0").val() }, function (data) {
-                $("#Cate1").empty();
-                $.each(data, function (index, row) {
-                    $("#Cate1").append("<option value='" + row.Id +"'>" + row.Name + "</option>")
-                });
-            });
-        })
-        $("#Cate1").change(function () {
-            $.get("/admin/adproduct/GetCate1", { Id: $("#Cate1").val() }, function (data) {
-                $("#Cate2").empty();
-                $.each(data, function (index, row) {
-                    $("#Cate2").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
-                });
-            });
-        })
-    });
-</script>
+
 

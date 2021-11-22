@@ -62,29 +62,27 @@
                     @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>@count</td>
-                        @{ count++;}
-                        <td><img src="@item.LotImage" width="50px"/></td>
-                        <td width="250px">@item.Name</td>
-                        <td width="70px">@item.Category.Name</td>
-                        <td width="100px">@item.HostName</td>
-                        <td> @string.Format(info, "{0:0,0}", item.StartingPrice) đ</td>
-                        <td> @string.Format(info, "{0:0,0}", item.MiniumBid) đ</td>
-                        <td> @string.Format(info, "{0:0,0}", item.AdvanceDesposit) đ</td>
-                        <td width="150px">@item.TimeForBidStart</td>
-                        <td width="150px">@item.TimeForBidEnd</td>
-                        <td width="150px">@item.TimeForRegisterStart</td>
-                        <td width="150px">@item.TimeForRegisterEnd</td>
-                        <td>
-                            <a href="/admin/adlot/editlot/@item.ID" style="padding-left:15px">
-                                <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
-                            </a>
-                            <a href="/admin/adlot/deletelot/@item.ID" style="padding-left:15px" onclick="return confirm('Bạn có chắc chắc muốn xóa phiên đấu giá này?\nID: @item.ID\nTên Phiên: @item.Name')">
-                                <i class="fas fa-trash-alt" style="color:red"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>@count</td>
+                            @{ count++;}
+                            <td><img src="@item.LotImage" width="50px" /></td>
+                            <td width="250px">@item.Name</td>
+                            <td width="70px">@item.Category.Name</td>
+                            <td width="100px">@item.HostName</td>
+                            <td> @string.Format(info, "{0:0,0}", item.StartingPrice) đ</td>
+                            <td> @string.Format(info, "{0:0,0}", item.MiniumBid) đ</td>
+                            <td> @string.Format(info, "{0:0,0}", item.AdvanceDesposit) đ</td>
+                            <td width="150px">@item.TimeForBidStart</td>
+                            <td width="150px">@item.TimeForBidEnd</td>
+                            <td width="150px">@item.TimeForRegisterStart</td>
+                            <td width="150px">@item.TimeForRegisterEnd</td>
+                            <td>
+                                <a href="/admin/adlot/editlot/@item.ID" style="padding-left:15px">
+                                    <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                                </a>
+
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

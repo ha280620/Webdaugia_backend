@@ -147,6 +147,7 @@
     <Compile Include="Controllers\LotController.cs" />
     <Compile Include="DAO\LotDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
+    <Compile Include="Models\Common\AuctionItem.cs" />
     <Compile Include="Models\Common\FriendlyURL.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Login\AddInfoModel.cs" />
@@ -1958,8 +1959,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
