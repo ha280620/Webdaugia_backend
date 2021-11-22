@@ -7,11 +7,11 @@
 
 <h2>Thêm Sản Phẩm Mới</h2>
 <div class="box">
-    @using (Html.BeginForm("CreateProduct", "AdProduct", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("CreateLot", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="col-6">
-            <a href="/admin/adproduct/listproduct" class="btn btn-info" style="display:inline-block">
+            <a href="/admin/adlot/listlot" class="btn btn-info" style="display:inline-block">
                 Danh Sách Sản phẩm
             </a>
         </div>
@@ -21,7 +21,7 @@
         <div class="col-6">
             <label>Tên Sản phẩm</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="Name"
                        type="text" />
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
@@ -30,7 +30,7 @@
         <div class="col-6">
             <label>Giá khởi điểm</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="StartingPrice"
                        type="number" />
                 @Html.ValidationMessageFor(model => model.StartingPrice, "", new { @class = "text-danger" })
@@ -39,7 +39,7 @@
         <div class="col-6">
             <label>Bước giá</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="MiniumBid"
                        type="number" />
                 @Html.ValidationMessageFor(model => model.MiniumBid, "", new { @class = "text-danger" })
@@ -48,7 +48,7 @@
         <div class="col-6">
             <label>Giá đặt cọc</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="AdvanceDesposit"
                        type="number" />
                 @Html.ValidationMessageFor(model => model.AdvanceDesposit, "", new { @class = "text-danger" })
@@ -57,34 +57,25 @@
         <div class="col-6">
             <label>Giá đặt cọc</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="ParticipationFee"
                        type="number" />
                 @Html.ValidationMessageFor(model => model.ParticipationFee, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-6">
-            <label>Đấu Giá Viên</label>
+            <label>Chủ tài sản</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="HostName"
                        type="text" />
                 @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-6">
-            <label>Chủ tài sản</label>
-            <div class="form_control">
-                <input required
-                       name="HostLot"
-                       type="text" />
-                @Html.ValidationMessageFor(model => model.HostLot, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-6">
             <label>Địa điểm</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="Location"
                        type="text" />
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
@@ -93,16 +84,16 @@
         <div class="col-6">
             <label>Thời gian xem sản phẩm đấu giá</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="ViewInTime"
-                       type="datetime-local" />
+                       type="text" />
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-6">
             <label>Ngày bắt đầu phiên</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="TimeForBidStart"
 
                        type="datetime-local" />
@@ -112,7 +103,7 @@
         <div class="col-6">
             <label>Ngày kết thúc phiên</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="TimeForBidEnd"
                        type="datetime-local" />
                 @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
@@ -121,7 +112,7 @@
         <div class="col-6">
             <label>Ngày bắt đầu dăng ký phiên</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="TimeForRegisterStart"
                        type="datetime-local" />
                 @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
@@ -130,16 +121,16 @@
         <div class="col-6">
             <label>Ngày kết thúc đăng ký phiên</label>
             <div class="form_control">
-                <input required
+                <input  
                        name="TimeForRegisterEnd"
-                       type="datetime" />
+                       type="datetime-local" />
                 @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-6">
             <label>Hình ảnh đại diện Phiên</label>
             <div class="form_control">
-                <input required type="file" name="file1" />
+                <input   type="file" name="file1" />
             </div>
         </div>
         

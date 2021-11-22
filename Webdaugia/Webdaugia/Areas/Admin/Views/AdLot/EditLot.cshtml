@@ -14,9 +14,12 @@
                 Danh Sách Phiên Đấu Giá
             </a>
         </div>
-        <div class="col-6">
-            <div class="text-success" style="font-size:large">@ViewBag.success</div>
-        </div>
+        @if (ViewBag.success != null)
+        {
+<div class="col-6">
+    <div class="text-success" style="font-size:large">@ViewBag.success</div>
+</div>
+        }
         <div class="col-6">
             <label>Tên Sản phẩm</label>
             <div class="form_control">
@@ -108,7 +111,7 @@
             <div class="form_control">
                 <input required
                        name="ViewInTime"
-                       type="datetime-local"
+                       type="text"
                        value="@Model.ViewInTime" />
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
@@ -158,7 +161,8 @@
         <div class="col-6">
             <label>Hình ảnh đại diện Phiên</label>
             <div class="form_control">
-                <input required value="@Model.LotImage" type="file" name="file1" />
+                <img src="@Model.LotImage" width="100px" />
+                <input required type="file" name="file1" />
             </div>
         </div>
 
