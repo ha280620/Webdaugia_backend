@@ -52,8 +52,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                 return RedirectToAction("Index", "AdLogin");
             }
             else
-            {
-                SetViewBag();
+            { 
                 return View();
             }
             
@@ -61,14 +60,28 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CreateLot([Bind(Include = "Name,CateID,StartingPrice,MiniumBid,AdvanceDeposit,ParticipationFee,HostLot,Location,ViewInTime,TimeForBidStart,TimeForBidEnd,TimeForRegisterStart,TimeForRegisterEnd")] Lot lot, HttpPostedFileBase file1)
+        public ActionResult CreateLot(Lot lot, HttpPostedFileBase file1)
         {
-            SetViewBag();
+            
             if (ModelState.IsValid)
             {
                 db = new AuctionDBContext();
-                lot.SiteTile = FriendlyURL.URLFriendly(lot.Name);
-                lot.Status = true;
+                Lot lot1 = new Lot();
+                lot1.SiteTile = FriendlyURL.URLFriendly(lot.Name);
+                lot1.Status = false;
+                lot1.CateID = lot.CateID;
+                lot1.StartingPrice = lot.StartingPrice;
+                lot1.MiniumBid = lot.MiniumBid;
+                lot1.ParticipationFee = lot.ParticipationFee;
+                lot1.AdvanceDesposit = lot.AdvanceDesposit;
+                lot1.ViewInTime = lot.ViewInTime;
+                lot1.Location = lot.Location;
+                lot1.HostLot = ((UserLogin)Session["AD"]).UserID;
+                lot1.TimeForRegisterStart = lot.TimeForRegisterStart;
+                lot1.TimeForRegisterEnd = lot.TimeForRegisterEnd;
+                lot1.TimeForBidStart = lot.TimeForBidStart;
+                lot1.TimeForBidEnd = lot.TimeForBidEnd;
+                lot1.HostName = lot.HostName;
                 db.Lots.Add(lot);
                 db.SaveChanges();
                 int LotId = db.Lots.Max(x => x.ID);//Lấy Id của sản phẩm mới vừa thêm vào
@@ -90,13 +103,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                 return View(lot);
             }
         }
-        public void SetViewBag()
-        {
-            db = new AuctionDBContext();
-            var cate0 = db.Categories.Where(x => x.ID == null).ToList();
-            ViewBag.cate0 = new SelectList(cate0, "Id", "Name");
-            
-        }
+        
         public string SaveImage(HttpPostedFileBase fileUpload)
         {
             //Image
@@ -115,18 +122,12 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             return ImagePath;
         }
-        public JsonResult GetCate1(int Id)
-        {
-            db = new AuctionDBContext();
-            db.Configuration.ProxyCreationEnabled = false;
-            var cate1 = db.Categories.Where(x => x.ID == Id).ToList();
-            ViewBag.cate1 = new SelectList(cate1, "ID", "Name");
-            return Json(cate1, JsonRequestBehavior.AllowGet);
-        }
+        
         //EDIT LOT============================================================
         [HttpGet]
         public ActionResult EditLot(int id)
         {
+            ViewBag.success = null;
             if (Session["AD"] == null)
             {
                 return RedirectToAction("Index", "AdLogin");
@@ -135,7 +136,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             {
                 db = new AuctionDBContext();
                 var lot = db.Lots.Find(id);
-                SetViewBag();
+                
                 return View(lot);
             }
 
@@ -144,9 +145,9 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditLot([Bind(Include = "Name,CateID,StartingPrice,MiniumBid,AdvanceDeposit,ParticipationFee,HostLot,Location,ViewInTime,TimeForBidStart,TimeForBidEnd,TimeForRegisterStart,TimeForRegisterEnd")] Lot lot, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public ActionResult EditLot(Lot lot, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
-            SetViewBag();
+
             db = new AuctionDBContext();
             if (ModelState.IsValid)
             {
@@ -161,46 +162,28 @@ namespace Webdaugia.Areas.Admin.Controllers
                 editLot.AdvanceDesposit = lot.AdvanceDesposit;
                 editLot.ViewInTime = lot.ViewInTime;
                 editLot.Location = lot.Location;
-                editLot.HostLot = lot.HostLot;
+                editLot.HostLot = ((UserLogin)Session["AD"]).UserID;
                 editLot.TimeForRegisterStart = lot.TimeForRegisterStart;
                 editLot.TimeForRegisterEnd = lot.TimeForRegisterEnd;
                 editLot.TimeForBidStart = lot.TimeForBidStart;
                 editLot.TimeForBidEnd = lot.TimeForBidEnd;
                 editLot.SiteTile = FriendlyURL.URLFriendly(lot.Name);
-                editLot.HostName = ((UserLogin)Session["AD"]).Name;
+                editLot.HostName = lot.HostName;
                 db.SaveChanges();
                 //Lưu từng ảnh nêu có nhập ảnh
-                if (file1 != null)
-                {
-                    string fileName1 = SaveImage(file1);
-                    var img1 = new Lot();
-                    img1.ID = lot.ID;
-                    img1.LotImage = fileName1;
-                    db.Lots.Add(img1);
-                    db.SaveChanges();
-                }
+                //if (file1 != null)
+                //{
+                //    string fileName1 = SaveImage(file1);
+                //    var img1 = new Lot();
+                //    img1.ID = lot.ID;
+                //    img1.LotImage = fileName1;
+                //    db.Lots(img1);
+                //    db.SaveChanges();
+                //}
                 ViewBag.success = "Sửa Sản Phẩm thành công!";
                 return View(lot);
             }
             return View();
         }
-        //DELETE PRODUCT==========================================================
-        public ActionResult DeleteLot(int id)
-        {
-            db = new AuctionDBContext();
-            //Xóa ảnh SP
-            //var allimg = db.ProductImages.Where(x => x.ProductId == id).ToList();
-            //foreach (var item in allimg)
-            //{
-            //    db.ProductImages.Remove(item);
-            //}
-            //db.SaveChanges();
-            //Xóa SP
-            var delLot = db.Lots.Where(x => x.ID == id).SingleOrDefault();
-            db.Lots.Remove(delLot);
-            db.SaveChanges();
-            return RedirectToAction("ListLot");
-        }
-
     }
 }

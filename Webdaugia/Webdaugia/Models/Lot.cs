@@ -1,4 +1,4 @@
-namespace Webdaugia.Models
+﻿namespace Webdaugia.Models
 {
     using System;
     using System.Collections.Generic;
@@ -20,24 +20,25 @@ namespace Webdaugia.Models
         public int ID { get; set; }
 
         [StringLength(200)]
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public string Name { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public long? MiniumBid { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public long? StartingPrice { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public long? AdvanceDesposit { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public int? ParticipationFee { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public int? HostLot { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public DateTime? TimeForRegisterEnd { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public DateTime? TimeForBidEnd { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public DateTime? TimeForBidStart { get; set; }
-
+        [Required(ErrorMessage = "Bạn cần nhập cmnd")]
         public DateTime? TimeForRegisterStart { get; set; }
 
         public int? AssetID { get; set; }

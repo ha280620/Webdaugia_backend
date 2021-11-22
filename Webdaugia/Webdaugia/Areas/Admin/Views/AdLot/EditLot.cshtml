@@ -14,9 +14,12 @@
                 Danh Sách Phiên Đấu Giá
             </a>
         </div>
-        <div class="col-6">
-            <div class="text-success" style="font-size:large">@ViewBag.success</div>
-        </div>
+        @if (ViewBag.success != null)
+        {
+<div class="col-6">
+    <div class="text-success" style="font-size:large">@ViewBag.success</div>
+</div>
+        }
         <div class="col-6">
             <label>Tên Sản phẩm</label>
             <div class="form_control">
@@ -108,7 +111,7 @@
             <div class="form_control">
                 <input required
                        name="ViewInTime"
-                       type="datetime"
+                       type="text"
                        value="@Model.ViewInTime" />
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
@@ -118,8 +121,8 @@
             <div class="form_control">
                 <input required
                        name="TimeForBidStart"
-                       type="datetime"
-                       value="@Model.TimeForBidStart" />
+                       type="datetime-local"
+                       value="@Model.TimeForBidStart.Value.ToString("yyyy-MM-ddTHH:mm")" />
                 @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -128,8 +131,8 @@
             <div class="form_control">
                 <input required
                        name="TimeForBidEnd"
-                       type="datetime"
-                       value="@Model.TimeForBidEnd" />
+                       type="datetime-local"
+                       value="@Model.TimeForBidEnd.Value.ToString("yyyy-MM-ddTHH:mm")" />
                 @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -138,8 +141,8 @@
             <div class="form_control">
                 <input required
                        name="TimeForRegisterStart"
-                       type="datetime"
-                       value="@Model.TimeForRegisterStart" />
+                       type="datetime-local"
+                       value="@Model.TimeForRegisterStart.Value.ToString("yyyy-MM-ddTHH:mm")" />
                 @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -148,8 +151,8 @@
             <div class="form_control">
                 <input required
                        name="TTimeForRegisterEnd"
-                       type="datetime"
-                       value="@Model.TimeForRegisterEnd" />
+                       type="datetime-local"
+                       value="@Model.TimeForRegisterEnd.Value.ToString("yyyy-MM-ddTHH:mm")" />
                 @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -158,6 +161,7 @@
         <div class="col-6">
             <label>Hình ảnh đại diện Phiên</label>
             <div class="form_control">
+                <img src="@Model.LotImage" width="100px" />
                 <input required type="file" name="file1" />
             </div>
         </div>
