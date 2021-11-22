@@ -27,6 +27,9 @@ namespace Webdaugia.Models
         public string MetaKeywords { get; set; }
 
         [StringLength(158)]
+        public string CateImg { get; set; }
+
+        [StringLength(158)]
         public string MetaDescription { get; set; }
 
         public bool Status { get; set; }

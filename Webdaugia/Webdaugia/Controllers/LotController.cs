@@ -80,10 +80,10 @@ namespace Webdaugia.Controllers
         public ActionResult IncomingLot(int LotId = 1000016)
 
         {
-            /*if (LotId == null)
+            if (LotId == null)
             {
                 return RedirectToAction("Index", "Home");
-            }*/
+            }
             db = new AuctionDBContext();
             var user = (Models.Common.UserLogin)Session["USER"];
     

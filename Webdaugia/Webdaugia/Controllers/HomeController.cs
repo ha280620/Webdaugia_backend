@@ -23,6 +23,8 @@ namespace Webdaugia.Controllers
             homemodel.listOnGoingLot = listOnGoingLot;
             var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
             homemodel.listReadyLot = listReadyLot;
+            var listCategory = db.Categories.ToList();
+            homemodel.listCategory = listCategory;
             return View(homemodel);
         }
 
@@ -32,10 +34,7 @@ namespace Webdaugia.Controllers
 
             if (Session["USER"] != null)
             {
-         
                 int userid = ((UserLogin)Session["USER"]).UserID;
-              
-               
                 var imguser = db.UsersImages.Where(x=> x.UsersID == userid).FirstOrDefault();
                 ViewBag.imguser = imguser.Image;
                 ViewBag.user = true;
@@ -48,11 +47,13 @@ namespace Webdaugia.Controllers
             return PartialView();
         }
 
-        public ActionResult Categories()
-        {
-            db = new AuctionDBContext();
-            var listCategory = db.Categories.ToList();
-            return View(listCategory);
-        }
+        //public ActionResult Categories()
+        //{
+        //    db = new AuctionDBContext();
+        //    var listCategory = db.Categories.ToList();
+        //    HomeModel homemodel = new HomeModel();
+        //    homemodel.listCategory = listCategory;
+        //    return View(homemodel);
+        //}
     }
 }
