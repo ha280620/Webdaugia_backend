@@ -143,6 +143,7 @@
     <Compile Include="Areas\Admin\Controllers\AdProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Models\PasswordModel.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LotController.cs" />
     <Compile Include="DAO\LotDao.cs" />
     <Compile Include="DAO\ProductDao.cs" />
@@ -1970,6 +1971,7 @@
     <Content Include="Views\Lot\OnGoingLot.cshtml" />
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Login\Themthongtin.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
