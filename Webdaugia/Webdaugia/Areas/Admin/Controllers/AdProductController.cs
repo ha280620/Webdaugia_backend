@@ -12,21 +12,45 @@ namespace Webdaugia.Areas.Admin.Controllers
 {
     public class AdProductController : Controller
     {
+        public ActionResult Index()
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            return View();
+        }
         // GET: Admin/Product
         AuctionDBContext db = null;
         public ActionResult ListProduct(string searchString, int page = 1, int pageSize = 10)
         {
-            var dao = new ProductDao();
-            var model = dao.ListAllPaging(searchString, page, pageSize);
-            ViewBag.searchString = searchString;
-            return View(model);
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new ProductDao();
+                var model = dao.ListAllPaging(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+            
         }
         //CREATE PRODUCT ======================================================================
         [HttpGet]
         public ActionResult CreateProduct()
         {
-            SetViewBag();
-            return View();
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                SetViewBag();
+                return View();
+            }
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -115,15 +139,22 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult EditProduct(int id)
         {
-            db = new AuctionDBContext();
-            var product = db.Products.Find(id);
-            SetViewBag();
-            return View(product);
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var product = db.Products.Find(id);
+                SetViewBag();
+                return View(product);
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProduct([Bind(Include = "ID,Name,LotID,Price,Description")] Product product, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public ActionResult EditProduct([Bind(Include = "ID,Name,LotID,Description")] Product product, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
         {
             SetViewBag();
             db = new AuctionDBContext();

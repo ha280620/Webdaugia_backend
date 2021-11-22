@@ -13,6 +13,10 @@ namespace Webdaugia.Areas.Admin.Controllers
         AuctionDBContext db = null;
         public ActionResult Index()
         {
+            if (Session["AD"] != null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
             return View();
         }
     }

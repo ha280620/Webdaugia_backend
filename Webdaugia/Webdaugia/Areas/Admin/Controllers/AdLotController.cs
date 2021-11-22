@@ -14,21 +14,49 @@ namespace Webdaugia.Areas.Admin.Controllers
 {
     public class AdLotController : Controller
     {
+        public ActionResult Index()
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                return View();
+            }
+            
+        }
         // GET: Admin/Lot
         AuctionDBContext db = null;
         public ActionResult ListLot(string searchString, int page = 1, int pageSize = 10)
         {
-            var dao = new LotDao();
-            var model = dao.ListAllPaging(searchString, page, pageSize);
-            ViewBag.searchString = searchString;
-            return View(model);
+            if(Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPaging(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+                
         }
         //CREATE LOT ======================================================================
         [HttpGet]
         public ActionResult CreateLot()
         {
-            SetViewBag();
-            return View();
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                SetViewBag();
+                return View();
+            }
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,10 +127,19 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult EditLot(int id)
         {
-            db = new AuctionDBContext();
-            var lot = db.Lots.Find(id);
-            SetViewBag();
-            return View(lot);
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var lot = db.Lots.Find(id);
+                SetViewBag();
+                return View(lot);
+            }
+
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
