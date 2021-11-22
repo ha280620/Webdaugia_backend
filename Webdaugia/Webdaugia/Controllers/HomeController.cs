@@ -46,14 +46,5 @@ namespace Webdaugia.Controllers
         
             return PartialView();
         }
-
-        //public ActionResult Categories()
-        //{
-        //    db = new AuctionDBContext();
-        //    var listCategory = db.Categories.ToList();
-        //    HomeModel homemodel = new HomeModel();
-        //    homemodel.listCategory = listCategory;
-        //    return View(homemodel);
-        //}
     }
 }

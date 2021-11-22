@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Webdaugia.Models;
 using Webdaugia.Models.Common;
-//using PagedList;
+using PagedList;
 
 namespace Webdaugia.Controllers
 {
@@ -134,7 +134,7 @@ namespace Webdaugia.Controllers
             ViewBag.CateName = db.Categories.Where(x => x.ID == CateId).FirstOrDefault().Name;
             var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
 
-            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd)); /*.ToPagedList(page, pageSize));*/
+            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd).ToPagedList(page, pageSize));
         }
 
         public ActionResult RegisterBid(int lotId, int userID, string url)
