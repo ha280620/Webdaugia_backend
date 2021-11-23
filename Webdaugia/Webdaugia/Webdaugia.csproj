@@ -52,6 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -132,10 +138,18 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdLoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdLotController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Models\PasswordModel.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LotController.cs" />
+    <Compile Include="DAO\LotDao.cs" />
+    <Compile Include="DAO\ProductDao.cs" />
+    <Compile Include="Models\Common\AdLot.cs" />
+    <Compile Include="Models\Common\AuctionItem.cs" />
+    <Compile Include="Models\Common\FriendlyURL.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Models\Login\AddInfoModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1630,6 +1644,16 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Lot\245398817_402615768009509_2871009326896691470_n.11_23_2021_01_01_22.jpg" />
+    <Content Include="Content\Images\Lot\249347145_1349282195493353_8494279244873990058_n.11_23_2021_07_52_31.jpg" />
+    <Content Include="Content\Images\Lot\252732773_153945653571609_1971640022074689624_n.11_23_2021_08_06_53.jpg" />
+    <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_01_21_41.png" />
+    <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_01_24_49.png" />
+    <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_07_50_13.png" />
+    <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_10_16_56.png" />
+    <Content Include="Content\Images\Lot\hinh.11_23_2021_07_52_59.png" />
+    <Content Include="Content\Images\Lot\home-BG.11_23_2021_07_14_27.png" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\Product\P011.jpg" />
     <Content Include="Content\Product\P012.jpg" />
     <Content Include="Content\Product\P013.jpg" />
@@ -1920,6 +1944,16 @@
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\ListAccount.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Profile.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListLot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\EditLot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\CreateLot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\ListProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\CreateProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\AdProduct\EditProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListLotRegister.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\listregitsteroflot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListLotAuction.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListAuctionOfLot.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1942,8 +1976,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
@@ -1955,12 +1987,14 @@
     <Content Include="Views\Lot\OnGoingLot.cshtml" />
     <Content Include="Views\Home\Header.cshtml" />
     <Content Include="Views\Login\Themthongtin.cshtml" />
+    <Content Include="Views\Error\PageNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Content\Images\Prouduct\" />
     <Folder Include="imgcmnd\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>

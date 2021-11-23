@@ -17,8 +17,9 @@ namespace Webdaugia.Models
 
         public DateTime BidTime { get; set; }
 
-        public bool? Status { get; set; }
+        public int? Status { get; set; }
 
         public virtual RegisterBid RegisterBid { get; set; }
+      
     }
 }

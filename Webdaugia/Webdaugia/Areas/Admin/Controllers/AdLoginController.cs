@@ -13,7 +13,7 @@ namespace Webdaugia.Areas.Admin.Controllers
     {
         public ActionResult Index()
         {
-            if (Session["AD"] != null) return Redirect("/admin/account");
+            if (Session["AD"] != null) return RedirectToAction("Index", "AdminHome");
             return View();
         }
         [HttpPost]

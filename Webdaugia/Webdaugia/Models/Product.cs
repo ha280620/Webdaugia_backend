@@ -38,5 +38,6 @@ namespace Webdaugia.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductsImage> ProductsImages { get; set; }
+        public List<Lot> ListLot= new List<Lot>();
     }
 }

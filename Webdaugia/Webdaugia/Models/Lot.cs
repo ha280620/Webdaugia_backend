@@ -1,4 +1,4 @@
-namespace Webdaugia.Models
+﻿namespace Webdaugia.Models
 {
     using System;
     using System.Collections.Generic;
@@ -20,12 +20,13 @@ namespace Webdaugia.Models
         public int ID { get; set; }
 
         [StringLength(200)]
+
         public string Name { get; set; }
 
         public long? MiniumBid { get; set; }
 
         public long? StartingPrice { get; set; }
-
+  
         public long? AdvanceDesposit { get; set; }
 
         public int? ParticipationFee { get; set; }
@@ -48,18 +49,22 @@ namespace Webdaugia.Models
 
 
         [StringLength(200)]
+     
         public string HostName { get; set; }
 
         [StringLength(158)]
+
         public string Location { get; set; }
 
         [StringLength(158)]
+     
         public string ViewInTime { get; set; }
 
         [StringLength(128)]
         public string SiteTile { get; set; }
 
         [StringLength(250)]
+
         public string LotImage { get; set; }
 
         public long? HighBid { get; set; }
@@ -76,5 +81,8 @@ namespace Webdaugia.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegisterBid> RegisterBids { get; set; }
+        public List<Category> ListCategory = new List<Category>();
+      /*  [Required(ErrorMessage = "Vui lòng chọn ảnh")]
+        public string file1;*/
     }
 }

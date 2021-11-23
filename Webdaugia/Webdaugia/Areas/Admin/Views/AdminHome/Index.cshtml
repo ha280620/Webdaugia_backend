@@ -3,15 +3,16 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
 <!-- nav left -->
 <div class="row">
     <div class="col-3 col-md-6 col-sm-12">
         <div class="box box-hover">
             <!-- COUNTER -->
             <div class="counter">
-                <div class="counter-title">Tổng Đơn hàng</div>
+                <div class="counter-title">Tổng phiên đấu giá</div>
                 <div class="counter-info">
-                    <div class="counter-count">@ViewBag.countOrder</div>
+                    <div class="counter-count">@ViewBag.countLot</div>
                     <i class="bx bx-shopping-bag"></i>
                 </div>
             </div>
@@ -22,9 +23,9 @@
         <div class="box box-hover">
             <!-- COUNTER -->
             <div class="counter">
-                <div class="counter-title">conversion rate</div>
+                <div class="counter-title">Tổng số sản phẩm</div>
                 <div class="counter-info">
-                    <div class="counter-count">30.5%</div>
+                    <div class="counter-count">@ViewBag.countProduct</div>
                     <i class="bx bx-chat"></i>
                 </div>
             </div>
@@ -35,12 +36,21 @@
         <div class="box box-hover">
             <!-- COUNTER -->
             @*@{
-                var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-            }*@
+                    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                }*@
             <div class="counter">
                 <div class="counter-title">Tổng doanh thu (VNĐ)</div>
                 <div class="counter-info">
-                    @*<div class="counter-count">@string.Format(info, "{0:0,0}", @ViewBag.Profit)</div>*@
+                    @if (@ViewBag.countTotal != 0)
+                    {
+                        <div class="counter-count">@string.Format(info, "{0:0,0}", @ViewBag.countTotal)</div>
+                    }
+                    else
+                    {
+                        <div class="counter-count"> @ViewBag.countTotal</div>
+                    }
+
+
                     <i class="bx bx-line-chart"></i>
                 </div>
             </div>
@@ -51,9 +61,9 @@
         <div class="box box-hover">
             <!-- COUNTER -->
             <div class="counter">
-                <div class="counter-title">Tổng lượt ghé thăm</div>
+                <div class="counter-title">Tổng tài khoản</div>
                 <div class="counter-info">
-                    <div class="counter-count">690</div>
+                    <div class="counter-count">@ViewBag.countAccount</div>
                     <i class="bx bx-user"></i>
                 </div>
             </div>
@@ -102,8 +112,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                   
-
                     </tbody>
                 </table>
             </div>
@@ -127,8 +135,8 @@
             backgroundColor: 'rgb(255, 99, 132)',
             fill: false,
             borderColor: 'rgb(255, 99, 132)',
-            data: [3534314, 1232110, 34435,23847],
-             tension: 0.1
+            data: [3534314, 1232110, 34435, 23847],
+            tension: 0.1
         }]
     };
     const config = {

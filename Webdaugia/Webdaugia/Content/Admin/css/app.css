@@ -660,8 +660,8 @@ li.dropdown-menu-item:hover {
 
 .box-hover:hover {
     border-color: var(--main-color);
-    display:flex;
-    justify-content:space-between;
+
+
     align-items:center;
 }
 .box-header{
@@ -794,6 +794,7 @@ table td {
 .payment-status {
     display: flex;
     align-items: center;
+    justify-content:center;
 }
 
     .payment-status .dot {

@@ -6,6 +6,9 @@
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
 }
+@{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
 
 <<main>
     @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];
@@ -53,26 +56,6 @@
                                 </a>
                             }
                         }
-                        @*    <a class="slide-for-item" href="img/product-1-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-1-450x450.jpg"
-                                     alt="" />
-                            </a>
-                            <a class="slide-for-item" href="img/product-2-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-2-450x450.jpg"
-                                     alt="" />
-                            </a>
-                            <a class="slide-for-item" href="img/product-3-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-3-450x450.jpg"
-                                     alt="" />
-                            </a>
-                            <a class="slide-for-item" href="img/product-4-450x450.jpg">
-                                <img class="img-fluid w-100"
-                                     src="img/product-4-450x450.jpg"
-                                     alt="" />
-                            </a>*@
 
                     </div>
                     <div class="bg_slide-nav">
@@ -91,29 +74,6 @@
 
                                 }
                             }
-
-                            @*    <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-2-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>
-                                <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-3-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>
-                                <div class="slide-nav-item">
-                                    <div class="slide-nav-item-img">
-                                        <img class="img-fluid"
-                                             src="img/product-4-450x450.jpg"
-                                             alt="" />
-                                    </div>
-                                </div>*@
-
                         </div>
                     </div>
                 </div>
@@ -166,15 +126,15 @@
 
                                     <tr>
                                         <th scope="row">Phí đăng ký tham gia đấu giá:</th>
-                                        <td>@Model.ParticipationFee VNĐ</td>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.ParticipationFee) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Tiền đặt trước:</th>
-                                        <td>@Model.AdvanceDesposit VNĐ</td>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.AdvanceDesposit) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Bước giá:</th>
-                                        <td>@Model.MiniumBid VNĐ</td>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.MiniumBid) VNĐ</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Tên chủ tài sản:</th>
@@ -199,7 +159,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Giá khởi điểm</th>
-                                        <td style="color:var(--btn-danger); font-weight: 700; ">@Model.StartingPrice VNĐ</td>
+                                        <td style="color:var(--btn-danger); font-weight: 700; ">@string.Format(info, "{0:0,0}", @Model.StartingPrice) VNĐ</td>
                                     </tr>
 
                                     <tr>
@@ -246,10 +206,10 @@
                                 <p class="time-register">Đã hết thời gian đăng ký</p>
                             </div>
                         }
-                        else if (@Model.TimeForBidEnd < DateTime.Now  && user != null)
+                        else if (@Model.TimeForBidEnd < DateTime.Now && user != null)
                         {
                             <div class="col-12">
-                             
+
                             </div>
                         }
                         else if (user != null && user.Status == 0)
@@ -314,7 +274,8 @@
                      aria-labelledby="nav-home-tab">
                     @foreach (var item in listAttributes)
                     {
-                        @item.Description
+                        @Html.Raw(item.Description);
+                    
                     }
                 </div>
                 <div class="tab-pane fade"
@@ -354,106 +315,58 @@
             </div>
         </div>
     </section>
-    <section id="going">
-        <div class="container mt-2">
-            <div class="going-title">
-                <i class="bx bxs-right-arrow mr-2"></i>
-                <h3>Tài sản sắp đấu giá</h3>
-            </div>
-            <div class="row">
-                <div class="col-4 p-2">
-                    <div class="going-item">
-                        <div class="going-item-img">
-                            <img src="~/img/bag.jpg" class="img-fluid" alt="" />
-                            <div class="going__overlay"></div>
-                            <div class="going__play">
-                                <a href="#">
-                                    <h5>Thời kết thúc đăng ký</h5>
-                                    <p>21/12/2021 08:30</p>
-                                    <h5>Thời gian bắt đầu đấu giá </h5>
-                                    <p>21/01/2022 08:30</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="going-content">
-                            <p>Hàng Hiệu</p>
-                            <h3>
-                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
-                                thông Cần Thơ
-                            </h3>
 
-                            <div class="going-starting-price mt-1">
-                                <h4>2.000.0000.000đ</h4>
-                            </div>
-                            <a class="btn btn-sign-up going_btn" href="#">
-                                Đăng Ký tham gia đấu giá
-                            </a>
-                        </div>
-                    </div>
+    @if (ViewBag.listReadyLot == null)
+    {
+
+    }
+    else
+    {
+        <section id="going">
+            <div class="container mt-2">
+                <div class="going-title">
+                    <i class="bx bxs-right-arrow mr-2"></i>
+                    <h3>Tài sản sắp đấu giá</h3>
+
                 </div>
-                <div class="col-4 p-2">
-                    <div class="going-item">
-                        <div class="going-item-img">
-                            <img src="~/img/bag.jpg" class="img-fluid" alt="" />
-                            <div class="going__overlay"></div>
-                            <div class="going__play">
-                                <a href="#">
-                                    <h5>Thời kết thúc đăng ký</h5>
-                                    <p>21/12/2021 08:30</p>
-                                    <h5>Thời gian bắt đầu đấu giá </h5>
-                                    <p>21/01/2022 08:30</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="going-content">
-                            <p>Hàng Hiệu</p>
-                            <h3>
-                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
-                                thông Cần Thơ
-                            </h3>
+                <div class="row">
+                    @foreach (var item in ViewBag.listReadyLot)
+                    {
+                        <div class="col-4 p-2">
+                            <div class="going-item">
+                                <div class="going-item-img">
+                                    <img src="@item.LotImage" class="img-fluid" alt="" />
+                                    <div class="going__overlay"></div>
+                                    <div class="going__play">
+                                        <a href="#">
+                                            <h5>Thời gian kết thúc đăng ký</h5>
+                                            <p>@item.TimeForRegisterEnd</p>
+                                            <h5>Thời gian bắt đầu đấu giá</h5>
+                                            <p>@item.TimeForBidStart</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="going-content">
+                                    <p>@item.Category.Name</p>
+                                    <h3>
+                                        @item.Name
+                                    </h3>
 
-                            <div class="going-starting-price mt-1">
-                                <h4>2.000.0000.000đ</h4>
-                            </div>
-                            <a class="btn btn-sign-up going_btn" href="#">
-                                Đăng Ký tham gia đấu giá
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4 p-2">
-                    <div class="going-item">
-                        <div class="going-item-img">
-                            <img src="~/img/bag.jpg" class="img-fluid" alt="" />
-                            <div class="going__overlay"></div>
-                            <div class="going__play">
-                                <a href="#">
-                                    <h5>Thời kết thúc đăng ký</h5>
-                                    <p>21/12/2021 08:30</p>
-                                    <h5>Thời gian bắt đầu đấu giá </h5>
-                                    <p>21/01/2022 08:30</p>
-                                </a>
+                                    <div class="going-starting-price mt-1">
+                                        <h4>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</h4>
+                                    </div>
+                                    <a class="btn btn-sign-up going_btn" href="#">
+                                        Đấu giá ngay
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="going-content">
-                            <p>Hàng Hiệu</p>
-                            <h3>
-                                Cáp đồng viễn thông các loại thanh lý dạng phế liệu của Viễn
-                                thông Cần Thơ
-                            </h3>
+                    }
 
-                            <div class="going-starting-price mt-1">
-                                <h4>2.000.0000.000đ</h4>
-                            </div>
-                            <a class="btn btn-sign-up going_btn" href="#">
-                                Đăng Ký tham gia đấu giá
-                            </a>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    }
 </main>
 
 <!-- Modal -->
@@ -525,7 +438,6 @@
 @if (@Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
 {
     <script>
-
             var countDownDateEnd = new Date("@Model.TimeForRegisterEnd").getTime();
             var y = setInterval(function () {
             // Nhận ngày và giờ hôm nay
@@ -586,7 +498,7 @@ else if (@Model.TimeForRegisterStart > DateTime.Now)
         }, 1000);
     </script>
 }
-if (@Model.TimeForBidStart >= DateTime.Now)
+@if (@Model.TimeForBidStart >= DateTime.Now)
 {
 <script>
     var countDownDate = new Date("@Model.TimeForBidStart").getTime();
@@ -623,6 +535,7 @@ if (@Model.TimeForBidStart >= DateTime.Now)
 }
 
 @section Lot{
+  
     <script type="text/javascript">
         lightGallery(document.getElementById("lightgallery"), {
             speed: 300,

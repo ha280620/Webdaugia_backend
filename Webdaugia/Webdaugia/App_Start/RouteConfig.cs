@@ -18,7 +18,7 @@ namespace Webdaugia
              defaults: new { controller = "Lot", action = "IncomingLot", id = UrlParameter.Optional }
 
                );
-                routes.MapRoute(
+            routes.MapRoute(
                name: "Dang Ky Dau Gia",
                url: "dang-ky-dau-gia",
                defaults: new { controller = "Lot", action = "RegisterBid", id = UrlParameter.Optional }
