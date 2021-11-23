@@ -1780,6 +1780,9 @@
     <Content Include="images\img\user-image.jpg" />
     <Content Include="images\img\UserSideBanner.png" />
     <Content Include="images\img\VisitorSideBanner.png" />
+    <Content Include="images\Landing Page.png" />
+    <Content Include="images\LogiGear_BGggM.png" />
+    <Content Include="images\tma.png" />
     <Content Include="img\200lab-education-golang-flutter-software-engineer-1.jpg" />
     <Content Include="img\auction.jpg" />
     <Content Include="img\bag.jpg" />
