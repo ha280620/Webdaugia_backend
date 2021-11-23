@@ -1,0 +1,21 @@
+﻿@model Webdaugia.Models.Login.LoginModel
+@{
+    ViewBag.Title = "Quenmatkhau";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@using (Html.BeginForm("Quenmatkhau", "Login", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <h3>Lấy lại mật khẩu</h3>
+    <p>
+        Để lấy lại mật khẩu của bạn, hãy nhập địa chỉ email mà bạn đã
+        đăng ký vào DSG
+    </p>
+    <div class="form-group">
+        <input type="email" name="email" required class="form-control" placeholder="Email" />
+    </div>
+    <button id="submit" type="submit" class="btn btn-primary">
+        Send Reset Link
+    </button>
+}
+

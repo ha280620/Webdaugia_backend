@@ -212,24 +212,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                 Directory.CreateDirectory(FilePath);
             }
         }
-        public string SaveImage(HttpPostedFileBase fileUpload)
-        {
-            //Image
-            string fileName = Path.GetFileNameWithoutExtension(fileUpload.FileName);
-            string extension = Path.GetExtension(fileUpload.FileName);
-            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            string ImagePath = "/Content/Product/" + fileName;
-            fileName = Path.Combine(Server.MapPath("/Content/Images/Products/"), fileName);
-            try
-            {
-                fileUpload.SaveAs(fileName);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return ImagePath;
-        }
+       
         
         //EDIT LOT============================================================
         [HttpGet]

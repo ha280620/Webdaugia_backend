@@ -219,7 +219,7 @@ namespace Webdaugia.Controllers
 
         private void SetFilePath()
         {
-            FilePath = Server.MapPath("~/imgcmnd/");
+            FilePath = Server.MapPath("~/Content/Images/Cmnd/");
             if (!Directory.Exists(FilePath))
             {
                 Directory.CreateDirectory(FilePath);
@@ -268,8 +268,8 @@ namespace Webdaugia.Controllers
                 string fileName1 = UploadFile(cmndback);
                 //cmndfront.SaveAs(path);
                 //cmndback.SaveAs(path1);
-                user.ImageFront = "/imgcmnd/" + fileName;
-                user.ImageBack = "/imgcmnd/" + fileName1;
+                user.ImageFront = "\\Content\\Images\\Cmnd\\" + fileName;
+                user.ImageBack = "\\Content\\Images\\Cmnd\\" + fileName1;
                 db.ATMs.AddOrUpdate(atm);
                 //db.Banks.AddOrUpdate(bank);
                 db.Users.AddOrUpdate(user);
@@ -358,8 +358,9 @@ namespace Webdaugia.Controllers
                     content = content.Replace("{{CustomerName}}", resetPassword);
                     content = content.Replace("{{Email}}", email);
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
-                    new MailHelper().SendMail(email, "Thông báo từ web đấu giá", content);
-                    new MailHelper().SendMail(toEmail, "Thông báo từ web đấu giá", content);
+
+                    new MailHelper().SendMail(email, "Cấp lại mật khẩu ", content);
+                    new MailHelper().SendMail(toEmail, "Cấp lại mật khẩu", content);
                 }
                 catch (Exception ex)
                 {
