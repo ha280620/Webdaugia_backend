@@ -14,11 +14,11 @@
                 Danh Sách Phiên Đấu Giá
             </a>
         </div>
-   
-<div class="col-6">
-    <div class="text-success" style="font-size:large">@ViewBag.success</div>
-</div>
-        
+
+        <div class="col-6">
+            <div class="text-success" style="font-size:large">@ViewBag.success</div>
+        </div>
+
         <div class="col-6">
             <label>Tên Sản phẩm</label>
             <div class="form_control">
@@ -29,12 +29,15 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*<div class="col-6">
-                <label>Loại sản phầm của phiên</label>
-                <div class="form_control">
-                    @Html.DropDownList("Categoriíes", ViewBag.category as SelectList, "--Chọn Danh Mục-- ", new { @Name = "CateID" })
-                </div>
-            </div>*@
+        <div class="col-6 col-sm-12">
+            <label>Chọn loại đấu giá</label>
+            <div class="form_control">
+                @Html.DropDownList("CateID", new SelectList(Model.ListCategory, "Id", "Name"), "--Chọn thể loại-- ")
+                @*@Html.DropDownListFor(m => m.ListCategory, Model.ListCategory ?? new List<SelectListItem>(), "--Chọn Ngân hàng--")*@
+                @*@Html.DropDownList("tennganhang", ViewBag.banks as SelectList, "--Chọn Ngân hàng-- ", new { @Name = "tennganhang" })*@
+                @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="col-6">
             <label>Giá khởi điểm</label>
             <div class="form_control">
@@ -89,10 +92,10 @@
             <label>Chủ tài sản</label>
             <div class="form_control">
                 <input required
-                       name="HostLot"
+                       name="HostName"
                        type="text"
-                       value="@Model.HostLot" />
-                @Html.ValidationMessageFor(model => model.HostLot, "", new { @class = "text-danger" })
+                       value="@Model.HostName" />
+                @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-6">
@@ -115,6 +118,28 @@
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="col-6">
+            <label>Ngày bắt đầu dăng ký phiên</label>
+            <div class="form_control">
+                <input required
+                       name="TimeForRegisterStart"
+                       type="datetime-local"
+                       value="@Model.TimeForRegisterStart.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Ngày kết thúc đăng ký phiên</label>
+            <div class="form_control">
+                <input required
+                       name="TimeForRegisterEnd"
+                       type="datetime-local"
+                       value="@Model.TimeForRegisterEnd.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="col-6">
             <label>Ngày bắt đầu phiên</label>
             <div class="form_control">
@@ -136,60 +161,17 @@
             </div>
         </div>
         <div class="col-6">
-            <label>Ngày bắt đầu dăng ký phiên</label>
-            <div class="form_control">
-                <input required
-                       name="TimeForRegisterStart"
-                       type="datetime-local"
-                       value="@Model.TimeForRegisterStart.Value.ToString("yyyy-MM-ddTHH:mm")" />
-                @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-6">
-            <label>Ngày kết thúc đăng ký phiên</label>
-            <div class="form_control">
-                <input required
-                       name="TTimeForRegisterEnd"
-                       type="datetime-local"
-                       value="@Model.TimeForRegisterEnd.Value.ToString("yyyy-MM-ddTHH:mm")" />
-                @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="col-6">
             <label>Hình ảnh đại diện Phiên</label>
             <div class="form_control">
                 <img src="@Model.LotImage" width="100px" />
-                <input required type="file" name="file1" />
+                <input type="file" name="file1" />
             </div>
         </div>
 
         <div class="col-6 col-12">
-            <a href="">
-                <button class="btn btn-success" type="submit">Thêm phiên đáu giá mới</button>
-            </a>
+
+            <button class="btn btn-success" type="submit">Sửa phiên đấu giá mới</button>
+
         </div>
     }
 </div>
-<script>tinymce.init({ selector: 'textarea' });</script>
-<script>
-    $(document).ready(function () {
-        $("#Cate0").change(function () {
-            $.get("/admin/adproduct/GetCate1", { Id: $("#Cate0").val() }, function (data) {
-                $("#Cate1").empty();
-                $.each(data, function (index, row) {
-                    $("#Cate1").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
-                });
-            });
-        })
-        $("#Cate1").change(function () {
-            $.get("/admin/adproduct/GetCate1", { Id: $("#Cate1").val() }, function (data) {
-                $("#Cate2").empty();
-                $.each(data, function (index, row) {
-                    $("#Cate2").append("<option value='" + row.Id + "'>" + row.Name + "</option>")
-                });
-            });
-        })
-    });
-</script>

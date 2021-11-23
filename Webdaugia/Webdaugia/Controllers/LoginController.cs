@@ -268,8 +268,8 @@ namespace Webdaugia.Controllers
                 string fileName1 = UploadFile(cmndback);
                 //cmndfront.SaveAs(path);
                 //cmndback.SaveAs(path1);
-                user.ImageFront = fileName;
-                user.ImageBack = fileName1;
+                user.ImageFront = "/imgcmnd/" + fileName;
+                user.ImageBack = "/imgcmnd/" + fileName1;
                 db.ATMs.AddOrUpdate(atm);
                 //db.Banks.AddOrUpdate(bank);
                 db.Users.AddOrUpdate(user);

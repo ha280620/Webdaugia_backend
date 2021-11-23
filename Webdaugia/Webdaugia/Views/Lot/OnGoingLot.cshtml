@@ -260,7 +260,7 @@
                      aria-labelledby="nav-home-tab">
                     @foreach (var item in listAttributes)
                     {
-                        @item.Description
+                        @Html.Raw(item.Description);
                     }
                 </div>
                 <div class="tab-pane fade"

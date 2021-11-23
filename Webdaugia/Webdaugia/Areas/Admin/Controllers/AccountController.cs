@@ -19,7 +19,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             public ActionResult ListAccount()
             {
                 db = new AuctionDBContext();
-                List<User> listUser = db.Users.ToList();
+                List<User> listUser = db.Users.Where(x => x.Status == 1 || x.Status == 2).ToList();
                 return View(listUser);
             }
         //View UpdateProfile
@@ -127,13 +127,13 @@ namespace Webdaugia.Areas.Admin.Controllers
         {
             db = new AuctionDBContext();
             var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
-            if(user.Status == 0)
+            if(user.Status == 1)
+            {
+                user.Status = 2;
+            }
+            else  if(user.Status == 2)
             {
                 user.Status = 1;
-            }
-            else
-            {
-                user.Status = 0;
             }      
             db.Users.AddOrUpdate(user);
             db.SaveChanges();

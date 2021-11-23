@@ -191,7 +191,7 @@ namespace Webdaugia.Controllers
                 item.RegisterBidID = registerBidID;
                 item.PriceBid = priceBid;
                 item.BidTime = DateTime.Now;
-                item.Status = false;
+                item.Status = 0;
                 db.Auctions.Add(item);
                 db.SaveChanges();
             }

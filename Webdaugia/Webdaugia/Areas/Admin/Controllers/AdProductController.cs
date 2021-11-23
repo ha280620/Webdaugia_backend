@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace Webdaugia.Areas.Admin.Controllers
 {
     public class AdProductController : Controller
     {
+        string FilePath = "";
         public ActionResult Index()
         {
             if (Session["AD"] == null)
@@ -47,53 +49,44 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
-                SetViewBag();
-                return View();
+                db = new AuctionDBContext();
+                Product product = new Product();
+                product.ListLot = db.Lots.ToList();
+                return View(product);
             }
             
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CreateProduct([Bind(Include = "Name,LotID,Description")] Product product, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public ActionResult CreateProduct([Bind(Include = "Name,Description,LotID")] Product product, HttpPostedFileBase[] files)
         {
-            SetViewBag();
+            db = new AuctionDBContext();
+            product.ListLot = db.Lots.ToList();
             if (ModelState.IsValid)
             {
-                db = new AuctionDBContext();
                 product.CreatedAt = DateTime.Now;
                 product.CreatedBy = ((UserLogin)Session["AD"]).UserID;
                 db.Products.Add(product);
                 db.SaveChanges();
                 //Lưu từng ảnh nêu có nhập ảnh
                 int ProId = db.Products.Max(x => x.ID);//Lấy Id của sản phẩm mới vừa thêm vào
-                if (file1 != null)
+                if (files != null)
                 {
-                    string fileName1 = SaveImage(file1);
-                    var img1 = new ProductsImage();
-                    img1.ProductId = ProId;
-                    img1.Image = fileName1;
-                    db.ProductsImages.Add(img1);
+                    foreach(HttpPostedFileBase file in files)
+                    {
+                        ProductsImage img = new ProductsImage();
+                
+                                 string fileName = UploadFile(file);
+                        img.Image = "\\Content\\Images\\Prouduct\\" + fileName;
+                        img.ProductId = ProId;
+                        db.ProductsImages.Add(img);
+                       
+                    }
                     db.SaveChanges();
+
                 }
-                if (file2 != null)
-                {
-                    string fileName2 = SaveImage(file2);
-                    var img2 = new ProductsImage();
-                    img2.ProductId = ProId;
-                    img2.Image = fileName2;
-                    db.ProductsImages.Add(img2);
-                    db.SaveChanges();
-                }
-                if (file3 != null)
-                {
-                    string fileName3 = SaveImage(file3);
-                    var img3 = new ProductsImage();
-                    img3.ProductId = ProId;
-                    img3.Image = fileName3;
-                    db.ProductsImages.Add(img3);
-                    db.SaveChanges();
-                }
+
 
                 ViewBag.success = "Tạo mới sản phẩm thành công!";
                 return View(product);
@@ -103,30 +96,33 @@ namespace Webdaugia.Areas.Admin.Controllers
                 return View(product);
             }
         }
-        public void SetViewBag()
+        protected string UploadFile(HttpPostedFileBase file)
         {
-            db = new AuctionDBContext();
-            var lot01 = db.Lots.Where(x => x.AssetID == null).ToList();
-            ViewBag.cate0 = new SelectList(lot01, "Id", "Name");
-        }
-        public string SaveImage(HttpPostedFileBase fileUpload)
-        {
-            //Image
-            string fileName = Path.GetFileNameWithoutExtension(fileUpload.FileName);
-            string extension = Path.GetExtension(fileUpload.FileName);
-            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            string ImagePath = "/Content/Products/" + fileName;
-            fileName = Path.Combine(Server.MapPath("/Content/Products/"), fileName);
-            try
-            {
-                fileUpload.SaveAs(fileName);
-            }
-            catch (Exception ex)
-            {
+            string fileName = null;
+            string fileExtension = null;
+            string strDate = DateTime.Now.ToString("MM_dd_yyyy_hh_mm_ss");
 
-            }
-            return ImagePath;
+            SetFilePath();
+
+            fileExtension = Path.GetExtension(file.FileName).Replace(".", "");
+            fileName = file.FileName.Substring(file.FileName.LastIndexOf("\\\\") + 1);
+            fileName = fileName.Substring(0, fileName.LastIndexOf(fileExtension)) + strDate + "." + fileExtension;
+
+            FilePath = FilePath + fileName;
+            file.SaveAs(FilePath);
+            return fileName;
         }
+
+        private void SetFilePath()
+        {
+            FilePath = Server.MapPath("~/Content/Images/Prouduct/");
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
+        }
+      
+        
         //public JsonResult GetCate1(int Id)
         //{
         //    db = new AuctionDBContext();
@@ -146,89 +142,73 @@ namespace Webdaugia.Areas.Admin.Controllers
             else
             {
                 db = new AuctionDBContext();
-                var product = db.Products.Find(id);
-                SetViewBag();
+                var product = db.Products.Find(id);              
+                product.ListLot = db.Lots.ToList();
                 return View(product);
             }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProduct([Bind(Include = "ID,Name,LotID,Description")] Product product, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+        public ActionResult EditProduct(/*[Bind(Include = "Name,Description,LotID")] */Product product, HttpPostedFileBase[] files)
         {
-            SetViewBag();
             db = new AuctionDBContext();
+            product.ListLot = db.Lots.ToList();
+            int proID = product.ID;
             if (ModelState.IsValid)
             {
-                var editPro = db.Products.Where(x => x.ID == product.ID).SingleOrDefault();
+                var editPro = db.Products.Find(proID);
                 if (editPro == null)
                     return HttpNotFound();
                 //Xóa hình ảnh cũ trong bảng ProductImage
-                var delImg = db.ProductsImages.Where(x => x.ProductId == product.ID);
-                foreach (var item in delImg)
-                {
-                    db.ProductsImages.Remove(item);
-                }
-                db.SaveChanges();
+              
 
                 //Sửa thông tin sản phẩm 
-                editPro.ID = product.ID;
+      
                 editPro.Name = product.Name;
                 editPro.LotID = product.LotID;
                 editPro.Description = product.Description;
                 editPro.UpdatedAt = DateTime.Now;
                 editPro.UpdatedBy = ((UserLogin)Session["AD"]).UserID;
+                if (files[0] != null)
+                {
+                    var delImg = db.ProductsImages.Where(x => x.ProductId == product.ID);
+                    foreach (var item in delImg)
+                    {
+                        string path = Path.Combine(Server.MapPath(item.Image)); ;
+
+                        if (!Directory.Exists(path))
+                        {
+
+                            System.IO.File.Delete(path);
+                        }
+                        db.ProductsImages.Remove(item);
+                    }
+        
+                    foreach (HttpPostedFileBase file in files)
+                    {
+                        ProductsImage img = new ProductsImage();
+
+                        string fileName = UploadFile(file);
+                        img.Image = "\\Content\\Images\\Prouduct\\" + fileName;
+                        img.ProductId = editPro.ID;
+                        db.ProductsImages.Add(img);
+
+                    }
+                    db.SaveChanges();
+
+                }
+                db.Products.AddOrUpdate(editPro);
                 db.SaveChanges();
                 //Lưu từng ảnh nêu có nhập ảnh
-                if (file1 != null)
-                {
-                    string fileName1 = SaveImage(file1);
-                    var img1 = new ProductsImage();
-                    img1.ProductId = product.ID;
-                    img1.Image = fileName1;
-                    db.ProductsImages.Add(img1);
-                    db.SaveChanges();
-                }
-                if (file2 != null)
-                {
-                    string fileName2 = SaveImage(file2);
-                    var img2 = new ProductsImage();
-                    img2.ProductId = product.ID;
-                    img2.Image = fileName2;
-                    db.ProductsImages.Add(img2);
-                    db.SaveChanges();
-                }
-                if (file3 != null)
-                {
-                    string fileName3 = SaveImage(file3);
-                    var img3 = new ProductsImage();
-                    img3.ProductId = product.ID;
-                    img3.Image = fileName3;
-                    db.ProductsImages.Add(img3);
-                    db.SaveChanges();
-                }
+             
                 ViewBag.success = "Sửa Sản Phẩm thành công!";
                 return View(product);
             }
             return View();
         }
         //DELETE PRODUCT==========================================================
-        public ActionResult DeleteProduct(int id)
-        {
-            db = new AuctionDBContext();
-            //Xóa ảnh SP
-            var allimg = db.ProductsImages.Where(x => x.ProductId == id).ToList();
-            foreach (var item in allimg)
-            {
-                db.ProductsImages.Remove(item);
-            }
-            db.SaveChanges();
-            //Xóa SP
-            var delPro = db.Products.Where(x => x.ID == id).SingleOrDefault();
-            db.Products.Remove(delPro);
-            db.SaveChanges();
-            return RedirectToAction("ListProduct");
-        }
+     
 
     }
 }

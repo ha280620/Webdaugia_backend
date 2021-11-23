@@ -67,7 +67,7 @@
                                             </div>
                                         </td>
                                     }
-                                    else
+                                    else if(item.Status == 2)
                                     {
                                         <td>
                                             <div class="payment-status payment-pending">
@@ -76,18 +76,18 @@
                                             </div>
                                         </td>
                                     }
-                                    @if (item.Status == 0)
+                                    @if (item.Status == 2)
                                     {
                                         <td>
-                                            <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
+                                            <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn mở khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
                                                 <i class="fas fa-lock" style="color:red"></i>
                                             </a>
                                         </td>
                                     }
-                                    else
+                                    else if (item.Status == 1)
                                     {
                                         <td>
-                                            <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn mở khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
+                                            <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
                                                 <i class="fas fa-unlock" style="color:#04D182"></i>
                                             </a>
                                         </td>

@@ -9,6 +9,8 @@ using PagedList;
 using Webdaugia.DAO;
 using System.IO;
 
+using Webdaugia.Models.Common;
+using System.Data.Entity.Migrations;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
@@ -45,6 +47,66 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
                 
         }
+        public ActionResult ListLotAuction(string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingAuction(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
+        }
+        public ActionResult ListRegitsterOfLot(int id,string searchString, int page = 1, int pageSize = 10)
+        {
+            if(Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingRegisterOfLot(id, searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+                
+        } 
+        public ActionResult ListAuctionOfLot(int id,string searchString, int page = 1, int pageSize = 10)
+        {
+            if(Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingAuctionOfLot(id, searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+                
+        }
+        public ActionResult ListLotRegister(string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingRegister(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
+        }
         //CREATE LOT ======================================================================
         [HttpGet]
         public ActionResult CreateLot()
@@ -57,7 +119,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             else
             {
                 db = new AuctionDBContext();
-                Lot objLot = new Lot();
+                AdLot objLot = new AdLot();
 
 
                 //ViewBag.banks = new SelectList(banks, "Id", "Name");
@@ -69,13 +131,27 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult CreateLot(Lot lot, HttpPostedFileBase file1)
+        public ActionResult CreateLot(AdLot lot)
         {
-            
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            if (lot.TimeForRegisterStart > lot.TimeForRegisterEnd)
+            {
+                ViewBag.success = "Ngày kết thúc  đăng ký phải lớn ngày bắt đầu đăng ký!";
+                return View(lot);
+            }
+            if (lot.TimeForBidStart > lot.TimeForBidEnd)
+            {
+                ViewBag.success = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
+                return View(lot);
+            }
             if (ModelState.IsValid)
             {
                 db = new AuctionDBContext();
                 Lot lot1 = new Lot();
+                lot1.Name = lot.Name;
                 lot1.SiteTile = FriendlyURL.URLFriendly(lot.Name);
                 lot1.Status = false;
                 lot1.CateID = lot.CateID;
@@ -91,8 +167,12 @@ namespace Webdaugia.Areas.Admin.Controllers
                 lot1.TimeForBidStart = lot.TimeForBidStart;
                 lot1.TimeForBidEnd = lot.TimeForBidEnd;
                 lot1.HostName = lot.HostName;
-                string fileName = UploadFile(file1);
-                lot1.LotImage = fileName;
+   
+                
+                    string fileName = UploadFile(lot.file1);
+                    lot1.LotImage = "\\Content\\Images\\Lot\\" + fileName;
+             
+          
                 db.Lots.Add(lot1);
                 db.SaveChanges();
 
@@ -164,7 +244,25 @@ namespace Webdaugia.Areas.Admin.Controllers
             {
                 db = new AuctionDBContext();
                 var lot = db.Lots.Find(id);
-                
+
+                lot.ListCategory = db.Categories.ToList();
+                //ViewBag.banks = new SelectList(banks, "Id", "Name");
+               /* lotnew.ListCategory = db.Categories.ToList();
+                lotnew.Name = lot.Name;      
+                lotnew.CateID = lot.CateID;
+                lotnew.StartingPrice = lot.StartingPrice;
+                lotnew.MiniumBid = lot.MiniumBid;
+                lotnew.ParticipationFee = lot.ParticipationFee;
+                lotnew.AdvanceDesposit = lot.AdvanceDesposit;
+                lotnew.ViewInTime = lot.ViewInTime;
+                lotnew.Location = lot.Location;
+ 
+                lotnew.TimeForRegisterStart = lot.TimeForRegisterStart;
+                lotnew.TimeForRegisterEnd = lot.TimeForRegisterEnd;
+                lotnew.TimeForBidStart = lot.TimeForBidStart;
+                lotnew.TimeForBidEnd = lot.TimeForBidEnd;
+                lotnew.HostName = lot.HostName;
+                lotnew.LotImage = lot.LotImage;*/
                 return View(lot);
             }
 
@@ -172,11 +270,19 @@ namespace Webdaugia.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult EditLot(Lot lot, HttpPostedFileBase file1, HttpPostedFileBase file2, HttpPostedFileBase file3)
+/*        [ValidateInput(false)]*/
+        public ActionResult EditLot(Lot lot, HttpPostedFileBase file1)
         {
-
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
             db = new AuctionDBContext();
+            lot.ListCategory = db.Categories.ToList();
+            ModelState.Remove("file1");
+            ModelState.Remove("CateId");
+            ModelState.Remove("ViewInTime");
+            lot.ListCategory = db.Categories.ToList();
             if (ModelState.IsValid)
             {
                 var editLot = db.Lots.Where(x => x.ID == lot.ID).SingleOrDefault();
@@ -197,6 +303,20 @@ namespace Webdaugia.Areas.Admin.Controllers
                 editLot.TimeForBidEnd = lot.TimeForBidEnd;
                 editLot.SiteTile = FriendlyURL.URLFriendly(lot.Name);
                 editLot.HostName = lot.HostName;
+                if(file1 != null)
+                {
+                    string path = Path.Combine(Server.MapPath(editLot.LotImage)); ;
+                  
+                    if (!Directory.Exists(path))
+                    {
+                     
+                        System.IO.File.Delete(path);
+                    }
+         
+                    string fileName = UploadFile(file1);
+                    editLot.LotImage = "\\Content\\Images\\Lot\\" + fileName;
+                }
+                db.Lots.AddOrUpdate(editLot);
                 db.SaveChanges();
                 //Lưu từng ảnh nêu có nhập ảnh
                 //if (file1 != null)
@@ -208,10 +328,85 @@ namespace Webdaugia.Areas.Admin.Controllers
                 //    db.Lots(img1);
                 //    db.SaveChanges();
                 //}
+                lot.LotImage = editLot.LotImage;
                 ViewBag.success = "Sửa Sản Phẩm thành công!";
                 return View(lot);
             }
-            return View();
+         
+            return View(lot) ;
+        }
+        public ActionResult LockOrUnlockLot(int id)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+            var lot = db.Lots.Where(x => x.ID == id).FirstOrDefault();
+            if (lot.Status == false)
+            {
+                lot.Status = true;
+            }
+            else
+            {
+                lot.Status = false;
+            }
+            db.Lots.AddOrUpdate(lot);
+            db.SaveChanges();
+            return RedirectToAction("ListLot");
+        } public ActionResult ConfirmRegitsterOfLot(int LotId, int UserId, string Url)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+            var id = LotId;
+            var user = UserId;
+            var lot = db.RegisterBids.Where(x => x.LotID == id && x.UserID == user).FirstOrDefault();
+            if (lot.Status == false)
+            {
+                lot.Status = true;
+            }
+            else
+            {
+                lot.Status = false;
+            }
+            db.RegisterBids.AddOrUpdate(lot);
+            db.SaveChanges();
+            return Redirect(Url);
+        }public ActionResult ConfirmAuctionOfLot(int RegisterBidID, long PriceBid, string Url)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+    
+            var auction = db.Auctions.Where(x => x.RegisterBidID == RegisterBidID && x.PriceBid == PriceBid).FirstOrDefault();
+            if (auction.Status == 0)
+            {
+                var auctions = db.Auctions.Where(x => x.RegisterBid.LotID == auction.RegisterBid.LotID).ToList();
+                foreach(var item in auctions)
+                {
+                    item.Status = 2;
+                    db.Auctions.AddOrUpdate(auction);
+                }
+                auction.Status = 1;
+            }
+            else if(auction.Status == 2)
+            {
+                var auctions = db.Auctions.Where(x => x.RegisterBid.LotID == auction.RegisterBid.LotID).ToList();
+                foreach (var item in auctions)
+                {
+                    item.Status = 2;
+                    db.Auctions.AddOrUpdate(auction);
+                }
+                auction.Status = 1;
+            }
+            db.Auctions.AddOrUpdate(auction);
+            db.SaveChanges();
+            return Redirect(Url);
         }
     }
 }
