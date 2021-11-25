@@ -65,7 +65,6 @@ namespace Webdaugia.Models
         public long? HighBid { get; set; }
 
         public virtual Asset Asset { get; set; }
-
         public virtual Category Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

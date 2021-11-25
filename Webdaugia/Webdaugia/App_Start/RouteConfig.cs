@@ -13,6 +13,14 @@ namespace Webdaugia
         {
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+               name: "List Lot By Category",
+               url: "loai-phien-dau/{CateId}",
+               defaults: new { controller = "Lot", action = "ListLotByCate", id = UrlParameter.Optional }
+
+           );
+
             routes.MapRoute(
                name: "Lot Details",
                url: "phien-dau/{LotId}",

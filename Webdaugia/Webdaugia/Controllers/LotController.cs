@@ -132,10 +132,32 @@ namespace Webdaugia.Controllers
         {
             db = new AuctionDBContext();
             ViewBag.CateName = db.Categories.Where(x => x.ID == CateId).FirstOrDefault().Name;
+            ViewBag.listCategory = db.Categories.ToList();
             var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
 
             return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd).ToPagedList(page, pageSize));
         }
+
+        public ActionResult ListLotByDate1()
+        {
+            db = new AuctionDBContext();
+            var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).ToList();
+            HomeModel homemodel = new HomeModel();
+            homemodel.listOnGoingLot = listOnGoingLot;
+            
+            return View(homemodel);
+        }
+
+        public ActionResult ListLotByDate2()
+        {
+            db = new AuctionDBContext();
+            HomeModel homemodel = new HomeModel();
+            var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
+            homemodel.listReadyLot = listReadyLot;
+            
+            return View(homemodel);
+        }
+
 
         public ActionResult RegisterBid(int lotId, int userID, string url)
         {
