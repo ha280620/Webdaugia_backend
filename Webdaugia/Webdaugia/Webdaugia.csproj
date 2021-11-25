@@ -1748,6 +1748,7 @@
     <Content Include="images\img\CMNDFront.png" />
     <Content Include="images\img\datnen.png" />
     <Content Include="images\img\DJI-0357-1603422122.jpg" />
+    <Content Include="images\img\ending.png" />
     <Content Include="images\img\footer.png" />
     <Content Include="images\img\form7.jpg" />
     <Content Include="images\img\graphic3.svg" />
@@ -1949,6 +1950,7 @@
     <Content Include="Views\Lot\ListLotByCate.cshtml" />
     <Content Include="Views\Lot\ListLotByDate1.cshtml" />
     <Content Include="Views\Lot\ListLotByDate2.cshtml" />
+    <Content Include="Views\Lot\ListEndingLot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

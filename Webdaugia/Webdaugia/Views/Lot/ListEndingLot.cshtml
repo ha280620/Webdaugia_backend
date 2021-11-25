@@ -1,6 +1,7 @@
-﻿@model  IList<Webdaugia.Models.Lot>
+﻿
+@model Webdaugia.Models.HomeModel
 @{
-    ViewBag.Title = "ListLotByCate";
+    ViewBag.Title = "ListEndingLot";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 @{
@@ -8,21 +9,33 @@
 
 }
 
+<div id="carouselExampleIndicators"
+     class="container carousel slide"
+     data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/images/img/ending.png" class="img-fluid w-100" alt="..." />
+        </div>
 
-@foreach (var item in ViewBag.listCategory)
-{
-    <a class="btn" href="/loai-phien-dau/@item.SiteTile-@item.ID">
-        <img src="@item.CateIcon" />
-    </a>
-}
+    </div>
+</div>
+<br />
+<br />
+<br />
 <main>
     <section id="going">
         <div class="container">
             <div class="going-title">
-                <h3>@ViewBag.CateName</h3>
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản đã kết thúc đấu giá</h3>
             </div>
             <div class="row">
-                @foreach (var item in Model)
+                @foreach (var item in Model.listEndingLot)
                 {
                     <div class="col-12 col-md-6 col-lg-4 p-2">
                         <div class="going-item">
@@ -31,10 +44,10 @@
                                 <div class="going__overlay"></div>
                                 <div class="going__play">
                                     <a href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
-                                        <h5>Thời gian bắt đầu đấu giá</h5>
-                                        <p>@item.TimeForBidStart</p>
-                                        <h5>Thời gian kết thúc đấu giá </h5>
-                                        <p>@item.TimeForBidEnd</p>
+                                        <h5>Thời gian bắt đầu đăng ký</h5>
+                                        <p>@item.TimeForRegisterStart</p>
+                                        <h5>Thời gian kết thúc đăng ký</h5>
+                                        <p>@item.TimeForRegisterEnd</p>
                                     </a>
                                 </div>
                             </div>
@@ -48,15 +61,15 @@
                                     <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
                                 </div>
                                 <a class="btn btn-sign-up going_btn" href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
-                                    Đấu Giá Ngay
+                                    Xem Cuộc Đấu Giá
                                 </a>
                             </div>
                         </div>
                     </div>
                 }
-
             </div>
         </div>
     </section>
 
 </main>
+

@@ -128,14 +128,14 @@ namespace Webdaugia.Controllers
         }
 
         //List Lot By Categories
-        public ActionResult ListLotByCate(int CateId, int page = 1, int pageSize = 10)
+        public ActionResult ListLotByCate(int CateId)
         {
             db = new AuctionDBContext();
             ViewBag.CateName = db.Categories.Where(x => x.ID == CateId).FirstOrDefault().Name;
             ViewBag.listCategory = db.Categories.ToList();
             var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
 
-            return View(listLotbyCate.OrderBy(x => x.TimeForBidEnd).ToPagedList(page, pageSize));
+            return View(listLotbyCate);
         }
 
         public ActionResult ListLotByDate1()
@@ -158,6 +158,15 @@ namespace Webdaugia.Controllers
             return View(homemodel);
         }
 
+        public ActionResult ListEndingLot()
+        {
+            db = new AuctionDBContext();
+            var listEndingLot = db.Lots.Where(x => x.TimeForBidEnd < DateTime.Now && x.Status == true).ToList();
+            HomeModel homemodel = new HomeModel();
+            homemodel.listEndingLot = listEndingLot;
+
+            return View(homemodel);
+        }
 
         public ActionResult RegisterBid(int lotId, int userID, string url)
         {

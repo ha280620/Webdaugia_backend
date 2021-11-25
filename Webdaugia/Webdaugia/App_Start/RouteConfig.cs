@@ -15,22 +15,42 @@ namespace Webdaugia
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               name: "List Lot By Start",
+               url: "phien-dang-dien-ra",
+               defaults: new { controller = "Lot", action = "ListLotByDate1", id = UrlParameter.Optional }
+
+           );
+            routes.MapRoute(
+               name: "List Lot By Register",
+               url: "phien-sap-dien-ra",
+               defaults: new { controller = "Lot", action = "ListLotByDate2", id = UrlParameter.Optional }
+
+           );
+           routes.MapRoute(
+               name: "List Ended Lot",
+               url: "phien-da-ket-thuc",
+               defaults: new { controller = "Lot", action = "ListEndingLot", id = UrlParameter.Optional }
+
+           );
+           
+
+            routes.MapRoute(
                name: "List Lot By Category",
-               url: "loai-phien-dau/{CateId}",
+               url: "loai-phien-dau/{SiteTile}-{CateId}",
                defaults: new { controller = "Lot", action = "ListLotByCate", id = UrlParameter.Optional }
 
            );
 
             routes.MapRoute(
                name: "Lot Details",
-               url: "phien-dau/{LotId}",
+               url: "phien-dau/{SiteTile}-{LotId}",
                defaults: new { controller = "Lot", action = "IncomingLot", id = UrlParameter.Optional }
 
            );
 
             routes.MapRoute(
                name: "Ongoing Lot",
-               url: "phien-dang-dien-ra/{LotId}",
+               url: "phien-dang-dien-ra/{SiteTile}-{LotId}",
                defaults: new { controller = "Lot", action = "OnGoingLot", id = UrlParameter.Optional }
 
            );
@@ -48,8 +68,6 @@ namespace Webdaugia
                defaults: new { controller = "Lot", action = "PlaceBid", id = UrlParameter.Optional }
 
            );
-
-
 
             routes.MapRoute(
                 name: "Login",
