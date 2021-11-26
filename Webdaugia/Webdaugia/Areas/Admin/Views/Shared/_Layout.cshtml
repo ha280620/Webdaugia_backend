@@ -290,13 +290,7 @@
                     <span>dashboard</span>
                 </a>
             </li>
-            <li>
-                <a href="/admin/adorder/listorder">
-                    <i class="bx bx-shopping-bag"></i>
-                    <span>Quản lý phiên đấu giá</span>
-                </a>
-            </li>
-            @* Quan ly san pham *@
+
             <li class="sidebar-submenu">
                 <a href="#" class="sidebar-menu-dropdown">
                     <i class="bx bx-category"></i>
@@ -307,17 +301,36 @@
                     <li>
                         <a href="/admin/adlot/listlot"> Danh sách phiên đấu giá </a>
                     </li>
-
-                    <li>
-                        <a href="/admin/adlot/ListLotRegister"> Quản lý đăng ký phiên đấu giá </a>
-                    </li>
                     <li>
                         <a href="/admin/adlot/ListLotAuction"> Quản lý phiên đấu giá đang diễn ra </a>
                     </li>
                     <li>
                         <a href="/admin/adproduct/listproduct"> Danh sách sản phẩm </a>
                     </li>
-
+                    <li>
+                        <a href="/admin/adlot/ListCategory"> Danh sách loại phiên đấu giá </a>
+                    </li>
+                    @*<li>
+                    <a href="#"> Thêm loại sản phẩm </a>
+                </li>*@
+                    @*<li>
+                    <a href="/admin/adbrand"> Quản lý thương hiệu </a>
+                </li>*@
+                </ul>
+            </li>
+            <li class="sidebar-submenu">
+                <a href="#" class="sidebar-menu-dropdown">
+                    <i class="bx bx-category"></i>
+                    <span>Quản lý tiền cọc</span>
+                    <div class="dropdown-icon"></div>
+                </a>
+                <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                    <li>
+                        <a href="/admin/adlot/ListLotRegister"> Tiền cọc đăng ký phiên đấu giá </a>
+                    </li>
+                    <li>
+                        <a href="/admin/adlot/ListLotEnd"> Trả tiền cọc phiên đấu giá</a>
+                    </li>
                     @*<li>
             <a href="#"> Thêm loại sản phẩm </a>
         </li>*@
@@ -327,21 +340,22 @@
                 </ul>
             </li>
 
+
             @*<li class="sidebar-submenu">
-                <a href="#" class="sidebar-menu-dropdown">
-                    <i class="bx bx-news"></i>
-                    <span>Quản lý bài viết</span>
-                    <div class="dropdown-icon"></div>
-                </a>
-                <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                    <li>
-                        <a href="/admin/adpost/listpost">Danh sách bài viết</a>
-                    </li>
-                    <li>
-                        <a href="/admin/adpost/createpost">Thêm bài viết</a>
-                    </li>
-                </ul>
-            </li>*@
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class="bx bx-news"></i>
+                <span>Quản lý bài viết</span>
+                <div class="dropdown-icon"></div>
+            </a>
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a href="/admin/adpost/listpost">Danh sách bài viết</a>
+                </li>
+                <li>
+                    <a href="/admin/adpost/createpost">Thêm bài viết</a>
+                </li>
+            </ul>
+        </li>*@
             @* Quản lý tài khoản *@
             <li>
                 <a href="/admin/account/listaccount">

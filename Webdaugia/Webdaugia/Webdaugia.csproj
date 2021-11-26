@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
@@ -1644,6 +1644,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Cmnd\242896941_241844014504329_733016854597973873_n.11_24_2021_12_07_24.png" />
+    <Content Include="Content\Images\Cmnd\249552593_595510108169108_5095371096582561702_n.11_24_2021_12_04_01.png" />
+    <Content Include="Content\Images\Cmnd\AdvanceNotification.11_24_2021_12_07_24.png" />
+    <Content Include="Content\Images\Cmnd\áds.11_24_2021_12_04_01.jpg" />
     <Content Include="Content\Images\Lot\245398817_402615768009509_2871009326896691470_n.11_23_2021_01_01_22.jpg" />
     <Content Include="Content\Images\Lot\249347145_1349282195493353_8494279244873990058_n.11_23_2021_07_52_31.jpg" />
     <Content Include="Content\Images\Lot\252732773_153945653571609_1971640022074689624_n.11_23_2021_08_06_53.jpg" />
@@ -1914,10 +1918,12 @@
     <Content Include="Areas\Admin\Views\AdProduct\ListProduct.cshtml" />
     <Content Include="Areas\Admin\Views\AdProduct\CreateProduct.cshtml" />
     <Content Include="Areas\Admin\Views\AdProduct\EditProduct.cshtml" />
-    <Content Include="Areas\Admin\Views\AdLot\ListLotRegister.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\listregitsteroflot.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\ListLotAuction.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\ListAuctionOfLot.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListLotEnd.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListLotRegister.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListUserEndOfLot.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1957,7 +1963,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Content\Images\Cmnd\" />
     <Folder Include="imgcmnd\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>

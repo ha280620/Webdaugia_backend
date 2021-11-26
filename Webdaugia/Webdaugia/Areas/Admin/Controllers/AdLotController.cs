@@ -8,8 +8,6 @@ using System.Web.Mvc;
 using PagedList;
 using Webdaugia.DAO;
 using System.IO;
-
-using Webdaugia.Models.Common;
 using System.Data.Entity.Migrations;
 
 namespace Webdaugia.Areas.Admin.Controllers
@@ -62,21 +60,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
 
         }
-        public ActionResult ListRegitsterOfLot(int id,string searchString, int page = 1, int pageSize = 10)
-        {
-            if(Session["AD"] == null)
-            {
-                return RedirectToAction("Index", "AdLogin");
-            }
-            else
-            {
-                var dao = new LotDao();
-                var model = dao.ListAllPagingRegisterOfLot(id, searchString, page, pageSize);
-                ViewBag.searchString = searchString;
-                return View(model);
-            }
-                
-        } 
+     
         public ActionResult ListAuctionOfLot(int id,string searchString, int page = 1, int pageSize = 10)
         {
             if(Session["AD"] == null)
@@ -107,6 +91,69 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
 
         }
+        public ActionResult ListUserEndOfLot(int id, string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var listATM = db.ATMs.ToList();
+                List<ATM> listATMEnd = new List<ATM>();
+                var dao = new LotDao();
+                long? totalMoney = 0;
+                long? Money = db.Lots.Where(x => x.ID == id).SingleOrDefault().AdvanceDesposit;
+                var model = dao.ListAllPagingEndOfLot(id, searchString, page, pageSize);
+                foreach (var item in model)
+                {
+                    totalMoney += item.Lot.AdvanceDesposit;
+                    var atm = listATM.Where(x => x.UserID == item.UserID).FirstOrDefault();
+                    if (atm != null)
+                    {
+                        listATMEnd.Add(atm);
+                    }
+                }
+                ViewBag.searchString = searchString;
+                ViewBag.listATM = listATMEnd;
+                ViewBag.totalMoney = totalMoney;
+                ViewBag.Money = Money;
+                return View(model);
+            }
+
+        }
+        public ActionResult ListRegitsterOfLot(int id, string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingRegisterOfLot(id, searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
+        }
+        public ActionResult ListLotEnd(string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingEnd(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
+        }
+      
         //CREATE LOT ======================================================================
         [HttpGet]
         public ActionResult CreateLot()

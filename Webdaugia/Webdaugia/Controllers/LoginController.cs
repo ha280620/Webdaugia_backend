@@ -191,7 +191,19 @@ namespace Webdaugia.Controllers
         [HttpGet]
         public ActionResult Themthongtin()
         {
-           db = new AuctionDBContext();
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
+          
+            var dao = new UserDao();
+            UserLogin userid = (UserLogin)Session["USER"];
+            User user = dao.getUserById(userid.UserID);
+            if (user.CMND != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            db = new AuctionDBContext();
             AddInfoModel objbank = new AddInfoModel();
          
             
@@ -364,6 +376,7 @@ namespace Webdaugia.Controllers
                 }
                 catch (Exception ex)
                 {
+                    Console.WriteLine(ex);
                     return View("DangNhap");
                 }
             }

@@ -39,6 +39,15 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
         }
+        public IEnumerable<Lot> ListAllPagingEnd(string searchString, int page, int pageSize)
+        {
+            IQueryable<Lot> model = db.Lots.Where(x =>x.TimeForBidEnd < DateTime.Now);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
         public IEnumerable<Lot> ListAllPagingAuction(string searchString, int page, int pageSize)
         {
             IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidStart < DateTime.Now );
@@ -51,6 +60,25 @@ namespace Webdaugia.DAO
         public IEnumerable<RegisterBid> ListAllPagingRegisterOfLot(int id,string searchString, int page, int pageSize)
         {
             IQueryable<RegisterBid> model = db.RegisterBids.Where(x => x.LotID == id);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<RegisterBid> ListAllPagingEndOfLot(int id, string searchString, int page, int pageSize)
+        {
+            var modelAuctions = db.Auctions.Where(x => x.Status == 1 && x.RegisterBid.LotID == id).FirstOrDefault();
+            IQueryable<RegisterBid> model;
+            if (modelAuctions != null)
+            {
+                 model = db.RegisterBids.Where(x => x.LotID == id && x.Status == true && x.ID != modelAuctions.RegisterBidID);
+            }
+            else
+            {
+                model = db.RegisterBids.Where(x => x.LotID == id && x.Status == true);
+            }
+          
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));

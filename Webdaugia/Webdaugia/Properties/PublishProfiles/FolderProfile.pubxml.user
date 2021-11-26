@@ -192,7 +192,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/22/2021 23:08:43</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLogin/Index.cshtml">
-      <publishTime>11/23/2021 00:51:32</publishTime>
+      <publishTime>11/24/2021 14:33:08</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/CreateLot.cshtml">
       <publishTime>11/23/2021 08:09:24</publishTime>
@@ -4842,16 +4842,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 21:47:15</publishTime>
     </File>
     <File Include="bin/Webdaugia.dll">
-      <publishTime>11/23/2021 23:26:50</publishTime>
+      <publishTime>11/24/2021 17:47:26</publishTime>
     </File>
     <File Include="bin/Webdaugia.pdb">
-      <publishTime>11/23/2021 23:26:50</publishTime>
+      <publishTime>11/24/2021 17:47:26</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/09/2021 21:47:16</publishTime>
     </File>
     <File Include="Content/Admin/css/app.css">
-      <publishTime>11/23/2021 17:10:50</publishTime>
+      <publishTime>11/24/2021 14:32:13</publishTime>
     </File>
     <File Include="Content/Admin/css/grid.css">
       <publishTime>11/22/2021 20:33:13</publishTime>
@@ -4918,6 +4918,18 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>11/08/2021 22:04:42</publishTime>
+    </File>
+    <File Include="Content/Images/Cmnd/242896941_241844014504329_733016854597973873_n.11_24_2021_12_07_24.png">
+      <publishTime>11/24/2021 00:07:24</publishTime>
+    </File>
+    <File Include="Content/Images/Cmnd/249552593_595510108169108_5095371096582561702_n.11_24_2021_12_04_01.png">
+      <publishTime>11/24/2021 00:04:01</publishTime>
+    </File>
+    <File Include="Content/Images/Cmnd/AdvanceNotification.11_24_2021_12_07_24.png">
+      <publishTime>11/24/2021 00:07:24</publishTime>
+    </File>
+    <File Include="Content/Images/Cmnd/áds.11_24_2021_12_04_01.jpg">
+      <publishTime>11/24/2021 00:04:01</publishTime>
     </File>
     <File Include="Content/Images/Lot/245398817_402615768009509_2871009326896691470_n.11_23_2021_01_01_22.jpg">
       <publishTime>11/23/2021 01:01:22</publishTime>
@@ -5592,7 +5604,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/17/2021 14:05:19</publishTime>
     </File>
     <File Include="Views/Login/Themthongtin.cshtml">
-      <publishTime>11/23/2021 11:08:22</publishTime>
+      <publishTime>11/24/2021 00:17:39</publishTime>
     </File>
     <File Include="Views/Lot/IncomingLot.cshtml">
       <publishTime>11/23/2021 15:55:24</publishTime>
@@ -5619,7 +5631,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/23/2021 22:31:19</publishTime>
+      <publishTime>11/24/2021 14:47:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

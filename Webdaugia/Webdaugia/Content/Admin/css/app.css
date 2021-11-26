@@ -660,8 +660,6 @@ li.dropdown-menu-item:hover {
 
 .box-hover:hover {
     border-color: var(--main-color);
-
-
     align-items:center;
 }
 .box-header{

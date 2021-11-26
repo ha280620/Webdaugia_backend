@@ -105,6 +105,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                             }
                             catch (Exception ex)
                             {
+                            Console.WriteLine(ex);
                                 ViewBag.Success = "Đổi mật khẩu thất bại";
                             }
                         }

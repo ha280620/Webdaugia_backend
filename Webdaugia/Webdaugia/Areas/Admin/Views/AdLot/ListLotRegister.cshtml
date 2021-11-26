@@ -89,7 +89,7 @@
                 </table>
             </div>
 
-            @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
+            @Html.PagedListPager(Model, page => Url.Action("ListLotRegister", new { page, @searchString = ViewBag.searchString }))
         </div>
     </div>
 </div>

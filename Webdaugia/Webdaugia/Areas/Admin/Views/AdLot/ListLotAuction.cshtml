@@ -10,18 +10,9 @@
         <!-- ORDERS TABLE -->
         <div class="box">
             <div class="box-header title">
-                <h2>Danh sách phiên đấu giá</h2>
+                <h2>Quản lý phiên đấu giá đang diễn ra</h2>
 
-                <div>
-                    <a href="/admin/adlot/createlot" class="btn btn-success" style="display:inline-block">
-                        <i class="fa fa-plus-circle"></i>
-                        Thêm phiên đấu giá mới
-                    </a>
-                    @*<a href="#" class="btn btn-danger" style="display:inline-block">
-                            <i class="fa fa-trash"></i>
-                            Xóa SP đã chọn
-                        </a>*@
-                </div>
+   
             </div>
             <div class="row">
                 <div class="col-4" style="margin-bottom:0">
@@ -87,7 +78,7 @@
                 </table>
             </div>
 
-            @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
+            @Html.PagedListPager(Model, page => Url.Action("ListLotAuction", new { page, @searchString = ViewBag.searchString }))
         </div>
     </div>
 </div>
