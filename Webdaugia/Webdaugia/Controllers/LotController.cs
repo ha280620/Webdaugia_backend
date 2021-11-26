@@ -77,7 +77,7 @@ namespace Webdaugia.Controllers
             return View(Lot);
         }
 
-        public ActionResult IncomingLot(int LotId = 1000016)
+        public ActionResult IncomingLot(int LotId)
 
         {
             if (LotId == null)
