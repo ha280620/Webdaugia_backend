@@ -1,0 +1,74 @@
+﻿@model Webdaugia.Models.HomeModel
+@{
+    ViewBag.Title = "ListLotByDate2";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+
+<div id="carouselExampleIndicators"
+     class="container carousel slide"
+     data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators"
+            data-slide-to="0"
+            class="active"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/images/img/incoming1.png" class="img-fluid w-100" alt="..." />
+        </div>
+
+    </div>
+</div>
+<br />
+<br />
+<br />
+<main>
+    <section id="going">
+        <div class="container">
+            <div class="going-title">
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.listReadyLot)
+                {
+                    <div class="col-12 col-md-6 col-lg-4 p-2">
+                        <div class="going-item">
+                            <div class="going-item-img">
+                                <img src="@item.LotImage" class="img-fluid" alt="" />
+                                <div class="going__overlay"></div>
+                                <div class="going__play">
+                                    <a href="/phien-dau/@item.SiteTile-@item.ID">
+                                        <h5>Thời gian bắt đầu đăng ký</h5>
+                                        <p>@item.TimeForRegisterStart</p>
+                                        <h5>Thời gian kết thúc đăng ký</h5>
+                                        <p>@item.TimeForRegisterEnd</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="going-content">
+                                <p>@item.Category.Name</p>
+                                <h3>
+                                    @item.Name
+                                </h3>
+
+                                <div class="going-starting-price mt-1">
+                                    <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
+                                </div>
+                                <a class="btn btn-sign-up going_btn" href="/phien-dau/@item.SiteTile-@item.ID">
+                                    Đăng Ký Đấu Giá
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+</main>
+

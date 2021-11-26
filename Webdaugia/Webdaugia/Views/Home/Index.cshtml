@@ -43,45 +43,15 @@
             <div class="category-title"><h3>Danh Mục</h3></div>
             <div class="swiper">
                 <div class="swiper-wrapper">
-                    <a class="swiper-slide" href="#">
-                        <img src="~/img/city.jpg" class="img-fluid" alt="" />
-                        <div class="swiper-slide-content">
-                            <p>Bất động sản</p>
-                        </div>
-                    </a>
-                    <a class="swiper-slide" href="#">
-                        <img src="~/img/car.jpg" class="img-fluid" alt="" />
-                        <div class="swiper-slide-content">
-                            <p>Ô tô</p>
-                        </div>
-                    </a>
-                    <a class="swiper-slide" href="#">
-                        <img src="~/img/bag.jpg" class="img-fluid" alt="" />
-                        <div class="swiper-slide-content">
-                            <p>Hàng hiệu</p>
-                        </div>
-                    </a>
-                    <a class="swiper-slide" href="#">
-                        <img src="~/img/suutam.jpg" class="img-fluid" alt="" />
-                        <div class="swiper-slide-content">
-                            <p>
-                                Sưu tầm <br />
-                                Nghệ thuật
-                            </p>
-                        </div>
-                    </a>
-                    <a class="swiper-slide" href="#">
-                        <img src="~/img/pc.jpg" class="img-fluid" alt="" />
-                        <div class="swiper-slide-content">
-                            <p>Tài sản thanh lý</p>
-                        </div>
-                    </a>
-                    <a class="swiper-slide" href="#">
-                        <img src="~/img/taisankhac.jpg" class="img-fluid" alt="" />
-                        <div class="swiper-slide-content">
-                            <p>Tài sản khác</p>
-                        </div>
-                    </a>
+                    @foreach (var item in Model.listCategory)
+                    {
+                        <a class="swiper-slide" href="/loai-phien-dau/@item.SiteTile-@item.ID">
+                            <img src="@item.CateImg" class="img-fluid" alt="" />
+                            <div class="swiper-slide-content">
+                                <p>@item.Name</p>
+                            </div>
+                        </a>
+                    }
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -149,7 +119,7 @@
                                 <img src="@item.LotImage" class="img-fluid" alt="" />
                                 <div class="going__overlay"></div>
                                 <div class="going__play">
-                                    <a href="#">
+                                    <a href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
                                         <h5>Thời gian bắt đầu đấu giá</h5>
                                         <p>@item.TimeForBidStart</p>
                                         <h5>Thời gian kết thúc đấu giá </h5>
@@ -166,7 +136,7 @@
                                 <div class="going-starting-price mt-1">
                                     <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
                                 </div>
-                                <a class="btn btn-sign-up going_btn btn-daugia" href="#">
+                                <a class="btn btn-sign-up going_btn" href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
                                     Đấu Giá Ngay
                                 </a>
                             </div>
@@ -194,7 +164,7 @@
                                 <img src="@item.LotImage" class="img-fluid" alt="" />
                                 <div class="going__overlay"></div>
                                 <div class="going__play">
-                                    <a href="#">
+                                    <a href="/phien-dau/@item.SiteTile-@item.ID">
                                         <h5>Thời kết thúc đăng ký</h5>
                                         <p>@item.TimeForRegisterEnd</p>
                                         <h5>Thời gian bắt đầu đấu giá </h5>
@@ -211,7 +181,7 @@
                                 <div class="going-starting-price mt-1">
                                     <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
                                 </div>
-                                <a class="btn btn-sign-up going_btn" href="#">
+                                <a class="btn btn-sign-up going_btn" href="/phien-dau/@item.SiteTile-@item.ID">
                                     Đăng Ký tham gia đấu giá
                                 </a>
                             </div>
