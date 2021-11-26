@@ -1765,6 +1765,8 @@
     <Content Include="images\img\logo-white.png" />
     <Content Include="images\img\logo.png" />
     <Content Include="images\img\nhao.png" />
+    <Content Include="images\img\noauction.png" />
+    <Content Include="images\img\noauction1.png" />
     <Content Include="images\img\ongoing1.png" />
     <Content Include="images\img\pc.jpg" />
     <Content Include="images\img\product-1-450x450.jpg" />
