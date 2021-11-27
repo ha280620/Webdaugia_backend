@@ -68,6 +68,18 @@
                             </div>
                         </div>
                     }
+                    @if (Model.listOnGoingLot.Count == 0)
+                    {
+                        <img src="~/images/img/noauction1.png">
+                        <div class="container container--checkout pb-2">
+                            <div class="checkout">
+                                <div class="empty" style="vertical-align:middle; text-align:center">
+                                    <a href="/" style="text-align:center;">Về Trang Chủ</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </section>

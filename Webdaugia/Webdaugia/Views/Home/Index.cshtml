@@ -143,6 +143,10 @@
                         </div>
                     </div>
                 }
+                @if (Model.listOnGoingLot.Count == 0)
+                {
+                    <img src="~/images/img/noauction1.png">
+                }
             </div>
         </div>
     </section>
@@ -187,6 +191,10 @@
                             </div>
                         </div>
                     </div>
+                }
+                @if (Model.listReadyLot.Count == 0)
+                {
+                    <img src="~/images/img/noauction1.png">
                 }
             </div>
         </div>
