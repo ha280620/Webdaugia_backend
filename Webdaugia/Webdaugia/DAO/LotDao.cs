@@ -48,6 +48,17 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
         }
+        public IEnumerable<Lot> ListAllPagingEnd30(string searchString, int page, int pageSize)
+        {
+            var date = DateTime.Now.AddDays(-180);
+            IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidEnd < date);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
         public IEnumerable<Lot> ListAllPagingAuction(string searchString, int page, int pageSize)
         {
             IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidStart < DateTime.Now );

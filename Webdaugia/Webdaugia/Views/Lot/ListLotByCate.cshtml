@@ -9,13 +9,51 @@
 }
 
 
-@foreach (var item in ViewBag.listCategory)
-{
-    <a class="btn" href="/loai-phien-dau/@item.SiteTile-@item.ID">
-        <img src="@item.CateIcon" />
-    </a>
+@section Category{
+    <script>
+        var swipercategory = new Swiper(".swiper-category", {
+            slidesPerView: getSlidesPerView(),
+            spaceBetween: 20,
+            direction: getDirection(),
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            on: {
+                resize: function () {
+                    swipercategory.changeDirection(getDirection());
+                    swipercategory.slidesPerView(slidesPerView());
+                },
+            },
+        });
+        function getSlidesPerView() {
+
+            var slidesPerView = window.innerWidth <= 760 ? "1" : "6";
+
+            return slidesPerView;
+        }
+        function getDirection() {
+
+            var direction = window.innerWidth <= 760 ? "vertical" : "horizontal";
+
+            return direction;
+        }
+    </script>
 }
 <main>
+    <section class="mb-5">
+        <div class="container">
+            <div class="row">
+                    @foreach (var item in ViewBag.listCategory)
+                    {
+                        <a class="col-2 " href="/loai-phien-dau/@item.SiteTile-@item.ID">
+                            <img class="img-fluid" src="@item.CateIcon" />
+                        </a>
+                    }
+            </div>
+
+        </div>
+    </section>
     <section id="going">
         <div class="container">
             <div class="going-title">

@@ -52,9 +52,9 @@ namespace Webdaugia
                url: "phien-dang-dien-ra/{SiteTile}-{LotId}",
                defaults: new { controller = "Lot", action = "OnGoingLot", id = UrlParameter.Optional }
 
-           );
+             );
 
-               );
+        
             routes.MapRoute(
                name: "Dang Ky Dau Gia",
                url: "dang-ky-dau-gia",

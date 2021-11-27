@@ -11,6 +11,7 @@ using Webdaugia.Models.Common;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
+    [HandleError]
     public class AccountController : Controller
     {
         // GET: Admin/Account

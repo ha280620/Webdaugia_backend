@@ -7,6 +7,7 @@ using Webdaugia.Models;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
+    [HandleError]
     public class AdminHomeController : BaseController
     {
         // GET: Admin/AdminHome

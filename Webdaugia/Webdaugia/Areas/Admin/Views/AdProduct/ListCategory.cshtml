@@ -1,0 +1,123 @@
+﻿@model PagedList.IPagedList<Webdaugia.Models.Category>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <!-- ORDERS TABLE -->
+        <div class="box">
+            <div class="box-header title">
+                <h2>Danh sách sản phẩm</h2>
+
+                <div>
+                    <a href="/admin/adproduct/CreateCategory" class="btn btn-success" style="display:inline-block">
+                        <i class="fa fa-plus-circle"></i>
+                        Thêm mới loại phiên đấu giá
+                    </a>
+                    @*<a href="#" class="btn btn-danger" style="display:inline-block">
+                            <i class="fa fa-trash"></i>
+                            Xóa SP đã chọn
+                        </a>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4" style="margin-bottom:0">
+                    @using (Html.BeginForm("ListCategory", "ADProduct", FormMethod.Get, new { @class = "navbar-search" }))
+                    {
+                        <input type="text"
+                               name="searchString"
+                               class="navbar-search-input"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               value="@ViewBag.searchString" />
+                        <button type="submit"><i class="fas fa-search"></i></button>}
+                </div>
+            </div>
+            <div style="overflow-x:scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th align="center" width="40px">
+                                STT
+                            </th>
+                            <th align="center">Tên Sản Phẩm</th>
+                            <th align="center">SileTile </th>
+                            <th align="center">Ảnh Loại </th>
+                            <th align="center">Icon Loại </th>
+                            <th align="center">Hiển thị </th>
+                            <th align="center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int count = 1;}
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td align="center">@count</td>
+                                @{ count++;}
+
+                                <td align="center">@item.Name</td>
+                                <td align="center">@item.SiteTile</td>
+                                <td align="center"><img src="@item.CateImg" width="100px" /></td>
+                                <td align="center"><img src="@item.CateIcon" width="100px" /></td>
+
+
+
+                                @if (item.Status == true)
+                                {
+
+
+                                    <td align="center">
+                                        <div class="payment-status payment-paid">
+                                            <div class="dot"></div>
+                                            <span>Hiển thị</span>
+                                        </div>
+                                    </td>
+                                }
+                                else if (item.Status == false)
+                                {
+                                    <td align="center">
+                                        <div class="payment-status payment-pending">
+                                            <div class="dot"></div>
+                                            <span>Không hiển thị</span>
+                                        </div>
+                                    </td>
+                                }
+                                @if (item.Status == false)
+                                {
+                                    <td align="center">
+                                        <a href="/admin/adproduct/EditCategory/@item.ID">
+                                            <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                                        </a>
+                                        <a href="/admin/adproduct/LockOrUnlockCategory/@item.ID" style="padding-left:10px" onclick="return confirm('Bạn có muốn mở khóa loại phiên tên: @item.Name')">
+                                            <i class="fas fa-eye" style="color:red"></i>
+                                        </a>
+                                    </td>
+                                }
+                                else if (item.Status == true)
+                                {
+                                    <td align="center">
+                                        <a href="/admin/adproduct/EditCategory/@item.ID">
+                                            <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                                        </a>
+                                        <a href="/admin/adproduct/LockOrUnlockCategory/@item.ID" style="padding-left:10px" onclick="return confirm('Bạn có muốn mở khóa loại phiên tên: @item.Name')">
+                                            <i class="fas fa-eye-slash" style="color:#04D182"></i>
+                                        </a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+         
+            @Html.PagedListPager(Model, page => Url.Action("ListCategory", new { page, @searchString = ViewBag.searchString }))
+        </div>
+    </div>
+</div>
+
+
+

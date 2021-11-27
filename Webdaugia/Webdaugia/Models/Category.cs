@@ -1,4 +1,4 @@
-namespace Webdaugia.Models
+﻿namespace Webdaugia.Models
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +16,9 @@ namespace Webdaugia.Models
 
         public int ID { get; set; }
 
-        [Required]
+
         [StringLength(128)]
+        [Required(ErrorMessage = "Bạn cần nhập tên loại")]
         public string Name { get; set; }
 
         [StringLength(128)]

@@ -131,8 +131,13 @@ namespace Webdaugia.Controllers
         public ActionResult ListLotByCate(int CateId)
         {
             db = new AuctionDBContext();
-            ViewBag.CateName = db.Categories.Where(x => x.ID == CateId).FirstOrDefault().Name;
-            ViewBag.listCategory = db.Categories.ToList();
+            var cate = db.Categories.Where(x => x.ID == CateId).SingleOrDefault();
+            if(cate.Status == false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.CateName = db.Categories.Where(x => x.ID == CateId && x.Status == true).FirstOrDefault().Name;
+            ViewBag.listCategory = db.Categories.Where(x=>x.Status == true).ToList();
             var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
 
             return View(listLotbyCate);
