@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -214,14 +215,25 @@ namespace Webdaugia.Areas.Admin.Controllers
             db = new AuctionDBContext();
             var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
             var bank = db.ATMs.Where(x => x.UserID == id).FirstOrDefault();
-            if (user.ImageFront != null && user.ImageBack != null)
+            if (user.ImageFront != null || user.ImageBack != null)
             {
+                string path = Path.Combine(Server.MapPath(user.ImageFront)); ;
+                string path1 = Path.Combine(Server.MapPath(user.ImageBack)); ;
+
+                if (!Directory.Exists(path))
+                {                    
+                    System.IO.File.Delete(path);
+                }
+                if (!Directory.Exists(path1))
+                {
+                    System.IO.File.Delete(path1);
+                }
                 user.CMND = null;
                 user.ImageFront = null;
-                user.ImageBack = null;
-                bank.BankId = null;
+                user.ImageBack = null;           
             }
             db.Users.AddOrUpdate(user);
+            db.ATMs.Remove(bank);
             db.SaveChanges();
             return RedirectToAction("ConfirmAccount");
         }
