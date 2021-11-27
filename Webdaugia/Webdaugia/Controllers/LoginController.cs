@@ -16,6 +16,7 @@ using System.Data.Entity.Migrations;
 using Webdaugia.Models.Login;
 using System.IO;
 using System.Web.Services.Description;
+using Webdaugia.Areas.Admin.Models;
 
 namespace Webdaugia.Controllers
 {
@@ -382,8 +383,119 @@ namespace Webdaugia.Controllers
                 return v != null;
             }
         }
+        //------------------------------------------------------------------------------
+        [HttpGet]
+        public ActionResult ProfileCustomer()
+        {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            //int userid = ((UserLogin)Session["USER"]).UserID;
+            UserLogin userid = (UserLogin)Session["USER"];
+            var dao = new UserDao();
+            User user = dao.getUserById(userid.UserID);
+            //var user = dao.getUserById(userid);
+            return View(user);
+        }
+        //Update Profile
+        [HttpPost, ActionName("ProfileCustomer")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfileCustomera(User collection)
+        {
+            db = new AuctionDBContext();
+            UserLogin userid = (UserLogin)Session["USER"];
+            var dao = new UserDao();
+            User user = dao.getUserById(userid.UserID);
+            try
+            {
+                var errors = ModelState.Values.SelectMany(b => b.Errors);
+                if (!ModelState.IsValid)
+                {
+                    user.Email = collection.Email;
+                    user.Phone = collection.Phone;
+                    var result = dao.Update(user);
+                    if (result)
+                    {
+                        ViewBag.Success = "Cập nhật thông tin thành công!";
+                    }
+                    else
+                    {
+                        ViewBag.Fail = "Cập nhật thông tin thất bại!";
+                    }
+                }
+            return View(collection);
+             }
+            catch
+            {
+                return View();
+            }
+        }
         //--------------------------------------------------------------------------------
+        [HttpGet]
+        public ActionResult ChangePassCustomer()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassCustomer(PasswordModel model)
+        {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            db = new AuctionDBContext();
+            UserLogin userid = (UserLogin)Session["USER"];
+            var dao = new UserDao();
+            //int userid = ((UserLogin)Session["USER"]).UserID;
+            //var user = dao.getUserById(userid);
+            User user = dao.getUserById(userid.UserID);
+      
+            try
+            {
+                var errors = ModelState.Values.SelectMany(b => b.Errors);
+                if (ModelState.IsValid)
+                {
+                    if (user.Password.Trim() == MD5Encryptor.MD5Hash(model.password.Trim()))
+                    {
+                        if(model.password != model.newpassword)
+                        {
 
+                         
+                        //Update Password
+                            user.Password = MD5Encryptor.MD5Hash(model.newpassword.Trim());
+
+                            db.Users.AddOrUpdate(user);
+                            try
+                            {
+                                db.SaveChanges();
+                                ViewBag.Success = "Đổi mật khẩu thành công";
+                            }
+                            catch (Exception ex)
+                            {
+                                ViewBag.Fail = "Đổi mật khẩu thất bại";
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.WrongPass = "Mật khẩu cũ không được giống mật khẩu mới!";
+                        }    
+                    }
+                    else
+                    {
+                        ViewBag.WrongPass = "Mật khẩu cũ không đúng";
+                    }
+
+                    //save change
+                }
+                return View(model);
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         public ActionResult Index()
         {

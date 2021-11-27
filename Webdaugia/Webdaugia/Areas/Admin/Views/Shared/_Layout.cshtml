@@ -342,12 +342,30 @@
                 </ul>
             </li>*@
             @* Quản lý tài khoản *@
-            <li>
-                <a href="/admin/account/listaccount">
-                    <i class="bx bx-user-circle"></i>
-                    <span>Quản lý tài khoản</span>
-                </a>
-            </li>
+
+        <li class="sidebar-submenu">
+            @*<a href="/admin/account/listaccount">
+                <i class="bx bx-user-circle"></i>
+                <span>Quản lý tài khoản</span>
+                <div class="dropdown-icon"></div>
+            </a>*@
+            <a href="#" class="sidebar-menu-dropdown">
+                <i class="bx bx-category"></i>
+                <span>Quản lý tài khoản</span>
+                <div class="dropdown-icon"></div>
+            </a>
+
+            <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                <li>
+                    <a href="/admin/account/listaccount"> Danh sách tài khoản </a>
+                </li>
+                <li>
+                    <a href="/admin/account/confirmaccount"> Xác minh tài khoản </a>
+                </li>
+
+            </ul>
+
+        </li>
             @* Thống kê *@
             <li>
                 <a href="#">

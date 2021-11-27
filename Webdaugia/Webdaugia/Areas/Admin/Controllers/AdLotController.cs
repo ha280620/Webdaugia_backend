@@ -8,7 +8,6 @@ using System.Web.Mvc;
 using PagedList;
 using Webdaugia.DAO;
 using System.IO;
-
 using Webdaugia.Models.Common;
 using System.Data.Entity.Migrations;
 

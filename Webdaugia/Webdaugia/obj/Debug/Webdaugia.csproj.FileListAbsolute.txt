@@ -252,3 +252,7 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.Assem
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.dll
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.dll
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.xml
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.xml

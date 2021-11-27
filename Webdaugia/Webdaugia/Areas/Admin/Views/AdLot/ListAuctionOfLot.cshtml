@@ -55,12 +55,13 @@
                         @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@count</td>
-                            @{ count++;}
-                            <td width="250px" align="center">@item.RegisterBid.UserID</td>
-                            <td width="250px" align="center">@item.RegisterBid.User.FullName</td>
-                            <td width="250px" align="center">@item.BidTime
+                            <tr>
+                                <td>@count</td>
+                                @{ count++;}
+                                <td width="250px" align="center">@item.RegisterBid.UserID</td>
+                                <td width="250px" align="center">@item.RegisterBid.User.FullName</td>
+                                <td width="250px" align="center">
+                                    @item.BidTime
                             </td>
                             <td width="250px" align="center">@item.PriceBid</td>
                             <td align="center">
@@ -73,27 +74,27 @@
                                         <div class="dot"></div>
                                         <span>Thành công</span>
                                     </div>
-                         
-                            }
-                            else if(item.Status == 2)
-                            {
+
+                                }
+                                else if (item.Status == 2)
+                                {
 
 
 
-<div class="payment-status payment-pending">
-                                <div class="dot"></div>
-                                <span>Thất bại</span>
-                            </div>
+                                    <div class="payment-status payment-pending">
+                                        <div class="dot"></div>
+                                        <span>Thất bại</span>
+                                    </div>
 
-                }
-                else
-                {
-                            <div class="payment-status payment-pending">
-                                <div class="dot"></div>
-                                <span>Chưa có kết quả</span>
-                            </div>
-                }
-                        </td>
+                                }
+                                else
+                                {
+                                    <div class="payment-status payment-pending">
+                                        <div class="dot"></div>
+                                        <span>Chưa có kết quả</span>
+                                    </div>
+                                }
+                            </td>
                             <td align="center">
                                 @if (item.Status == 0)
                                 {
@@ -107,18 +108,18 @@
                                 }
                                 else if (item.Status == 2)
                                 {
-                            <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
-                                    <i class="fas fa-times" style="color: red"></i>
-                                </a>
+                                    <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                        <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
+                                            <i class="fas fa-times" style="color: red"></i>
+                                        </a>
 
-                            </div>
+                                    </div>
                                 }
-                            
+
 
                             </td>
-                            </tr>
-                        }
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>
