@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using PagedList;
 using Webdaugia.Models;
+using Webdaugia.Models.Common;
 
 namespace Webdaugia.DAO
 {
@@ -51,6 +52,19 @@ namespace Webdaugia.DAO
         public IEnumerable<RegisterBid> ListAllPagingRegisterOfLot(int id,string searchString, int page, int pageSize)
         {
             IQueryable<RegisterBid> model = db.RegisterBids.Where(x => x.LotID == id);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<RegisterBid> ListAllPagingRegisterOfLot1(string searchString, int page, int pageSize)
+        {
+            var dao = new UserDao();
+            //UserLogin userid = (UserLogin)Session["USER"];
+            var userid = ((UserLogin)Session["USER"]).UserID;
+            var user = dao.getUserById(userid);
+            IQueryable<RegisterBid> model = db.RegisterBids.Where(x => x.UserID == );
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));

@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<Webdaugia.Models.RegisterBid>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "AccountManagement";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="header-position"></div>
+<section id="userInfo">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="userInfo_cata">
+                    <ul class="m-0">
+                        <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                        <li><a href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
+                        <li><a href="/quan-ly-tai-khoan">Quản lý tài khoản</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="userInfo_content">
+                    <h2 class="text-left pl-0 pt-0">Thông tin</h2>
+                    <div class="box">
+                        <div style="overflow:scroll">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th width="40px">
+                                            STT
+                                        </th>
+
+                                        <th width="200px">ID Phiên</th>
+                                        <th >Tên Phiên</th>
+                                        <th >ID Tài khoản</th>
+                                        <th >Tên Tài khoản</th>
+                                        <th >Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int count = 1;}
+                                    @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@count</td>
+                                            @{ count++;}
+                                            <td width="250px" align="center">@item.LotID</td>
+                                            <td width="250px" align="center">@item.Lot.Name</td>
+                                            <td width="250px" align="center">@item.User.ID</td>
+                                            <td width="250px" align="center">@item.User.FullName</td>
+                                            @if (item.Status == true)
+                                            {
+
+
+                                                <td align="center">
+                                                    <div class="payment-status payment-paid">
+                                                        <div class="dot"></div>
+                                                        <span style="color: #04D182">Đã nộp tiền</span>
+                                                    </div>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td align="center">
+                                                    <div class="payment-status payment-pending">
+                                                        <div class="dot"></div>
+                                                        <span style="color: red">Chưa nộp tiền</span>
+                                                    </div>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

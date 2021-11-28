@@ -23,6 +23,7 @@ namespace Webdaugia.Controllers
     [HandleError]
     public class LoginController : Controller
     {
+        //public static User userid = null;
         // GET: Login
         //AuctionDBContext data = new AuctionDBContext();
         string FilePath = "";
@@ -139,6 +140,7 @@ namespace Webdaugia.Controllers
                     userSession.Status = user.Status;
                     //userSession.ProfileImage = user.ProfileImage;
                     Session.Add("USER", userSession);
+                    //userid = (User)Session["USER"];
                     if(user.RoleID == 3)
                     {
                         if (user.CMND == null)
@@ -448,9 +450,9 @@ namespace Webdaugia.Controllers
             db = new AuctionDBContext();
             UserLogin userid = (UserLogin)Session["USER"];
             var dao = new UserDao();
+            User user = dao.getUserById(userid.UserID);
             //int userid = ((UserLogin)Session["USER"]).UserID;
             //var user = dao.getUserById(userid);
-            User user = dao.getUserById(userid.UserID);
       
             try
             {
@@ -495,6 +497,35 @@ namespace Webdaugia.Controllers
             {
                 return View();
             }
+        }
+
+        //public ActionResult AccountManagement()
+        //{
+        //    db = new AuctionDBContext();
+        //    List<Lot> listlot = db.Lots.ToList();
+        //    return View(listlot);
+        //}
+
+        public ActionResult AccountManagement(string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                //UserLogin userid = (UserLogin)Session["USER"];
+                //var dao1 = new UserDao();
+                //User user = dao1.getUserById(userid.UserID);
+                //var Order = db.RegisterBids.Where(x => x.UserID == user.ID).ToList();
+                //var Order = db.RegisterBids.Where(x => x.UserID == userid.UserID).ToList();
+
+                var dao = new LotDao();
+                var model = dao.ListAllPagingRegisterOfLot1(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
         }
 
         public ActionResult Index()

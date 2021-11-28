@@ -2054,6 +2054,7 @@
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Login\ChangePassCustomer.cshtml" />
     <Content Include="Views\Login\ProfileCustomer.cshtml" />
+    <Content Include="Views\Login\AccountManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
