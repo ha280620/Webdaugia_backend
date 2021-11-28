@@ -1,4 +1,4 @@
-﻿@model Webdaugia.Models.Login.LoginModel
+﻿@model Webdaugia.Models.Login.Email
 @{
     ViewBag.Title = "Quenmatkhau";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
@@ -12,11 +12,15 @@
         đăng ký vào DSG
     </p>
     <div class="form-group">
-        <p class="text-success">@ViewBag.Success</p>
-        <p class="text-success">@ViewBag.Error</p>
-        <input type="email" name="email" required class="form-control" placeholder="Email" />
+        <p class="text-success mb-0">@ViewBag.Success</p>
+        <p class="text-success mb-0">@ViewBag.Error</p>
+        <div class="form_control">
+            @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", @class = "mb-0 mt-2", required = "required", placeholder = "Email" })
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+
     </div>
-    <button id="submit" type="submit" class="btn btn-primary">
+    <button  type="submit" class="btn btn-primary" id="loading">
         Send Reset Link
     </button>
 }

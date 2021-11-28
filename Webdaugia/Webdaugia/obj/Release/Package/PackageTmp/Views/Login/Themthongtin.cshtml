@@ -34,9 +34,35 @@
     <link rel="stylesheet" href="~/css/style1.css" />
     <link rel="stylesheet" href="~/css/taisansapdaugia.css" />
     <link rel="stylesheet" href="~/css/multiplestep.css" />
+    <style>
+        #loader {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <!-- BEGIN NAV -->
+    <div id="loader">
+        <!-- <span class="fas fa-spider xoay icon"></span> -->
+        <div class="loader-content">
+            <img class="img-fluid" src="~/img/ben-thanh-icon-animation800x600.gif" alt="" />
+        </div>
+    </div>
     <header>
         @Html.Action("Header", "Home")
 
@@ -98,38 +124,17 @@
                                         placeholder="Địa chỉ ghi trên cmnd/cccd" required />*@
                                     <div class="form_control">
                                         <label class="fieldlabels">Ngày sinh: *</label>
-                                        @Html.TextBoxFor(model => model.ns, htmlAttributes: new { @class = "m-0", name = "ns", type = "date"})
+                                        @Html.TextBoxFor(model => model.ns, htmlAttributes: new { @class = "m-0", name = "ns", type = "date" })
                                         @Html.ValidationMessageFor(model => model.ns, "", new { @class = "text-danger" })
                                     </div>
                                     @*<input type="date" name="ns" />*@
-                                    <label class="fieldlabels">Giới tính: *</label>
-                                    <div class="ml-0 row">
-                                        <div class="form-check col-3 col-md-2 ml-0">
-                                            @*@Html.RadioButtonFor(m => m.gt, "Nam")*@
-                                            @Html.TextBoxFor(model => model.gt, htmlAttributes: new { @class = "m-0", name = "gt", type = "radio", value = "true" , id = "radio-2" })
-                                            @*<input class="form-check-input radio"
-                                                   type="radio"
-                                                   name="gt"
-                                                   id="radio-1"
-                                                   value="1"
-                                                   checked />*@
-                                            <label class="form-check-label" for="radio-1">
-                                                Nam
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-3 col-md-2">
 
-                                            @*@Html.RadioButtonFor(m => m.gt, "Nữ")*@
-                                            @Html.TextBoxFor(model => model.gt, htmlAttributes: new { @class = "m-0", name = "gt", type = "radio", value = "false", required = "required", id = "radio-2" })
-                                            @*<input class="form-check-input radio"
-                                                   type="radio"
-                                                   name="gt"
-                                                   id="radio-2"
-                                                   value="0" />*@
-                                            <label class="form-check-label" for="radio-2">
-                                                Nữ
-                                            </label>
-                                        </div>
+                                    <div class="form_control">
+                                        <label class="fieldlabels">Giới tính: *</label>
+                                        <select id="Gender" name="gt">
+                                            <option value="True" selected>Nam</option>
+                                            <option value="False">Nữ</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <button type="button"
@@ -151,10 +156,10 @@
                                         <input class="m-0" type="number"
                                                name="cmnd"
                                                placeholder="9 số hoặc 12 số" />
-                                     @*   @Html.TextBoxFor(model => model.cmnd, htmlAttributes: new { name = "cmnd", type = "number", placeholder = "9 số hoặc 12 số" })*@
+                                        @*   @Html.TextBoxFor(model => model.cmnd, htmlAttributes: new { name = "cmnd", type = "number", placeholder = "9 số hoặc 12 số" })*@
                                         @Html.ValidationMessageFor(model => model.cmnd, "", new { @class = "text-danger" })
                                     </div>
-                             
+
                                     <div class="form_control">
                                         <label class="fieldlabels">Ngày cấp CMND/CCCD: *</label>
                                         @Html.TextBoxFor(model => model.ngaycapcmnd, htmlAttributes: new { @class = "m-0", name = "ngaycapcmnd", type = "date", placeholder = "Ngày cấp CMND/CCCD:" })
@@ -206,7 +211,7 @@
                                                    id="cmndfront"
                                                    name="cmndfront"
                                                    accept="image/*" />
-                                   
+
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <p>Ảnh CMND/CCCD mặt sau:</p>
@@ -253,19 +258,19 @@
                                         @*@Html.DropDownList("tennganhang", ViewBag.banks as SelectList, "--Chọn Ngân hàng-- ", new { @Name = "tennganhang" })*@
                                         @Html.ValidationMessageFor(model => model.tennganhang, "", new { @class = "text-danger" })
                                     </div>
-                                
-                                <div class="form_control">
-                                    <label class="fieldlabels">Số tài khoản: *</label>
-                                    <input class="m-0" type="number"
-                                           name="atmcode"
-                                           placeholder="vd:1910234234" />
-                             @*       @Html.TextBoxFor(model => model.atmcode, htmlAttributes: new { name = "atmcode", type = "number", placeholder = "vd:1910234234" })*@
-                                    @Html.ValidationMessageFor(model => model.atmcode, "", new { @class = "text-danger" })
-                                </div>
-                                    
+
+                                    <div class="form_control">
+                                        <label class="fieldlabels">Số tài khoản: *</label>
+                                        <input class="m-0" type="number"
+                                               name="atmcode"
+                                               placeholder="vd:1910234234" />
+                                        @*       @Html.TextBoxFor(model => model.atmcode, htmlAttributes: new { name = "atmcode", type = "number", placeholder = "vd:1910234234" })*@
+                                        @Html.ValidationMessageFor(model => model.atmcode, "", new { @class = "text-danger" })
+                                    </div>
+
                                     <div class="form_control">
                                         <label class="fieldlabels">Tên chủ tài khoản *</label>
-                                        @Html.TextBoxFor(model => model.atmfullname, htmlAttributes: new { @class = "m-0", name = "atmfullname", type = "text" , placeholder = "vd: Nguyễn Văn A" })
+                                        @Html.TextBoxFor(model => model.atmfullname, htmlAttributes: new { @class = "m-0", name = "atmfullname", type = "text", placeholder = "vd: Nguyễn Văn A" })
                                         @Html.ValidationMessageFor(model => model.atmfullname, "", new { @class = "text-danger" })
                                     </div>
                                     @*<input type="text"
@@ -290,7 +295,7 @@
                                 </div>
                                 <button type="submit"
                                         class="action-button"
-                                        value="submit">
+                                        value="submit" id="loading">
                                     Hoàn tất
                                 </button>
                                 <button type="button"
@@ -316,6 +321,13 @@
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.js"></script>
     <script src="~/js/userhover.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#loading').click(function () {
+                $('#loader').css('display', 'block');
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
     <!-- begin js danh mục -->
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>

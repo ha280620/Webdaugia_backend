@@ -673,7 +673,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             db = new AuctionDBContext();
             lot.ListCategory = db.Categories.ToList();
             ModelState.Remove("file1");
-            ModelState.Remove("CateId");
+            ModelState.Remove("CateID");
             ModelState.Remove("ViewInTime");
             lot.ListCategory = db.Categories.ToList();
             if (ModelState.IsValid)

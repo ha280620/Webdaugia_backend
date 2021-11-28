@@ -47,6 +47,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="11" style="
+                            text-align: center;
+                            font-size: 2rem;">
+                                    Hiện chưa có phiên đấu giá nào diễn ra
+                                </td>
+                            </tr>
+                        }
                         @{ int count = 1;}
                         @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
                         @foreach (var item in Model)
@@ -63,7 +73,7 @@
                                 <td align="center"> @string.Format(info, "{0:0,0}", item.AdvanceDesposit) đ</td>
                                 <td align="center">@item.TimeForBidStart</td>
                                 <td align="center">@item.TimeForBidEnd</td>
-                     
+
                                 <td align="center">
                                     <div style="height:100%; display:flex; align-items:center; justify-content:center">
                                         <a class="btn" href="/admin/adlot/ListAuctionOfLot/@item.ID" style="padding-left:15px">

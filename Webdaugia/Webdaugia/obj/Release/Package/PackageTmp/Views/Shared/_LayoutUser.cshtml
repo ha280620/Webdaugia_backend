@@ -36,10 +36,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        #loader {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <!-- BEGIN NAV -->
+    <div id="loader">
+        <!-- <span class="fas fa-spider xoay icon"></span> -->
+        <div class="loader-content">
+            <img class="img-fluid" src="~/img/ben-thanh-icon-animation800x600.gif" alt="" />
+        </div>
+    </div>
     <header>
+
         @Html.Action("Header", "Home")
         @*<div class="container">
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light px-0">
@@ -175,6 +202,7 @@
     <script src="~/js/jquery.js"></script>
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.js"></script>
+
     @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
     @if (user != null)
     {
@@ -185,6 +213,7 @@
     <script src="~/js/lightGallery.js"></script>
     <!-- begin js danh mục -->
     <script src="~/js/swiper.js"></script>
+
     <script>
         var swiper = new Swiper(".swiper", {
             slidesPerView: 4,
@@ -233,13 +262,7 @@
     </script>
 
 
-    <script>
-        $(window).on("load", function (event) {
 
-            $("#loader").fadeOut(400);
-
-        });
-    </script>
 
     @if (user != null)
     {
@@ -255,8 +278,6 @@
             });
         </script>
     }
-
-
     @RenderSection("scripts", required: false)
     @RenderSection("ProductDetail", required: false)
 </body>

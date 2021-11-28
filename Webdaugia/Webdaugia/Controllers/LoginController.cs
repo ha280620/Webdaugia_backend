@@ -90,7 +90,7 @@ namespace Webdaugia.Controllers
                         userSession.Name = user.FullName;
                         userSession.Status = user.Status;
 
-                        var img = "Content\\User\\User00.png";
+                        var img = "\\Content\\User\\User00.png";
                         UsersImage usersImage = new UsersImage();
                         usersImage.UsersID = result;
                         usersImage.Image = img;

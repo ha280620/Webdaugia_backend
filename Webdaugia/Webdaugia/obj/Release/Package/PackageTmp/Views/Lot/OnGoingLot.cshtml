@@ -1,7 +1,7 @@
 ﻿@model Webdaugia.Models.Lot
 @{
     ViewBag.Title = "OnGoingLot";
-    var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listOnGoingLot;
+    var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     var listAuctioned = (List<Webdaugia.Models.Auction>)ViewBag.listAuctioned;
     var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
@@ -306,10 +306,10 @@
 
             </div>
 
-            @if (ViewBag.listOnGoingLot != null)
+            @if (listOnGoingLot.Count() != 0)
             {
                 <div class="row">
-                    @foreach (var item in ViewBag.listOnGoingLot)
+                    @foreach (var item in listOnGoingLot)
                     {
                         <div class="col-12 col-md-6 col-lg-4 p-2">
                             <div class="going-item">
@@ -357,7 +357,6 @@
                         </div>
                     </div>
                 </div>
-
             }
 
 

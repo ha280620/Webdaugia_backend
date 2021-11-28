@@ -35,52 +35,65 @@
                         <button type="submit"><i class="fas fa-search"></i></button>}
                 </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th width="40px">
-                            STT
-                        </th>
-                        <th width="80px"></th>
-                        <th width="400px">Tên Sản Phẩm</th>
-                        <th width="150px">ID Phiên </th>
-                        <th width="400px">Tên Phiên </th>
-                        <th width="180px">Ngày tạo</th>
-                        <th>Người tạo</th>
-                        <th>Thao tác</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{ int count = 1;}
-                    @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
-                    @foreach (var item in Model)
-                    {
-                    <tr>
-                        <td>@count</td>
-                        @{ count++; }
-                        @if (@item.ProductsImages.FirstOrDefault().Image != null)
+            <div style="overflow-x:scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th align="center">
+                                STT
+                            </th>
+                            <th align="center"></th>
+                            <th align="center">Tên Sản Phẩm</th>
+                            <th align="center">ID Phiên </th>
+                            <th align="center">Tên Phiên </th>
+                            <th align="center">Ngày tạo</th>
+                            <th align="center">Người tạo</th>
+                            <th align="center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count() == 0)
                         {
-                            <td><img src="@item.ProductsImages.FirstOrDefault().Image" width="50px" /></td>
+                            <tr>
+                                <td colspan="8" style="
+                            text-align: center;
+                            font-size: 2rem;">
+                                    Hiện chưa có sản phẩm nào
+                                </td>
+                            </tr>
                         }
-                        else
+                        @{ int count = 1;}
+                        @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+                        @foreach (var item in Model)
                         {
-                            <td>Không có ảnh</td>
-                        }
+                            <tr>
+                                <td>@count</td>
+                                @{ count++; }
+                                @if (@item.ProductsImages.FirstOrDefault().Image != null)
+                                {
+                                    <td><img src="@item.ProductsImages.FirstOrDefault().Image" width="50px" /></td>
+                                }
+                                else
+                                {
+                                    <td>Không có ảnh</td>
+                                }
 
-                        <td width="400px">@item.Name</td>
-                        <td>@item.Lot.ID</td>
-                        <td>@item.Lot.Name</td>
-                        <td>@item.CreatedAt</td>
-                        <td>@item.CreatedBy</td>
-                        <td>
-                            <a href="/admin/adproduct/editproduct/@item.ID" style="padding-left:15px">
-                                <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
+                                <td align="center" >@item.Name</td>
+                                <td align="center">@item.Lot.ID</td>
+                                <td align="center">@item.Lot.Name</td>
+                                <td align="center">@item.CreatedAt</td>
+                                <td align="center">@item.CreatedBy</td>
+                                <td align="center">
+                                    <a href="/admin/adproduct/editproduct/@item.ID" style="padding-left:15px">
+                                        <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+           
             @Html.PagedListPager(Model, page => Url.Action("ListProduct", new { page, @searchString = ViewBag.searchString }))
         </div>
     </div>

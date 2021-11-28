@@ -35,7 +35,7 @@ namespace Webdaugia.Controllers
                 var total = Lot.HighBid + Lot.MiniumBid;
                 ViewBag.highBid = total;
             }
-            var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).Take(3).ToList();
+            var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).Take(3).ToList();
             var listLotAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var listAttributes = db.Products.Where(x => x.LotID == LotId).ToList();
             var listAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
@@ -74,7 +74,7 @@ namespace Webdaugia.Controllers
 
             ViewBag.listAttributes = listAttributes;
             ViewBag.listLotAttachment = listLotAttachment;
-            ViewBag.listOnGoingLot = listOnGoingLot;
+            ViewBag.listReadyLot = listReadyLot;
             ViewBag.listAttachment = listAttachment;
 
             ViewBag.listRegisterBid = listRegisterBid.Count();

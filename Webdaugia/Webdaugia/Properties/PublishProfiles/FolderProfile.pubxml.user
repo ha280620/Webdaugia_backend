@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2021-11-28T11:31:30.4122007Z;False|2021-11-28T18:30:53.4414747+07:00;False|2021-11-28T18:30:34.3388661+07:00;False|2021-11-28T18:30:13.0636728+07:00;False|2021-11-28T18:28:51.7238664+07:00;False|2021-11-28T18:27:51.5597935+07:00;False|2021-11-28T18:25:08.7837339+07:00;False|2021-11-23T22:10:27.4158882+07:00;False|2021-11-23T22:09:52.3214721+07:00;False|2021-11-23T22:08:29.4661949+07:00;</History>
+    <History>False|2021-11-28T18:52:37.6310660Z;True|2021-11-29T01:41:46.5812498+07:00;True|2021-11-29T01:02:01.2063485+07:00;True|2021-11-29T01:01:29.1586732+07:00;True|2021-11-28T18:31:30.4122007+07:00;False|2021-11-28T18:30:53.4414747+07:00;False|2021-11-28T18:30:34.3388661+07:00;False|2021-11-28T18:30:13.0636728+07:00;False|2021-11-28T18:28:51.7238664+07:00;False|2021-11-28T18:27:51.5597935+07:00;False|2021-11-28T18:25:08.7837339+07:00;False|2021-11-23T22:10:27.4158882+07:00;False|2021-11-23T22:09:52.3214721+07:00;False|2021-11-23T22:08:29.4661949+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ajax/advanced-Plugins.html">
@@ -185,8 +185,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="ajax/wizard.html">
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/Account/ChangePass.cshtml">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/ConfirmAccount.cshtml">
+      <publishTime>11/29/2021 01:00:26</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Account/Details.cshtml">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/Account/ListAccount.cshtml">
-      <publishTime>11/23/2021 20:26:18</publishTime>
+      <publishTime>11/29/2021 00:58:55</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Account/Profile.cshtml">
       <publishTime>11/22/2021 23:08:43</publishTime>
@@ -194,41 +203,68 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Areas/Admin/Views/AdLogin/Index.cshtml">
       <publishTime>11/24/2021 14:33:08</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/AdLot/CreateLink.cshtml">
+      <publishTime>11/28/2021 14:43:21</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/AdLot/CreateLot.cshtml">
-      <publishTime>11/23/2021 08:09:24</publishTime>
+      <publishTime>11/28/2021 20:12:24</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdLot/EditLink.cshtml">
+      <publishTime>11/28/2021 14:51:46</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/EditLot.cshtml">
-      <publishTime>11/23/2021 10:15:14</publishTime>
+      <publishTime>11/29/2021 01:48:22</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/ListAuctionOfLot.cshtml">
-      <publishTime>11/23/2021 19:51:05</publishTime>
+      <publishTime>11/29/2021 00:49:09</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/ListLot.cshtml">
-      <publishTime>11/23/2021 16:23:10</publishTime>
+      <publishTime>11/29/2021 00:49:35</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/ListLotAuction.cshtml">
-      <publishTime>11/23/2021 18:20:45</publishTime>
+      <publishTime>11/29/2021 00:51:46</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdLot/ListLotEnd.cshtml">
+      <publishTime>11/29/2021 00:57:48</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdLot/ListLotEndFor180.cshtml">
+      <publishTime>11/29/2021 00:54:29</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdLot/ListLotLink.cshtml">
+      <publishTime>11/29/2021 00:55:13</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/ListLotRegister.cshtml">
-      <publishTime>11/23/2021 17:22:28</publishTime>
+      <publishTime>11/29/2021 00:55:52</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/listregitsteroflot.cshtml">
-      <publishTime>11/23/2021 20:11:17</publishTime>
+      <publishTime>11/29/2021 00:56:38</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdLot/ListUserEndOfLot.cshtml">
+      <publishTime>11/29/2021 00:57:46</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdminHome/Index.cshtml">
       <publishTime>11/23/2021 15:19:50</publishTime>
     </File>
+    <File Include="Areas/Admin/Views/AdProduct/CreateCategory.cshtml">
+      <publishTime>11/26/2021 20:47:10</publishTime>
+    </File>
     <File Include="Areas/Admin/Views/AdProduct/CreateProduct.cshtml">
-      <publishTime>11/23/2021 13:48:46</publishTime>
+      <publishTime>11/28/2021 14:10:56</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdProduct/EditCategory.cshtml">
+      <publishTime>11/26/2021 19:51:42</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdProduct/EditProduct.cshtml">
-      <publishTime>11/23/2021 15:41:44</publishTime>
+      <publishTime>11/28/2021 12:29:30</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/AdProduct/ListCategory.cshtml">
+      <publishTime>11/28/2021 12:01:02</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdProduct/ListProduct.cshtml">
-      <publishTime>11/23/2021 19:45:10</publishTime>
+      <publishTime>11/29/2021 01:52:11</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_Layout.cshtml">
-      <publishTime>11/23/2021 21:36:54</publishTime>
+      <publishTime>11/28/2021 15:56:58</publishTime>
     </File>
     <File Include="Areas/Admin/Views/web.config">
       <publishTime>11/22/2021 20:33:13</publishTime>
@@ -327,7 +363,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 20:50:12</publishTime>
     </File>
     <File Include="assets/css/style.css">
-      <publishTime>11/09/2021 20:50:12</publishTime>
+      <publishTime>11/27/2021 20:10:24</publishTime>
     </File>
     <File Include="assets/css/swiper.css">
       <publishTime>11/09/2021 20:50:12</publishTime>
@@ -4653,10 +4689,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 21:47:15</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
-      <publishTime>11/10/2021 00:53:58</publishTime>
+      <publishTime>03/02/2015 16:32:26</publishTime>
     </File>
     <File Include="bin/EntityFramework.SqlServer.dll">
-      <publishTime>11/10/2021 00:53:58</publishTime>
+      <publishTime>03/02/2015 16:32:26</publishTime>
     </File>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
       <publishTime>11/09/2021 21:47:15</publishTime>
@@ -4842,10 +4878,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 21:47:15</publishTime>
     </File>
     <File Include="bin/Webdaugia.dll">
-      <publishTime>11/24/2021 17:47:26</publishTime>
+      <publishTime>11/29/2021 01:53:08</publishTime>
     </File>
     <File Include="bin/Webdaugia.pdb">
-      <publishTime>11/24/2021 17:47:26</publishTime>
+      <publishTime>11/29/2021 01:53:08</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/09/2021 21:47:16</publishTime>
@@ -4865,11 +4901,32 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/Admin/img/backpack.jpg">
       <publishTime>11/22/2021 20:33:13</publishTime>
     </File>
+    <File Include="Content/Admin/img/batdongsan.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
     <File Include="Content/Admin/img/bg-07.svg">
       <publishTime>11/22/2021 20:33:13</publishTime>
     </File>
+    <File Include="Content/Admin/img/car.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/datnen.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/ending.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/hanghieu.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
     <File Include="Content/Admin/img/headphone.jpg">
       <publishTime>11/22/2021 20:33:13</publishTime>
+    </File>
+    <File Include="Content/Admin/img/incoming1.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/land.jpg">
+      <publishTime>11/26/2021 11:34:12</publishTime>
     </File>
     <File Include="Content/Admin/img/logo-lg.png">
       <publishTime>11/22/2021 20:33:13</publishTime>
@@ -4877,8 +4934,23 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/Admin/img/logo-mb.png">
       <publishTime>11/22/2021 20:33:13</publishTime>
     </File>
+    <File Include="Content/Admin/img/nhao.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/ongoing1.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
     <File Include="Content/Admin/img/sneaker.jpg">
       <publishTime>11/22/2021 20:33:13</publishTime>
+    </File>
+    <File Include="Content/Admin/img/suutamnghethuat.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/taisankhac.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
+    </File>
+    <File Include="Content/Admin/img/taisankhac1.png">
+      <publishTime>11/26/2021 11:34:12</publishTime>
     </File>
     <File Include="Content/Admin/img/thumb-7.jpg">
       <publishTime>11/22/2021 20:33:13</publishTime>
@@ -4919,8 +4991,218 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/bootstrap.min.css.map">
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
+    <File Include="Content/Client/css/app.css">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/css/grid.css">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/css/index.css">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/css/info.css">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/css/login.css">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/css/login.css.map">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/css/loginadmin.css">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/backpack.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/banner-12.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/banner-13.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/banner-25.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/bg-07.svg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/bg-parchment.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/bird.01a45ffa.gif">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/blog-1-720x484.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/blog-2-720x484.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/blog-3-720x484.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/breadcumd.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/cat.862fddc4.gif">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/dog.8d179361.gif">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/ezgif.com-gif-maker_2.gif">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/fish.6c4bafb9.gif">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/giong-cho-alaskan-malamute-khong-lo-lieu-gia-co-re.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/headphone.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/logo-lg.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/logo-mb.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/matrix.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/product-1-450x450.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/product-2-450x450.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/product-3-450x450.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/product-4-450x450.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/product-5-450x450.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/product-6-450x450.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/rabbit.46db3c99.gif">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-01.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-02.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-03.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-04.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-1.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-19.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-2.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-22.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-23.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-24.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/Slider-3.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/sneaker.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/thumb-7.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/user-image-2.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/user-image-3.png">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/img/user-image.jpg">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/js/app.js">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/js/shoplist.js">
+      <publishTime>11/28/2021 15:26:02</publishTime>
+    </File>
+    <File Include="Content/Client/js/userinfo.js">
+      <publishTime>11/28/2021 17:58:56</publishTime>
+    </File>
+    <File Include="Content/Images/Category/batdongsan.png">
+      <publishTime>11/26/2021 11:59:47</publishTime>
+    </File>
+    <File Include="Content/Images/Category/car.jpg">
+      <publishTime>11/09/2021 20:50:12</publishTime>
+    </File>
+    <File Include="Content/Images/Category/car.png">
+      <publishTime>11/26/2021 11:59:47</publishTime>
+    </File>
+    <File Include="Content/Images/Category/city.jpg">
+      <publishTime>11/09/2021 20:50:12</publishTime>
+    </File>
+    <File Include="Content/Images/Category/datnen.png">
+      <publishTime>11/26/2021 11:59:47</publishTime>
+    </File>
+    <File Include="Content/Images/Category/hanghieu.png">
+      <publishTime>11/26/2021 11:59:47</publishTime>
+    </File>
+    <File Include="Content/Images/Category/land.jpg">
+      <publishTime>11/26/2021 11:34:09</publishTime>
+    </File>
+    <File Include="Content/Images/Category/nhao.png">
+      <publishTime>11/26/2021 11:59:47</publishTime>
+    </File>
+    <File Include="Content/Images/Category/noauction.png">
+      <publishTime>11/27/2021 20:10:28</publishTime>
+    </File>
+    <File Include="Content/Images/Category/noauction1.png">
+      <publishTime>11/27/2021 20:17:45</publishTime>
+    </File>
+    <File Include="Content/Images/Category/pc.jpg">
+      <publishTime>11/26/2021 12:02:53</publishTime>
+    </File>
+    <File Include="Content/Images/Category/suutam.jpg">
+      <publishTime>11/09/2021 20:50:13</publishTime>
+    </File>
+    <File Include="Content/Images/Category/suutamnghethuat.png">
+      <publishTime>11/26/2021 11:59:47</publishTime>
+    </File>
+    <File Include="Content/Images/Category/taisankhac.jpg">
+      <publishTime>11/09/2021 20:50:13</publishTime>
+    </File>
+    <File Include="Content/Images/Category/taisankhac.png">
+      <publishTime>11/26/2021 12:01:12</publishTime>
+    </File>
+    <File Include="Content/Images/Category/taisankhac1.png">
+      <publishTime>11/26/2021 12:00:22</publishTime>
+    </File>
     <File Include="Content/Images/Cmnd/242896941_241844014504329_733016854597973873_n.11_24_2021_12_07_24.png">
       <publishTime>11/24/2021 00:07:24</publishTime>
+    </File>
+    <File Include="Content/Images/Cmnd/242896941_241844014504329_733016854597973873_n.11_28_2021_05_05_23.png">
+      <publishTime>11/28/2021 17:05:23</publishTime>
     </File>
     <File Include="Content/Images/Cmnd/249552593_595510108169108_5095371096582561702_n.11_24_2021_12_04_01.png">
       <publishTime>11/24/2021 00:04:01</publishTime>
@@ -5240,8 +5522,29 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/Site.css">
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
+    <File Include="Content/template/dangthanhcong.html">
+      <publishTime>11/28/2021 22:13:07</publishTime>
+    </File>
+    <File Include="Content/template/daugiafail.html">
+      <publishTime>11/28/2021 22:12:50</publishTime>
+    </File>
+    <File Include="Content/template/daugiasuccess.html">
+      <publishTime>11/28/2021 22:12:06</publishTime>
+    </File>
     <File Include="Content/template/neworder.html">
-      <publishTime>11/13/2021 22:19:36</publishTime>
+      <publishTime>11/28/2021 22:11:48</publishTime>
+    </File>
+    <File Include="Content/template/sendangky.html">
+      <publishTime>11/28/2021 23:08:17</publishTime>
+    </File>
+    <File Include="Content/template/thongbaodangky.html">
+      <publishTime>11/28/2021 22:11:33</publishTime>
+    </File>
+    <File Include="Content/template/xacnhansuccess.html">
+      <publishTime>11/28/2021 22:11:19</publishTime>
+    </File>
+    <File Include="Content/template/xannhanfail.html">
+      <publishTime>11/28/2021 22:10:50</publishTime>
     </File>
     <File Include="Content/User/User00.png">
       <publishTime>11/12/2021 22:13:46</publishTime>
@@ -5432,11 +5735,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="img/bag.png">
       <publishTime>11/09/2021 20:50:12</publishTime>
     </File>
+    <File Include="img/batdongsan.png">
+      <publishTime>11/26/2021 11:59:25</publishTime>
+    </File>
+    <File Include="img/ben-thanh-icon-animation800x600.gif">
+      <publishTime>11/28/2021 21:56:51</publishTime>
+    </File>
     <File Include="img/Can-reforms-in-property-auctions-help-real-estate-during-COVID-19-FB-1200x700-compressed.jpg">
       <publishTime>11/09/2021 20:50:12</publishTime>
     </File>
     <File Include="img/car.jpg">
       <publishTime>11/09/2021 20:50:12</publishTime>
+    </File>
+    <File Include="img/car.png">
+      <publishTime>11/26/2021 11:59:25</publishTime>
     </File>
     <File Include="img/city.jpg">
       <publishTime>11/09/2021 20:50:12</publishTime>
@@ -5447,8 +5759,17 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="img/CMNDFront.png">
       <publishTime>11/09/2021 20:50:12</publishTime>
     </File>
+    <File Include="img/datnen.png">
+      <publishTime>11/26/2021 11:59:25</publishTime>
+    </File>
     <File Include="img/DJI-0357-1603422122.jpg">
       <publishTime>11/09/2021 20:50:12</publishTime>
+    </File>
+    <File Include="img/ending.png">
+      <publishTime>11/28/2021 20:34:12</publishTime>
+    </File>
+    <File Include="img/error-img.png">
+      <publishTime>11/15/2021 23:06:41</publishTime>
     </File>
     <File Include="img/footer.png">
       <publishTime>11/09/2021 20:50:12</publishTime>
@@ -5465,8 +5786,14 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="img/hammer.png">
       <publishTime>11/09/2021 20:50:13</publishTime>
     </File>
+    <File Include="img/hanghieu.png">
+      <publishTime>11/26/2021 11:59:25</publishTime>
+    </File>
     <File Include="img/img1.jpg">
       <publishTime>11/09/2021 20:50:13</publishTime>
+    </File>
+    <File Include="img/incoming1.png">
+      <publishTime>11/26/2021 11:56:32</publishTime>
     </File>
     <File Include="img/logo-dark.svg">
       <publishTime>11/09/2021 20:50:13</publishTime>
@@ -5486,6 +5813,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="img/logo.png">
       <publishTime>11/09/2021 20:50:13</publishTime>
     </File>
+    <File Include="img/nhao.png">
+      <publishTime>11/26/2021 11:59:25</publishTime>
+    </File>
+    <File Include="img/ongoing1.png">
+      <publishTime>11/26/2021 11:56:32</publishTime>
+    </File>
     <File Include="img/pc.jpg">
       <publishTime>11/09/2021 20:50:13</publishTime>
     </File>
@@ -5501,8 +5834,23 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="img/product-4-450x450.jpg">
       <publishTime>11/09/2021 20:50:13</publishTime>
     </File>
+    <File Include="img/soc_1.png">
+      <publishTime>11/27/2021 22:57:43</publishTime>
+    </File>
+    <File Include="img/soc_2.png">
+      <publishTime>11/27/2021 22:57:43</publishTime>
+    </File>
+    <File Include="img/soc_3.png">
+      <publishTime>11/27/2021 22:57:43</publishTime>
+    </File>
+    <File Include="img/soc_4.png">
+      <publishTime>11/27/2021 22:57:43</publishTime>
+    </File>
     <File Include="img/suutam.jpg">
       <publishTime>11/09/2021 20:50:13</publishTime>
+    </File>
+    <File Include="img/suutamnghethuat.png">
+      <publishTime>11/26/2021 11:59:25</publishTime>
     </File>
     <File Include="img/taisankhac.jpg">
       <publishTime>11/09/2021 20:50:13</publishTime>
@@ -5542,6 +5890,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="js/slick.js">
       <publishTime>11/12/2021 22:23:23</publishTime>
+    </File>
+    <File Include="js/swiper.js">
+      <publishTime>11/26/2021 12:21:46</publishTime>
     </File>
     <File Include="js/userhover.js">
       <publishTime>11/14/2021 14:29:25</publishTime>
@@ -5586,31 +5937,52 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
     <File Include="Views/Error/PageNotFound.cshtml">
-      <publishTime>11/15/2021 23:39:00</publishTime>
+      <publishTime>11/26/2021 11:58:10</publishTime>
     </File>
     <File Include="Views/Home/Header.cshtml">
-      <publishTime>11/17/2021 14:10:15</publishTime>
+      <publishTime>11/28/2021 18:23:24</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>11/17/2021 16:13:18</publishTime>
+      <publishTime>11/29/2021 00:06:27</publishTime>
+    </File>
+    <File Include="Views/Login/AccountManagement.cshtml">
+      <publishTime>11/29/2021 00:04:12</publishTime>
+    </File>
+    <File Include="Views/Login/ChangePassCustomer.cshtml">
+      <publishTime>11/28/2021 23:58:44</publishTime>
     </File>
     <File Include="Views/Login/DangKi.cshtml">
-      <publishTime>11/23/2021 23:18:39</publishTime>
+      <publishTime>11/28/2021 22:49:17</publishTime>
     </File>
     <File Include="Views/Login/DangNhap.cshtml">
-      <publishTime>11/13/2021 22:19:36</publishTime>
+      <publishTime>11/28/2021 22:31:14</publishTime>
+    </File>
+    <File Include="Views/Login/ProfileCustomer.cshtml">
+      <publishTime>11/28/2021 23:58:49</publishTime>
     </File>
     <File Include="Views/Login/Quenmatkhau.cshtml">
-      <publishTime>11/17/2021 14:05:19</publishTime>
+      <publishTime>11/28/2021 23:00:40</publishTime>
     </File>
     <File Include="Views/Login/Themthongtin.cshtml">
-      <publishTime>11/24/2021 00:17:39</publishTime>
+      <publishTime>11/28/2021 22:23:01</publishTime>
     </File>
     <File Include="Views/Lot/IncomingLot.cshtml">
-      <publishTime>11/23/2021 15:55:24</publishTime>
+      <publishTime>11/29/2021 01:38:38</publishTime>
+    </File>
+    <File Include="Views/Lot/ListEndingLot.cshtml">
+      <publishTime>11/28/2021 20:34:27</publishTime>
+    </File>
+    <File Include="Views/Lot/ListLotByCate.cshtml">
+      <publishTime>11/27/2021 20:40:31</publishTime>
+    </File>
+    <File Include="Views/Lot/ListLotByDate1.cshtml">
+      <publishTime>11/28/2021 20:35:19</publishTime>
+    </File>
+    <File Include="Views/Lot/ListLotByDate2.cshtml">
+      <publishTime>11/27/2021 20:58:04</publishTime>
     </File>
     <File Include="Views/Lot/OnGoingLot.cshtml">
-      <publishTime>11/23/2021 17:03:02</publishTime>
+      <publishTime>11/29/2021 01:38:18</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>11/08/2021 22:04:42</publishTime>
@@ -5619,10 +5991,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 20:50:12</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutLogin.cshtml">
-      <publishTime>11/14/2021 15:09:12</publishTime>
+      <publishTime>11/28/2021 22:48:39</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutUser.cshtml">
-      <publishTime>11/22/2021 20:33:13</publishTime>
+      <publishTime>11/28/2021 22:49:53</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>11/10/2021 01:02:06</publishTime>
@@ -5631,7 +6003,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/24/2021 14:47:31</publishTime>
+      <publishTime>11/28/2021 18:25:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

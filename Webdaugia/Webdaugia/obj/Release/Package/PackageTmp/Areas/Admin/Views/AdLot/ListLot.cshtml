@@ -45,66 +45,76 @@
                                 STT
                             </th>
                             <th width="80px" align="center"></th>
-                            <th width="300px"  align="center">Tên phiên</th>
-                            <th width="70px"  align="center">Danh mục</th>
-                            <th  align="center">Chủ tài sản</th>
-                            <th   align="center">Giá khởi điểm</th>
-                            <th   align="center">Bước giá</th>
-                            <th   align="center">Tiền cọc</th>
-                            <th  align="center">Ngày bắt đầu phiên</th>
-                            <th  align="center">Ngày kết thúc phiên</th>
-                            <th  align="center">Ngày bắt đầu đăng ký</th>
-                            <th  align="center">Ngày kết thúc đăng ký</th>
-                            <th  align="center">Thao tác</th>
+                            <th width="300px" align="center">Tên phiên</th>
+                            <th width="70px" align="center">Danh mục</th>
+                            <th align="center">Chủ tài sản</th>
+                            <th align="center">Giá khởi điểm</th>
+                            <th align="center">Bước giá</th>
+                            <th align="center">Tiền cọc</th>
+                            <th align="center">Ngày bắt đầu phiên</th>
+                            <th align="center">Ngày kết thúc phiên</th>
+                            <th align="center">Ngày bắt đầu đăng ký</th>
+                            <th align="center">Ngày kết thúc đăng ký</th>
+                            <th align="center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @{ int count = 1;}
                         @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="13" style="
+                            text-align: center;
+                            font-size: 2rem;">
+                                    Hiện chưa có phiên đấu giá nào
+                                </td>
+                            </tr>
+                        }
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@count</td>
-                            @{ count++;}
-                            <td><img src="@item.LotImage" width="50px" /></td>
-                            <td width="250px">@item.Name</td>
-                            <td  align="center">@item.Category.Name</td>
-                            <td  align="center">@item.HostName</td>
-                            <td  align="center"> @string.Format(info, "{0:0,0}", item.StartingPrice) đ</td>
-                            <td  align="center"> @string.Format(info, "{0:0,0}", item.MiniumBid) đ</td>
-                            <td  align="center"> @string.Format(info, "{0:0,0}", item.AdvanceDesposit) đ</td>
-                            <td  align="center">@item.TimeForBidStart</td>
-                            <td  align="center">@item.TimeForBidEnd</td>
-                            <td  align="center">@item.TimeForRegisterStart</td>
-                            <td  align="center">@item.TimeForRegisterEnd</td>
-                            <td  align="center">
-                                <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                    <a href="/admin/adlot/editlot/@item.ID" style="padding-left:15px">
-                                        <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
-                                    </a>
-                                    @if (item.Status == false)
-                                    {
-
-                                        <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left:10px" onclick="return confirm('Bạn có muốn khách hàng có thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
-                                            <i class="fas fa-eye" style="color:red"></i>
-
+                            <tr>
+                                <td>@count</td>
+                                @{ count++;}
+                                <td><img src="@item.LotImage" width="50px" /></td>
+                                <td width="250px">@item.Name</td>
+                                <td align="center">@item.Category.Name</td>
+                                <td align="center">@item.HostName</td>
+                                <td align="center"> @string.Format(info, "{0:0,0}", item.StartingPrice) đ</td>
+                                <td align="center"> @string.Format(info, "{0:0,0}", item.MiniumBid) đ</td>
+                                <td align="center"> @string.Format(info, "{0:0,0}", item.AdvanceDesposit) đ</td>
+                                <td align="center">@item.TimeForBidStart</td>
+                                <td align="center">@item.TimeForBidEnd</td>
+                                <td align="center">@item.TimeForRegisterStart</td>
+                                <td align="center">@item.TimeForRegisterEnd</td>
+                                <td align="center">
+                                    <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                        <a href="/admin/adlot/editlot/@item.ID" style="padding-left:15px">
+                                            <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
                                         </a>
+                                        @if (item.Status == false)
+                                        {
 
-                                    }
-                                    else
-                                    {
+                                            <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left:10px" onclick="return confirm('Bạn có muốn khách hàng có thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
+                                                <i class="fas fa-eye" style="color:red"></i>
 
-                                        <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left: 10px" onclick="return confirm('Bạn có muốn khách hàng không thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
-                                            <i class="fas fa-eye-slash" style="color:#04D182"></i>
-                                        </a>
+                                            </a>
 
-                                    }
-                                </div>
+                                        }
+                                        else
+                                        {
+
+                                            <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left: 10px" onclick="return confirm('Bạn có muốn khách hàng không thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
+                                                <i class="fas fa-eye-slash" style="color:#04D182"></i>
+                                            </a>
+
+                                        }
+                                    </div>
                                 </td>
                             </tr>
                         }
                     </tbody>
-                </table>
+                    </table>
             </div>
           
             @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))

@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-6">
-            <label>Tên Sản phẩm</label>
+            <label>Tên phiên đấu giá</label>
             <div class="form_control">
                 <input required
                        name="Name"
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="col-6">
-            <label>Giá đặt cọc</label>
+            <label>Tiền đặt cọc trước</label>
             <div class="form_control">
                 <input required
                        name="ParticipationFee"
@@ -79,16 +79,7 @@
                 @Html.ValidationMessageFor(model => model.ParticipationFee, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="col-6">
-            <label>Đấu Giá Viên</label>
-            <div class="form_control">
-                <input required
-                       name="HostName"
-                       type="text"
-                       value="@Model.HostName" />
-                @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
-            </div>
-        </div>
+  
         <div class="col-6">
             <label>Chủ tài sản</label>
             <div class="form_control">
@@ -100,7 +91,7 @@
             </div>
         </div>
         <div class="col-6">
-            <label>Địa điểm</label>
+            <label>Địa điểm xem tài sản</label>
             <div class="form_control">
                 <input required
                        name="Location"
@@ -142,7 +133,7 @@
         </div>
 
         <div class="col-6">
-            <label>Ngày bắt đầu phiên</label>
+            <label>Ngày bắt đầu phiên đấu giá</label>
             <div class="form_control">
                 <input required
                        name="TimeForBidStart"
@@ -152,7 +143,7 @@
             </div>
         </div>
         <div class="col-6">
-            <label>Ngày kết thúc phiên</label>
+            <label>Ngày kết thúc phiên đấu giá</label>
             <div class="form_control">
                 <input required
                        name="TimeForBidEnd"
