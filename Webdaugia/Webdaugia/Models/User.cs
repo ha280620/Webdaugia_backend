@@ -47,7 +47,7 @@ namespace Webdaugia.Models
         [StringLength(11)]
         public string Phone { get; set; }
 
-        [StringLength(13)]
+        [StringLength(50)]
         public string CMND { get; set; }
 
         [StringLength(158)]

@@ -241,11 +241,10 @@ namespace Webdaugia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Themthongtin(AddInfoModel model, HttpPostedFileBase cmndfront, HttpPostedFileBase cmndback)
+        public ActionResult Themthongtin(AddInfoModel model)
         {
             var dao = new UserDao();
-            ModelState.Remove("cmndfront");
-            ModelState.Remove("cmndback");
+    
             ModelState.Remove("gt");
             if (!ModelState.IsValid)
             {
@@ -253,38 +252,37 @@ namespace Webdaugia.Controllers
                 model.ListCategory = db.Banks.ToList();
                 return View(model);
             }
-            if (Session["USER"] != null)
+            if (Session["USER"] != null && ModelState.IsValid)
             {
-                ATM atm = new ATM();
+               
                 //Bank bank = new Bank();
                 UserLogin userid = (UserLogin)Session["USER"];
                 User user = dao.getUserById(userid.UserID);
-                AuctionDBContext db = new AuctionDBContext();
+                db = new AuctionDBContext();
                 user.Address = model.diachi;
                 user.CMND = model.cmnd.ToString();
                 user.LocationCMND = model.noicapcmnd;
                 user.DayCMND = model.ngaycapcmnd;
                 user.Birthday = model.ns;
                 user.Gender = model.gt;
-                atm.ATMCode = model.atmcode;
-                atm.ATMFullName = model.atmfullname;
-                atm.UserID = user.ID;
-                //var bakid = model.tennganhang;
-                atm.BankId = model.tennganhang;
-                //var fileName = Path.GetFileName(cmndfront.FileName);
-                //var fileName1 = Path.GetFileName(cmndback.FileName);
+          
 
-                //var path = Path.Combine(Server.MapPath("~/images"), fileName);
-                //var path1 = Path.Combine(Server.MapPath("~/images"), fileName1);
-
-                string fileName = UploadFile(cmndfront);
-                string fileName1 = UploadFile(cmndback);
-                //cmndfront.SaveAs(path);
-                //cmndback.SaveAs(path1);
+                string fileName = UploadFile(model.cmndfront);
+                string fileName1 = UploadFile(model.cmndback);
+               
                 user.ImageFront = "\\Content\\Images\\Cmnd\\" + fileName;
                 user.ImageBack = "\\Content\\Images\\Cmnd\\" + fileName1;
-                db.ATMs.AddOrUpdate(atm);
-                //db.Banks.AddOrUpdate(bank);
+
+
+                ATM atm = new ATM();
+                atm.ATMCode = model.atmcode.ToString();
+                atm.ATMFullName = model.atmfullname;
+                atm.UserID = user.ID;
+           
+                atm.BankId = model.tennganhang;
+                    
+                db.ATMs.Add(atm);
+                
                 db.Users.AddOrUpdate(user);
                 db.SaveChanges();
                 return RedirectToAction("Index", "Home");
@@ -408,9 +406,14 @@ namespace Webdaugia.Controllers
                 return RedirectToAction("Index", "Login");
             }
             //int userid = ((UserLogin)Session["USER"]).UserID;
+   
             UserLogin userid = (UserLogin)Session["USER"];
+            db = new AuctionDBContext();
+
             var dao = new UserDao();
             User user = dao.getUserById(userid.UserID);
+            var imguser = db.UsersImages.Where(x => x.UsersID == user.ID).FirstOrDefault();
+            ViewBag.imguser = imguser.Image;
             //var user = dao.getUserById(userid);
             return View(user);
         }
@@ -419,17 +422,38 @@ namespace Webdaugia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ProfileCustomera(User collection)
         {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             db = new AuctionDBContext();
             UserLogin userid = (UserLogin)Session["USER"];
+
             var dao = new UserDao();
             User user = dao.getUserById(userid.UserID);
+            var imguser = db.UsersImages.Where(x => x.UsersID == user.ID).FirstOrDefault();
+            var sdt = db.Users.Where(x => x.Phone.Trim() == collection.Phone.Trim() && x.ID != user.ID).FirstOrDefault();
+            var email = db.Users.Where(x => x.Email.Trim() == collection.Email.Trim() && x.ID != user.ID).FirstOrDefault();
+            ViewBag.imguser = imguser.Image;
             try
             {
                 var errors = ModelState.Values.SelectMany(b => b.Errors);
                 if (!ModelState.IsValid)
                 {
+                  
+                    if(sdt != null)
+                    {
+                        ViewBag.Fail = "Số điện thoại đã tồn tại!";
+                        return View(user);
+                    }
+                    if (email != null)
+                    {
+                        ViewBag.Fail = "Email đã tồn tại!";
+                        return View(user);
+                    }
                     user.Email = collection.Email;
                     user.Phone = collection.Phone;
+                    
                     var result = dao.Update(user);
                     if (result)
                     {
@@ -440,7 +464,7 @@ namespace Webdaugia.Controllers
                         ViewBag.Fail = "Cập nhật thông tin thất bại!";
                     }
                 }
-            return View(collection);
+            return View(user);
              }
             catch
             {

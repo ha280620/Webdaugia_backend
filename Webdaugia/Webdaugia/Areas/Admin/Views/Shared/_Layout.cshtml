@@ -310,7 +310,7 @@
             </li>
             <li class="sidebar-submenu">
                 <a href="#" class="sidebar-menu-dropdown">
-                    <i class="bx bx-category"></i>
+                    <i class='bx bxs-business'></i>
                     <span>Quản lý phiên đấu giá</span>
                     <div class="dropdown-icon"></div>
                 </a>
@@ -373,7 +373,7 @@
                 <div class="dropdown-icon"></div>
             </a>*@
             <a href="#" class="sidebar-menu-dropdown">
-                <i class="bx bx-category"></i>
+                <i class='bx bx-user-circle'></i>
                 <span>Quản lý tài khoản</span>
                 <div class="dropdown-icon"></div>
             </a>
@@ -396,7 +396,7 @@
                     <span>Thống Kê</span>
                 </a>
             </li>
-            <li>
+      @*      <li>
                 <a href="#">
                     <i class="bx bx-mail-send"></i>
                     <span>mail</span>
@@ -407,11 +407,12 @@
                     <i class="bx bx-chat"></i>
                     <span>chat</span>
                 </a>
-            </li>
+            </li>*@
+            <hr/>
             <li>
-                <a href="/admin/AdminHome/calendar">
-                    <i class="bx bx-calendar"></i>
-                    <span>calendar</span>
+                <a href="@Url.Action("Logout", "AdLogin", new { Area = "Admin"})">
+                    <i class='bx bx-log-in'></i>
+                    <span>Đăng xuất</span>
                 </a>
             </li>
 

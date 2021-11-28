@@ -331,12 +331,17 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             if (lot.TimeForRegisterStart > lot.TimeForRegisterEnd)
             {
-                ViewBag.success = "Ngày kết thúc  đăng ký phải lớn ngày bắt đầu đăng ký!";
+                ViewBag.fail = "Ngày kết thúc đăng ký phải lớn ngày bắt đầu đăng ký!";
                 return View(lot);
             }
             if (lot.TimeForBidStart > lot.TimeForBidEnd)
             {
-                ViewBag.success = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
+                ViewBag.fail = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
+                return View(lot);
+            }
+            if (lot.TimeForRegisterEnd > lot.TimeForRegisterStart)
+            {
+                ViewBag.fail = "Ngày kết bắt đầu đấu phải lớn người kết thúc đăng ký đấu giá !";
                 return View(lot);
             }
             if (ModelState.IsValid)
@@ -645,6 +650,21 @@ namespace Webdaugia.Areas.Admin.Controllers
             if (Session["AD"] == null)
             {
                 return RedirectToAction("Index", "AdLogin");
+            }
+            if (lot.TimeForRegisterStart > lot.TimeForRegisterEnd)
+            {
+                ViewBag.fail = "Ngày kết thúc đăng ký phải lớn ngày bắt đầu đăng ký!";
+                return View(lot);
+            }
+            if (lot.TimeForBidStart > lot.TimeForBidEnd)
+            {
+                ViewBag.fail = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
+                return View(lot);
+            }
+            if (lot.TimeForRegisterEnd > lot.TimeForRegisterStart)
+            {
+                ViewBag.fail = "Ngày kết bắt đầu đấu phải lớn người kết thúc đăng ký đấu giá !";
+                return View(lot);
             }
             db = new AuctionDBContext();
             lot.ListCategory = db.Categories.ToList();

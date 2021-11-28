@@ -13,33 +13,33 @@
 @using (Html.BeginForm("DangKi", "Login", FormMethod.Post))
 {
     <div class="form_control">
-        @Html.TextBoxFor(model => model.username, htmlAttributes: new { name = "username", type = "text", required = "required", placeholder = "Tên tài khoản" })
+        @Html.TextBoxFor(model => model.username, htmlAttributes: new { name = "username", type = "text", @class = "mb-0 mt-2" , required = "required", placeholder = "Tên tài khoản" })
         @*<input required name="username" type="text" />*@
-        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger m-0" })
+        @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
     </div>
     <div class="form_control">
-        @Html.TextBoxFor(model => model.name, htmlAttributes: new { name = "name", type = "text", required = "required", placeholder = "Họ và tên" })
+        @Html.TextBoxFor(model => model.name, htmlAttributes: new { name = "name", type = "text", @class = "mb-0 mt-2", required = "required", placeholder = "Họ và tên" })
         @*<input required name="name" type="text" />*@
     </div>
     <div class="form_control">
-        @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", required = "required", placeholder = "Email" })
+        @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", @class = "mb-0 mt-2", required = "required", placeholder = "Email" })
         @*<input required name="email" type="email" />*@
         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
     </div>
     <div class="form_control">
-        @Html.TextBoxFor(model => model.phone, htmlAttributes: new { name = "phone", type = "text", required = "required", placeholder = "Sdt" })
+        @Html.TextBoxFor(model => model.phone, htmlAttributes: new { name = "phone", type = "text", @class = "mb-0 mt-2", required = "required", placeholder = "Sdt" })
         @*<input required name="phone" type="phone" />*@
-        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger m-0" })
+        @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger " })
     </div>
 
     <div class="form_control">
-        @Html.TextBoxFor(model => model.password, htmlAttributes: new { name = "password", type = "password", required = "required", placeholder = "Mật khẩu" })
+        @Html.TextBoxFor(model => model.password, htmlAttributes: new { name = "password", type = "password", @class = "mb-0 mt-2", required = "required", placeholder = "Mật khẩu" })
         @*<input required name="password" type="password" />*@
-        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger m-0" })
+        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
     </div>
     <div class="form_control">
-        @Html.TextBoxFor(model => model.confirmpassword, htmlAttributes: new { name = "confirmpassword", type = "password", required = "required", placeholder = "Xác nhận mật khẩu" })
-        @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger m-0" })
+        @Html.TextBoxFor(model => model.confirmpassword, htmlAttributes: new { name = "confirmpassword", type = "password", @class = "mb-0 mt-2", required = "required", placeholder = "Xác nhận mật khẩu" })
+        @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
     </div>
     <div class="form-button">
         <button id="submit" type="submit" class="ibtn">

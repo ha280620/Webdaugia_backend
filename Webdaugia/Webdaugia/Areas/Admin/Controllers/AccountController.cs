@@ -215,27 +215,41 @@ namespace Webdaugia.Areas.Admin.Controllers
         public ActionResult ConfirmIdetify(int id)
         {
             db = new AuctionDBContext();
-            var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
-            var bank = db.ATMs.Where(x => x.UserID == id).FirstOrDefault();
-            if (user.ImageFront != null || user.ImageBack != null)
+            var user = db.Users.Where(x => x.ID == id && x.Status == 0).SingleOrDefault();
+            var bank = db.ATMs.Where(x => x.UserID == id).ToList();
+            if(user != null)
             {
-                string path = Path.Combine(Server.MapPath(user.ImageFront)); ;
-                string path1 = Path.Combine(Server.MapPath(user.ImageBack)); ;
-
-                if (!Directory.Exists(path))
-                {                    
-                    System.IO.File.Delete(path);
-                }
-                if (!Directory.Exists(path1))
+                if(user.ImageFront != null)
                 {
-                    System.IO.File.Delete(path1);
+                    string path = Path.Combine(Server.MapPath(user.ImageFront)); ;
+                    if (!Directory.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
+                if (user.ImageBack != null)
+                {
+                    string path1 = Path.Combine(Server.MapPath(user.ImageBack)); ;
+                    if (!Directory.Exists(path1))
+                    {
+                        System.IO.File.Delete(path1);
+                    }
                 }
                 user.CMND = null;
+                user.DayCMND = null;
+                user.Birthday = null;
+                user.LocationCMND = null;
+
                 user.ImageFront = null;
-                user.ImageBack = null;           
-            }
+                user.ImageBack = null;
+            }   
+         
             db.Users.AddOrUpdate(user);
-            db.ATMs.Remove(bank);
+            if(bank != null)
+            {
+                db.ATMs.RemoveRange(bank);
+            }
+           
             db.SaveChanges();
             return RedirectToAction("ConfirmAccount");
         }

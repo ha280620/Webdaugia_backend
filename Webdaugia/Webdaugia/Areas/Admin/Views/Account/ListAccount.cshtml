@@ -13,10 +13,11 @@
                     <thead>
                         <tr>
                             <th width="50px">STT</th>
-                            <th>Họ Tên</th>
+                            <th >Họ Tên</th>
                             <th width="100px">Giới tính</th>
                             <th width="250px">Email</th>
                             <th>Địa chỉ</th>
+                            <th>Số điện thoại</th>
                             <th>Trạng thái</th>
                             <th>Khóa tài khoản</th>
                         </tr>
@@ -27,74 +28,81 @@
                         {
                             if (item.RoleID == 3)
                             {
-                                <tr>
-                                    <td>@count</td>
-                                    @{count++;}
+                        <tr>
+                            <td>@count</td>
+                            @{count++;}
 
-                                    <td width="200px">
-                                        @item.FullName
-                                    </td>
-                                    @if (item.Gender == null)
-                                    {
-                                        <td>Chưa cập nhật</td>
-                                    }
-                                    @if (item.Gender == true)
-                                    {
-                                        <td>Nam</td>
-                                    }
-                                    @if (item.Gender == false)
-                                    {
-                                        <td>Nữ</td>
-                                    }
-                                    <td>@item.Email</td>
-                                    @if (item.Address == null)
-                                    {
-                                        <td width="250px" style="padding-right:50px">Chưa cập nhật</td>
-                                    }
-                                    else
-                                    {
-                                        <td width="250px" style="padding-right:50px">@item.Address</td>
-                                    }
-
-                                    @if (item.Status == 1)
-                                    {
-
-
-                                        <td>
-                                            <div class="payment-status payment-paid">
-                                                <div class="dot"></div>
-                                                <span>Active</span>
-                                            </div>
-                                        </td>
-                                    }
-                                    else if(item.Status == 2)
-                                    {
-                                        <td>
-                                            <div class="payment-status payment-pending">
-                                                <div class="dot"></div>
-                                                <span>Inactive</span>
-                                            </div>
-                                        </td>
-                                    }
-                                    @if (item.Status == 2)
-                                    {
-                                        <td>
-                                            <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn mở khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
-                                                <i class="fas fa-lock" style="color:red"></i>
-                                            </a>
-                                        </td>
-                                    }
-                                    else if (item.Status == 1)
-                                    {
-                                        <td>
-                                            <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
-                                                <i class="fas fa-unlock" style="color:#04D182"></i>
-                                            </a>
-                                        </td>
-                                    }
+                            <td width="200px">
+                                @item.FullName
+                            </td>
+                            @if (item.Gender == null)
+                            {
+                                <td>Chưa cập nhật</td>
+                            }
+                            @if (item.Gender == true)
+                            {
+                                <td>Nam</td>
+                            }
+                            @if (item.Gender == false)
+                            {
+                                <td>Nữ</td>
+                            }
+                            <td>@item.Email</td>
+                            @if (item.Address == null)
+                            {
+                                <td width="250px" style="padding-right:50px">Chưa cập nhật</td>
+                            }
+                            else
+                            {
+                                <td width="250px" style="padding-right:50px">@item.Address</td>
+                            }
+                            @if (item.Phone == null)
+                            {
+                                <td style="padding-right:50px">Chưa cập nhật</td>
+                            }
+                            else
+                            {
+                                <td  style="padding-right:50px">@item.Phone</td>
+                            }
+                            @if (item.Status == 1)
+                            {
 
 
-                                </tr>
+                                <td>
+                                    <div class="payment-status payment-paid">
+                                        <div class="dot"></div>
+                                        <span>Đã kích hoạt</span>
+                                    </div>
+                                </td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td>
+                                    <div class="payment-status payment-pending">
+                                        <div class="dot"></div>
+                                        <span>Đã khoá</span>
+                                    </div>
+                                </td>
+                            }
+                            @if (item.Status == 2)
+                            {
+                                <td>
+                                    <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn mở khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
+                                        <i class="fas fa-lock" style="color:red"></i>
+                                    </a>
+                                </td>
+                            }
+                            else if (item.Status == 1)
+                            {
+                                <td>
+                                    <a href="/admin/account/LockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn khóa tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
+                                        <i class="fas fa-unlock" style="color:#04D182"></i>
+                                    </a>
+                                </td>
+                            }
+
+
+                        </tr>
                             }
 
                         }

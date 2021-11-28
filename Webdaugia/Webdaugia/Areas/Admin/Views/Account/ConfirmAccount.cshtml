@@ -14,12 +14,13 @@
                     <thead>
                         <tr>
                             <th width="50px">STT</th>
-                            <th>Họ Tên</th>
-                            <th width="100px">Ảnh CMND mặt trước</th>
-                            <th width="100px">Ảnh CMND mặt sau</th>
-                            <th>Trạng Thái</th>
-                            <th>Xác Minh Tài Khoản</th>
-                            <th>Xem chi tiết</th>
+                            <th  align="center">Họ Tên</th>
+                            <th  align="center" width="100px">Ảnh CMND mặt trước</th>
+                            <th  align="center" width="100px">Ảnh CMND mặt sau</th>
+           
+                            <th align="center">Trạng Thái</th>
+                            <th  align="center">Xác Minh Tài Khoản</th>
+                            <th  align="center">Xem chi tiết</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -29,10 +30,10 @@
                             if (item.RoleID == 3)
                             {
                                 <tr>
-                                    <td>@count</td>
+                                    <td  align="center">@count</td>
                                     @{count++;}
 
-                                    <td width="100px">
+                                    <td  width="100px">
                                         @item.FullName
                                     </td>
 
@@ -49,7 +50,7 @@
 
                                     @if (item.Status == 1)
                                     {
-                                        <td>
+                                        <td  align="center">
                                             <div class="payment-status payment-paid">
                                                 <div class="dot"></div>
                                                 <span>Đã xác minh tài khoản</span>
@@ -58,7 +59,7 @@
                                     }
                                     else if (item.Status == 0)
                                     {
-                                        <td>
+                                        <td  align="center">
                                             <div class="payment-status payment-pending">
                                                 <div class="dot"></div>
                                                 <span>Chưa xác minh tài khoản</span>
@@ -67,7 +68,7 @@
                                     }
                                     @if (item.Status == 0)
                                     {
-                                        <td>
+                                        <td  align="center">
                                             @*<a href="/admin/account/ConfirmLockOrUnlockAccount/@item.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn xác minh tài khoản?\nHọ tên: @item.FullName\nGmail: @item.Email')">
                                                 <i class="fas fa-lock" style="color:red"></i>
                                             </a>*@
@@ -88,7 +89,7 @@
                                             </td>
                                         }*@
 
-                                    <td>
+                                    <td  align="center">
                                         <a class="btn btn-warning btn-sm" href="@Url.Action("Details","Account",new { id = item.ID })"><i class="fas fa-eye"></i></a>
                                         @*<a href="/admin/account/Details" style="padding-left:15px">
                                                 <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>

@@ -165,8 +165,6 @@ C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\b
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.dll
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.xml
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.xml
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll.config
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.pdb
@@ -177,9 +175,11 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\csi.exe
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\csi.exe.config
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\csi.rsp
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.CSharp.Core.targets
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
@@ -246,4 +246,3 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

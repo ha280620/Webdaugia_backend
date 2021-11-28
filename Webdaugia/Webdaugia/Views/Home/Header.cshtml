@@ -125,16 +125,14 @@
             {
                 <div class="user-info pl-2">
                     <div class="img-user">
-                        <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
+                        <img class="img-fluid" src="@ViewBag.imguser" alt="" />
                     </div>
                     <div class="user_dropdown">
                         <div class="my-2 p-0">
                             <ul>                
                                 @*<li><a href="@Url.Action("ChangePassCustomer", "Login")">Thông tin tài khoản</a></li>*@
                                 <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
-                                <li>
-                                    <a href="">Đơn hàng</a>
-                                </li>
+                  
                                 <li><a href="@Url.Action("DangXuat", "Login")">Đăng xuất </a></li>
                             </ul>
                         </div>
