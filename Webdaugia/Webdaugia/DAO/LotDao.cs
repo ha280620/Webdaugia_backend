@@ -58,19 +58,19 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
-        public IEnumerable<RegisterBid> ListAllPagingRegisterOfLot1(string searchString, int page, int pageSize)
-        {
-            var dao = new UserDao();
-            //UserLogin userid = (UserLogin)Session["USER"];
-            var userid = ((UserLogin)Session["USER"]).UserID;
-            var user = dao.getUserById(userid);
-            IQueryable<RegisterBid> model = db.RegisterBids.Where(x => x.UserID == );
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));
-            }
-            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
-        }
+        //public IEnumerable<RegisterBid> ListAllPagingRegisterOfLot1(string searchString, int page, int pageSize)
+        //{
+        //    var dao = new UserDao();
+        //    //UserLogin userid = (UserLogin)Session["USER"];
+        //    var userid = ((UserLogin)Session["USER"]).UserID;
+        //    var user = dao.getUserById(userid);
+        //    IQueryable<RegisterBid> model = db.RegisterBids.Where(x => x.UserID == );
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));
+        //    }
+        //    return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        //}
         public IEnumerable<Auction> ListAllPagingAuctionOfLot(int id, string searchString, int page, int pageSize)
         {
     

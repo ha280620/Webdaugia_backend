@@ -498,34 +498,12 @@ namespace Webdaugia.Controllers
                 return View();
             }
         }
-
-        //public ActionResult AccountManagement()
-        //{
-        //    db = new AuctionDBContext();
-        //    List<Lot> listlot = db.Lots.ToList();
-        //    return View(listlot);
-        //}
-
-        public ActionResult AccountManagement(string searchString, int page = 1, int pageSize = 10)
+        public ActionResult AccountManagement()
         {
-            if (Session["USER"] == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                //UserLogin userid = (UserLogin)Session["USER"];
-                //var dao1 = new UserDao();
-                //User user = dao1.getUserById(userid.UserID);
-                //var Order = db.RegisterBids.Where(x => x.UserID == user.ID).ToList();
-                //var Order = db.RegisterBids.Where(x => x.UserID == userid.UserID).ToList();
-
-                var dao = new LotDao();
-                var model = dao.ListAllPagingRegisterOfLot1(searchString, page, pageSize);
-                ViewBag.searchString = searchString;
-                return View(model);
-            }
-
+            UserLogin userid = (UserLogin)Session["USER"];
+            AuctionDBContext data = new AuctionDBContext();
+            var list = data.RegisterBids.Where(l => l.UserID == userid.UserID).ToList();
+            return View(list);
         }
 
         public ActionResult Index()

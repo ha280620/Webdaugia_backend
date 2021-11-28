@@ -1,5 +1,5 @@
-﻿@model PagedList.IPagedList<Webdaugia.Models.RegisterBid>
-@using PagedList.Mvc
+﻿@model IEnumerable<Webdaugia.Models.RegisterBid>
+
 @{
     ViewBag.Title = "AccountManagement";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -25,15 +25,15 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th width="40px">
+                                        <th width="80px">
                                             STT
                                         </th>
 
-                                        <th width="200px">ID Phiên</th>
-                                        <th >Tên Phiên</th>
-                                        <th >ID Tài khoản</th>
-                                        <th >Tên Tài khoản</th>
-                                        <th >Trạng thái</th>
+                                        <th align="center">ID Phiên</th>
+                                        <th align="center">Tên Phiên</th>
+                                        <th align="center">ID Tài khoản</th>
+                                        <th align="center">Tên Tài khoản</th>
+                                        <th align="center">Trạng thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,7 +74,7 @@
                             </table>
                         </div>
 
-                        @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
+                        @*@Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))*@
                     </div>
 
                 </div>
@@ -82,4 +82,35 @@
         </div>
     </div>
 </section>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LotID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LotID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>*@
