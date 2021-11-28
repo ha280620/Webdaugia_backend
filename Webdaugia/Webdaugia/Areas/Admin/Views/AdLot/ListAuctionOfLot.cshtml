@@ -11,13 +11,13 @@
         <div class="box">
             <div class="box-header title row">
                 <div class="col-6 col-sm-12">
-                    <h2 style="margin-bottom:40px">Danh sách đặt giá</h2>
+                    <h2>Danh sách đặt giá</h2>
                 </div>
-                <div class="col-6 col-sm-12">       
-                            <a href="/admin/adlot/SendMailAuction?LotID=@ViewBag.LotId&Url=@Request.Url.ToString()" class="btn btn-success" style="display:grid">
-                                <i class='bx bx-mail-send'></i>
-                                Gửi mail
-                            </a>
+                <div class="col-6 col-sm-12">
+                    <a href="/admin/adlot/SendMailAuction?LotID=@ViewBag.LotId&Url=@Request.Url.ToString()" class="btn btn-success" style="display:grid">
+                        <i class='bx bx-mail-send'></i>
+                        Gửi mail
+                    </a>
                 </div>
 
             </div>
@@ -49,8 +49,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(Model.Count() == 0)
+                        {
+                        <tr>
+                            <td colspan="7" style="
+                            text-align: center;
+                            font-size: 2rem;">
+                                Hiện chưa có ai đặt giá
+                            </td>
+                        </tr>
+                        }
                         @{ int count = 1;}
                         @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -60,71 +71,71 @@
                                 <td width="250px" align="center">@item.RegisterBid.User.FullName</td>
                                 <td width="250px" align="center">
                                     @item.BidTime
-                            </td>
-                            <td width="250px" align="center">  @string.Format(info, "{0:0,0}", item.PriceBid) đ</td>
-                            <td align="center">
-                                @if (item.Status == 1)
-                                {
+                                </td>
+                                <td width="250px" align="center">  @string.Format(info, "{0:0,0}", item.PriceBid) đ</td>
+                                <td align="center">
+                                    @if (item.Status == 1)
+                                    {
 
 
 
-                                    <div class="payment-status payment-paid">
-                                        <div class="dot"></div>
-                                        <span>Thành công</span>
-                                    </div>
+                                        <div class="payment-status payment-paid">
+                                            <div class="dot"></div>
+                                            <span>Thành công</span>
+                                        </div>
 
-                                }
-                                else if (item.Status == 2)
-                                {
-
-
-
-                                    <div class="payment-status payment-pending">
-                                        <div class="dot"></div>
-                                        <span>Thất bại</span>
-                                    </div>
-
-                                }
-                                else
-                                {
-                                    <div class="payment-status payment-pending">
-                                        <div class="dot"></div>
-                                        <span>Chưa có kết quả</span>
-                                    </div>
-                                }
-                            </td>
-                            <td align="center">
-                                @if (item.Status == 0)
-                                {
-                                    <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                        <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
-                                            <i class="fas fa-check" style="color: #04D182"></i>
-                                        </a>
-
-                                    </div>
-
-                                }
-                                else if (item.Status == 2)
-                                {
-                                    <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                        <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
-                                            <i class="fas fa-times" style="color: red"></i>
-                                        </a>
-
-                                    </div>
-                                }
+                                    }
+                                    else if (item.Status == 2)
+                                    {
 
 
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
+
+                                        <div class="payment-status payment-pending">
+                                            <div class="dot"></div>
+                                            <span>Thất bại</span>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="payment-status payment-pending">
+                                            <div class="dot"></div>
+                                            <span>Chưa có kết quả</span>
+                                        </div>
+                                    }
+                                </td>
+                                <td align="center">
+                                    @if (item.Status == 0)
+                                    {
+                                        <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                            <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
+                                                <i class="fas fa-check" style="color: #04D182"></i>
+                                            </a>
+
+                                        </div>
+
+                                    }
+                                    else if (item.Status == 2)
+                                    {
+                                        <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                            <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
+                                                <i class="fas fa-times" style="color: red"></i>
+                                            </a>
+
+                                        </div>
+                                    }
+
+
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
             </div>
-
-            @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
         </div>
     </div>
-</div>
 
 

@@ -3,79 +3,91 @@
 @{
     ViewBag.Title = "AccountManagement";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+
 }
 <div class="header-position"></div>
-<section id="userInfo">
+<section id="userInfo"  style="background-color:#eee">
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-12 col-md-3" style="margin-bottom:2rem">
                 <div class="userInfo_cata">
                     <ul class="m-0">
-                        <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
-                        <li><a href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
-                        <li><a href="/quan-ly-tai-khoan">Quản lý tài khoản</a></li>
+                        <li ><a style="padding-right: 5.4rem !important;" class="p-2" href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                        <li><a  style="padding-right: 8.4rem !important;"  class="p-2" href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
+                        <li class="active "><a style="padding-right: 5.4rem !important;" class="p-2" href="/quan-ly-tai-khoan">Danh sách đăng ký</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-9">
                 <div class="userInfo_content">
-                    <h2 class="text-left pl-0 pt-0">Thông tin</h2>
-                    <div class="box">
+                    <h2 class="text-left pl-0 pt-0 mb-2">Danh sách đăng ký đấu giá</h2>
+                  
                         <div style="overflow:scroll">
-                            <table>
+                            <table class="table">
                                 <thead>
                                     <tr>
-                                        <th width="80px">
+                                        <th class="text-center" width="80px">
                                             STT
                                         </th>
 
-                                        <th align="center">ID Phiên</th>
-                                        <th align="center">Tên Phiên</th>
-                                        <th align="center">ID Tài khoản</th>
-                                        <th align="center">Tên Tài khoản</th>
-                                        <th align="center">Trạng thái</th>
+                                        <th class="text-center" align="center">ID Phiên</th>
+                                        <th class="text-center" align="center">Tên Phiên</th>
+                                        <th class="text-center" align="center">ID Tài khoản</th>
+                                        <th class="text-center" align="center">Tên Tài khoản</th>
+                                        <th class="text-center" align="center">Trạng thái</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (Model.Count() == 0)
+                                    {
+                                    <td align="center" style="text-align:center; font-size:2rem" colspan="6">Chưa có đăng ký nào</td>
+                                   }
                                     @{ int count = 1;}
                                     @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>@count</td>
-                                            @{ count++;}
-                                            <td width="250px" align="center">@item.LotID</td>
-                                            <td width="250px" align="center">@item.Lot.Name</td>
-                                            <td width="250px" align="center">@item.User.ID</td>
-                                            <td width="250px" align="center">@item.User.FullName</td>
-                                            @if (item.Status == true)
-                                            {
+                            <tr>
+                                <td class="text-center" scope="row">@count</td>
+                                @{ count++;}
+                                <td class="text-center" align="center">@item.LotID</td>
+                                @if (item.Status == true)
+                                {
+                            <td class="text-center" align="center"><a style="text-decoration:underline" href="/phien-dang-dien-ra/@item.Lot.SiteTile-@item.Lot.ID">@item.Lot.Name</a> </td>
+                                }
+                                else
+                                {
+                                    <td class="text-center" align="center"><a style="text-decoration:underline"  href="/phien-dau/@item.Lot.SiteTile-@item.Lot.ID">@item.Lot.Name</a> </td>
+                                }
 
-
-                                                <td align="center">
-                                                    <div class="payment-status payment-paid">
-                                                        <div class="dot"></div>
-                                                        <span style="color: #04D182">Đã nộp tiền</span>
-                                                    </div>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td align="center">
-                                                    <div class="payment-status payment-pending">
-                                                        <div class="dot"></div>
-                                                        <span style="color: red">Chưa nộp tiền</span>
-                                                    </div>
-                                                </td>
-                                            }
-                                        </tr>
+                                <td class="text-center" align="center">@item.User.ID</td>
+                                <td class="text-center" align="center">@item.User.FullName</td>
+                                @if (item.Status == true)
+                                {
+                                    <td class="text-center" align="center">
+                                        <div class="payment-status payment-paid">
+                                            <div class="dot"></div>
+                                            <span style="color: #04D182">Đã nộp tiền</span>
+                                        </div>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="text-center" align="center">
+                                        <div class="payment-status payment-pending">
+                                            <div class="dot"></div>
+                                            <span style="color: red">Chưa nộp tiền</span>
+                                        </div>
+                                    </td>
+                                }
+                            </tr>
                                     }
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
                         </div>
 
                         @*@Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))*@
-                    </div>
+
 
                 </div>
             </div>

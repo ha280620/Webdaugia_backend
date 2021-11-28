@@ -46,33 +46,45 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr>
+                                <td colspan="5" style="
+                            text-align: center;
+                            font-size: 2rem;">
+                                    Hiện chưa có danh sách link đính kèm
+                                </td>
+                            </tr>
+                        }
                         @{ int count = 1;}
                         @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
                         @foreach (var item in Model)
                         {
-                        <tr>
+                            <tr>
 
-                            <td>@count</td>
-                            @{ count++;}
+                                <td>@count</td>
+                                @{ count++;}
 
-                            <td width="250px" align="center"><a href="@item.AttachmentLink.Trim()" alt="link-@item.Name" target="_blank" style="
+                                <td width="250px" align="center">
+                                    <a href="@item.AttachmentLink.Trim()" alt="link-@item.Name" target="_blank" style="
     text-decoration: underline;
-">@item.Name</a> </td>
-                            <td align="center">@item.LotID</td>
-                            <td align="center">@item.Lot.Name</td>
-                            <td align="center">
-                                <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                    <a class="btn" href="/admin/adlot/editlink/@item.ID" style="padding-left:15px">
-                                        <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
-                                    </a>
-                                    <a class="btn" href="/admin/adlot/DeleteLink/@item.ID" onclick="return confirm('Bạn có chắn chắn muốn xoá link đính kèm @item.Name của phiên đấu giá @item.Lot.Name không? ')" style="padding-left:15px">
-                                        <i class="fas fa-trash" style="color: #04D182"></i>
-                                    </a>
+">@item.Name</a>
+                    </td>
+                    <td align="center">@item.LotID</td>
+                    <td align="center">@item.Lot.Name</td>
+                    <td align="center">
+                        <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                            <a class="btn" href="/admin/adlot/editlink/@item.ID" style="padding-left:15px">
+                                <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                            </a>
+                            <a class="btn" href="/admin/adlot/DeleteLink/@item.ID" onclick="return confirm('Bạn có chắn chắn muốn xoá link đính kèm @item.Name của phiên đấu giá @item.Lot.Name không? ')" style="padding-left:15px">
+                                <i class="fas fa-trash" style="color: #04D182"></i>
+                            </a>
 
-                                </div>
-                            </td>
-                        </tr>
-                        }
+                        </div>
+                    </td>
+                    </tr>
+                }
                     </tbody>
                 </table>
             </div>

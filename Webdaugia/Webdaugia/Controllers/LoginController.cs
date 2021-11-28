@@ -562,9 +562,13 @@ namespace Webdaugia.Controllers
         }
         public ActionResult AccountManagement()
         {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             UserLogin userid = (UserLogin)Session["USER"];
             AuctionDBContext data = new AuctionDBContext();
-            var list = data.RegisterBids.Where(l => l.UserID == userid.UserID).ToList();
+            var list = data.RegisterBids.Where(l => l.UserID == userid.UserID && l.Lot.Status == true).ToList();
             return View(list);
         }
 
@@ -574,7 +578,7 @@ namespace Webdaugia.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("DangNhap");
         }
     }
 }

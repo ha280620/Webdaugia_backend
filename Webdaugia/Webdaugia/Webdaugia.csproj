@@ -1821,6 +1821,7 @@
     <Content Include="Content\Product\P157.jpg" />
     <Content Include="Content\template\xacnhansuccess.html" />
     <Content Include="Content\template\thongbaodangky.html" />
+    <Content Include="Content\template\sendangky.html" />
     <Content Include="Content\template\xannhanfail.html" />
     <Content Include="Content\template\daugiasuccess.html" />
     <Content Include="Content\template\daugiafail.html" />
@@ -2066,6 +2067,7 @@
     <Content Include="Views\Lot\ListEndingLot.cshtml" />
     <Content Include="Views\Login\ProfileCustomer.cshtml" />
     <Content Include="Views\Login\ChangePassCustomer.cshtml" />
+    <Content Include="Views\Login\AccountManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

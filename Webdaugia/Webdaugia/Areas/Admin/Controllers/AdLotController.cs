@@ -591,8 +591,8 @@ namespace Webdaugia.Areas.Admin.Controllers
                 }
                 var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true).ToList();
                 var AuctionWin = db.Auctions.Where(x => x.Status == 1 && x.RegisterBid.LotID == LotID).FirstOrDefault();
-                RegisterBid registerBidWin = new RegisterBid();
-                List<RegisterBid> registerBidFail = new List<RegisterBid>();
+                RegisterBid registerBidWin = null;
+                List<RegisterBid> registerBidFail = null;
                 if (AuctionWin != null)
                 {
                     registerBidWin = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true && x.ID == AuctionWin.RegisterBidID).FirstOrDefault();

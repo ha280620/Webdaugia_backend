@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "IncomingLot";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listOnGoingLot;
     var listReadyLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
@@ -311,10 +312,10 @@
 
             </div>
             <div class="row">
-                @if (ViewBag.listOnGoingLot != null)
+                @if (listOnGoingLot.Count() != 0)
                 {
                     <div class="row">
-                        @foreach (var item in ViewBag.listOnGoingLot)
+                        @foreach (var item in listOnGoingLot)
                         {
                             <div class="col-12 col-md-6 col-lg-4 p-2">
                                 <div class="going-item">

@@ -62,11 +62,22 @@ namespace Webdaugia.DAO
         }
         public IEnumerable<LotAttachment> ListAllPagingLink(string searchString, int page, int pageSize)
         {
-            var date = DateTime.Now.AddDays(-180);
+ 
             IQueryable<LotAttachment> model = db.LotAttachments;
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Name.Contains(searchString) || x.Lot.Name.Contains(searchString));
+            }
+
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<User> ListAllPagingUser(string searchString, int page, int pageSize)
+        {
+
+            IQueryable<User> model = db.Users.Where(x => x.Status == 1 || x.Status == 2);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.FullName.Contains(searchString) || x.ID.ToString().Contains(searchString));
             }
 
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
