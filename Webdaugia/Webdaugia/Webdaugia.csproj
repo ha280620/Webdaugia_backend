@@ -1662,6 +1662,8 @@
     <Content Include="Content\Images\Category\datnen.png" />
     <Content Include="Content\Images\Category\hanghieu.png" />
     <Content Include="Content\Images\Category\nhao.png" />
+    <Content Include="Content\Images\Category\noauction.png" />
+    <Content Include="Content\Images\Category\noauction1.png" />
     <Content Include="Content\Images\Category\pc.jpg" />
     <Content Include="Content\Images\Category\suutamnghethuat.png" />
     <Content Include="Content\Images\Category\taisankhac.png" />
@@ -1779,6 +1781,9 @@
     <Content Include="Content\Product\P164.jpg" />
     <Content Include="Content\Product\P165.jpg" />
     <Content Include="Content\Product\P166.jpg" />
+    <Content Include="Content\template\daugiasuccess.html" />
+    <Content Include="Content\template\daugiafail.html" />
+    <Content Include="Content\template\dangthanhcong.html" />
     <Content Include="Content\template\neworder.html" />
     <Content Include="Content\User\User00.png" />
     <Content Include="Content\User\User01.jpg" />
@@ -1843,6 +1848,10 @@
     <Content Include="img\product-3-450x450.jpg" />
     <Content Include="img\product-4-450x450.jpg" />
     <Content Include="Content\Images\Category\suutam.jpg" />
+    <Content Include="img\soc_1.png" />
+    <Content Include="img\soc_2.png" />
+    <Content Include="img\soc_3.png" />
+    <Content Include="img\soc_4.png" />
     <Content Include="img\suutamnghethuat.png" />
     <Content Include="Content\Images\Category\taisankhac.jpg" />
     <Content Include="img\user-image.jpg" />
@@ -1970,6 +1979,8 @@
     <Content Include="Areas\Admin\Views\AdProduct\EditCategory.cshtml" />
     <Content Include="Areas\Admin\Views\AdProduct\CreateCategory.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\ListLotEndFor180.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\ListLotLink.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\CreateLink.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

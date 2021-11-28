@@ -1,0 +1,80 @@
+﻿@model PagedList.IPagedList<Webdaugia.Models.LotAttachment>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListLotLink";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <!-- ORDERS TABLE -->
+        <div class="box">
+            <div class="box-header title">
+                <h2 class="col-6 col-sm-12">Danh sách link đính kèm</h2>
+                <div class="col-6 col-sm-12" style="display:flex; justify-content:end">
+                    <a href="/admin/adlot/createlink" class="btn btn-success" style="display:inline-block">
+                        <i class="fa fa-plus-circle"></i>
+                        Thêm link đính kèm
+                    </a>
+           
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
+                    @using (Html.BeginForm("ListLotLink", "AdLot", FormMethod.Get, new { @class = "navbar-search" }))
+                    {
+                        <input type="text"
+                               name="searchString"
+                               class="navbar-search-input"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               value="@ViewBag.searchString" />
+                        <button type="submit"><i class="fas fa-search"></i></button>}
+                </div>
+            </div>
+            <div style="overflow:scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="40px">
+                                STT
+                            </th>
+
+                            <th width="300px" align="center">Tên tệp đính kèm</th>
+                            <th align="center">ID Phiên Đấu Giá</th>
+                            <th align="center">Tên Phiên Đấu Giá</th>
+                            <th align="center">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int count = 1;}
+                        @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+
+                            <td>@count</td>
+                            @{ count++;}
+
+                            <td width="250px" align="center"><a href="@item.AttachmentLink.Trim()" alt="link-@item.Name" target="_blank" style="
+    text-decoration: underline;
+">@item.Name</a> </td>
+                            <td align="center">@item.LotID</td>
+                            <td align="center">@item.Lot.Name</td>
+                            <td align="center">
+                                <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                    <a class="btn" href="/admin/adlot/DeleteLink/@item.ID" onclick="return confirm('Bạn có chắn chắn muốn xoá link đính kèm @item.Name của phiên đấu giá @item.Lot.Name không? ')" style="padding-left:15px">
+                                        <i class="fas fa-trash" style="color: #04D182"></i>
+                                   </a>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @Html.PagedListPager(Model, page => Url.Action("ListLotLink", new { page, @searchString = ViewBag.searchString }))
+        </div>
+    </div>
+</div>
+

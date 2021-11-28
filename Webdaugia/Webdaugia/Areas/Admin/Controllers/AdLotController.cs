@@ -9,6 +9,7 @@ using PagedList;
 using Webdaugia.DAO;
 using System.IO;
 using System.Data.Entity.Migrations;
+using System.Threading.Tasks;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
@@ -73,6 +74,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             {
                 var dao = new LotDao();
                 var model = dao.ListAllPagingAuctionOfLot(id, searchString, page, pageSize);
+                ViewBag.LotId = id;
                 ViewBag.searchString = searchString;
                 return View(model);
             }
@@ -133,9 +135,13 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                db = new AuctionDBContext();
+                var lot = db.Lots.Find(id);
+                ViewBag.tiencoc = lot.ParticipationFee + lot.AdvanceDesposit;
                 var dao = new LotDao();
                 var model = dao.ListAllPagingRegisterOfLot(id, searchString, page, pageSize);
                 ViewBag.searchString = searchString;
+                ViewBag.LotId = id;
                 return View(model);
             }
 
@@ -165,6 +171,21 @@ namespace Webdaugia.Areas.Admin.Controllers
             {
                 var dao = new LotDao();
                 var model = dao.ListAllPagingEnd30(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
+        }
+        public ActionResult ListLotLink(string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingLink(searchString, page, pageSize);
                 ViewBag.searchString = searchString;
                 return View(model);
             }
@@ -249,6 +270,27 @@ namespace Webdaugia.Areas.Admin.Controllers
                 return RedirectToAction("ListLotEndFor180");
             }
 
+        }public ActionResult DeleteLink(int id)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var link = db.LotAttachments.Find(id);
+                if(link != null)
+                {
+                    db.LotAttachments.Remove(link);
+                    db.SaveChanges();
+                }
+               
+          
+
+                return RedirectToAction("ListLotLink");
+            }
+
         }
 
         //CREATE LOT ======================================================================
@@ -272,6 +314,7 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
 
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -331,6 +374,53 @@ namespace Webdaugia.Areas.Admin.Controllers
                 return View(lot);
             }
         }
+        [HttpGet]
+        public ActionResult CreateLink()
+        {
+            if (Session["AD"] == null)
+            {
+
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                LotAttachment objLot = new LotAttachment();
+                //ViewBag.banks = new SelectList(banks, "Id", "Name");
+                objLot.ListLot = db.Lots.ToList();
+                return View(objLot);
+            }
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CreateLink(LotAttachment lotAttachment)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            
+            else
+            {
+                db = new AuctionDBContext();
+                lotAttachment.ListLot = db.Lots.ToList();
+                if (ModelState.IsValid)
+                {
+                    LotAttachment attachment = new LotAttachment();
+                    attachment.Name = lotAttachment.Name;
+                    attachment.AttachmentLink = lotAttachment.AttachmentLink;
+                    attachment.LotID = lotAttachment.LotID;
+                    db.LotAttachments.Add(attachment);
+                    db.SaveChanges();
+                    ViewBag.success = "Thêm link đính kèm thành công";
+                    return View(lotAttachment);
+                }
+                ViewBag.error = "Thêm link đính kèm bị lỗi rồi";
+                return View(lotAttachment);
+            }
+        }
         protected string UploadFile(HttpPostedFileBase file)
         {
             string fileName = null;
@@ -373,27 +463,120 @@ namespace Webdaugia.Areas.Admin.Controllers
                 var lot = db.Lots.Find(id);
 
                 lot.ListCategory = db.Categories.ToList();
-                //ViewBag.banks = new SelectList(banks, "Id", "Name");
-                /* lotnew.ListCategory = db.Categories.ToList();
-                 lotnew.Name = lot.Name;      
-                 lotnew.CateID = lot.CateID;
-                 lotnew.StartingPrice = lot.StartingPrice;
-                 lotnew.MiniumBid = lot.MiniumBid;
-                 lotnew.ParticipationFee = lot.ParticipationFee;
-                 lotnew.AdvanceDesposit = lot.AdvanceDesposit;
-                 lotnew.ViewInTime = lot.ViewInTime;
-                 lotnew.Location = lot.Location;
-
-                 lotnew.TimeForRegisterStart = lot.TimeForRegisterStart;
-                 lotnew.TimeForRegisterEnd = lot.TimeForRegisterEnd;
-                 lotnew.TimeForBidStart = lot.TimeForBidStart;
-                 lotnew.TimeForBidEnd = lot.TimeForBidEnd;
-                 lotnew.HostName = lot.HostName;
-                 lotnew.LotImage = lot.LotImage;*/
+             
                 return View(lot);
             }
+        }
+     
+        public ActionResult SendMailRegister(int LotID, string Url)
+        {
 
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var lot = db.Lots.Find(LotID);
+                var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true).ToList();
+                if(listRegister != null)
+                {
+                    foreach (var item in listRegister)
+                    {
+                        try
+                        {
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/dangthanhcong.html"));
+                            content = content.Replace("{{TenPhienDauGia}}", lot.Name);
+                            content = content.Replace("{{CustomerName}}", item.User.FullName);
+                            content = content.Replace("{{Thoigianbatdau}}", lot.TimeForBidStart.ToString());
+                            content = content.Replace("{{Thoiketthuc}}", lot.TimeForBidEnd.ToString());
+                            string tb = "Đăng ký tham giá phiên đấu giá " + lot.Name + " thành công";
+                            new MailHelper().SendMail(item.User.Email, tb, content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            return Redirect(Url);
+                        }
+                    }
+                }
+                return Redirect(Url);
+            }
+        }
+        public ActionResult SendMailAuction(int LotID, string Url)
+        {
 
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                 var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+                db = new AuctionDBContext();
+                var lot = db.Lots.Find(LotID);
+                var AuctionNull = db.Auctions.Where(x => x.Status == 0 && x.RegisterBid.LotID == LotID).ToList();
+                if(AuctionNull.Count() > 0)
+                {
+                    return Redirect(Url);
+                }
+                var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true).ToList();
+                var AuctionWin = db.Auctions.Where(x => x.Status == 1 && x.RegisterBid.LotID == LotID).FirstOrDefault();
+                RegisterBid registerBidWin = new RegisterBid();
+                List<RegisterBid> registerBidFail = new List<RegisterBid>();
+                if (AuctionWin != null)
+                {
+                    registerBidWin = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true && x.ID == AuctionWin.RegisterBidID).FirstOrDefault();
+                    registerBidFail = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true && x.ID != AuctionWin.RegisterBidID).ToList();
+                }
+                
+
+                if (registerBidFail != null)
+                {
+                    foreach (var item in registerBidFail)
+                    {
+                        try
+                        {
+                          
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/daugiafail.html"));
+                            content = content.Replace("{{TenPhienDauGia}}", lot.Name);
+                            content = content.Replace("{{CustomerName}}", item.User.FullName);
+                            content = content.Replace("{{Sotiencoc}}", string.Format(info, "{0:0,0}", lot.AdvanceDesposit));
+                     
+                            string tb = "Đấu giá thất bại " + lot.Name;
+                            new MailHelper().SendMail(item.User.Email, tb, content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            return Redirect(Url);
+                        }
+                    }
+                }
+                if (registerBidWin != null)
+                {
+                 
+                        try
+                        {
+
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/daugiasuccess.html"));
+                            content = content.Replace("{{TenPhienDauGia}}", lot.Name);
+                            content = content.Replace("{{CustomerName}}", registerBidWin.User.FullName);
+                            content = content.Replace("{{tienthangcuoc}}", string.Format(info, "{0:0,0}", AuctionWin.PriceBid));
+
+                            string tb = "Đấu giá thành công " + lot.Name;
+                            new MailHelper().SendMail(registerBidWin.User.Email, tb, content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            return Redirect(Url);
+                        }
+              
+                }
+                return Redirect(Url);
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

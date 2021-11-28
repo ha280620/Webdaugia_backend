@@ -11,10 +11,10 @@
     <div class="col-12">
         <!-- ORDERS TABLE -->
         <div class="box">
-            <div class="box-header title">
-                <h2>Danh sách phiên đấu giá</h2>
+            <div class="box-header title row">
+                <h2 class="col-6 col-sm-12">Danh sách phiên đấu giá</h2>
 
-                <div>
+                <div class="col-6 col-sm-12">
                     <a href="/admin/adlot/createlot" class="btn btn-success" style="display:inline-block">
                         <i class="fa fa-plus-circle"></i>
                         Thêm phiên đấu giá mới
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4" style="margin-bottom:0">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
                     @using (Html.BeginForm("ListLotRegister", "AdLot", FormMethod.Get, new { @class = "navbar-search" }))
                     {
                         <input type="text"

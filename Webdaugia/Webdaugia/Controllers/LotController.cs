@@ -214,26 +214,65 @@ namespace Webdaugia.Controllers
 
             db = new AuctionDBContext();
             var lot = db.Lots.Find(lotId);
-           
-            if (lot == null)
+            var register = db.RegisterBids.Find(registerBidID);
+            if (lot == null || register == null)
             {
                 return Redirect(url);
             }
-            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true)
+            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true || register.Status !=true)
             {
                 return Redirect(url);
             }
             else 
             {
-                lot.HighBid = priceBid;
-                db.Lots.AddOrUpdate(lot);
-                Auction item = new Auction();
-                item.RegisterBidID = registerBidID;
-                item.PriceBid = priceBid;
-                item.BidTime = DateTime.Now;
-                item.Status = 0;
-                db.Auctions.Add(item);
-                db.SaveChanges();
+                if(lot.HighBid == null)
+                {
+                    if((priceBid - lot.StartingPrice) == 0)
+                    {
+                        lot.HighBid = priceBid;
+                        db.Lots.AddOrUpdate(lot);
+                        Auction item = new Auction();
+                        item.RegisterBidID = register.ID;
+                        item.PriceBid = priceBid;
+                        item.BidTime = DateTime.Now;
+                        item.Status = 0;
+                        db.Auctions.Add(item);
+                        db.SaveChanges();
+                        return Redirect(url);
+                    }
+                    if ((priceBid - lot.StartingPrice)%lot.MiniumBid == 0)
+                    {
+                        lot.HighBid = priceBid;
+                        db.Lots.AddOrUpdate(lot);
+                        Auction item = new Auction();
+                        item.RegisterBidID = register.ID;
+                        item.PriceBid = priceBid;
+                        item.BidTime = DateTime.Now;
+                        item.Status = 0;
+                        db.Auctions.Add(item);
+                        db.SaveChanges();
+                        return Redirect(url);
+                    }
+
+                }
+                else
+                {
+                 
+                    if ((priceBid - lot.StartingPrice) % lot.MiniumBid == 0 && priceBid > lot.HighBid)
+                    {
+                        lot.HighBid = priceBid;
+                        db.Lots.AddOrUpdate(lot);
+                        Auction item = new Auction();
+                        item.RegisterBidID = register.ID;
+                        item.PriceBid = priceBid;
+                        item.BidTime = DateTime.Now;
+                        item.Status = 0;
+                        db.Auctions.Add(item);
+                        db.SaveChanges();
+                        return Redirect(url);
+                    }
+                }
+
             }
             return Redirect(url);
         }

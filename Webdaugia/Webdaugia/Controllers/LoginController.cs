@@ -367,25 +367,27 @@ namespace Webdaugia.Controllers
                 try
                 {
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/neworder.html"));
-                    content = content.Replace("{{CustomerName}}", resetPassword);
-                    content = content.Replace("{{Email}}", email);
+                    content = content.Replace("{{matkhaumoi}}", resetPassword);
+                    content = content.Replace("{{CustomerName}}", User.FullName);
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                     new MailHelper().SendMail(email, "Cấp lại mật khẩu ", content);
-                    new MailHelper().SendMail(toEmail, "Cấp lại mật khẩu", content);
+      /*              new MailHelper().SendMail(toEmail, "Cấp lại mật khẩu", content);*/
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.Error = "Gửi mail không thành công";
                     Console.WriteLine(ex);
                     return View("DangNhap");
                 }
             }
             else
             {
-                return View("DangKi");
+                ViewBag.Error = "Không tìm thấy tài khoản";
+                return View();
             }
-
-            return View("DangNhap");
+            ViewBag.Success = "Đã gửi mật vào email của bạn";
+            return View();
         }
         [NonAction]
         public bool IsEmailExist(string emailID)

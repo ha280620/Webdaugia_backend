@@ -9,22 +9,20 @@
     <div class="col-12">
         <!-- ORDERS TABLE -->
         <div class="box">
-            <div class="box-header title">
-                <h2>Danh sách phiên đấu giá</h2>
-
-                <div>
-                    <a href="/admin/adlot/createlot" class="btn btn-success" style="display:inline-block">
-                        <i class="fa fa-plus-circle"></i>
-                        Thêm phiên đấu giá mới
-                    </a>
-                    @*<a href="#" class="btn btn-danger" style="display:inline-block">
-                            <i class="fa fa-trash"></i>
-                            Xóa SP đã chọn
-                        </a>*@
+            <div class="box-header title row">
+                <div class="col-6 col-sm-12">
+                    <h2 style="margin-bottom:40px">Danh sách đặt giá</h2>
                 </div>
+                <div class="col-6 col-sm-12">       
+                            <a href="/admin/adlot/SendMailAuction?LotID=@ViewBag.LotId&Url=@Request.Url.ToString()" class="btn btn-success" style="display:grid">
+                                <i class='bx bx-mail-send'></i>
+                                Gửi mail
+                            </a>
+                </div>
+
             </div>
             <div class="row">
-                <div class="col-4" style="margin-bottom:0">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
                     @using (Html.BeginForm("ListRegitsterOfLot", "AdLot", FormMethod.Get, new { @class = "navbar-search" }))
                     {
                         <input type="text"
@@ -55,14 +53,15 @@
                         @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@count</td>
-                            @{ count++;}
-                            <td width="250px" align="center">@item.RegisterBid.UserID</td>
-                            <td width="250px" align="center">@item.RegisterBid.User.FullName</td>
-                            <td width="250px" align="center">@item.BidTime
+                            <tr>
+                                <td>@count</td>
+                                @{ count++;}
+                                <td width="250px" align="center">@item.RegisterBid.UserID</td>
+                                <td width="250px" align="center">@item.RegisterBid.User.FullName</td>
+                                <td width="250px" align="center">
+                                    @item.BidTime
                             </td>
-                            <td width="250px" align="center">@item.PriceBid</td>
+                            <td width="250px" align="center">  @string.Format(info, "{0:0,0}", item.PriceBid) đ</td>
                             <td align="center">
                                 @if (item.Status == 1)
                                 {
@@ -73,27 +72,27 @@
                                         <div class="dot"></div>
                                         <span>Thành công</span>
                                     </div>
-                         
-                            }
-                            else if(item.Status == 2)
-                            {
+
+                                }
+                                else if (item.Status == 2)
+                                {
 
 
 
-<div class="payment-status payment-pending">
-                                <div class="dot"></div>
-                                <span>Thất bại</span>
-                            </div>
+                                    <div class="payment-status payment-pending">
+                                        <div class="dot"></div>
+                                        <span>Thất bại</span>
+                                    </div>
 
-                }
-                else
-                {
-                            <div class="payment-status payment-pending">
-                                <div class="dot"></div>
-                                <span>Chưa có kết quả</span>
-                            </div>
-                }
-                        </td>
+                                }
+                                else
+                                {
+                                    <div class="payment-status payment-pending">
+                                        <div class="dot"></div>
+                                        <span>Chưa có kết quả</span>
+                                    </div>
+                                }
+                            </td>
                             <td align="center">
                                 @if (item.Status == 0)
                                 {
@@ -107,18 +106,18 @@
                                 }
                                 else if (item.Status == 2)
                                 {
-                            <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
-                                    <i class="fas fa-times" style="color: red"></i>
-                                </a>
+                                    <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                        <a class="btn" href="/admin/adlot/ConfirmAuctionOfLot?RegisterBidID=@item.RegisterBidID&PriceBid=@item.PriceBid&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.RegisterBid.User.ID này chiến thắng')">
+                                            <i class="fas fa-times" style="color: red"></i>
+                                        </a>
 
-                            </div>
+                                    </div>
                                 }
-                            
+
 
                             </td>
-                            </tr>
-                        }
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>

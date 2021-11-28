@@ -16,7 +16,7 @@
 
     }
     <section id="detail-link ">
-        
+
         <div class="container">
             <div class="row product">
                 <div class="col-12">
@@ -122,7 +122,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        @if (@ViewBag.bidRegister != null)
+                        @if (@ViewBag.bidRegister != null && @Model.TimeForBidEnd >= DateTime.Now && @Model.TimeForBidStart <= DateTime.Now)
                         {<div class="p-2">
                                 <div class="row m-0">
 
@@ -168,15 +168,10 @@
                                         </button>
                                     </div>
                                     <div class="col-12 col-sm-5 px-0 pl-sm-1 pl-md-1 ">
-                                        @if (@Model.HighBid == null)
-                                        {
-                                            <a class="btn btn-sign-up w-100 dau-gia" style=" height: 50px; display: flex; align-items: center; justify-content: center;" href="/Lot/PlaceBid?lotId=@Model.ID&registerBidID=@ViewBag.bidRegister&priceBid=@Model.StartingPrice&url=@Request.Url.ToString()"> Đặt Giá </a>
-                                        }
-                                        else
-                                        {
-                                            <a class="btn btn-sign-up w-100 dau-gia" style=" height: 50px; display: flex; align-items: center; justify-content: center;" href="/Lot/PlaceBid?lotId=@Model.ID&registerBidID=@ViewBag.bidRegister&priceBid=@ViewBag.highBid&url=@Request.Url.ToString()"> Đặt Giá </a>
-                                        }
 
+                                        <button class="btn btn-sign-up w-100 dau-gia h-100 mt-sm-1" data-toggle="modal" data-target="#dangkydaugia">
+                                            Đặt Giá
+                                        </button>
 
                                     </div>
                                 </div>
@@ -201,15 +196,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Webdaugia.Models.Auction item in listAuctioned)
+                                    @{ int count = 1;}
+                                    @if (@ViewBag.bidRegister != null)
                                     {
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>@item.RegisterBid.User.Username</td>
-                                            <td>@item.BidTime.ToString("yyyy-MM-dd HH':'mm':'ss:fff")</td>
-                                            <td> @string.Format(info, "{0:0,0}", @item.PriceBid) VNĐ</td>
-                                        </tr>
+                                        foreach (Webdaugia.Models.Auction item in listAuctioned)
+                                        {
+                                            <tr>
+                                                <th scope="row">@count</th>
+                                                @{ count++;}
+                                                <td>@item.RegisterBid.User.Username</td>
+                                                <td>@item.BidTime.ToString("yyyy-MM-dd HH':'mm':'ss:fff")</td>
+                                                <td> @string.Format(info, "{0:0,0}", @item.PriceBid) VNĐ</td>
+                                            </tr>
+                                        }
+
+
+
                                     }
+                                    else
+                                    {
+
+                                        foreach (Webdaugia.Models.Auction item in listAuctioned)
+                                        {
+                                            <tr>
+                                                <th>@count</th>
+                                                @{ count++;}
+                                                <td>******</td>
+                                                <td>@item.BidTime.ToString("yyyy-MM-dd HH':'mm':'ss:fff")</td>
+                                                <td> @string.Format(info, "{0:0,0}", @item.PriceBid) VNĐ</td>
+                                            </tr>
+                                        }
+                                    }
+
 
                                 </tbody>
                             </table>
@@ -221,7 +239,7 @@
     </section>
     <section class="detail-description mb-5">
         <div class="container">
-            <nav>
+            <nav class="justify-content-center">
                 <div class="nav nav-pills" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active"
                        id="nav-home-tab"
@@ -294,32 +312,30 @@
         </div>
     </section>
 
-    @if (ViewBag.listOnGoingLot == null)
-    {
-        <img src="~/images/img/noauction.png" />
-    }
-    else
-    {
-        <section id="going">
-            <div class="container">
-                <div class="going-title">
-                    <i class="bx bxs-circle mr-2"></i>
-                    <h3>Tài sản đang đấu giá</h3>
 
-                </div>
+    <section id="going">
+        <div class="container">
+            <div class="going-title">
+                <i class="bx bxs-circle mr-2"></i>
+                <h3>Tài sản đang đấu giá</h3>
+
+            </div>
+
+            @if (ViewBag.listOnGoingLot != null)
+            {
                 <div class="row">
                     @foreach (var item in ViewBag.listOnGoingLot)
                     {
-                        <div class="col-4 p-2">
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
                             <div class="going-item">
                                 <div class="going-item-img">
                                     <img src="@item.LotImage" class="img-fluid" alt="" />
                                     <div class="going__overlay"></div>
                                     <div class="going__play">
-                                        <a href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
-                                            <h5>Thời gian kết thúc đấu giá</h5>
-                                            <p>@item.TimeForBidEnd</p>
-                                            <h5>Thời gian bắt đầu đấu giá</h5>
+                                        <a href="/phien-dau/@item.SiteTile-@item.ID">
+                                            <h5>Thời kết thúc đăng ký</h5>
+                                            <p>@item.TimeForRegisterEnd</p>
+                                            <h5>Thời gian bắt đầu đấu giá </h5>
                                             <p>@item.TimeForBidStart</p>
                                         </a>
                                     </div>
@@ -331,47 +347,102 @@
                                     </h3>
 
                                     <div class="going-starting-price mt-1">
-                                        <h4>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</h4>
+                                        <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
                                     </div>
-                                    <a class="btn btn-sign-up going_btn" href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
-                                        Đấu giá ngay
+                                    <a class="btn btn-sign-up going_btn" href="/phien-dau/@item.SiteTile-@item.ID">
+                                        Đăng Ký tham gia đấu giá
                                     </a>
                                 </div>
                             </div>
                         </div>
                     }
-                    @if (ViewBag.listOnGoingLot.Count == 0)
-                    {
-                        <img src="~/images/img/noauction1.png">
-                        <div class="container container--checkout pb-2">
-                            <div class="checkout">
-                                <div class="empty" style="vertical-align:middle; text-align:center">
-                                    <a href="/" style="text-align:center;">Về Trang Chủ</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    }
                 </div>
-            </div>
-        </section>
 
-    }
+            }
+            else
+            {
+                <div class="row justify-content-center">
+                    <img src="~/Content/Images/Category/noauction1.png" class="img-fluid">
+                    <div class="container container--checkout pb-2">
+                        <div class="checkout">
+                            <div class="empty" style="vertical-align:middle; text-align:center">
+                                <a href="/" style="text-align:center;">Về Trang Chủ</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+
+        </div>
+    </section>
+
+
 
 
 
 </main>
-@if (@ViewBag.bidRegister != null)
+@if (@ViewBag.bidRegister != null && @Model.TimeForBidEnd >= DateTime.Now && @Model.TimeForBidStart <= DateTime.Now)
 {
     <script>
+    var qtyModal = document.getElementById("display").value;
+    document.getElementById("qtyModal").innerHTML = `Bạn chắc chắn muốn đặt ${qtyModal} VNĐ`;
     function addAttribute() {
         var qty = document.getElementById("number").value;
+        var qtyModal = document.getElementById("display").value;
         document.querySelector(".dau-gia").href = "/Lot/PlaceBid?lotId=" + @Model.ID + "&registerBidID=" + @ViewBag.bidRegister + "&priceBid=" + qty + "&url=" + "@Request.Url.ToString()"
-
+        document.getElementById("qtyModal").innerHTML = `Bạn chắc chắn muốn đặt ${qtyModal} VNĐ`;
     }
     </script>
 }
+@if (@ViewBag.bidRegister != null && @Model.TimeForBidEnd >= DateTime.Now && @Model.TimeForBidStart <= DateTime.Now)
+{
+    <div class="modal fade" id="dangkydaugia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Xác nhận đặt giá</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
+                    @if (@Model.HighBid == null)
+                    {
+                        <h4 id="qtyModal">
+                            Bạn chắc chắn muốn đặt @string.Format(info, "{0:0,0}", @Model.StartingPrice) VNĐ
+                        </h4>
+
+                    }
+                    else
+                    {
+                        <h4 id="qtyModal">
+                            Bạn chắc chắn muốn đặt @string.Format(info, "{0:0,0}", ViewBag.highBid) VNĐ
+                        </h4>
+
+                    }
+
+
+
+                </div>
+                <div class="modal-footer">
+                    @if (@Model.HighBid == null)
+                    {
+                        <a class="btn btn-sign-up w-100 dau-gia" style=" height: 50px; display: flex; align-items: center; justify-content: center;" href="/Lot/PlaceBid?lotId=@Model.ID&registerBidID=@ViewBag.bidRegister&priceBid=@Model.StartingPrice&url=@Request.Url.ToString()"> Xác nhận </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sign-up w-100 dau-gia" style=" height: 50px; display: flex; align-items: center; justify-content: center;" href="/Lot/PlaceBid?lotId=@Model.ID&registerBidID=@ViewBag.bidRegister&priceBid=@ViewBag.highBid&url=@Request.Url.ToString()"> Xác nhận </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
 <script>
      var countDownDate = new Date("@Model.TimeForBidEnd").getTime();
          console.log(countDownDate);
@@ -401,7 +472,7 @@
         // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
 
     }, 1000);
-  
+
 </script>
 @section Lot{
     @if (@ViewBag.bidRegister != null)

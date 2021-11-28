@@ -12,19 +12,9 @@
             <div class="box-header title">
                 <h2>Danh sách phiên đấu giá kết thúc được 6 tháng</h2>
 
-                <div>
-                    <a href="/admin/adlot/createlot" class="btn btn-success" style="display:inline-block">
-                        <i class="fa fa-plus-circle"></i>
-                        Thêm phiên đấu giá mới
-                    </a>
-                    @*<a href="#" class="btn btn-danger" style="display:inline-block">
-                            <i class="fa fa-trash"></i>
-                            Xóa SP đã chọn
-                        </a>*@
-                </div>
             </div>
             <div class="row">
-                <div class="col-4" style="margin-bottom:0">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
                     @using (Html.BeginForm("ListLotEndFor180", "AdLot", FormMethod.Get, new { @class = "navbar-search" }))
                     {
                         <input type="text"

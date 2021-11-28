@@ -1,0 +1,52 @@
+﻿@model Webdaugia.Models.LotAttachment
+@{
+    ViewBag.Title = "CreateLink";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thêm Sản Phẩm Mới</h2>
+<div class="box">
+    @using (Html.BeginForm("CreateLink", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-6">
+            <a href="/admin/adlot/ListLotLink" class="btn btn-info" style="display:inline-block">
+                Danh sách link đính kèm phiên đấu giá
+            </a>
+        </div>
+        <div class="col-6">
+            <div class="text-success" style="font-size:large">@ViewBag.success</div>
+            <div class="text-danger" style="font-size:large">@ViewBag.error</div>
+        </div>
+        <div class="col-6">
+            <label>Tên link đính kèm</label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { name = "Name", type = "text" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Link đính kèm</label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.AttachmentLink, htmlAttributes: new { name = "AttachmentLink", type = "text" })
+         
+                @Html.ValidationMessageFor(model => model.AttachmentLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>ID Phiên</label>
+            <div class="form_control">
+                @Html.DropDownListFor(model => model.LotID, new SelectList(Model.ListLot, "Id", "Name"), "--Chọn phiên-- ", new { @Name = "LotID" })
+                @Html.ValidationMessageFor(model => model.LotID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-6 col-12">
+
+            <button class="btn btn-success" type="submit">Thêm mới đính kèm</button>
+
+        </div>
+    }
+</div>
+
+

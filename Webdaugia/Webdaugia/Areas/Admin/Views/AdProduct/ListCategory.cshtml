@@ -10,7 +10,7 @@
         <!-- ORDERS TABLE -->
         <div class="box">
             <div class="box-header title">
-                <h2>Danh sách sản phẩm</h2>
+                <h2>Danh sách loại phiên đấu giá</h2>
 
                 <div>
                     <a href="/admin/adproduct/CreateCategory" class="btn btn-success" style="display:inline-block">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4" style="margin-bottom:0">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
                     @using (Html.BeginForm("ListCategory", "ADProduct", FormMethod.Get, new { @class = "navbar-search" }))
                     {
                         <input type="text"
