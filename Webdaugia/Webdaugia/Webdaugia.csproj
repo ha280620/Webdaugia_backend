@@ -1981,6 +1981,7 @@
     <Content Include="Areas\Admin\Views\AdLot\ListLotEndFor180.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\ListLotLink.cshtml" />
     <Content Include="Areas\Admin\Views\AdLot\CreateLink.cshtml" />
+    <Content Include="Areas\Admin\Views\AdLot\EditLink.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

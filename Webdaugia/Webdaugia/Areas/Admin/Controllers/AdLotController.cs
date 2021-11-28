@@ -257,6 +257,11 @@ namespace Webdaugia.Areas.Admin.Controllers
          
 
                     }
+                    var listAttachment = db.LotAttachments.Where(x => x.LotID == lot.ID);
+                    if (listAttachment != null)
+                    {                            
+                        db.LotAttachments.RemoveRange(listAttachment);
+                    }
                     string path2 = Path.Combine(Server.MapPath(lot.LotImage)); ;
                     if (!Directory.Exists(path2))
                     {
@@ -314,7 +319,6 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
 
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -420,6 +424,60 @@ namespace Webdaugia.Areas.Admin.Controllers
                 ViewBag.error = "Thêm link đính kèm bị lỗi rồi";
                 return View(lotAttachment);
             }
+        }
+        [HttpGet]
+        public ActionResult EditLink(int id)
+        {
+            if (Session["AD"] == null)
+            {
+
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var objLot = db.LotAttachments.Find(id);
+                if(objLot == null)
+                {
+                    return RedirectToAction("ListLotLink");
+                }
+                //ViewBag.banks = new SelectList(banks, "Id", "Name");
+                objLot.ListLot = db.Lots.ToList();
+                return View(objLot);
+            }
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditLink(LotAttachment lotAttachment)
+        {
+            if (Session["AD"] == null)
+            {
+
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                lotAttachment.ListLot = db.Lots.ToList();
+
+                var attachment = db.LotAttachments.Find(lotAttachment.ID);
+                if(attachment != null)
+                {
+                    attachment.Name = lotAttachment.Name;
+                    attachment.AttachmentLink = lotAttachment.AttachmentLink;
+                    attachment.LotID = lotAttachment.LotID;
+                    db.LotAttachments.AddOrUpdate(attachment);
+                    db.SaveChanges();
+                    ViewBag.success = "Sửa link đính kèm thành công";
+                    return View(lotAttachment);
+                }
+                //ViewBag.banks = new SelectList(banks, "Id", "Name");
+                ViewBag.error = "Bị lỗi rồi -_-";
+                return View(lotAttachment);
+            }
+ 
+
         }
         protected string UploadFile(HttpPostedFileBase file)
         {

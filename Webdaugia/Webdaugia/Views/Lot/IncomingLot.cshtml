@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
     var listReadyLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
+    var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
     //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
 }
 @{
@@ -14,6 +15,8 @@
     @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];
 
     }
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=369248914700597&autoLogAppEvents=1" nonce="KQ7HIJOL"></script>
     <section id="detail-link ">
 
         <div class="container">
@@ -281,35 +284,19 @@
                      id="nav-profile"
                      role="tabpanel"
                      aria-labelledby="nav-profile-tab">
-                    Sint sit mollit irure quis est nostrud cillum consequat Lorem
-                    esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam
-                    Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo
-                    elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud
-                    tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad
-                    irure in labore cillum elit enim. Consequat aliquip incididunt
-                    ipsum et minim laborum laborum laborum et cillum labore.
-                    Deserunt adipisicing cillum id nulla minim nostrud labore
-                    eiusmod et amet. Laboris consequat consequat commodo non ut non
-                    aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                    @foreach (var item in listAttachment)
+                    {
+                        <a href="@item.AttachmentLink.Trim()" alt="link-@item.Name" target="_blank" style="
+    text-decoration: underline;
+">@item.Name</a>
+<br />
+}
                 </div>
                 <div class="tab-pane fade"
                      id="nav-contact"
                      role="tabpanel"
                      aria-labelledby="nav-contact-tab">
-                    Sint sit mollit irure quis est nostrud cillum consequat Lorem
-                    esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam
-                    Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo
-                    elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud
-                    tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad
-                    irure in labore cillum elit enim. Consequat aliquip incididunt
-                    ipsum et minim laborum laborum laborum et cillum labore.
-                    Deserunt adipisicing cillum id nulla minim nostrud labore
-                    eiusmod et amet. Laboris consequat consequat commodo non ut non
-                    aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                    <div class="fb-comments" data-href="@Request.Url.ToString()" data-width="500" data-numposts=""></div>
                 </div>
             </div>
         </div>

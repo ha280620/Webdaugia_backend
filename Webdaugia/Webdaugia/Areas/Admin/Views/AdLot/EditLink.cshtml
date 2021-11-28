@@ -1,12 +1,11 @@
 ﻿@model Webdaugia.Models.LotAttachment
 @{
-    ViewBag.Title = "CreateLink";
+    ViewBag.Title = "EditLink";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="box">
-    @using (Html.BeginForm("CreateLink", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("EditLink", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="col-6">
@@ -29,7 +28,7 @@
             <label>Link đính kèm</label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.AttachmentLink, htmlAttributes: new { name = "AttachmentLink", type = "text" })
-         
+
                 @Html.ValidationMessageFor(model => model.AttachmentLink, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -43,10 +42,12 @@
 
         <div class="col-6 col-12">
 
-            <button class="btn btn-success" type="submit">Thêm mới đính kèm</button>
+            <button class="btn btn-success" type="submit">Sửa đính kèm</button>
 
         </div>
     }
 </div>
+
+
 
 

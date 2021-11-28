@@ -34,6 +34,7 @@ namespace Webdaugia.Controllers
             var listOnGoingLot = db.Lots.Where(x => x.TimeForBidEnd > DateTime.Now && x.TimeForBidStart < DateTime.Now && x.Status == true).Take(3).ToList();
             var listLotAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var listAttributes = db.Products.Where(x => x.LotID == LotId).ToList();
+            var listAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             ViewBag.bidRegister = null;
             if (user != null)
             {
@@ -70,6 +71,7 @@ namespace Webdaugia.Controllers
             ViewBag.listAttributes = listAttributes;
             ViewBag.listLotAttachment = listLotAttachment;
             ViewBag.listOnGoingLot = listOnGoingLot;
+            ViewBag.listAttachment = listAttachment;
 
             ViewBag.listRegisterBid = listRegisterBid.Count();
 
@@ -95,7 +97,7 @@ namespace Webdaugia.Controllers
             var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).Take(3).ToList();
             //var listLotAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var listAttributes = db.Products.Where(x => x.LotID == LotId).ToList();
-          
+            var listAttachment = db.LotAttachments.Where(x => x.LotID == LotId).ToList();
             var totalMoney = Lot.AdvanceDesposit + Lot.ParticipationFee;
             if(user != null)
             {
@@ -123,6 +125,7 @@ namespace Webdaugia.Controllers
             ViewBag.JavaScriptFunction = string.Format("countDownTime('{0}');", Lot.TimeForRegisterEnd);
             //ViewBag.listLotAttachment = listLotAttachment;
             ViewBag.listReadyLot = listReadyLot;
+            ViewBag.listAttachment = listAttachment;
 
             return View(Lot);
         }
