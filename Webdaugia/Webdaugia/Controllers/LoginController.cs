@@ -23,6 +23,7 @@ namespace Webdaugia.Controllers
     [HandleError]
     public class LoginController : Controller
     {
+        //public static User userid = null;
         // GET: Login
         //AuctionDBContext data = new AuctionDBContext();
         string FilePath = "";
@@ -139,6 +140,7 @@ namespace Webdaugia.Controllers
                     userSession.Status = user.Status;
                     //userSession.ProfileImage = user.ProfileImage;
                     Session.Add("USER", userSession);
+                    //userid = (User)Session["USER"];
                     if(user.RoleID == 3)
                     {
                         if (user.CMND == null)
@@ -508,9 +510,8 @@ namespace Webdaugia.Controllers
             db = new AuctionDBContext();
             UserLogin userid = (UserLogin)Session["USER"];
             var dao = new UserDao();
-            //int userid = ((UserLogin)Session["USER"]).UserID;
-            //var user = dao.getUserById(userid);
             User user = dao.getUserById(userid.UserID);
+  
             if (user.CMND == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -558,6 +559,13 @@ namespace Webdaugia.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult AccountManagement()
+        {
+            UserLogin userid = (UserLogin)Session["USER"];
+            AuctionDBContext data = new AuctionDBContext();
+            var list = data.RegisterBids.Where(l => l.UserID == userid.UserID).ToList();
+            return View(list);
         }
 
         public ActionResult Index()

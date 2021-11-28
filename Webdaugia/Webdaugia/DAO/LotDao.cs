@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using PagedList;
 using Webdaugia.Models;
+using Webdaugia.Models.Common;
 
 namespace Webdaugia.DAO
 {
