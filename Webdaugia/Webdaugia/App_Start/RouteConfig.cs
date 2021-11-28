@@ -64,6 +64,17 @@ namespace Webdaugia
 
            );
             routes.MapRoute(
+             name: "ProfileCustomer",
+             url: "thong-tin-tai-khoan",
+             defaults: new { controller = "Login", action = "ProfileCustomer", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+             name: "ChangePassCustomer",
+             url: "thay-doi-mat-khau",
+             defaults: new { controller = "Login", action = "ChangePassCustomer", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Login",
                 url: "dang-nhap",
                 defaults: new { controller = "Login", action = "DangNhap" }

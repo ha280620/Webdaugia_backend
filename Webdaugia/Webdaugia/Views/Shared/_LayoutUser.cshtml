@@ -8,6 +8,7 @@
     <title>Đông Sài Gòn</title>
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="icon" href="~/Content/Client/img/logo-mb.png" />
     <!-- BOXICON -->
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
           rel="stylesheet" />
@@ -21,6 +22,20 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/css/style1.css" />
     <link rel="stylesheet" href="~/css/taisansapdaugia.css" />
+
+    <!-- info css -->
+    <link href="~/Content/Client/css/info.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    <!-- SLICK  CSS -->
+    @*<link rel="stylesheet" href="~/Content/Client/css/index.css" />*@
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!--FONT GOOGLE-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- BEGIN NAV -->
@@ -195,5 +210,65 @@
     </script>
     @RenderSection("Lot", required: false)
     @RenderSection("Category", required: false)
+    @*-------------------------------*@
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "110928377946240");
+        chatbox.setAttribute("attribution", "biz_inbox");
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v11.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- BOOTSTRAP 4 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <!-- SLICK -->
+    <script type="text/javascript"
+            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        $(window).on("load", function (event) {
+
+            $("#loader").fadeOut(400);
+
+        });
+    </script>
+
+    @if (user != null)
+    {
+        <script>
+
+            const user_info = document.querySelector(".user-info");
+            const user_dropdown = document.querySelector(".user_dropdown");
+            user_info.addEventListener("mouseenter", () => {
+                user_dropdown.classList.add("active");
+            });
+            user_info.addEventListener("mouseleave", () => {
+                user_dropdown.classList.remove("active");
+            });
+        </script>
+    }
+
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("ProductDetail", required: false)
 </body>
 </html>

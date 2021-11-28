@@ -70,6 +70,7 @@ namespace Webdaugia.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersImage> UsersImages { get; set; }
-       
+        //public List<Category> ListCategory = new List<Category>();
+
     }
 }

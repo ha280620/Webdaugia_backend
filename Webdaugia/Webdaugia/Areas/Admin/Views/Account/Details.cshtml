@@ -1,0 +1,115 @@
+﻿@model Webdaugia.Models.User
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <!-- Post TABLE -->
+        <div class="box">
+            <div class="box-header"><h3>Xem chi tiết tài khoản</h3></div>
+            <div class="box-body overflow-scroll">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Tên tài khoản :
+                                @Html.DisplayFor(model => model.Username)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Họ và tên:
+
+                                @Html.DisplayFor(model => model.FullName)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Email:
+                                @Html.DisplayFor(model => model.Email)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Ngày sinh:
+                                @Html.DisplayFor(model => model.Birthday)
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                Địa chỉ:
+                                @Html.DisplayFor(model => model.Address)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Số điện thoại:
+                                @Html.DisplayFor(model => model.Phone)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Số CMND:
+                                @Html.DisplayFor(model => model.CMND)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Nơi cấp CMND:
+                                @Html.DisplayFor(model => model.LocationCMND)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Ngày cấp CMND:
+                                @Html.DisplayFor(model => model.DayCMND)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Ảnh mặt trước CMND:
+                                <img src="@Model.ImageFront" width="300" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Ảnh mặt sau CMND:
+                                <img src="@Model.ImageBack" width="300" />
+                            </td>
+                        </tr>
+                        <tr>
+
+                            @if (Model.Status == 0)
+                            {
+                                <td>
+
+                                    <a href="/admin/account/ConfirmLockOrUnlockAccount/@Model.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn xác minh tài khoản?\nHọ tên: @Model.FullName\nGmail: @Model.Email')">
+                                        @*<i class="fas fa-lock" style="color:red"></i>*@
+                                   
+                                        <i class="fa fa-check" style="color:#04D182"></i>
+                                    </a>
+
+                                    <a href="/admin/account/ConfirmIdetify/@Model.ID" style="padding-left:50px" onclick="return confirm('Bạn có muốn xóa thông tin tài khoản?\nHọ tên: @Model.FullName\nGmail: @Model.FullName')">
+                                        @*<i class="fas fa-unlock" style="color:#04D182"></i>*@
+                                        <i class="fa fa-times" style="color:red"></i>
+                                    </a>
+                                </td>
+                            }
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <p>
+            @Html.ActionLink("Trở về", "ConfirmAccount")
+        </p>
+        <!-- END TABLE -->
+    </div>
+</div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +24,50 @@ namespace Webdaugia.Areas.Admin.Controllers
                 List<User> listUser = db.Users.Where(x => x.Status == 1 || x.Status == 2).ToList();
                 return View(listUser);
             }
+            public ActionResult ConfirmAccount()
+            {
+            db = new AuctionDBContext();
+            List<User> listUser = db.Users.Where(x => x.Status == 0 && x.CMND != null).ToList();
+            return View(listUser);
+            }
+
+        //[HttpGet]
+        //public ActionResult Details(int id)
+        //{
+        //    ViewBag.success = null;
+        //    if (Session["AD"] == null)
+        //    {
+        //        return RedirectToAction("Index", "AdLogin");
+        //    }
+        //    else
+        //    {
+        //        db = new AuctionDBContext();
+        //        _ = db.Users.Find(id);
+
+        //        List<User> listUser = db.Users.ToList();
+
+        //        return RedirectToAction("listUser");
+        //    }
+
+
+        //}
+
+        public ActionResult Details(int id)
+        {
+            ViewBag.success = null;
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var user = from us in db.Users where us.ID == id select us;
+                return View(user.SingleOrDefault());
+            }
+
+
+        }
         //View UpdateProfile
         [HttpGet]
         public ActionResult Profile()
@@ -48,7 +93,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                 try
                 {
                     var errors = ModelState.Values.SelectMany(v => v.Errors);
-                    if (ModelState.IsValid)
+                    if (!ModelState.IsValid)
                     {
                         //Update Profile
                         user.FullName = collection.FullName;
@@ -94,10 +139,12 @@ namespace Webdaugia.Areas.Admin.Controllers
                     var errors = ModelState.Values.SelectMany(v => v.Errors);
                     if (ModelState.IsValid)
                     {
-                        if (user.Password == MD5Encryptor.MD5Hash(model.password))
+                        if (user.Password.Trim() == MD5Encryptor.MD5Hash(model.password.Trim()))
+                        {
+                        if (model.password != model.newpassword)
                         {
                             //Update Password
-                            user.Password = MD5Encryptor.MD5Hash(model.newpassword);
+                            user.Password = MD5Encryptor.MD5Hash(model.newpassword.Trim());
                             db.Users.AddOrUpdate(user);
                             try
                             {
@@ -110,6 +157,11 @@ namespace Webdaugia.Areas.Admin.Controllers
                                 ViewBag.Success = "Đổi mật khẩu thất bại";
                             }
                         }
+                        else
+                        {
+                            ViewBag.WrongPass = "Mật khẩu cũ không được giống mật khẩu mới!";
+                        }
+                    }
                         else
                         {
                             ViewBag.WrongPass = "Mật khẩu cũ không đúng";
@@ -142,5 +194,50 @@ namespace Webdaugia.Areas.Admin.Controllers
             return RedirectToAction("ListAccount");
         }
 
+        public ActionResult ConfirmLockOrUnlockAccount(int id)
+        {
+            db = new AuctionDBContext();
+            var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+            if (user.Status == 1)
+            {
+                user.Status = 0;
+            }
+            else if (user.Status == 0)
+            {
+                user.Status = 1;
+            }
+            db.Users.AddOrUpdate(user);
+            db.SaveChanges();
+            return RedirectToAction("ConfirmAccount");
+        }
+
+
+        public ActionResult ConfirmIdetify(int id)
+        {
+            db = new AuctionDBContext();
+            var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+            var bank = db.ATMs.Where(x => x.UserID == id).FirstOrDefault();
+            if (user.ImageFront != null || user.ImageBack != null)
+            {
+                string path = Path.Combine(Server.MapPath(user.ImageFront)); ;
+                string path1 = Path.Combine(Server.MapPath(user.ImageBack)); ;
+
+                if (!Directory.Exists(path))
+                {                    
+                    System.IO.File.Delete(path);
+                }
+                if (!Directory.Exists(path1))
+                {
+                    System.IO.File.Delete(path1);
+                }
+                user.CMND = null;
+                user.ImageFront = null;
+                user.ImageBack = null;           
+            }
+            db.Users.AddOrUpdate(user);
+            db.ATMs.Remove(bank);
+            db.SaveChanges();
+            return RedirectToAction("ConfirmAccount");
+        }
     }
 }
