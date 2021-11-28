@@ -430,7 +430,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-sign-up w-100" href="/dang-ky-dau-gia?lotId=@Model.ID&userID=@user.UserID.ToString()&url=@Request.Url.ToString()"> Đăng ký </a>
+                    <a id="loading" class="btn btn-sign-up w-100" href="/dang-ky-dau-gia?lotId=@Model.ID&userID=@user.UserID.ToString()&url=@Request.Url.ToString()"> Đăng ký </a>
                 </div>
             </div>
         </div>
@@ -538,6 +538,13 @@ else if (@Model.TimeForRegisterStart > DateTime.Now)
 
 @section Lot{
 
+    <script>
+        $(document).ready(function () {
+            $('#loading').click(function () {
+                $('#loader').css('display', 'block');
+            });
+        });
+    </script>
     <script type="text/javascript">
         lightGallery(document.getElementById("lightgallery"), {
             speed: 300,

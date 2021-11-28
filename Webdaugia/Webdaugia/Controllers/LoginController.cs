@@ -285,6 +285,22 @@ namespace Webdaugia.Controllers
                 
                 db.Users.AddOrUpdate(user);
                 db.SaveChanges();
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/thongbaodangky.html"));
+            
+                    content = content.Replace("{{id}}", user.ID.ToString());
+                    content = content.Replace("{{ten}}", user.FullName);
+           
+                    string tb = "Có tài khoản đăng ký xác minh " + user.FullName;
+                    var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                    new MailHelper().SendMail(toEmail, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+              
+                }
                 return RedirectToAction("Index", "Home");
 
             }
@@ -385,7 +401,7 @@ namespace Webdaugia.Controllers
                 ViewBag.Error = "Không tìm thấy tài khoản";
                 return View();
             }
-            ViewBag.Success = "Đã gửi mật vào email của bạn";
+            ViewBag.Success = "Đã gửi mật khẩu vào email của bạn";
             return View();
         }
         [NonAction]
@@ -412,6 +428,10 @@ namespace Webdaugia.Controllers
 
             var dao = new UserDao();
             User user = dao.getUserById(userid.UserID);
+            if(user.CMND == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             var imguser = db.UsersImages.Where(x => x.UsersID == user.ID).FirstOrDefault();
             ViewBag.imguser = imguser.Image;
             //var user = dao.getUserById(userid);
@@ -491,7 +511,10 @@ namespace Webdaugia.Controllers
             //int userid = ((UserLogin)Session["USER"]).UserID;
             //var user = dao.getUserById(userid);
             User user = dao.getUserById(userid.UserID);
-      
+            if (user.CMND == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             try
             {
                 var errors = ModelState.Values.SelectMany(b => b.Errors);

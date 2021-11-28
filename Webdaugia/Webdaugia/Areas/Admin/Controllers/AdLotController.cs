@@ -339,13 +339,17 @@ namespace Webdaugia.Areas.Admin.Controllers
                 ViewBag.fail = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
                 return View(lot);
             }
-            if (lot.TimeForRegisterEnd > lot.TimeForRegisterStart)
+            if (lot.TimeForRegisterEnd > lot.TimeForBidStart)
             {
-                ViewBag.fail = "Ngày kết bắt đầu đấu phải lớn người kết thúc đăng ký đấu giá !";
+                ViewBag.fail = "Ngày kết bắt đầu đấu giá phải lớn người kết thúc đăng ký đấu giá !";
                 return View(lot);
             }
             if (ModelState.IsValid)
             {
+                db = new AuctionDBContext();
+
+
+                lot.ListCategory = db.Categories.ToList();
                 db = new AuctionDBContext();
                 Lot lot1 = new Lot();
                 lot1.Name = lot.Name;
@@ -661,9 +665,9 @@ namespace Webdaugia.Areas.Admin.Controllers
                 ViewBag.fail = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
                 return View(lot);
             }
-            if (lot.TimeForRegisterEnd > lot.TimeForRegisterStart)
+            if (lot.TimeForRegisterEnd > lot.TimeForBidStart)
             {
-                ViewBag.fail = "Ngày kết bắt đầu đấu phải lớn người kết thúc đăng ký đấu giá !";
+                ViewBag.fail = "Ngày kết bắt đầu đấu giá phải lớn người kết thúc đăng ký đấu giá !";
                 return View(lot);
             }
             db = new AuctionDBContext();

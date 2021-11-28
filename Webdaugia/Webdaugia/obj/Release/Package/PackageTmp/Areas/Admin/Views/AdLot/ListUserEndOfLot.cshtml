@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<Webdaugia.Models.RegisterBid>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListUserEndOfLot";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var listATM = (List<Webdaugia.Models.ATM>)ViewBag.listATM;
+}
+@{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+<div class="row">
+    <div class="col-12">
+        <!-- ORDERS TABLE -->
+        <div class="box">
+            <div class="box-header title row">
+                <h2 class="col-6 col-sm-12">Danh tài khoản trả cọc</h2>
+        
+                    @if (@ViewBag.totalMoney != 0)
+                    {
+                        <h3  class="col-3 col-sm-12">Tổng số tiền trà lại: <span class="text-success">@string.Format(info, "{0:0,0}", @ViewBag.totalMoney)</span>  </h3>
+                    }
+                    else
+                    {
+                        <h3  class="col-3 col-sm-12">Tổng số tiền trả lại: <span class="text-success"> @ViewBag.totalMoney</span>  </h3>
+                    }
+                    <h3  class="col-3 col-sm-12">Tiền đặt cọc: <span class="text-success">@string.Format(info, "{0:0,0}", @ViewBag.Money)</span>  </h3>
+     
+             
+
+            </div>
+            <div class="row">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
+                    @using (Html.BeginForm("ListRegitsterOfLot", "AdLot", FormMethod.Get, new { @class = "navbar-search" }))
+                    {
+                        <input type="text"
+                               name="searchString"
+                               class="navbar-search-input"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               value="@ViewBag.searchString" />
+                        <button type="submit"><i class="fas fa-search"></i></button>}
+                </div>
+            </div>
+            <div style="overflow:scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="40px">
+                                STT
+                            </th>
+
+                            <th align="center">ID Phiên</th>
+                            <th align="center">Tên Phiên</th>
+                            <th align="center">ID Tài Khoản</th>
+                            <td align="center">Tên Ngân Hàng</td>
+                            <td align="center">Tên Người Hưởng</td>
+                            <td align="center">Số Tài Khoản</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int count = 1;}
+                
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                @{ count++;}
+                                <td align="center">@item.LotID</td>
+                                <td align="center">@item.Lot.Name</td>
+                                <td align="center">@item.UserID</td> 
+
+                                @if (listATM == null)
+                                {
+
+                                    <td align="center">Không có</td>
+                                    <td align="center">Không có</td>
+                                    <td align="center">Không có</td>
+
+
+
+                                }
+                                else
+                                {
+                                    var countatm = 0;
+                                    foreach (var atm in listATM)
+                                    {
+                                        if (atm.UserID == @item.UserID)
+                                        {
+                                            countatm++;
+                                            <td align="center">@atm.Bank.Name</td>
+                                            <td align="center">@atm.ATMFullName</td>
+                                            <td align="center">@atm.ATMCode</td>
+                                        }
+
+
+                                    }
+                                    if (countatm == 0)
+                                    {
+                                        <td align="center">Không có</td>
+                                        <td align="center">Không có</td>
+                                        <td align="center">Không có</td>
+                                    }
+                                }
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @Html.PagedListPager(Model, page => Url.Action("ListUserEndOfLot", new { page, @searchString = ViewBag.searchString }))
+        </div>
+    </div>
+</div>
+
+
+

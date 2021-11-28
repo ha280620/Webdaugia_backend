@@ -1,0 +1,55 @@
+﻿@model Webdaugia.Models.Common.AdCategory
+@{
+    ViewBag.Title = "CreateCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Sửa Loại Phiên Đấu</h2>
+<div class="box">
+    @using (Html.BeginForm("CreateCategory", "AdProduct", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-6 col-sm-12">
+            <a href="/admin/adproduct/ListCategory" class="btn btn-info" style="display:inline-block">
+                Danh Sách Sản phẩm
+            </a>
+        </div>
+
+
+        <div class="col-6  col-sm-12">
+            <div class="text-success" style="font-size:large">@ViewBag.success</div>
+        </div>
+        <div class="col-6  col-sm-12">
+            <label>Tên Sản phẩm</label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { name = "Name", type = "text" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-6 col-sm-12">
+            <label>Hình ảnh </label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.CateImg, htmlAttributes: new { name = "CateImg", type = "file" })
+                @*  <input type="file" name="file1" />*@
+                @Html.ValidationMessageFor(model => model.CateImg, "", new { @class = "text-danger" })
+        
+            </div>
+        </div>
+        <div class="col-6 col-sm-12">
+            <label>Icon </label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.CateIcon, htmlAttributes: new { name = "CateImg", type = "file" })
+                @*  <input type="file" name="file1" />*@
+                @Html.ValidationMessageFor(model => model.CateIcon, "", new { @class = "text-danger" })
+      
+            </div>
+        </div>
+
+
+        <div class="col-6 col-sm-12">
+            <button class="btn btn-success" type="submit">Thêm mới Sản phẩm</button>
+        </div>
+    }
+</div>

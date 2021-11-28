@@ -205,6 +205,20 @@ namespace Webdaugia.Areas.Admin.Controllers
             else if (user.Status == 0)
             {
                 user.Status = 1;
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/xacnhansuccess.html"));
+
+                    content = content.Replace("{{CustomerName}}", user.FullName);
+
+                    string tb = "Xác minh tài khoản thành công " + user.FullName;
+                    new MailHelper().SendMail(user.Email, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+
+                }
             }
             db.Users.AddOrUpdate(user);
             db.SaveChanges();
@@ -242,6 +256,20 @@ namespace Webdaugia.Areas.Admin.Controllers
 
                 user.ImageFront = null;
                 user.ImageBack = null;
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/xannhanfail.html"));
+              
+                    content = content.Replace("{{CustomerName}}", user.FullName);
+             
+                    string tb = "Xác minh tài khoản thất bại " + user.FullName;
+                    new MailHelper().SendMail(user.Email, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+      
+                }
             }   
          
             db.Users.AddOrUpdate(user);

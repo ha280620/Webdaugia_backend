@@ -12,7 +12,7 @@
         @Html.AntiForgeryToken()
         <div class="col-6 col-sm-12">
             <a href="/admin/adlot/listlot" class="btn btn-info" style="display:inline-block">
-                Danh Sách Sản phẩm
+                Danh Sách Phiên Đấu Giá
             </a>
         </div>
         <div class="col-6 col-sm-12">
@@ -20,7 +20,7 @@
             <div class="text-danger" style="font-size:large">@ViewBag.fail</div>
         </div>
         <div class="col-6 col-sm-12">
-            <label>Tên Sản phẩm</label>
+            <label>Tên phiên đấu giá</label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.Name, htmlAttributes: new { name = "Name", type = "text" })
                 @*   <input name="Name"
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="col-6 col-sm-12">
-            <label>Giá đặt cọc</label>
+            <label>Tiền cọc trước</label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.AdvanceDesposit, htmlAttributes: new { name = "AdvanceDesposit", type = "number" })
                 @* <input name="AdvanceDesposit"
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="col-6 col-sm-12">
-            <label>Chủ tài sản</label>
+            <label>Người có tài sản đấu giá</label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.HostName, htmlAttributes: new { name = "ParticipationFee", type = "text" })
                 @*            <input name="HostName"
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="col-6 col-sm-12">
-            <label>Địa điểm</label>
+            <label>Địa điểm xem tài sản</label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.Location, htmlAttributes: new { name = "Location", type = "text" })
                 @*           <input name="Location"
@@ -93,32 +93,15 @@
             </div>
         </div>
         <div class="col-6 col-sm-12">
-            <label>Thời gian xem sản phẩm đấu giá</label>
+            <label>Thời gian xem tài sản </label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.ViewInTime, htmlAttributes: new { name = "ViewInTime", type = "text" })
                 @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="col-6 col-sm-12">
-            <label>Ngày bắt đầu phiên</label>
-            <div class="form_control">
-                @Html.TextBoxFor(model => model.TimeForBidStart, htmlAttributes: new { name = "TimeForBidStart", type = "datetime-local" })
-                @*         <input name="TimeForBidStart"
-                    type="datetime-local" />*@
-                @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-6 col-sm-12">
-            <label>Ngày kết thúc phiên</label>
-            <div class="form_control">
-                @Html.TextBoxFor(model => model.TimeForBidEnd, htmlAttributes: new { name = "TimeForBidEnd", type = "datetime-local" })
-                @*         <input name="TimeForBidEnd"
-                    type="datetime-local" />*@
-                @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="col-6 col-sm-12">
-            <label>Ngày bắt đầu dăng ký phiên</label>
+            <label>Ngày bắt đầu đăng ký phiên</label>
             <div class="form_control">
                 @Html.TextBoxFor(model => model.TimeForRegisterStart, htmlAttributes: new { name = "TimeForRegisterStart", type = "datetime-local" })
                 @*   <input name="TimeForRegisterStart"
@@ -136,11 +119,30 @@
             </div>
         </div>
         <div class="col-6 col-sm-12">
+            <label>Ngày bắt đầu phiên đấu giá</label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.TimeForBidStart, htmlAttributes: new { name = "TimeForBidStart", type = "datetime-local" })
+                @*         <input name="TimeForBidStart"
+                    type="datetime-local" />*@
+                @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6 col-sm-12">
+            <label>Ngày kết thúc phiên đấu giá</label>
+            <div class="form_control">
+                @Html.TextBoxFor(model => model.TimeForBidEnd, htmlAttributes: new { name = "TimeForBidEnd", type = "datetime-local" })
+                @*         <input name="TimeForBidEnd"
+                    type="datetime-local" />*@
+                @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-6 col-sm-12">
             <label>Hình ảnh đại diện Phiên</label>
 
             <div class="form_control">
                 @Html.TextBoxFor(model => model.file1, htmlAttributes: new { name = "file1", type = "file" })
-              @*  <input type="file" name="file1" />*@
+                @*  <input type="file" name="file1" />*@
                 @Html.ValidationMessageFor(model => model.file1, "", new { @class = "text-danger" })
             </div>
         </div>

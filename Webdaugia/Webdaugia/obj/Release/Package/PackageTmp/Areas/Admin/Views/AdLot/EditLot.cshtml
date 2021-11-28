@@ -1,0 +1,178 @@
+﻿@model Webdaugia.Models.Lot
+@{
+    ViewBag.Title = "EditLot";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chỉnh Sửa Thông Tin Phiên Đấu Giá</h2>
+<div class="box">
+    @using (Html.BeginForm("EditLot", "AdLot", FormMethod.Post, new { @area = "Admin", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-6">
+            <a href="/admin/adlot/listlot" class="btn btn-info" style="display:inline-block">
+                Danh Sách Phiên Đấu Giá
+            </a>
+        </div>
+
+        <div class="col-6">
+            <div class="text-success" style="font-size:large">@ViewBag.success</div>
+            <div class="text-danger" style="font-size:large">@ViewBag.fail</div>
+        </div>
+
+        <div class="col-6">
+            <label>Tên Sản phẩm</label>
+            <div class="form_control">
+                <input required
+                       name="Name"
+                       type="text"
+                       value="@Model.Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6 col-sm-12">
+            <label>Chọn loại đấu giá</label>
+            <div class="form_control">
+                @Html.DropDownList("CateID", new SelectList(Model.ListCategory, "Id", "Name"), "--Chọn thể loại-- ")
+                @*@Html.DropDownListFor(m => m.ListCategory, Model.ListCategory ?? new List<SelectListItem>(), "--Chọn Ngân hàng--")*@
+                @*@Html.DropDownList("tennganhang", ViewBag.banks as SelectList, "--Chọn Ngân hàng-- ", new { @Name = "tennganhang" })*@
+                @Html.ValidationMessageFor(model => model.CateID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Giá khởi điểm</label>
+            <div class="form_control">
+                <input required
+                       name="StartingPrice"
+                       type="number"
+                       value="@Model.StartingPrice" />
+                @Html.ValidationMessageFor(model => model.StartingPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Bước giá</label>
+            <div class="form_control">
+                <input required
+                       name="MiniumBid"
+                       type="number"
+                       value="@Model.MiniumBid" />
+                @Html.ValidationMessageFor(model => model.MiniumBid, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Giá đặt cọc</label>
+            <div class="form_control">
+                <input required
+                       name="AdvanceDesposit"
+                       type="number"
+                       value="@Model.AdvanceDesposit" />
+                @Html.ValidationMessageFor(model => model.AdvanceDesposit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Giá đặt cọc</label>
+            <div class="form_control">
+                <input required
+                       name="ParticipationFee"
+                       type="number"
+                       value="@Model.ParticipationFee" />
+                @Html.ValidationMessageFor(model => model.ParticipationFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Đấu Giá Viên</label>
+            <div class="form_control">
+                <input required
+                       name="HostName"
+                       type="text"
+                       value="@Model.HostName" />
+                @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Chủ tài sản</label>
+            <div class="form_control">
+                <input required
+                       name="HostName"
+                       type="text"
+                       value="@Model.HostName" />
+                @Html.ValidationMessageFor(model => model.HostName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Địa điểm</label>
+            <div class="form_control">
+                <input required
+                       name="Location"
+                       type="text"
+                       value="@Model.Location" />
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Thời gian xem sản phẩm đấu giá</label>
+            <div class="form_control">
+                <input required
+                       name="ViewInTime"
+                       type="text"
+                       value="@Model.ViewInTime" />
+                @Html.ValidationMessageFor(model => model.ViewInTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-6">
+            <label>Ngày bắt đầu dăng ký phiên</label>
+            <div class="form_control">
+                <input required
+                       name="TimeForRegisterStart"
+                       type="datetime-local"
+                       value="@Model.TimeForRegisterStart.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Ngày kết thúc đăng ký phiên</label>
+            <div class="form_control">
+                <input required
+                       name="TimeForRegisterEnd"
+                       type="datetime-local"
+                       value="@Model.TimeForRegisterEnd.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="col-6">
+            <label>Ngày bắt đầu phiên</label>
+            <div class="form_control">
+                <input required
+                       name="TimeForBidStart"
+                       type="datetime-local"
+                       value="@Model.TimeForBidStart.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Ngày kết thúc phiên</label>
+            <div class="form_control">
+                <input required
+                       name="TimeForBidEnd"
+                       type="datetime-local"
+                       value="@Model.TimeForBidEnd.Value.ToString("yyyy-MM-ddTHH:mm")" />
+                @Html.ValidationMessageFor(model => model.TimeForBidEnd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-6">
+            <label>Hình ảnh đại diện Phiên</label>
+            <div class="form_control">
+                <img src="@Model.LotImage" width="100px" />
+                <input type="file" name="file1" />
+            </div>
+        </div>
+
+        <div class="col-6 col-12">
+
+            <button class="btn btn-success" type="submit">Sửa phiên đấu giá mới</button>
+
+        </div>
+    }
+</div>

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Webdaugia.Models;
 using Webdaugia.Models.Common;
 using PagedList;
+using System.Configuration;
 
 namespace Webdaugia.Controllers
 {
@@ -24,8 +25,11 @@ namespace Webdaugia.Controllers
         {
             var user = (Models.Common.UserLogin)Session["USER"];
             db = new AuctionDBContext();
-            var Lot = db.Lots.Where(x => x.ID == LotId).FirstOrDefault();
-            
+            var Lot = db.Lots.Where(x => x.ID == LotId && x.Status == true).FirstOrDefault();
+            if(Lot == null)
+            {
+                return RedirectToAction("PageNotFound", "Error");
+            }
             if(Lot.HighBid != null)
             {
                 var total = Lot.HighBid + Lot.MiniumBid;
@@ -89,8 +93,12 @@ namespace Webdaugia.Controllers
             db = new AuctionDBContext();
             var user = (Models.Common.UserLogin)Session["USER"];
     
-            var Lot = db.Lots.Where(x => x.ID == LotId).FirstOrDefault();
-            if(Lot == null)
+            var Lot = db.Lots.Where(x => x.ID == LotId && x.Status == true).FirstOrDefault();
+            if (Lot == null)
+            {
+                return RedirectToAction("PageNotFound", "Error");
+            }
+            if (Lot == null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -141,7 +149,7 @@ namespace Webdaugia.Controllers
             }
             ViewBag.CateName = db.Categories.Where(x => x.ID == CateId && x.Status == true).FirstOrDefault().Name;
             ViewBag.listCategory = db.Categories.Where(x=>x.Status == true).ToList();
-            var listLotbyCate = db.Lots.Where(x => x.CateID == CateId).ToList();
+            var listLotbyCate = db.Lots.Where(x => x.CateID == CateId && x.Status == true).ToList();
 
             return View(listLotbyCate);
         }
@@ -160,7 +168,7 @@ namespace Webdaugia.Controllers
         {
             db = new AuctionDBContext();
             HomeModel homemodel = new HomeModel();
-            var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
+            var listReadyLot = db.Lots.Where(x => x.TimeForBidStart >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
             homemodel.listReadyLot = listReadyLot;
             
             return View(homemodel);
@@ -185,13 +193,13 @@ namespace Webdaugia.Controllers
             }
 
             db = new AuctionDBContext();
-            var product = db.Lots.Find(lotId);
+            var product = db.Lots.Where(x => x.Status == true && x.ID == lotId).SingleOrDefault();
             var user = db.Users.Where(x => x.ID == userID).SingleOrDefault();
             var registered = db.RegisterBids.Where(x => x.LotID == lotId && x.UserID == user.ID).SingleOrDefault();
             if (product == null && user == null && registered != null)
             {
                 return Redirect(url);
-            } else if (product != null && product.TimeForRegisterStart > DateTime.Now || product.TimeForRegisterEnd < DateTime.Now)
+            } else if (product != null && product.TimeForRegisterStart > DateTime.Now || product.TimeForRegisterEnd < DateTime.Now || product.Status != true)
             {
                 return Redirect(url);
             }
@@ -203,6 +211,23 @@ namespace Webdaugia.Controllers
                 register.Status = false;
                 db.RegisterBids.Add(register);
                 db.SaveChanges();
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/sendangky.html"));
+
+                    content = content.Replace("{{id}}", user.ID.ToString());
+                    content = content.Replace("{{ten}}", user.FullName);
+                    content = content.Replace("{{tenphien}}", product.Name);
+
+                    string tb = "Đăng ký tham gia đấu giá " + user.ID + " " + user.FullName + " phiên đấu " + product.Name;
+                    var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                    new MailHelper().SendMail(toEmail, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+
+                }
             }
 
             return Redirect(url);
@@ -222,7 +247,7 @@ namespace Webdaugia.Controllers
             {
                 return Redirect(url);
             }
-            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true || register.Status !=true)
+            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true || register.Status !=true || lot.Status != true)
             {
                 return Redirect(url);
             }

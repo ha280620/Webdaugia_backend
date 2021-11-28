@@ -68,6 +68,10 @@ namespace Webdaugia.Areas.Admin.Controllers
                 db = new AuctionDBContext();
                 Product product = new Product();
                 product.ListLot = db.Lots.ToList();
+               if(product.ListLot == null)
+                {
+                    return RedirectToAction("ListProduct");
+                }
                 return View(product);
             }
             

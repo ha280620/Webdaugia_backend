@@ -168,6 +168,7 @@
     <Compile Include="Models\Common\MailHelper.cs" />
     <Compile Include="Models\Common\MD5Encryptor.cs" />
     <Compile Include="Models\Common\UserLogin.cs" />
+    <Compile Include="Models\Login\Email.cs" />
     <Compile Include="Models\Login\LoginModel.cs" />
     <Compile Include="Models\Lot.cs" />
     <Compile Include="Models\LotAttachment.cs" />
@@ -1721,14 +1722,13 @@
     <Content Include="Content\Images\Category\taisankhac.png" />
     <Content Include="Content\Images\Category\taisankhac1.png" />
     <Content Include="Content\Images\Cmnd\242896941_241844014504329_733016854597973873_n.11_24_2021_12_07_24.png" />
+    <Content Include="Content\Images\Cmnd\242896941_241844014504329_733016854597973873_n.11_28_2021_05_05_23.png" />
     <Content Include="Content\Images\Cmnd\249552593_595510108169108_5095371096582561702_n.11_24_2021_12_04_01.png" />
     <Content Include="Content\Images\Cmnd\AdvanceNotification.11_24_2021_12_07_24.png" />
     <Content Include="Content\Images\Cmnd\áds.11_24_2021_12_04_01.jpg" />
     <Content Include="Content\Images\Lot\245398817_402615768009509_2871009326896691470_n.11_23_2021_01_01_22.jpg" />
     <Content Include="Content\Images\Lot\249347145_1349282195493353_8494279244873990058_n.11_23_2021_07_52_31.jpg" />
     <Content Include="Content\Images\Lot\252732773_153945653571609_1971640022074689624_n.11_23_2021_08_06_53.jpg" />
-    <Content Include="Content\Images\Lot\252732773_153945653571609_1971640022074689624_n.11_23_2021_11_05_04.jpg" />
-    <Content Include="Content\Images\Lot\AdvanceNotification.11_23_2021_10_25_46.png" />
     <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_01_21_41.png" />
     <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_01_24_49.png" />
     <Content Include="Content\Images\Lot\bgr_meet8.11_23_2021_07_50_13.png" />
@@ -1738,7 +1738,6 @@
     <Content Include="Content\Images\Prouduct\249347145_1349282195493353_8494279244873990058_n.11_23_2021_01_50_24.jpg" />
     <Content Include="Content\Images\Prouduct\249347145_1349282195493353_8494279244873990058_n.11_23_2021_01_52_10.jpg" />
     <Content Include="Content\Images\Prouduct\253012852_562133721769160_4618980454066795657_n.11_23_2021_01_50_24.png" />
-    <Content Include="Content\Images\Prouduct\bgr_meet8.11_23_2021_03_59_15.png" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Product\P011.jpg" />
     <Content Include="Content\Product\P012.jpg" />
@@ -1793,13 +1792,6 @@
     <Content Include="Content\Product\P092.jpg" />
     <Content Include="Content\Product\P093.jpg" />
     <Content Include="Content\Product\P094.jpg" />
-    <Content Include="Content\Product\P101.jpg" />
-    <Content Include="Content\Product\P102.jpg" />
-    <Content Include="Content\Product\P103.jpg" />
-    <Content Include="Content\Product\P104.jpg" />
-    <Content Include="Content\Product\P105.jpg" />
-    <Content Include="Content\Product\P106.jpg" />
-    <Content Include="Content\Product\P107.jpg" />
     <Content Include="Content\Product\P111.jpg" />
     <Content Include="Content\Product\P112.jpg" />
     <Content Include="Content\Product\P113.jpg" />
@@ -1827,12 +1819,9 @@
     <Content Include="Content\Product\P155.jpg" />
     <Content Include="Content\Product\P156.jpg" />
     <Content Include="Content\Product\P157.jpg" />
-    <Content Include="Content\Product\P161.jpg" />
-    <Content Include="Content\Product\P162.jpg" />
-    <Content Include="Content\Product\P163.jpg" />
-    <Content Include="Content\Product\P164.jpg" />
-    <Content Include="Content\Product\P165.jpg" />
-    <Content Include="Content\Product\P166.jpg" />
+    <Content Include="Content\template\xacnhansuccess.html" />
+    <Content Include="Content\template\thongbaodangky.html" />
+    <Content Include="Content\template\xannhanfail.html" />
     <Content Include="Content\template\daugiasuccess.html" />
     <Content Include="Content\template\daugiafail.html" />
     <Content Include="Content\template\dangthanhcong.html" />
@@ -1854,7 +1843,6 @@
     <Content Include="css\multiplestep.css" />
     <Content Include="css\reset.css" />
     <Content Include="css\slick.css" />
-    <Content Include="css\style.css" />
     <Content Include="css\style1.css" />
     <Content Include="css\swiper.css" />
     <Content Include="css\taisansapdaugia.css" />
@@ -1867,6 +1855,7 @@
     <Content Include="img\bag.jpg" />
     <Content Include="img\bag.png" />
     <Content Include="img\batdongsan.png" />
+    <Content Include="img\ben-thanh-icon-animation800x600.gif" />
     <Content Include="img\Can-reforms-in-property-auctions-help-real-estate-during-COVID-19-FB-1200x700-compressed.jpg" />
     <Content Include="Content\Images\Category\car.jpg" />
     <Content Include="img\car.png" />
@@ -2059,8 +2048,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutUser.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

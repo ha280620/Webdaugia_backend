@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<Webdaugia.Models.Product>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListProduct";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12">
+        <!-- ORDERS TABLE -->
+        <div class="box">
+            <div class="box-header title">
+                <h2>Danh sách sản phẩm</h2>
+
+                <div>
+                    <a href="/admin/adproduct/createproduct" class="btn btn-success" style="display:inline-block">
+                        <i class="fa fa-plus-circle"></i>
+                        Thêm mới sản phẩm
+                    </a>
+                    @*<a href="#" class="btn btn-danger" style="display:inline-block">
+                            <i class="fa fa-trash"></i>
+                            Xóa SP đã chọn
+                        </a>*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-sm-12" style="margin-bottom:0">
+                    @using (Html.BeginForm("ListProduct", "AdProduct", FormMethod.Get, new { @class = "navbar-search" }))
+                    {
+                        <input type="text"
+                               name="searchString"
+                               class="navbar-search-input"
+                               placeholder="Tìm kiếm sản phẩm..."
+                               value="@ViewBag.searchString" />
+                        <button type="submit"><i class="fas fa-search"></i></button>}
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th width="40px">
+                            STT
+                        </th>
+                        <th width="80px"></th>
+                        <th width="400px">Tên Sản Phẩm</th>
+                        <th width="150px">ID Phiên </th>
+                        <th width="400px">Tên Phiên </th>
+                        <th width="180px">Ngày tạo</th>
+                        <th>Người tạo</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int count = 1;}
+                    @{ var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN"); }
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@count</td>
+                        @{ count++; }
+                        @if (@item.ProductsImages.FirstOrDefault().Image != null)
+                        {
+                            <td><img src="@item.ProductsImages.FirstOrDefault().Image" width="50px" /></td>
+                        }
+                        else
+                        {
+                            <td>Không có ảnh</td>
+                        }
+
+                        <td width="400px">@item.Name</td>
+                        <td>@item.Lot.ID</td>
+                        <td>@item.Lot.Name</td>
+                        <td>@item.CreatedAt</td>
+                        <td>@item.CreatedBy</td>
+                        <td>
+                            <a href="/admin/adproduct/editproduct/@item.ID" style="padding-left:15px">
+                                <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("ListProduct", new { page, @searchString = ViewBag.searchString }))
+        </div>
+    </div>
+</div>
+
+
