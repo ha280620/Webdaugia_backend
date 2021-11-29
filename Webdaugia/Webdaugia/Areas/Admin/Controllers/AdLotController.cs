@@ -599,7 +599,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                 {
                     return RedirectToAction("ListLotRegister");
                 }
-                    var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true).ToList();
+                    var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == 1).ToList();
                 if (listRegister != null)
                 {
                     foreach (var item in listRegister)
@@ -646,14 +646,14 @@ namespace Webdaugia.Areas.Admin.Controllers
                 {
                     return Redirect(Url);
                 }
-                var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true).ToList();
+                var listRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == 1).ToList();
                 var AuctionWin = db.Auctions.Where(x => x.Status == 1 && x.RegisterBid.LotID == LotID).FirstOrDefault();
                 RegisterBid registerBidWin = null;
                 List<RegisterBid> registerBidFail = null;
                 if (AuctionWin != null)
                 {
-                    registerBidWin = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true && x.ID == AuctionWin.RegisterBidID).FirstOrDefault();
-                    registerBidFail = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == true && x.ID != AuctionWin.RegisterBidID).ToList();
+                    registerBidWin = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == 1 && x.ID == AuctionWin.RegisterBidID).FirstOrDefault();
+                    registerBidFail = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == 1 && x.ID != AuctionWin.RegisterBidID).ToList();
                 }
 
 
@@ -822,18 +822,58 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             db = new AuctionDBContext();
             var id = LotId;
-            var user = UserId;
-            var lot = db.RegisterBids.Where(x => x.LotID == id && x.UserID == user).FirstOrDefault();
-            if (lot.Status == false)
+            var user = (UserLogin)Session["AD"];
+            var lot = db.RegisterBids.Where(x => x.LotID == id && x.UserID == UserId).FirstOrDefault();
+            if(user.Role == 2 && lot.Lot.HostLot != user.UserID)
             {
-                lot.Status = true;
+                return RedirectToAction("Index", "AdLogin");
+            }
+            if (lot.Status == 0)
+            {
+                lot.Status = 1;
             }
             else
             {
-                lot.Status = false;
+                lot.Status = 0;
             }
             db.RegisterBids.AddOrUpdate(lot);
             db.SaveChanges();
+            return Redirect(Url);
+        }
+        public ActionResult ConfirmEndOfLot(int LotId, int UserId, string Url)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+            var id = LotId;
+            var user = (UserLogin)Session["AD"];
+            var RegisterBids = db.RegisterBids.Where(x => x.LotID == id && x.UserID == UserId).FirstOrDefault();
+            if (RegisterBids.Status == 0)
+            {
+                return RedirectToAction(Url);
+            }
+            if (user.Role == 2 && RegisterBids.Lot.HostLot != user.UserID)
+            {
+                return RedirectToAction(Url);
+            }
+            if (RegisterBids.Status == 1)
+            {
+                RegisterBids.Status = 2;
+                db.RegisterBids.AddOrUpdate(RegisterBids);
+                db.SaveChanges();
+                return Redirect(Url);
+         
+            }
+            if (RegisterBids.Status == 1)
+            {
+                RegisterBids.Status = 2;
+                db.RegisterBids.AddOrUpdate(RegisterBids);
+                db.SaveChanges();
+                return Redirect(Url);
+
+            }
             return Redirect(Url);
         }
         public ActionResult ConfirmAuctionOfLot(int RegisterBidID, long PriceBid, string Url)

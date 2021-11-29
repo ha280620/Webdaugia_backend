@@ -84,7 +84,7 @@
                                 <td width="250px" align="center">@item.User.ID</td>
                                 <td width="250px" align="center">@item.User.FullName</td>
                                 <td width="250px" align="center">@item.User.Phone</td>
-                                @if (item.Status == true)
+                                @if (item.Status != 0)
                                 {
 
 
@@ -105,10 +105,10 @@
                                     </td>
                                 }
                                 <td align="center">
-                                    @if (item.Status == true)
+                                    @if (item.Status != 0)
                                     {
                                         <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                            <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.LotID này chưa nộp tiền')">
+                                            <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName này chưa nộp tiền')">
                                                 <i class="fas fa-check" style="color: #04D182"></i>
                                             </a>
 
@@ -117,7 +117,7 @@
                                     else
                                     {
                                         <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                            <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.LotID này đã nộp tiền')">
+                                            <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName này đã nộp tiền')">
                                                 <i class="fas fa-times" style="color: red"></i>
                                             </a>
 

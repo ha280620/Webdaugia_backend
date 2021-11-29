@@ -42,7 +42,7 @@ namespace Webdaugia.Controllers
             ViewBag.bidRegister = null;
             if (user != null)
             {
-                RegisterBid UserRegisterBid = db.RegisterBids.Where(x => x.LotID == LotId && x.UserID == user.UserID && x.Status == true).SingleOrDefault();
+                RegisterBid UserRegisterBid = db.RegisterBids.Where(x => x.LotID == LotId && x.UserID == user.UserID && x.Status == 1).SingleOrDefault();
                 if (UserRegisterBid != null)
                 {
 
@@ -50,7 +50,7 @@ namespace Webdaugia.Controllers
                 }
             }
             
-            var listRegisterBid = db.RegisterBids.Where(x => x.LotID == LotId && x.Status == true).ToList();
+            var listRegisterBid = db.RegisterBids.Where(x => x.LotID == LotId && x.Status == 1).ToList();
             List<Auction> listAuctioned = new List<Auction>();
             if (listRegisterBid != null)
             {
@@ -112,7 +112,7 @@ namespace Webdaugia.Controllers
                 var registered = db.RegisterBids.Where(x => x.LotID == LotId && x.UserID == user.UserID).SingleOrDefault();
                 if (registered != null)
                 {
-                    if (registered.Status == true)
+                    if (registered.Status == 1)
                     {
                         ViewBag.register = true;
                     }
@@ -208,7 +208,7 @@ namespace Webdaugia.Controllers
                 RegisterBid register = new RegisterBid();
                 register.LotID = lotId;
                 register.UserID = userID;
-                register.Status = false;
+                register.Status = 0;
                 db.RegisterBids.Add(register);
                 db.SaveChanges();
                 try
@@ -247,7 +247,7 @@ namespace Webdaugia.Controllers
             {
                 return Redirect(url);
             }
-            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true || register.Status !=true || lot.Status != true)
+            else if (lot != null && lot.TimeForBidStart > DateTime.Now || lot.TimeForBidEnd < DateTime.Now || lot.Status != true || register.Status !=1 || lot.Status != true)
             {
                 return Redirect(url);
             }

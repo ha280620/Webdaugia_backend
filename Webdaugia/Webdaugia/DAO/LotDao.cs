@@ -143,11 +143,11 @@ namespace Webdaugia.DAO
             IQueryable<RegisterBid> model;
             if (modelAuctions != null)
             {
-                 model = db.RegisterBids.Where(x => x.LotID == id && x.Status == true && x.ID != modelAuctions.RegisterBidID);
+                 model = db.RegisterBids.Where(x => x.LotID == id && x.Status == 1 || x.Status == 2 && x.ID != modelAuctions.RegisterBidID);
             }
             else
             {
-                model = db.RegisterBids.Where(x => x.LotID == id && x.Status == true);
+                model = db.RegisterBids.Where(x => x.LotID == id && x.Status == 1 || x.Status == 2);
             }
           
             if (!string.IsNullOrEmpty(searchString))
@@ -157,10 +157,8 @@ namespace Webdaugia.DAO
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
         public IEnumerable<Auction> ListAllPagingAuctionOfLot(int id, string searchString, int page, int pageSize)
-        {
-    
-         
-            IQueryable<Auction> model = db.Auctions.Where(x => x.RegisterBid.LotID == id && x.RegisterBid.Status == true);
+        {       
+            IQueryable<Auction> model = db.Auctions.Where(x => x.RegisterBid.LotID == id && x.RegisterBid.Status == 1);
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.RegisterBid.User.FullName.Contains(searchString) || x.RegisterBid.Lot.Name.Contains(searchString));
