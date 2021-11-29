@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Webdaugia.Models.User>
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -258,7 +259,7 @@
                         <span>Thông tin tài khoản</span>
                     </a>
                 </li>
-          
+
                 <li class="dropdown-menu-item">
                     <a href="@Url.Action("Logout", "AdLogin", new { Area = "Admin"})" class="dropdown-menu-link">
                         <div>
@@ -318,54 +319,55 @@
                     </li>
 
                     @*<li>
-            <a href="#"> Thêm loại sản phẩm </a>
-        </li>*@
+                            <a href="#"> Thêm loại sản phẩm </a>
+                        </li>*@
                     @*<li>
-            <a href="/admin/adbrand"> Quản lý thương hiệu </a>
-        </li>*@
+                            <a href="/admin/adbrand"> Quản lý thương hiệu </a>
+                        </li>*@
                 </ul>
             </li>
 
             @*<li class="sidebar-submenu">
-                <a href="#" class="sidebar-menu-dropdown">
-                    <i class="bx bx-news"></i>
-                    <span>Quản lý bài viết</span>
-                    <div class="dropdown-icon"></div>
-                </a>
-                <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                    <li>
-                        <a href="/admin/adpost/listpost">Danh sách bài viết</a>
-                    </li>
-                    <li>
-                        <a href="/admin/adpost/createpost">Thêm bài viết</a>
-                    </li>
-                </ul>
-            </li>*@
+                    <a href="#" class="sidebar-menu-dropdown">
+                        <i class="bx bx-news"></i>
+                        <span>Quản lý bài viết</span>
+                        <div class="dropdown-icon"></div>
+                    </a>
+                    <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                        <li>
+                            <a href="/admin/adpost/listpost">Danh sách bài viết</a>
+                        </li>
+                        <li>
+                            <a href="/admin/adpost/createpost">Thêm bài viết</a>
+                        </li>
+                    </ul>
+                </li>*@
             @* Quản lý tài khoản *@
 
-        <li class="sidebar-submenu">
-            @*<a href="/admin/account/listaccount">
-                <i class="bx bx-user-circle"></i>
-                <span>Quản lý tài khoản</span>
-                <div class="dropdown-icon"></div>
-            </a>*@
-            <a href="#" class="sidebar-menu-dropdown">
-                <i class="bx bx-category"></i>
-                <span>Quản lý tài khoản</span>
-                <div class="dropdown-icon"></div>
-            </a>
+            <li class="sidebar-submenu">
+                @*<a href="/admin/account/listaccount">
+                        <i class="bx bx-user-circle"></i>
+                        <span>Quản lý tài khoản</span>
+                        <div class="dropdown-icon"></div>
+                    </a>*@
+                <a href="#" class="sidebar-menu-dropdown">
+                    <i class="bx bx-category"></i>
+                    <span>Quản lý tài khoản</span>
+                    <div class="dropdown-icon"></div>
+                </a>
 
-            <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                <li>
-                    <a href="/admin/account/listaccount"> Danh sách tài khoản </a>
-                </li>
-                <li>
-                    <a href="/admin/account/confirmaccount"> Xác minh tài khoản </a>
-                </li>
 
-            </ul>
+                <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                        <li>
+                            <a href="/admin/account/listaccount"> Danh sách tài khoản </a>
+                        </li>
+                        <li>
+                            <a href="/admin/account/confirmaccount"> Xác minh tài khoản </a>
+                        </li>
 
-        </li>
+                 </ul>
+
+            </li>
             @* Thống kê *@
             <li>
                 <a href="#">
