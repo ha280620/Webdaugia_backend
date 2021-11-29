@@ -54,5 +54,10 @@ namespace Webdaugia.Controllers
             var listCategory = db.Categories.ToList();
             return View(listCategory);
         }
+        public ActionResult Introduce()
+        {
+            return View();
+        }
+
     }
 }
