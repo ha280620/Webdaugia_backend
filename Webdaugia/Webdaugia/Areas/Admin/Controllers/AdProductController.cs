@@ -14,6 +14,7 @@ namespace Webdaugia.Areas.Admin.Controllers
     [HandleError]
     public class AdProductController : Controller
     {
+   
         string FilePath = "";
         public ActionResult Index()
         {
@@ -33,8 +34,9 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                var user = (UserLogin)Session["AD"];
                 var dao = new ProductDao();
-                var model = dao.ListAllPaging(searchString, page, pageSize);
+                var model = user.Role == 2 ? dao.ListAllPaging2(user.UserID,searchString, page, pageSize): dao.ListAllPaging(searchString, page, pageSize);
                 ViewBag.searchString = searchString;
                 return View(model);
             }
@@ -42,7 +44,8 @@ namespace Webdaugia.Areas.Admin.Controllers
         }
         public ActionResult ListCategory(string searchString, int page = 1, int pageSize = 10)
         {
-            if (Session["AD"] == null)
+            var user = (UserLogin)Session["AD"];
+            if (Session["AD"] == null || user.Role == 2)
             {
                 return RedirectToAction("Index", "AdLogin");
             }
@@ -65,10 +68,16 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                var user = (UserLogin)Session["AD"];
                 db = new AuctionDBContext();
+              
                 Product product = new Product();
                 product.ListLot = db.Lots.ToList();
-               if(product.ListLot == null)
+                if (user.Role == 2)
+                {
+                    product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+                }
+                if (product.ListLot == null)
                 {
                     return RedirectToAction("ListProduct");
                 }
@@ -83,6 +92,15 @@ namespace Webdaugia.Areas.Admin.Controllers
         {
             db = new AuctionDBContext();
             product.ListLot = db.Lots.ToList();
+            var user = (UserLogin)Session["AD"];
+            if (user.Role == 2)
+            {
+                product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+            }
+            if (product.ListLot == null)
+            {
+                return RedirectToAction("ListProduct");
+            }
             if (ModelState.IsValid)
             {
                 product.CreatedAt = DateTime.Now;
@@ -119,7 +137,8 @@ namespace Webdaugia.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult CreateCategory()
         {
-            if (Session["AD"] == null)
+            var user = (UserLogin)Session["AD"];
+            if (Session["AD"] == null || user.Role == 2)
             {
                 return RedirectToAction("Index", "AdLogin");
             }
@@ -202,16 +221,28 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                var user = (UserLogin)Session["AD"];
                 db = new AuctionDBContext();
                 var product = db.Products.Find(id);              
                 product.ListLot = db.Lots.ToList();
+                if (user.Role == 2)
+                {
+                    product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+                }
+                if (product.ListLot == null)
+                {
+                    return RedirectToAction("ListProduct");
+                }
+
                 return View(product);
             }
         }
         [HttpGet]
         public ActionResult EditCategory(int id)
         {
-            if (Session["AD"] == null)
+            var user = (UserLogin)Session["AD"];
+
+            if (Session["AD"] == null || user.Role == 2)
             {
                 return RedirectToAction("Index", "AdLogin");
             }
@@ -286,6 +317,15 @@ namespace Webdaugia.Areas.Admin.Controllers
         {
             db = new AuctionDBContext();
             product.ListLot = db.Lots.ToList();
+            var user = (UserLogin)Session["AD"];
+            if (user.Role == 2)
+            {
+                product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+            }
+            if (product.ListLot == null)
+            {
+                return RedirectToAction("ListProduct");
+            }
             int proID = product.ID;
             if (ModelState.IsValid)
             {
@@ -341,7 +381,8 @@ namespace Webdaugia.Areas.Admin.Controllers
         }
         public ActionResult LockOrUnlockCategory(int id)
         {
-            if (Session["AD"] == null)
+            var user = (UserLogin)Session["AD"];
+            if (Session["AD"] == null || user.Role == 2)
             {
                 return RedirectToAction("Index", "AdLogin");
             }

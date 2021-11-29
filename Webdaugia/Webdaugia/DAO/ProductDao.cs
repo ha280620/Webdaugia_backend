@@ -29,6 +29,15 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
+        public IEnumerable<Product> ListAllPaging2(int userid,string searchString, int page, int pageSize)
+        {
+            IQueryable<Product> model = db.Products.Where(x => x.CreatedBy == userid);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Lot.Name.Contains(searchString) || x.Lot.ID.ToString().Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
         public IEnumerable<Category> ListAllPagingCategory(string searchString, int page, int pageSize)
         {
             IQueryable<Category> model = db.Categories;

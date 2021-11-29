@@ -215,6 +215,10 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             db = new AuctionDBContext();
             var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
+            if(user.RoleID == 2 && user.RoleID == 1)
+            {
+                return RedirectToAction("ListAccount");
+            }
             if (user.Status == 1)
             {
                 user.Status = 2;

@@ -1812,12 +1812,6 @@
     <Content Include="Content\Product\P142.jpg" />
     <Content Include="Content\Product\P143.jpg" />
     <Content Include="Content\Product\P144.jpg" />
-    <Content Include="Content\Product\P152.jpg" />
-    <Content Include="Content\Product\P153.jpg" />
-    <Content Include="Content\Product\P154.jpg" />
-    <Content Include="Content\Product\P155.jpg" />
-    <Content Include="Content\Product\P156.jpg" />
-    <Content Include="Content\Product\P157.jpg" />
     <Content Include="Content\template\xacnhansuccess.html" />
     <Content Include="Content\template\thongbaodangky.html" />
     <Content Include="Content\template\sendangky.html" />
@@ -1837,8 +1831,8 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\boxicon.css" />
     <Content Include="css\fonteawesome.css" />
-    <Content Include="css\iofrm.css" />
     <Content Include="css\iofrm-theme.css" />
+    <Content Include="css\iofrm.css" />
     <Content Include="css\lightgallery.css" />
     <Content Include="css\multiplestep.css" />
     <Content Include="css\reset.css" />

@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-
+@{ var user = (Webdaugia.Models.Common.UserLogin)Session["AD"];}
 
 <div class="row">
     <div class="col-12">
@@ -14,7 +14,10 @@
             <div class="box-header title row">
                 <h2 class="col-6 col-sm-12">Danh sách phiên đấu giá</h2>
 
-                <div class="col-6 col-sm-12">
+                <div class="col-6 col-sm-12" style="
+    display: flex;
+    justify-content: end;
+">
                     <a href="/admin/adlot/createlot" class="btn btn-success" style="display:inline-block">
                         <i class="fa fa-plus-circle"></i>
                         Thêm phiên đấu giá mới
@@ -92,7 +95,8 @@
                                         <a href="/admin/adlot/editlot/@item.ID" style="padding-left:15px">
                                             <i class="fas fa-pencil-alt" style="color:dodgerblue"></i>
                                         </a>
-                                        @if (item.Status == false)
+
+                                        @if (item.Status == false && user.Role == 1)
                                         {
 
                                             <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left:10px" onclick="return confirm('Bạn có muốn khách hàng có thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
@@ -103,20 +107,21 @@
                                         }
                                         else
                                         {
-
-                                            <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left: 10px" onclick="return confirm('Bạn có muốn khách hàng không thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
-                                                <i class="fas fa-eye-slash" style="color:#04D182"></i>
-                                            </a>
-
+                                            if (user.Role == 1)
+                                            {
+                                                <a href="/admin/adlot/LockOrUnlockLot/@item.ID" style="margin-left: 10px" onclick="return confirm('Bạn có muốn khách hàng không thể xem phiên đấu giá này?\nTên phiên đấu giá: @item.Name')">
+                                                    <i class="fas fa-eye-slash" style="color:#04D182"></i>
+                                                </a>
+                                            }
                                         }
                                     </div>
                                 </td>
                             </tr>
                         }
                     </tbody>
-                    </table>
+                </table>
             </div>
-          
+
             @Html.PagedListPager(Model, page => Url.Action("ListLot", new { page, @searchString = ViewBag.searchString }))
         </div>
     </div>
