@@ -216,10 +216,10 @@ namespace Webdaugia.Controllers
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/sendangky.html"));
 
                     content = content.Replace("{{id}}", user.ID.ToString());
-                    content = content.Replace("{{ten}}", user.FullName);
+                    content = content.Replace("{{name}}", user.FullName);
                     content = content.Replace("{{tenphien}}", product.Name);
 
-                    string tb = "Đăng ký tham gia đấu giá " + user.ID + " " + user.FullName + " phiên đấu " + product.Name;
+                    string tb = "Đăng ký tham gia đấu giá " + user.ID + " - " + user.FullName + " phiên đấu " + product.ID + " - " +product.Name;
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
                     new MailHelper().SendMail(toEmail, tb, content);
                 }
