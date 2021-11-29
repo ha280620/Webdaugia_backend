@@ -362,22 +362,26 @@ namespace Webdaugia.Areas.Admin.Controllers
         [ValidateInput(false)]
         public ActionResult CreateLot(AdLot lot)
         {
+            db = new AuctionDBContext();
             if (Session["AD"] == null)
             {
                 return RedirectToAction("Index", "AdLogin");
             }
             if (lot.TimeForRegisterStart > lot.TimeForRegisterEnd)
             {
+                lot.ListCategory = db.Categories.ToList();
                 ViewBag.fail = "Ngày kết thúc đăng ký phải lớn ngày bắt đầu đăng ký!";
                 return View(lot);
             }
             if (lot.TimeForBidStart > lot.TimeForBidEnd)
             {
+                lot.ListCategory = db.Categories.ToList();
                 ViewBag.fail = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
                 return View(lot);
             }
             if (lot.TimeForRegisterEnd > lot.TimeForBidStart)
             {
+                lot.ListCategory = db.Categories.ToList();
                 ViewBag.fail = "Ngày kết bắt đầu đấu giá phải lớn người kết thúc đăng ký đấu giá !";
                 return View(lot);
             }
@@ -704,22 +708,26 @@ namespace Webdaugia.Areas.Admin.Controllers
         /*        [ValidateInput(false)]*/
         public ActionResult EditLot(Lot lot, HttpPostedFileBase file1)
         {
+            db = new AuctionDBContext();
             if (Session["AD"] == null)
             {
                 return RedirectToAction("Index", "AdLogin");
             }
             if (lot.TimeForRegisterStart > lot.TimeForRegisterEnd)
             {
+                lot.ListCategory = db.Categories.ToList();
                 ViewBag.fail = "Ngày kết thúc đăng ký phải lớn ngày bắt đầu đăng ký!";
                 return View(lot);
             }
             if (lot.TimeForBidStart > lot.TimeForBidEnd)
             {
+                lot.ListCategory = db.Categories.ToList();
                 ViewBag.fail = "Ngày kết thúc đấu giá phải lớn ngày bắt đầu đấu !";
                 return View(lot);
             }
             if (lot.TimeForRegisterEnd > lot.TimeForBidStart)
             {
+                lot.ListCategory = db.Categories.ToList();
                 ViewBag.fail = "Ngày kết bắt đầu đấu giá phải lớn người kết thúc đăng ký đấu giá !";
                 return View(lot);
             }

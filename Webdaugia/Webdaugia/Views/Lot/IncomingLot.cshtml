@@ -1,12 +1,17 @@
 ﻿@model Webdaugia.Models.Lot
 @{
-    ViewBag.Title = "IncomingLot";
+    ViewBag.Title = " - " + Model.Name;
+    ViewBag.keyword = "đấu giá, dau-gia, dau gia, bat-dong-san, o-to, dau gia o to, dau gia bat dong san, ô tô, Đông Sài Gòn, dong sai gon, Công ty đấu giá";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
     var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listReadyLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
     //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
+    foreach (var item in listAttributes)
+    {
+        ViewBag.meta += Html.Raw(item.Description);
+    };
 }
 @{
     var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
@@ -49,7 +54,7 @@
                                 <a class="slide-for-item" href="@img.Image">
                                     <img class="img-fluid w-100"
                                          src="@img.Image"
-                                         alt="anh" />
+                                         alt="@item.Name - @img.ID"  />
                                 </a>
                             }
                         }
@@ -65,7 +70,7 @@
                                         <div class="slide-nav-item-img">
                                             <img class="img-fluid"
                                                  src="@img.Image"
-                                                 alt="" />
+                                                 alt="@item.Name - @img.ID"  />
                                         </div>
                                     </div>
 
@@ -320,7 +325,7 @@
                             <div class="col-12 col-md-6 col-lg-4 p-2">
                                 <div class="going-item">
                                     <div class="going-item-img">
-                                        <img src="@item.LotImage" class="img-fluid" alt="" />
+                                        <img src="@item.LotImage" class="img-fluid" alt="@item.Name" />
                                         <div class="going__overlay"></div>
                                         <div class="going__play">
                                             <a href="/phien-dau/@item.SiteTile-@item.ID">

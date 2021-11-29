@@ -1,10 +1,16 @@
 ﻿@model Webdaugia.Models.Lot
 @{
-    ViewBag.Title = "OnGoingLot";
+    ViewBag.Title = " - " + Model.Name;
     var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
     var listAuctioned = (List<Webdaugia.Models.Auction>)ViewBag.listAuctioned;
     var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
+
+    foreach(var item in listAttributes)
+    {
+        ViewBag.meta += Html.Raw(item.Description);
+    };
+
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 @{
@@ -43,7 +49,7 @@
                                 <a class="slide-for-item" href="@img.Image">
                                     <img class="img-fluid w-100"
                                          src="@img.Image"
-                                         alt="anh" />
+                                         alt="@item.Name - @img.ID"  />
                                 </a>
                             }
                         }
@@ -58,7 +64,7 @@
                                         <div class="slide-nav-item-img">
                                             <img class="img-fluid"
                                                  src="@img.Image"
-                                                 alt="" />
+                                                 alt="@item.Name - @img.ID" />
                                         </div>
                                     </div>
 

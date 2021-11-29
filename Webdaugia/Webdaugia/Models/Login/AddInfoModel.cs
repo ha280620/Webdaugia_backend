@@ -11,7 +11,7 @@ namespace Webdaugia.Models.Login
         [Required(ErrorMessage ="Bạn cần nhập cmnd")]
 
         public long cmnd { set; get; }
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "Địa Chỉ vui lòng không nhập quá 100 kí tự!")]
+   
         [Required(ErrorMessage = "Bạn cần nhập địa chỉ")]
         public string diachi { set; get; }
 
@@ -38,7 +38,7 @@ namespace Webdaugia.Models.Login
         public long atmcode { set; get; }
 
         [Required(ErrorMessage = "Bạn cần nhập tên tài khoản")]
-        [StringLength(50, MinimumLength = 8, ErrorMessage = "Tên chủ tài khoản không nhập quá 100 kí tự!")]
+
         public string atmfullname { set; get; }
 
         [Required(ErrorMessage = "Bạn vui lòng chọn ngân hàng")]
