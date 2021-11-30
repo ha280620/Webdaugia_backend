@@ -2061,6 +2061,7 @@
     <Content Include="Views\Login\ProfileCustomer.cshtml" />
     <Content Include="Views\Login\ChangePassCustomer.cshtml" />
     <Content Include="Views\Login\AccountManagement.cshtml" />
+    <Content Include="Views\Home\Introduce.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />
