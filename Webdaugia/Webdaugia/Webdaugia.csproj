@@ -1860,6 +1860,7 @@
     <Content Include="img\DJI-0357-1603422122.jpg" />
     <Content Include="img\ending.png" />
     <Content Include="img\error-img.png" />
+    <Content Include="img\ezgif.com-gif-maker_7.gif" />
     <Content Include="img\footer.png" />
     <Content Include="img\form7.jpg" />
     <Content Include="img\graphic3.svg" />
@@ -2061,6 +2062,7 @@
     <Content Include="Views\Login\ProfileCustomer.cshtml" />
     <Content Include="Views\Login\ChangePassCustomer.cshtml" />
     <Content Include="Views\Login\AccountManagement.cshtml" />
+    <Content Include="Views\Home\Introduce.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

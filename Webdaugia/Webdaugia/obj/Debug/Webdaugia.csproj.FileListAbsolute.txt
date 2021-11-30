@@ -243,7 +243,7 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\System.Web.WebPages.Razor.xm
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Newtonsoft.Json.xml
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Antlr3.Runtime.pdb
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreCompileInputs.cache
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

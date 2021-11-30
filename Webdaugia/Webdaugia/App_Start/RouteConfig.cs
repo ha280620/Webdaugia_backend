@@ -50,7 +50,11 @@ namespace Webdaugia
                defaults: new { controller = "Lot", action = "ListLotByCate", CateId = UrlParameter.Optional }
            );
 
-        
+            routes.MapRoute(
+                name: "Introduce",
+                url: "gioi-thieu",
+                defaults: new { controller = "Home", action = "Introduce", id = UrlParameter.Optional }
+               );
             routes.MapRoute(
                name: "Dang Ky Dau Gia",
                url: "dang-ky-dau-gia",

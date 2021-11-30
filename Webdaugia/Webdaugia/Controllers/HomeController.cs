@@ -46,5 +46,9 @@ namespace Webdaugia.Controllers
         
             return PartialView();
         }
+        public ActionResult Introduce()
+        {
+            return View();
+        }
     }
 }
