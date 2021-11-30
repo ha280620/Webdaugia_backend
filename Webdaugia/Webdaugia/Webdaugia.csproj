@@ -1845,11 +1845,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="img\200lab-education-golang-flutter-software-engineer-1.jpg" />
+    <Content Include="img\ben-thanh-icon-animation800x600.gif" />
     <Content Include="img\auction.jpg" />
     <Content Include="img\bag.jpg" />
     <Content Include="img\bag.png" />
     <Content Include="img\batdongsan.png" />
-    <Content Include="img\ben-thanh-icon-animation800x600.gif" />
     <Content Include="img\Can-reforms-in-property-auctions-help-real-estate-during-COVID-19-FB-1200x700-compressed.jpg" />
     <Content Include="Content\Images\Category\car.jpg" />
     <Content Include="img\car.png" />

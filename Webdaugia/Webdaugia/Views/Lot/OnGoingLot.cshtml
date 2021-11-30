@@ -24,20 +24,30 @@
 
         <div class="container">
             <div class="row product">
-                <div class="col-12">
-                    <div class="product-title-start">
-                        <i class="bx bxs-circle mr-2"></i>
-                        <h3>Tài sản đang đấu giá</h3>
+                @if (@Model.TimeForBidEnd >= DateTime.Now && @Model.TimeForBidStart <= DateTime.Now)
+                {
+                    <div class="col-12">
+                        <div class="product-title-start">
+                            <i class="bx bxs-circle mr-2"></i>
+                            <h2>Tài sản đang đấu giá</h2>
+                        </div>
                     </div>
-                </div>
+                }
+                @if (@Model.TimeForBidEnd < DateTime.Now)
+                {
+                    <div class="col-12">
+                        <div class="product-title-start" style="background-color: #0c4da1">
+                            <i class='bx bxs-square-rounded mr-2'></i>
+                            <h2>Tài sản đã kết thúc đấu giá</h2>
+                        </div>
+                    </div>
+                }
+
                 <div class="col-12">
                     <div class="product__name mb-3">
-                        <h2>
-                            @foreach (var item in listAttributes)
-                            {
-                                @item.Name
-                            }
-                        </h2>
+                        <h1 class="h2">
+                            @Model.Name
+                        </h1>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -49,7 +59,7 @@
                                 <a class="slide-for-item" href="@img.Image">
                                     <img class="img-fluid w-100"
                                          src="@img.Image"
-                                         alt="@item.Name - @img.ID"  />
+                                         alt="@item.Name - @img.ID" />
                                 </a>
                             }
                         }

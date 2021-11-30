@@ -15,7 +15,7 @@
         <p class="text-success mb-0">@ViewBag.Success</p>
         <p class="text-success mb-0">@ViewBag.Error</p>
         <div class="form_control">
-            @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", @class = "mb-0 mt-2", required = "required", placeholder = "Email" })
+            @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", @class = "mb-0 mt-2", placeholder = "Email" })
             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
         </div>
 

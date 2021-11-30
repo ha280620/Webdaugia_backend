@@ -11,22 +11,24 @@
 </div>
 @using (Html.BeginForm("DangNhap", "Login", FormMethod.Post))
 {
-    <div class="form_control">
-        @*@Html.TextBoxFor(model => model.Username)*@
-        <input required name="Username" type="text" placeholder="Tên đăng nhập" />
-    </div>
-    <div class="form_control">
-        @*@Html.TextBoxFor(model => model.Password)*@
-        <input required name="Password" type="password" placeholder="Mật khẩu" />
-        @*<div class="input-group-append cursor-pointer">
-                <span class="input-group-text">
-                        <i class="fa fa-eye"></i>
-                    </span>
-            </div>*@
-    </div>
+<div class="form_control">
+    @*@Html.TextBoxFor(model => model.Username)*@
+    <input name="Username" type="text" placeholder="Tên đăng nhập" />
+   
+</div>
+<div class="form_control">
+    @*@Html.TextBoxFor(model => model.Password)*@
+    <input name="Password"  type="password" placeholder="Mật khẩu" />
+    @*<div class="input-group-append cursor-pointer">
+            <span class="input-group-text">
+                    <i class="fa fa-eye"></i>
+                </span>
+        </div>*@
+   
+</div>
     <div class="row mt-10 mx-0">
         <div class="col-6 pl-0">
-            <button type="submit" class="btn btn-primary btn-block"  id="loading">Đăng Nhập</button>
+            <button type="submit" class="btn btn-primary btn-block" id="loading" style="#0c4da1">Đăng Nhập</button>
         </div>
         <div class="col-6 d-flex align-items-center justify-content-end pr-0">
             <a href="~/Login/Quenmatkhau">Quên mật khẩu?</a>
