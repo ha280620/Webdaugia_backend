@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đông Sài Gòn</title>
+    <link rel="icon" href="~/img/logo-title.png" type="~/image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/fonteawesome.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/iofrm.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/iofrm-theme.css" />
+    <style>
+        #loader {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="loader">
+        <!-- <span class="fas fa-spider xoay icon"></span> -->
+        <div class="loader-content">
+            <img class="img-fluid" src="~/img/ben-thanh-icon-animation800x600.gif" alt="" />
+        </div>
+    </div>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="/">
+                <div class="logo">
+                    <img class="logo-size" src="~/img/logo-title.png" alt="" />
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="~/img/graphic3.svg" alt="" />
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        @*<div class="page-links">
+                                <a href="~/dang-nhap" >Đăng nhập</a><a href="~/dang-ki" class="active">Đăng ký</a>
+                            </div>*@
+                        <div>
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#loading').click(function () {
+                $('#loader').css('display', 'block');
+            });
+        });
+    </script>
+</body>
+</html>

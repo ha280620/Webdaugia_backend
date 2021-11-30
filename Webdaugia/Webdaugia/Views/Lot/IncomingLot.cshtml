@@ -1,28 +1,30 @@
 ﻿@model Webdaugia.Models.Lot
 @{
-    ViewBag.Title = "IncomingLot";
+    ViewBag.Title = " - " + Model.Name;
+    ViewBag.keyword = "đấu giá, dau-gia, dau gia, bat-dong-san, o-to, dau gia o to, dau gia bat dong san, ô tô, Đông Sài Gòn, dong sai gon, Công ty đấu giá";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listReadyLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
     var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
+    var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
     //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
+    foreach (var item in listAttributes)
+    {
+        ViewBag.meta += Html.Raw(item.Description);
+    };
 }
 @{
     var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
-<<main>
+<main>
     @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];
 
     }
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=369248914700597&autoLogAppEvents=1" nonce="KQ7HIJOL"></script>
     <section id="detail-link ">
-        <div class="breadcrumb-noheading container">
-            <div class="breadcrumb" style="background-color: #fff">
-                <a href="/">Trang Chủ</a><i class="bx bx-chevron-right"></i>
-                <a href="/thuong-hieu">Mèo Cảnh</a><i class="bx bx-chevron-right"></i>
-                <a href="/thuong-hieu">Nhà, Chuồng, Nệm</a><i class="bx bx-chevron-right"></i>
-                <a href="#">Nhà mèo &amp; Nhà cây Cattree</a>
-            </div>
-        </div>
+
         <div class="container">
             <div class="row product">
                 @if (@Model.TimeForRegisterEnd >= DateTime.Now)
@@ -52,7 +54,7 @@
                                 <a class="slide-for-item" href="@img.Image">
                                     <img class="img-fluid w-100"
                                          src="@img.Image"
-                                         alt="anh" />
+                                         alt="@item.Name - @img.ID"  />
                                 </a>
                             }
                         }
@@ -68,7 +70,7 @@
                                         <div class="slide-nav-item-img">
                                             <img class="img-fluid"
                                                  src="@img.Image"
-                                                 alt="" />
+                                                 alt="@item.Name - @img.ID"  />
                                         </div>
                                     </div>
 
@@ -100,7 +102,7 @@
                             { <p>
                                     Thời gian đăng ký còn lại:
                                 </p>
-                                <h2 class="text-danger">Thời gian đăng ký kết thúc</h2>
+                                <h2>Thời gian đăng ký kết thúc</h2>
                             }
 
                         </div>
@@ -169,7 +171,7 @@
                                         {
 
 
-                                            <td class="text-success time-register">Đấu giá đã bắt đầu</td>
+                                            <td class="text-success time-register">Đấu giá đã bắt đầu <a href="/phien-dang-dien-ra/@Model.SiteTile-@Model.ID">Vào ngay</a></td>
                                         }
                                         else if (@Model.TimeForBidStart >= DateTime.Now)
                                         {
@@ -234,6 +236,12 @@
                             }
 
                         }
+                        @if (user == null)
+                        {
+                            <div class="col-12 d-flex justify-content-center align-items-center alert alert-success" role="alert">
+                                <p class="text-success">Bạn vui lòng đăng nhập để đăng ký</p>
+                            </div>
+                        }
 
                     </div>
                 </div>
@@ -242,7 +250,7 @@
     </section>
     <section class="detail-description mb-5">
         <div class="container">
-            <nav>
+            <nav class="justify-content-center">
                 <div class="nav nav-pills" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link active"
                        id="nav-home-tab"
@@ -275,98 +283,98 @@
                     @foreach (var item in listAttributes)
                     {
                         @Html.Raw(item.Description);
-                    
+
                     }
                 </div>
                 <div class="tab-pane fade"
                      id="nav-profile"
                      role="tabpanel"
                      aria-labelledby="nav-profile-tab">
-                    Sint sit mollit irure quis est nostrud cillum consequat Lorem
-                    esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam
-                    Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo
-                    elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud
-                    tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad
-                    irure in labore cillum elit enim. Consequat aliquip incididunt
-                    ipsum et minim laborum laborum laborum et cillum labore.
-                    Deserunt adipisicing cillum id nulla minim nostrud labore
-                    eiusmod et amet. Laboris consequat consequat commodo non ut non
-                    aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                    @foreach (var item in listAttachment)
+                    {
+                        <a href="@item.AttachmentLink.Trim()" alt="link-@item.Name" target="_blank" style="
+    text-decoration: underline;
+">@item.Name</a>
+<br />
+}
                 </div>
                 <div class="tab-pane fade"
                      id="nav-contact"
                      role="tabpanel"
                      aria-labelledby="nav-contact-tab">
-                    Sint sit mollit irure quis est nostrud cillum consequat Lorem
-                    esse do quis dolor esse fugiat sunt do. Eu ex commodo veniam
-                    Lorem aliquip laborum occaecat qui Lorem esse mollit dolore anim
-                    cupidatat. Deserunt officia id Lorem nostrud aute id commodo
-                    elit eiusmod enim irure amet eiusmod qui reprehenderit nostrud
-                    tempor. Fugiat ipsum excepteur in aliqua non et quis aliquip ad
-                    irure in labore cillum elit enim. Consequat aliquip incididunt
-                    ipsum et minim laborum laborum laborum et cillum labore.
-                    Deserunt adipisicing cillum id nulla minim nostrud labore
-                    eiusmod et amet. Laboris consequat consequat commodo non ut non
-                    aliquip reprehenderit nulla anim occaecat. Sunt sit ullamco
-                    reprehenderit irure ea ullamco Lorem aute nostrud magna.
+                    <div class="fb-comments" data-href="@Request.Url.ToString()" data-width="500" data-numposts=""></div>
                 </div>
             </div>
         </div>
     </section>
 
-    @if (ViewBag.listReadyLot == null)
-    {
 
-    }
-    else
-    {
-        <section id="going">
-            <div class="container mt-2">
-                <div class="going-title">
-                    <i class="bx bxs-right-arrow mr-2"></i>
-                    <h3>Tài sản sắp đấu giá</h3>
+    <section id="going">
+        <div class="container mt-2">
+            <div class="going-title">
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
 
-                </div>
-                <div class="row">
-                    @foreach (var item in ViewBag.listReadyLot)
-                    {
-                        <div class="col-4 p-2">
-                            <div class="going-item">
-                                <div class="going-item-img">
-                                    <img src="@item.LotImage" class="img-fluid" alt="" />
-                                    <div class="going__overlay"></div>
-                                    <div class="going__play">
-                                        <a href="#">
-                                            <h5>Thời gian kết thúc đăng ký</h5>
-                                            <p>@item.TimeForRegisterEnd</p>
-                                            <h5>Thời gian bắt đầu đấu giá</h5>
-                                            <p>@item.TimeForBidStart</p>
+            </div>
+
+                @if (listOnGoingLot != null)
+                {
+                    <div class="row">
+                        @foreach (var item in listOnGoingLot)
+                        {
+                            <div class="col-12 col-md-6 col-lg-4 p-2">
+                                <div class="going-item">
+                                    <div class="going-item-img">
+                                        <img src="@item.LotImage" class="img-fluid" alt="@item.Name" />
+                                        <div class="going__overlay"></div>
+                                        <div class="going__play">
+                                            <a href="/phien-dau/@item.SiteTile-@item.ID">
+                                                <h5>Thời kết thúc đăng ký</h5>
+                                                <p>@item.TimeForRegisterEnd</p>
+                                                <h5>Thời gian bắt đầu đấu giá </h5>
+                                                <p>@item.TimeForBidStart</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="going-content">
+                                        <p>@item.Category.Name</p>
+                                        <h3>
+                                            @item.Name
+                                        </h3>
+
+                                        <div class="going-starting-price mt-1">
+                                            <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
+                                        </div>
+                                        <a class="btn btn-sign-up going_btn" href="/phien-dau/@item.SiteTile-@item.ID">
+                                            Đăng Ký tham gia đấu giá
                                         </a>
                                     </div>
                                 </div>
-                                <div class="going-content">
-                                    <p>@item.Category.Name</p>
-                                    <h3>
-                                        @item.Name
-                                    </h3>
+                            </div>
+                        }
+                    </div>
 
-                                    <div class="going-starting-price mt-1">
-                                        <h4>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</h4>
-                                    </div>
-                                    <a class="btn btn-sign-up going_btn" href="#">
-                                        Đấu giá ngay
-                                    </a>
+                }
+                else
+                {
+                    <div class="row justify-content-center">
+                        <img src="~/Content/Images/Category/noauction1.png" class="img-fluid">
+                        <div class="container container--checkout pb-2">
+                            <div class="checkout">
+                                <div class="empty" style="vertical-align:middle; text-align:center">
+                                    <a href="/" style="text-align:center;">Về Trang Chủ</a>
                                 </div>
+
                             </div>
                         </div>
-                    }
+                    </div>
 
-                </div>
+                }
+
             </div>
-        </section>
-    }
+      
+    </section>
+
 </main>
 
 <!-- Modal -->
@@ -387,15 +395,15 @@
                         <tbody>
                             <tr>
                                 <th scope="row">Phí đăng ký tham gia đấu giá:</th>
-                                <td>@Model.ParticipationFee VNĐ</td>
+                                <td> @string.Format(info, "{0:0,0}", @Model.ParticipationFee) VNĐ</td>
                             </tr>
                             <tr>
                                 <th scope="row">Tiền đặt trước:</th>
-                                <td>@Model.AdvanceDesposit VNĐ</td>
+                                <td>  @string.Format(info, "{0:0,0}", @Model.AdvanceDesposit) VNĐ</td>
                             </tr>
                             <tr>
                                 <th scope="row">Tổng tiền</th>
-                                <td class="color:var(--btn-danger); font-weight: 700;"> @ViewBag.total VNĐ</td>
+                                <td class="color:var(--btn-danger); font-weight: 700;"> @string.Format(info, "{0:0,0}", @ViewBag.total) VNĐ</td>
                             </tr>
 
                         </tbody>
@@ -410,15 +418,15 @@
                             </tr>
                             <tr>
                                 <th scope="row">Số tài khoản</th>
-                                <td>8347538457983</td>
+                                <td>19036757562011</td>
                             </tr>
                             <tr>
                                 <th scope="row">Tên người hưởng</th>
-                                <td>Công ty Đông Sài Gòn VNĐ</td>
+                                <td>Công ty đấu giá hợp danh Đông Sài Gòn</td>
                             </tr>
                             <tr>
-                                <th scope="row">Chi Nhanh</th>
-                                <td> Hồ Chí Minh</td>
+                                <th scope="row">Chi Nhánh</th>
+                                <td>Chi nhánh Hồ Chí Minh</td>
                             </tr>
                             <tr>
                                 <th scope="row">Nội dung chuyển khoản</th>
@@ -428,7 +436,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-sign-up w-100" href="/dang-ky-dau-gia?lotId=@Model.ID&userID=@user.UserID.ToString()&url=@Request.Url.ToString()"> Đăng ký </a>
+                    <a id="loading" class="btn btn-sign-up w-100" href="/dang-ky-dau-gia?lotId=@Model.ID&userID=@user.UserID.ToString()&url=@Request.Url.ToString()"> Đăng ký </a>
                 </div>
             </div>
         </div>
@@ -500,7 +508,7 @@ else if (@Model.TimeForRegisterStart > DateTime.Now)
 }
 @if (@Model.TimeForBidStart >= DateTime.Now)
 {
-<script>
+    <script>
     var countDownDate = new Date("@Model.TimeForBidStart").getTime();
 
     var x = setInterval(function () {
@@ -531,11 +539,18 @@ else if (@Model.TimeForRegisterStart > DateTime.Now)
 
     }, 1000);
 
-</script>
+    </script>
 }
 
 @section Lot{
-  
+
+    <script>
+        $(document).ready(function () {
+            $('#loading').click(function () {
+                $('#loader').css('display', 'block');
+            });
+        });
+    </script>
     <script type="text/javascript">
         lightGallery(document.getElementById("lightgallery"), {
             speed: 300,

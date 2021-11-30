@@ -1,0 +1,119 @@
+﻿@model  IList<Webdaugia.Models.Lot>
+@{
+    ViewBag.Title = " - " + @ViewBag.CateName;
+
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+
+}
+z
+
+@section Category{
+    <script>
+        var swipercategory = new Swiper(".swiper-category", {
+            slidesPerView: getSlidesPerView(),
+            spaceBetween: 20,
+            direction: getDirection(),
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            on: {
+                resize: function () {
+                    swipercategory.changeDirection(getDirection());
+                    swipercategory.slidesPerView(slidesPerView());
+                },
+            },
+        });
+        function getSlidesPerView() {
+
+            var slidesPerView = window.innerWidth <= 760 ? "1" : "6";
+
+            return slidesPerView;
+        }
+        function getDirection() {
+
+            var direction = window.innerWidth <= 760 ? "vertical" : "horizontal";
+
+            return direction;
+        }
+    </script>
+}
+<main>
+    <section class="mb-5">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in ViewBag.listCategory)
+                {
+                    <a class="col-2 " href="/loai-phien-dau/@item.SiteTile-@item.ID">
+                        <img class="img-fluid" src="@item.CateIcon" />
+                    </a>
+                }
+            </div>
+
+        </div>
+    </section>
+    <section id="going">
+        <div class="container">
+            <div class="going-title">
+                <h3>@ViewBag.CateName</h3>
+            </div>
+            @if (Model.Count != 0)
+            {
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-12 col-md-6 col-lg-4 p-2">
+                            <div class="going-item">
+                                <div class="going-item-img">
+                                    <img src="@item.LotImage" class="img-fluid" alt="@item.Name" />
+                                    <div class="going__overlay"></div>
+                                    <div class="going__play">
+                                        <a href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
+                                            <h5>Thời gian bắt đầu đấu giá</h5>
+                                            <p>@item.TimeForBidStart</p>
+                                            <h5>Thời gian kết thúc đấu giá </h5>
+                                            <p>@item.TimeForBidEnd</p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="going-content">
+                                    <p>@item.Category.Name</p>
+                                    <h3>
+                                        @item.Name
+                                    </h3>
+
+                                    <div class="going-starting-price mt-1">
+                                        <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
+                                    </div>
+                                    <a class="btn btn-sign-up going_btn" href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
+                                        Đấu Giá Ngay
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (Model.Count == 0)
+            {
+                <div class="row justify-content-center">
+                    <img src="~/Content/Images/Category/noauction1.png" alt="Không có phiên đáu giá" class="img-fluid">
+                    <div class="container container--checkout pb-2">
+                        <div class="checkout">
+                            <div class="empty" style="vertical-align:middle; text-align:center">
+                                <a href="/" style="text-align:center;">Về Trang Chủ</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </section>
+
+</main>

@@ -1,0 +1,91 @@
+﻿@model Webdaugia.Areas.Admin.Models.PasswordModel
+@{
+    ViewBag.Title = "ChangePassCustomer";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="header-position"></div>
+<section id="userInfo" style="background-color:#eee">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3" style="margin-bottom:2rem">
+                <div class="userInfo_cata">
+                    <ul class="m-0">
+                        <li class=""><a  style="padding-right: 5.4rem !important;" class="p-2" href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                        <li class="active"><a  style="padding-right: 8.4rem !important;" class="p-2" href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
+      <li class=""><a style="padding-right: 5.4rem !important;" class="p-2" href="/quan-ly-tai-khoan">Danh sách đăng ký</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-9">
+                <div class="userInfo_content">
+                    <h2 class="text-left pl-0 pt-0 mb-2">Đổi mật khẩu</h2>
+
+                    <div class="col-12">
+                        @using (Html.BeginForm("ChangePassCustomer", "Login", FormMethod.Post, new { are = "" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                @if (ViewBag.WrongPass != null)
+                                {
+                                    <div class="col-12 mb-2">
+                                        <div class="text-danger">@ViewBag.WrongPass</div>
+                                    </div>
+                                }
+                                @if (ViewBag.Success != null)
+                                {
+                                    <div class="col-12 mb-2">
+                                        <div class="text-success">@ViewBag.success</div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form_control">
+                                        <input required name="password" type="password" />
+                                        <label>Mật khẩu cũ</label>
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form_control">
+                                        <input required name="newpassword" type="password" />
+                                        <label>Mật khẩu mới</label>
+                                        @Html.ValidationMessageFor(model => model.newpassword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form_control">
+                                        <input required name="confirmpassword" type="password" />
+                                        <label>Nhập lại mật khẩu mới</label>
+                                        @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6 ">
+                                    <button type="submit"
+                                            class="btn btn-primary w-100 font-weight-bold">
+                                        Lưu lại
+                                    </button>
+                                </div>
+                                <div class="col-6 ">
+                                    <button id=""
+                                            onclick="handleOffChange()"
+                                            class="btn btn-outline-primary w-100 font-weight-bold">
+                                        Huỷ
+                                    </button>
+                                </div>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*<script src="~/Content/Client/js/userinfo.js"></script>*@

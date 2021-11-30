@@ -9,12 +9,14 @@ namespace Webdaugia.Models.Login
     public class AddInfoModel
     {
         [Required(ErrorMessage ="Bạn cần nhập cmnd")]
-        public long cmnd { set; get; }
 
+        public long cmnd { set; get; }
+   
         [Required(ErrorMessage = "Bạn cần nhập địa chỉ")]
         public string diachi { set; get; }
 
         [Required(ErrorMessage = "Bạn cần nhập nơi cấp cmnd")]
+        [StringLength(100,  ErrorMessage = "Địa Chỉ vui lòng không nhập quá 158 kí tự!")]
         public string noicapcmnd { set; get; }
 
         [Required(ErrorMessage = "Bạn cần nhập ngày cấp cmnd")]
@@ -26,16 +28,17 @@ namespace Webdaugia.Models.Login
         [Required]
         public bool gt { set; get; }
 
-        [Required(ErrorMessage = "Bạn up ảnh cmnd/cccd mặt trước")]
-        public string cmndfront { set; get; }
+        [Required(ErrorMessage = "Bạn vui lòng up ảnh cmnd/cccd mặt trước")]
+        public HttpPostedFileBase cmndfront { set; get; }
 
-        [Required(ErrorMessage = "Bạn up ảnh cmnd/cccd mặt sau")]
-        public string cmndback { set; get; }
+        [Required(ErrorMessage = "Bạn vui lòng up ảnh cmnd/cccd mặt sau")]
+        public HttpPostedFileBase cmndback { set; get; }
 
         [Required(ErrorMessage = "Bạn cần nhập số tài khoản")]
         public long atmcode { set; get; }
 
         [Required(ErrorMessage = "Bạn cần nhập tên tài khoản")]
+
         public string atmfullname { set; get; }
 
         [Required(ErrorMessage = "Bạn vui lòng chọn ngân hàng")]

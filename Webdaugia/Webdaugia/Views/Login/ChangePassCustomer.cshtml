@@ -1,25 +1,26 @@
 ﻿@model Webdaugia.Areas.Admin.Models.PasswordModel
 @{
-    ViewBag.Title = "ChangePassCustomer";
+    ViewBag.Title = " - Thay đổi mật khẩu";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <div class="header-position"></div>
-<section id="userInfo">
+<section id="userInfo" style="background-color:#eee">
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-12 col-md-3" style="margin-bottom:2rem">
                 <div class="userInfo_cata">
                     <ul class="m-0">
-                        <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
-                        <li><a href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
-                        <li><a href="/quan-ly-tai-khoan">Quản lý tài khoản</a></li>
+                        <li class=""><a  style="padding-right: 5.4rem !important;" class="p-2" href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                        <li class="active"><a  style="padding-right: 8.4rem !important;" class="p-2" href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
+      <li class=""><a style="padding-right: 5.4rem !important;" class="p-2" href="/quan-ly-tai-khoan">Danh sách đăng ký</a></li>
+                       
                     </ul>
                 </div>
             </div>
 
-            <div class="col-9 pt-1">
+            <div class="col-12 col-md-9">
                 <div class="userInfo_content">
-                    <h2 class="text-left pl-0 pt-0">Đổi mật khẩu</h2>
+                    <h2 class="text-left pl-0 pt-0 mb-2">Đổi mật khẩu</h2>
 
                     <div class="col-12">
                         @using (Html.BeginForm("ChangePassCustomer", "Login", FormMethod.Post, new { are = "" }))

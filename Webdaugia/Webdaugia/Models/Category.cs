@@ -1,4 +1,4 @@
-namespace Webdaugia.Models
+﻿namespace Webdaugia.Models
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +16,9 @@ namespace Webdaugia.Models
 
         public int ID { get; set; }
 
-        [Required]
+
         [StringLength(128)]
+        [Required(ErrorMessage = "Bạn cần nhập tên loại")]
         public string Name { get; set; }
 
         [StringLength(128)]
@@ -25,6 +26,12 @@ namespace Webdaugia.Models
 
         [StringLength(158)]
         public string MetaKeywords { get; set; }
+
+        [StringLength(158)]
+        public string CateImg { get; set; }
+
+        [StringLength(158)]
+        public string CateIcon { get; set; }
 
         [StringLength(158)]
         public string MetaDescription { get; set; }

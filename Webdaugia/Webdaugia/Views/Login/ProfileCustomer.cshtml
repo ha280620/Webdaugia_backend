@@ -1,34 +1,34 @@
 ﻿@model Webdaugia.Models.User
 @{
-    ViewBag.Title = "ProfileCustomer";
+    ViewBag.Title = "- Thông tin tài khoản";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <div class="header-position"></div>
-<section id="userInfo">
+<section id="userInfo" style="background-color:#eee">
     <div class="container">
         <div class="row">
-            <div class="col-3">
+            <div class="col-12 col-md-3" style="margin-bottom:2rem">
                 <div class="userInfo_cata">
                     <ul class="m-0">
-                        <li class="active"><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
-                        <li><a href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
-                        <li><a href="/quan-ly-tai-khoan">Quản lý tài khoản</a></li>
+                        <li class="active "><a  style="padding-right: 5.4rem !important;" class="p-2" href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                        <li ><a  style="padding-right: 8.4rem !important;" class="p-2" href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
+                        <li ><a style="padding-right: 5.4rem !important;" class="p-2" href="/quan-ly-tai-khoan">Danh sách đăng ký</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-9">
                 <div class="userInfo_content">
-                    <h2 class="text-left pl-0 pt-0">Thông tin</h2>
+                    <h2 class="text-left pl-0 pt-0 mb-2">Thông tin</h2>
                     @using (Html.BeginForm("ProfileCustomer", "Login", FormMethod.Post, new { are = "" }))
                     {
                         <div class="row">
-                            <div class="col-2">
-                                <div class="userInfo_img">
-                                    <img class="img-fluid" src="~/Content/Client/img/user-image-3.png" alt="" />
+                            <div class="col-12 col-md-2 mb-2 p-5 p-md-1">
+                                <div class="userInfo_img ">
+                                    <img class="img-fluid" src="@ViewBag.imguser" alt="" />
                                 </div>
                             </div>
-                            <div class="col-9">
+                            <div class="col-11 col-md-9">
                                 @Html.AntiForgeryToken()
                                 <div class="row">
                                     @if (ViewBag.Fail != null)
@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form_control">
-                                            <select id="Gender" required name="Gender" disabled>
+                                            <select id="Gender" name="Gender" disabled>
                                                 @if (Model.Gender == true)
                                                 {
                                                     <option value="True" selected>Nam</option>
@@ -89,7 +89,7 @@
                                                    name="Phone"
                                                    type="text"
                                                    disabled />
-                                            <label for="userPhone">Số điện thoại</label>
+                                            <label for="userPhone">Số điện thoại <span class="text-danger">(được đổi)</span></label>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -101,7 +101,7 @@
                                                    type="text"
                                                    disabled />
 
-                                            <label for="userEmail">Email</label>
+                                            <label for="userEmail">Email <span class="text-danger">(được đổi)</span></label>
                                         </div>
                                     </div>
                                     <div class="col-12">

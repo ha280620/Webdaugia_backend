@@ -10,8 +10,8 @@ namespace Webdaugia.Models
     public partial class ATM
     {
         public int ID { get; set; }
-
-        public long? ATMCode { get; set; }
+        [StringLength(20)]
+        public string ATMCode { get; set; }
 
         [StringLength(50)]
         public string ATMFullName { get; set; }

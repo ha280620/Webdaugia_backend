@@ -90,7 +90,7 @@ namespace Webdaugia.Controllers
                         userSession.Name = user.FullName;
                         userSession.Status = user.Status;
 
-                        var img = "Content\\User\\User00.png";
+                        var img = "\\Content\\User\\User00.png";
                         UsersImage usersImage = new UsersImage();
                         usersImage.UsersID = result;
                         usersImage.Image = img;
@@ -194,7 +194,19 @@ namespace Webdaugia.Controllers
         [HttpGet]
         public ActionResult Themthongtin()
         {
-           db = new AuctionDBContext();
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("DangNhap", "Login");
+            }
+          
+            var dao = new UserDao();
+            UserLogin userid = (UserLogin)Session["USER"];
+            User user = dao.getUserById(userid.UserID);
+            if (user.CMND != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            db = new AuctionDBContext();
             AddInfoModel objbank = new AddInfoModel();
          
             
@@ -222,7 +234,7 @@ namespace Webdaugia.Controllers
 
         private void SetFilePath()
         {
-            FilePath = Server.MapPath("~/imgcmnd/");
+            FilePath = Server.MapPath("~/Content/Images/Cmnd/");
             if (!Directory.Exists(FilePath))
             {
                 Directory.CreateDirectory(FilePath);
@@ -231,11 +243,10 @@ namespace Webdaugia.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Themthongtin(AddInfoModel model, HttpPostedFileBase cmndfront, HttpPostedFileBase cmndback)
+        public ActionResult Themthongtin(AddInfoModel model)
         {
             var dao = new UserDao();
-            ModelState.Remove("cmndfront");
-            ModelState.Remove("cmndback");
+    
             ModelState.Remove("gt");
             if (!ModelState.IsValid)
             {
@@ -243,40 +254,55 @@ namespace Webdaugia.Controllers
                 model.ListCategory = db.Banks.ToList();
                 return View(model);
             }
-            if (Session["USER"] != null)
+            if (Session["USER"] != null && ModelState.IsValid)
             {
-                ATM atm = new ATM();
+               
                 //Bank bank = new Bank();
                 UserLogin userid = (UserLogin)Session["USER"];
                 User user = dao.getUserById(userid.UserID);
-                AuctionDBContext db = new AuctionDBContext();
+                db = new AuctionDBContext();
                 user.Address = model.diachi;
                 user.CMND = model.cmnd.ToString();
                 user.LocationCMND = model.noicapcmnd;
                 user.DayCMND = model.ngaycapcmnd;
                 user.Birthday = model.ns;
                 user.Gender = model.gt;
-                atm.ATMCode = model.atmcode;
+          
+
+                string fileName = UploadFile(model.cmndfront);
+                string fileName1 = UploadFile(model.cmndback);
+               
+                user.ImageFront = "\\Content\\Images\\Cmnd\\" + fileName;
+                user.ImageBack = "\\Content\\Images\\Cmnd\\" + fileName1;
+
+
+                ATM atm = new ATM();
+                atm.ATMCode = model.atmcode.ToString();
                 atm.ATMFullName = model.atmfullname;
                 atm.UserID = user.ID;
-                //var bakid = model.tennganhang;
+           
                 atm.BankId = model.tennganhang;
-                //var fileName = Path.GetFileName(cmndfront.FileName);
-                //var fileName1 = Path.GetFileName(cmndback.FileName);
-
-                //var path = Path.Combine(Server.MapPath("~/images"), fileName);
-                //var path1 = Path.Combine(Server.MapPath("~/images"), fileName1);
-
-                string fileName = UploadFile(cmndfront);
-                string fileName1 = UploadFile(cmndback);
-                //cmndfront.SaveAs(path);
-                //cmndback.SaveAs(path1);
-                user.ImageFront = "/imgcmnd/" + fileName;
-                user.ImageBack = "/imgcmnd/" + fileName1;
-                db.ATMs.AddOrUpdate(atm);
-                //db.Banks.AddOrUpdate(bank);
+                    
+                db.ATMs.Add(atm);
+                
                 db.Users.AddOrUpdate(user);
                 db.SaveChanges();
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/thongbaodangky.html"));
+            
+                    content = content.Replace("{{id}}", user.ID.ToString());
+                    content = content.Replace("{{ten}}", user.FullName);
+           
+                    string tb = "Có tài khoản đăng ký xác minh " + user.FullName;
+                    var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                    new MailHelper().SendMail(toEmail, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+              
+                }
                 return RedirectToAction("Index", "Home");
 
             }
@@ -358,23 +384,27 @@ namespace Webdaugia.Controllers
                 try
                 {
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/neworder.html"));
-                    content = content.Replace("{{CustomerName}}", resetPassword);
-                    content = content.Replace("{{Email}}", email);
+                    content = content.Replace("{{matkhaumoi}}", resetPassword);
+                    content = content.Replace("{{CustomerName}}", User.FullName);
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
-                    new MailHelper().SendMail(email, "Thông báo từ web đấu giá", content);
-                    new MailHelper().SendMail(toEmail, "Thông báo từ web đấu giá", content);
+
+                    new MailHelper().SendMail(email, "Cấp lại mật khẩu ", content);
+      /*              new MailHelper().SendMail(toEmail, "Cấp lại mật khẩu", content);*/
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.Error = "Gửi mail không thành công";
+                    Console.WriteLine(ex);
                     return View("DangNhap");
                 }
             }
             else
             {
-                return View("DangKi");
+                ViewBag.Error = "Không tìm thấy tài khoản";
+                return View();
             }
-
-            return View("DangNhap");
+            ViewBag.Success = "Đã gửi mật khẩu vào email của bạn";
+            return View();
         }
         [NonAction]
         public bool IsEmailExist(string emailID)
@@ -394,9 +424,18 @@ namespace Webdaugia.Controllers
                 return RedirectToAction("Index", "Login");
             }
             //int userid = ((UserLogin)Session["USER"]).UserID;
+   
             UserLogin userid = (UserLogin)Session["USER"];
+            db = new AuctionDBContext();
+
             var dao = new UserDao();
             User user = dao.getUserById(userid.UserID);
+            if(user.CMND == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            var imguser = db.UsersImages.Where(x => x.UsersID == user.ID).FirstOrDefault();
+            ViewBag.imguser = imguser.Image;
             //var user = dao.getUserById(userid);
             return View(user);
         }
@@ -405,17 +444,38 @@ namespace Webdaugia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ProfileCustomera(User collection)
         {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             db = new AuctionDBContext();
             UserLogin userid = (UserLogin)Session["USER"];
+
             var dao = new UserDao();
             User user = dao.getUserById(userid.UserID);
+            var imguser = db.UsersImages.Where(x => x.UsersID == user.ID).FirstOrDefault();
+            var sdt = db.Users.Where(x => x.Phone.Trim() == collection.Phone.Trim() && x.ID != user.ID).FirstOrDefault();
+            var email = db.Users.Where(x => x.Email.Trim() == collection.Email.Trim() && x.ID != user.ID).FirstOrDefault();
+            ViewBag.imguser = imguser.Image;
             try
             {
                 var errors = ModelState.Values.SelectMany(b => b.Errors);
                 if (!ModelState.IsValid)
                 {
+                  
+                    if(sdt != null)
+                    {
+                        ViewBag.Fail = "Số điện thoại đã tồn tại!";
+                        return View(user);
+                    }
+                    if (email != null)
+                    {
+                        ViewBag.Fail = "Email đã tồn tại!";
+                        return View(user);
+                    }
                     user.Email = collection.Email;
                     user.Phone = collection.Phone;
+                    
                     var result = dao.Update(user);
                     if (result)
                     {
@@ -426,7 +486,7 @@ namespace Webdaugia.Controllers
                         ViewBag.Fail = "Cập nhật thông tin thất bại!";
                     }
                 }
-            return View(collection);
+            return View(user);
              }
             catch
             {
@@ -451,9 +511,11 @@ namespace Webdaugia.Controllers
             UserLogin userid = (UserLogin)Session["USER"];
             var dao = new UserDao();
             User user = dao.getUserById(userid.UserID);
-            //int userid = ((UserLogin)Session["USER"]).UserID;
-            //var user = dao.getUserById(userid);
-      
+  
+            if (user.CMND == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             try
             {
                 var errors = ModelState.Values.SelectMany(b => b.Errors);
@@ -500,9 +562,13 @@ namespace Webdaugia.Controllers
         }
         public ActionResult AccountManagement()
         {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             UserLogin userid = (UserLogin)Session["USER"];
             AuctionDBContext data = new AuctionDBContext();
-            var list = data.RegisterBids.Where(l => l.UserID == userid.UserID).ToList();
+            var list = data.RegisterBids.Where(l => l.UserID == userid.UserID && l.Lot.Status == true).ToList();
             return View(list);
         }
 
@@ -512,7 +578,7 @@ namespace Webdaugia.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("DangNhap");
         }
     }
 }

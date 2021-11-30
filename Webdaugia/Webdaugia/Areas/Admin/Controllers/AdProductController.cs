@@ -11,8 +11,10 @@ using Webdaugia.Models.Common;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
+    [HandleError]
     public class AdProductController : Controller
     {
+   
         string FilePath = "";
         public ActionResult Index()
         {
@@ -32,12 +34,29 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                var user = (UserLogin)Session["AD"];
                 var dao = new ProductDao();
-                var model = dao.ListAllPaging(searchString, page, pageSize);
+                var model = user.Role == 2 ? dao.ListAllPaging2(user.UserID,searchString, page, pageSize): dao.ListAllPaging(searchString, page, pageSize);
                 ViewBag.searchString = searchString;
                 return View(model);
             }
             
+        }
+        public ActionResult ListCategory(string searchString, int page = 1, int pageSize = 10)
+        {
+            var user = (UserLogin)Session["AD"];
+            if (Session["AD"] == null || user.Role == 2)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var dao = new ProductDao();
+                var model = dao.ListAllPagingCategory(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
         }
         //CREATE PRODUCT ======================================================================
         [HttpGet]
@@ -49,9 +68,19 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                var user = (UserLogin)Session["AD"];
                 db = new AuctionDBContext();
+              
                 Product product = new Product();
                 product.ListLot = db.Lots.ToList();
+                if (user.Role == 2)
+                {
+                    product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+                }
+                if (product.ListLot == null)
+                {
+                    return RedirectToAction("ListProduct");
+                }
                 return View(product);
             }
             
@@ -63,6 +92,15 @@ namespace Webdaugia.Areas.Admin.Controllers
         {
             db = new AuctionDBContext();
             product.ListLot = db.Lots.ToList();
+            var user = (UserLogin)Session["AD"];
+            if (user.Role == 2)
+            {
+                product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+            }
+            if (product.ListLot == null)
+            {
+                return RedirectToAction("ListProduct");
+            }
             if (ModelState.IsValid)
             {
                 product.CreatedAt = DateTime.Now;
@@ -94,6 +132,48 @@ namespace Webdaugia.Areas.Admin.Controllers
             else
             {
                 return View(product);
+            }
+        }
+        [HttpGet]
+        public ActionResult CreateCategory()
+        {
+            var user = (UserLogin)Session["AD"];
+            if (Session["AD"] == null || user.Role == 2)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+         
+                return View();
+            }
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult CreateCategory(AdCategory adCategory)
+        {
+            db = new AuctionDBContext();
+
+            if (ModelState.IsValid)
+            {
+                Category category = new Category();
+                category.Name = adCategory.Name;
+                category.SiteTile =  FriendlyURL.URLFriendly(adCategory.Name);
+                string fileNameCateIcon = UploadFile(adCategory.CateIcon);
+                category.CateIcon = "\\Content\\Images\\Prouduct\\" + fileNameCateIcon;
+                string fileNameCateImg = UploadFile(adCategory.CateImg);
+                category.CateImg = "\\Content\\Images\\Prouduct\\" + fileNameCateImg;
+                category.Status = false;
+                db.Categories.Add(category);
+                db.SaveChanges();
+                ViewBag.success = "Tạo mới loại sản phẩm thành công!";
+                return View(adCategory);
+            }
+            else
+            {
+                return View();
             }
         }
         protected string UploadFile(HttpPostedFileBase file)
@@ -141,19 +221,111 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             else
             {
+                var user = (UserLogin)Session["AD"];
                 db = new AuctionDBContext();
                 var product = db.Products.Find(id);              
                 product.ListLot = db.Lots.ToList();
+                if (user.Role == 2)
+                {
+                    product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+                }
+                if (product.ListLot == null)
+                {
+                    return RedirectToAction("ListProduct");
+                }
+
                 return View(product);
+            }
+        }
+        [HttpGet]
+        public ActionResult EditCategory(int id)
+        {
+            var user = (UserLogin)Session["AD"];
+
+            if (Session["AD"] == null || user.Role == 2)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                db = new AuctionDBContext();
+                var Category = db.Categories.Find(id);
+                
+                return View(Category);
             }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult EditProduct(/*[Bind(Include = "Name,Description,LotID")] */Product product, HttpPostedFileBase[] files)
+        public ActionResult EditCategory(Category category, HttpPostedFileBase file1, HttpPostedFileBase file2)
+        {
+
+            db = new AuctionDBContext();
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            if (ModelState.IsValid)
+            {
+                var editCate = db.Categories.Find(category.ID);
+                if (editCate == null)
+                    return HttpNotFound();
+                editCate.Name = category.Name;
+                editCate.SiteTile =  FriendlyURL.URLFriendly(category.Name);
+                //Xóa hình ảnh cũ trong bảng ProductImage
+
+
+                //Sửa thông tin sản phẩm 
+
+
+                if (file1 != null)
+                {
+                    string path = Path.Combine(Server.MapPath(editCate.CateImg)); ;
+
+                    if (!Directory.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+              
+                    string fileName = UploadFile(file1);
+                    editCate.CateImg = "\\Content\\Images\\Prouduct\\" + fileName;
+                }
+                if (file2 != null)
+                {
+                    string path = Path.Combine(Server.MapPath(editCate.CateIcon)); ;
+
+                    if (!Directory.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                    string fileName = UploadFile(file2);
+                    editCate.CateIcon = "\\Content\\Images\\Prouduct\\" + fileName;
+                }
+                db.Categories.AddOrUpdate(editCate);
+                db.SaveChanges();
+   
+
+                ViewBag.success = "Sửa Sản Phẩm thành công!";
+                return View(category);
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditProduct(Product product, HttpPostedFileBase[] files)
         {
             db = new AuctionDBContext();
             product.ListLot = db.Lots.ToList();
+            var user = (UserLogin)Session["AD"];
+            if (user.Role == 2)
+            {
+                product.ListLot = db.Lots.Where(x => x.HostLot == user.UserID).ToList();
+            }
+            if (product.ListLot == null)
+            {
+                return RedirectToAction("ListProduct");
+            }
             int proID = product.ID;
             if (ModelState.IsValid)
             {
@@ -207,8 +379,29 @@ namespace Webdaugia.Areas.Admin.Controllers
             }
             return View();
         }
+        public ActionResult LockOrUnlockCategory(int id)
+        {
+            var user = (UserLogin)Session["AD"];
+            if (Session["AD"] == null || user.Role == 2)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+            var Category = db.Categories.Where(x => x.ID == id).SingleOrDefault();
+            if (Category.Status == false)
+            {
+                Category.Status = true;
+            }
+            else
+            {
+                Category.Status = false;
+            }
+            db.Categories.AddOrUpdate(Category);
+            db.SaveChanges();
+            return RedirectToAction("ListCategory");
+        }
         //DELETE PRODUCT==========================================================
-     
+
 
     }
 }

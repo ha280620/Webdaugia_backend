@@ -12,23 +12,38 @@ using Webdaugia.Models.Common;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
+    [HandleError]
     public class AccountController : Controller
     {
         // GET: Admin/Account
-            AuctionDBContext db = null;
-            // GET: Admin/Account
-            public ActionResult ListAccount()
+        AuctionDBContext db = null;
+        // GET: Admin/Account
+     
+        public ActionResult ListAccount(string searchString, int page = 1, int pageSize = 10)
+        {
+            if (Session["AD"] == null)
             {
-                db = new AuctionDBContext();
-                List<User> listUser = db.Users.Where(x => x.Status == 1 || x.Status == 2).ToList();
-                return View(listUser);
+                return RedirectToAction("Index", "AdLogin");
             }
-            public ActionResult ConfirmAccount()
+            else
             {
+                var dao = new LotDao();
+                var model = dao.ListAllPagingUser(searchString, page, pageSize);
+                ViewBag.searchString = searchString;
+                return View(model);
+            }
+
+        }
+        public ActionResult ConfirmAccount()
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
             db = new AuctionDBContext();
             List<User> listUser = db.Users.Where(x => x.Status == 0 && x.CMND != null).ToList();
             return View(listUser);
-            }
+        }
 
         //[HttpGet]
         //public ActionResult Details(int id)
@@ -53,6 +68,10 @@ namespace Webdaugia.Areas.Admin.Controllers
 
         public ActionResult Details(int id)
         {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
             ViewBag.success = null;
             if (Session["AD"] == null)
             {
@@ -80,66 +99,78 @@ namespace Webdaugia.Areas.Admin.Controllers
             var user = dao.getUserById(userid);
             return View(user);
         }
-            //Update Profile
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public ActionResult Profile(User collection)
+        //Update Profile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Profile(User collection)
+        {
+            if (Session["AD"] == null)
             {
-                db = new AuctionDBContext();
-                int userid = ((UserLogin)Session["AD"]).UserID;
-                var dao = new UserDao();
-                var user = dao.getUserById(userid);
-                try
-                {
-                    var errors = ModelState.Values.SelectMany(v => v.Errors);
-                    if (!ModelState.IsValid)
-                    {
-                        //Update Profile
-                        user.FullName = collection.FullName;
-                        user.Gender = collection.Gender;
-                        user.Phone = collection.Phone;
-                        user.Birthday = collection.Birthday;
-                        user.Email = collection.Email;
-                        user.Address = collection.Address;
-                        //save change
-                        var result = dao.Update(user);
-                        if (result)
-                        {
-                            ViewBag.Success = "Cập nhật thông tin thành công!";
-                        }
-                        else
-                        {
-                            ViewBag.Fail = "Cập nhật thông tin thất bại!";
-                        }
-                    }
-                    return View(collection);
-                }
-                catch
-                {
-                    return View();
-                }
+                return RedirectToAction("Index", "AdLogin");
             }
-            //Change Password View
-            [HttpGet]
-            public ActionResult ChangePass()
+            db = new AuctionDBContext();
+            int userid = ((UserLogin)Session["AD"]).UserID;
+            var dao = new UserDao();
+            var user = dao.getUserById(userid);
+            try
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                if (!ModelState.IsValid)
+                {
+                    //Update Profile
+                    user.FullName = collection.FullName;
+                    user.Gender = collection.Gender;
+                    user.Phone = collection.Phone;
+                    user.Birthday = collection.Birthday;
+                    user.Email = collection.Email;
+                    user.Address = collection.Address;
+                    //save change
+                    var result = dao.Update(user);
+                    if (result)
+                    {
+                        ViewBag.Success = "Cập nhật thông tin thành công!";
+                    }
+                    else
+                    {
+                        ViewBag.Fail = "Cập nhật thông tin thất bại!";
+                    }
+                }
+                return View(collection);
+            }
+            catch
             {
                 return View();
             }
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            public ActionResult ChangePass(PasswordModel model)
+        }
+        //Change Password View
+        [HttpGet]
+        public ActionResult ChangePass()
+        {
+            if (Session["AD"] == null)
             {
-                db = new AuctionDBContext();
-                int userid = ((UserLogin)Session["AD"]).UserID;
-                var dao = new UserDao();
-                var user = dao.getUserById(userid);
-                try
+                return RedirectToAction("Index", "AdLogin");
+            }
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePass(PasswordModel model)
+        {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+            int userid = ((UserLogin)Session["AD"]).UserID;
+            var dao = new UserDao();
+            var user = dao.getUserById(userid);
+            try
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                if (ModelState.IsValid)
                 {
-                    var errors = ModelState.Values.SelectMany(v => v.Errors);
-                    if (ModelState.IsValid)
+                    if (user.Password.Trim() == MD5Encryptor.MD5Hash(model.password.Trim()))
                     {
-                        if (user.Password.Trim() == MD5Encryptor.MD5Hash(model.password.Trim()))
-                        {
                         if (model.password != model.newpassword)
                         {
                             //Update Password
@@ -152,6 +183,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                             }
                             catch (Exception ex)
                             {
+                                Console.WriteLine(ex);
                                 ViewBag.Success = "Đổi mật khẩu thất bại";
                             }
                         }
@@ -160,33 +192,41 @@ namespace Webdaugia.Areas.Admin.Controllers
                             ViewBag.WrongPass = "Mật khẩu cũ không được giống mật khẩu mới!";
                         }
                     }
-                        else
-                        {
-                            ViewBag.WrongPass = "Mật khẩu cũ không đúng";
-                        }
-                        //save change
+                    else
+                    {
+                        ViewBag.WrongPass = "Mật khẩu cũ không đúng";
                     }
-                    return View(model);
+                    //save change
                 }
-                catch
-                {
-                    return View();
-                }
+                return View(model);
             }
+            catch
+            {
+                return View();
+            }
+        }
 
         //Lock and Unlock Account
-            public ActionResult LockOrUnlockAccount(int id)
+        public ActionResult LockOrUnlockAccount(int id)
         {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
             db = new AuctionDBContext();
             var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
-            if(user.Status == 1)
+            if(user.RoleID == 2 && user.RoleID == 1)
+            {
+                return RedirectToAction("ListAccount");
+            }
+            if (user.Status == 1)
             {
                 user.Status = 2;
             }
-            else  if(user.Status == 2)
+            else if (user.Status == 2)
             {
                 user.Status = 1;
-            }      
+            }
             db.Users.AddOrUpdate(user);
             db.SaveChanges();
             return RedirectToAction("ListAccount");
@@ -194,6 +234,10 @@ namespace Webdaugia.Areas.Admin.Controllers
 
         public ActionResult ConfirmLockOrUnlockAccount(int id)
         {
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
             db = new AuctionDBContext();
             var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
             if (user.Status == 1)
@@ -203,6 +247,20 @@ namespace Webdaugia.Areas.Admin.Controllers
             else if (user.Status == 0)
             {
                 user.Status = 1;
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/xacnhansuccess.html"));
+
+                    content = content.Replace("{{CustomerName}}", user.FullName);
+
+                    string tb = "Xác minh tài khoản thành công " + user.FullName;
+                    new MailHelper().SendMail(user.Email, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+
+                }
             }
             db.Users.AddOrUpdate(user);
             db.SaveChanges();
@@ -212,28 +270,60 @@ namespace Webdaugia.Areas.Admin.Controllers
 
         public ActionResult ConfirmIdetify(int id)
         {
-            db = new AuctionDBContext();
-            var user = db.Users.Where(x => x.ID == id).FirstOrDefault();
-            var bank = db.ATMs.Where(x => x.UserID == id).FirstOrDefault();
-            if (user.ImageFront != null || user.ImageBack != null)
+            if (Session["AD"] == null)
             {
-                string path = Path.Combine(Server.MapPath(user.ImageFront)); ;
-                string path1 = Path.Combine(Server.MapPath(user.ImageBack)); ;
-
-                if (!Directory.Exists(path))
-                {                    
-                    System.IO.File.Delete(path);
-                }
-                if (!Directory.Exists(path1))
+                return RedirectToAction("Index", "AdLogin");
+            }
+            db = new AuctionDBContext();
+            var user = db.Users.Where(x => x.ID == id && x.Status == 0).SingleOrDefault();
+            var bank = db.ATMs.Where(x => x.UserID == id).ToList();
+            if (user != null)
+            {
+                if (user.ImageFront != null)
                 {
-                    System.IO.File.Delete(path1);
+                    string path = Path.Combine(Server.MapPath(user.ImageFront)); ;
+                    if (!Directory.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+                }
+                if (user.ImageBack != null)
+                {
+                    string path1 = Path.Combine(Server.MapPath(user.ImageBack)); ;
+                    if (!Directory.Exists(path1))
+                    {
+                        System.IO.File.Delete(path1);
+                    }
                 }
                 user.CMND = null;
+                user.DayCMND = null;
+                user.Birthday = null;
+                user.LocationCMND = null;
+
                 user.ImageFront = null;
-                user.ImageBack = null;           
+                user.ImageBack = null;
+                try
+                {
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/xannhanfail.html"));
+
+                    content = content.Replace("{{CustomerName}}", user.FullName);
+
+                    string tb = "Xác minh tài khoản thất bại " + user.FullName;
+                    new MailHelper().SendMail(user.Email, tb, content);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+
+                }
             }
+
             db.Users.AddOrUpdate(user);
-            db.ATMs.Remove(bank);
+            if (bank != null)
+            {
+                db.ATMs.RemoveRange(bank);
+            }
+
             db.SaveChanges();
             return RedirectToAction("ConfirmAccount");
         }

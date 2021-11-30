@@ -5,7 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="~/img/logo-title.png" type="image/x-icon" />
-    <title>Đông Sài Gòn</title>
+    <title>Đông Sài Gòn @ViewBag.Title </title>
+    <meta name="description" content="@ViewBag.meta" />
+
+    <meta name="keywords" content="đấu giá, dau-gia, dau gia, bat-dong-san, o-to, dau gia o to, dau gia bat dong san, ô tô, Đông Sài Gòn, dong sai gon, Công ty đấu giá" />
+    <meta http-equiv="refresh" content="120">
+    <meta name="author" content="Zuradel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="~/css/bootstrap.css" />
     <link rel="icon" href="~/Content/Client/img/logo-mb.png" />
@@ -36,10 +42,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        #loader {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <!-- BEGIN NAV -->
+    <div id="loader">
+        <!-- <span class="fas fa-spider xoay icon"></span> -->
+        <div class="loader-content">
+            <img class="img-fluid" src="~/img/ben-thanh-icon-animation800x600.gif" alt="" />
+        </div>
+    </div>
     <header>
+
         @Html.Action("Header", "Home")
         @*<div class="container">
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light px-0">
@@ -130,9 +163,10 @@
                         Nếu bạn có bất kì câu hỏi nào, hãy liên hệ với chúng tôi quá địa
                         chỉ <span class="footer-email">dgdongsaigon@gmail.com</span>
                     </p>
+               
                     <div class="footer-address mb-3">
-                        <i class="bx bx-map"></i>
-                        <p class="">693 Kha Vạn Cân, Linh Tây, Thủ Đức, TP.HCM</p>
+                        <i class='bx bx-home-alt'></i>
+                        <p class="">693 Lầu 02, Toà nhà Galaxy 09, Số 9 Nguyễn Khoái, Phường 1, Quận 4, TP.HCM</p>
                     </div>
                     <div class="footer-address mb-3">
                         <i class="bx bx-mobile"></i>
@@ -149,7 +183,7 @@
                 </div>
                 <div class="col-12 col-md-4 footer-item">
                     <h4>HỖ TRỢ KHÁCH HÀNG</h4>
-                    <p>Liên hệ hỖ trợ</p>
+                    <p>Liên hệ hỗ trợ</p>
                     <p>Những câu hỏi thường gặp</p>
                     <p>Chính sách bảo mật thông tin</p>
                     <p></p>
@@ -175,6 +209,7 @@
     <script src="~/js/jquery.js"></script>
     <script src="~/js/popper.js"></script>
     <script src="~/js/bootstrap.js"></script>
+
     @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
     @if (user != null)
     {
@@ -184,7 +219,8 @@
             src="~/js/slick.js"></script>
     <script src="~/js/lightGallery.js"></script>
     <!-- begin js danh mục -->
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+    <script src="~/js/swiper.js"></script>
+
     <script>
         var swiper = new Swiper(".swiper", {
             slidesPerView: 4,
@@ -209,6 +245,7 @@
         }
     </script>
     @RenderSection("Lot", required: false)
+    @RenderSection("Category", required: false)
     @*-------------------------------*@
     <script>
         var chatbox = document.getElementById('fb-customer-chat');
@@ -230,26 +267,9 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
-    <!-- BOOTSTRAP 4 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-            crossorigin="anonymous"></script>
-    <!-- SLICK -->
-    <script type="text/javascript"
-            src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script>
-        $(window).on("load", function (event) {
 
-            $("#loader").fadeOut(400);
 
-        });
-    </script>
+
 
     @if (user != null)
     {
@@ -265,9 +285,7 @@
             });
         </script>
     }
-
-
-    @RenderSection("scripts", required: false)
+    @RenderSection("title", required: false)
     @RenderSection("ProductDetail", required: false)
 </body>
 </html>

@@ -9,6 +9,7 @@ using Webdaugia.Models.Login;
 
 namespace Webdaugia.Areas.Admin.Controllers
 {
+    [HandleError]
     public class AdLoginController : Controller
     {
         public ActionResult Index()

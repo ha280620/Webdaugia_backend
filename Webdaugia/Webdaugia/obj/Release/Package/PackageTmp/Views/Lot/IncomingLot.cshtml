@@ -1,0 +1,580 @@
+﻿@model Webdaugia.Models.Lot
+@{
+    ViewBag.Title = "IncomingLot";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    var listOnGoingLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
+    var listReadyLot = (List<Webdaugia.Models.Lot>)ViewBag.listReadyLot;
+    var listAttributes = (List<Webdaugia.Models.Product>)ViewBag.listAttributes;
+    var listAttachment = (List<Webdaugia.Models.LotAttachment>)ViewBag.listAttachment;
+    //var listLotAttachment = (List<Webdaugia.Models.Product>)ViewBag.listLotAttachment;
+}
+@{
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+}
+
+<main>
+    @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];
+
+    }
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=369248914700597&autoLogAppEvents=1" nonce="KQ7HIJOL"></script>
+    <section id="detail-link ">
+
+        <div class="container">
+            <div class="row product">
+                @if (@Model.TimeForRegisterEnd >= DateTime.Now)
+                {
+                    <div class="col-12">
+                        <div class="product-title">
+                            <i class="bx bxs-right-arrow mr-2"></i>
+                            <h3>Tài sản sắp đấu giá</h3>
+                        </div>
+                    </div>
+                }
+
+                <div class="col-12">
+                    <div class="product__name mb-3">
+                        <h2>
+                            @Model.Name
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+
+                    <div class="slide-for" id="lightgallery">
+                        @foreach (var item in listAttributes)
+                        {
+                            foreach (var img in @item.ProductsImages)
+                            {
+                                <a class="slide-for-item" href="@img.Image">
+                                    <img class="img-fluid w-100"
+                                         src="@img.Image"
+                                         alt="anh" />
+                                </a>
+                            }
+                        }
+
+                    </div>
+                    <div class="bg_slide-nav">
+                        <div class="slide-nav">
+                            @foreach (var item in listAttributes)
+                            {
+                                foreach (var img in @item.ProductsImages)
+                                {
+                                    <div class="slide-nav-item">
+                                        <div class="slide-nav-item-img">
+                                            <img class="img-fluid"
+                                                 src="@img.Image"
+                                                 alt="" />
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="product-content">
+                        <div class="product-time">
+
+
+                            @if (@Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
+                            {
+                                <p>
+                                    Thời gian đăng ký còn lại:
+                                </p>
+                                <h2 id="TimeForRegisterEnd"></h2>
+                            }
+                            else if (@Model.TimeForRegisterStart > DateTime.Now)
+                            {
+                                <p>
+                                    Thời gian đăng ký sắp đầu:
+                                </p>
+                                <h2 id="TimeForRegisterStart"></h2>
+                            }
+                            else
+                            { <p>
+                                    Thời gian đăng ký còn lại:
+                                </p>
+                                <h2>Thời gian đăng ký kết thúc</h2>
+                            }
+
+                        </div>
+                        <div class="product-detail">
+                            <table class="table m-0">
+
+                                <tbody>
+                                    <tr>
+                                        <th style="width: 40%;" scope="row">Mã tài sản</th>
+                                        <td>@Model.ID</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian mở đăng ký:</th>
+                                        <td>@Model.TimeForRegisterStart</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian kết thúc đăng ký:</th>
+                                        <td>@Model.TimeForRegisterEnd</td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Phí đăng ký tham gia đấu giá:</th>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.ParticipationFee) VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tiền đặt trước:</th>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.AdvanceDesposit) VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Bước giá:</th>
+                                        <td>@string.Format(info, "{0:0,0}", @Model.MiniumBid) VNĐ</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Tên chủ tài sản:</th>
+                                        <td>@Model.HostName</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Nơi xem tài sản:</th>
+                                        <td>@Model.Location</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian xem tài sản:</th>
+                                        <td>@Model.ViewInTime</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Thời gian bắt đầu trả giá:</th>
+                                        <td>@Model.TimeForBidStart</td>
+                                    </tr>
+                                    <tr>
+                                    <tr>
+                                        <th scope="row">Thời gian kết thúc trả giá:</th>
+                                        <td>@Model.TimeForBidEnd</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Giá khởi điểm</th>
+                                        <td style="color:var(--btn-danger); font-weight: 700; ">@string.Format(info, "{0:0,0}", @Model.StartingPrice) VNĐ</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th scope="row">Bắt đầu đấu giá trong:</th>
+
+                                        @if (@Model.TimeForBidStart <= DateTime.Now && @Model.TimeForBidEnd >= DateTime.Now)
+                                        {
+
+
+                                            <td class="text-success time-register">Đấu giá đã bắt đầu <a href="/phien-dang-dien-ra/@Model.SiteTile-@Model.ID">Vào ngay</a></td>
+                                        }
+                                        else if (@Model.TimeForBidStart >= DateTime.Now)
+                                        {
+
+
+                                            <td class="time-register" id="TimeForBidStart"></td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-danger time-register">Đấu giá đã kết thúc</td>
+                                        }
+
+
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-2 mx-0">
+
+                        @if (user != null && @ViewBag.register == null && @Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now && user.Status == 1)
+                        {
+                            <div class="col-12 px-0 mb-1">
+                                <button type="button" class="btn btn-sign-up w-100" data-toggle="modal" data-target="#dangkydaugia">
+                                    Đăng ký đấu giá
+                                </button>
+                            </div>
+                        }
+                        else if (@Model.TimeForRegisterEnd < DateTime.Now && ViewBag.register == null && user != null)
+                        {
+                            <div class="col-12 d-flex justify-content-center align-items-center alert alert-danger" role="alert">
+                                <p class="time-register">Đã hết thời gian đăng ký</p>
+                            </div>
+                        }
+                        else if (@Model.TimeForBidEnd < DateTime.Now && user != null)
+                        {
+                            <div class="col-12">
+
+                            </div>
+                        }
+                        else if (user != null && user.Status == 0)
+                        {
+                            <div class="col-12 d-flex justify-content-center align-items-center alert alert-warning" role="alert">
+                                <p class="time-register">Bạn vui lòng đợi xác minh tài khoản</p>
+                            </div>
+                        }
+                        else
+                        {
+                            if (ViewBag.register == false)
+                            {
+                                <div class="col-12 d-flex justify-content-center align-items-center alert alert-primary" role="alert">
+                                    <p class="time-register">Bạn vui lòng đợi duyệt, chúng tôi sẽ liên hệ bạn</p>
+                                </div>
+                            }
+                            else if (ViewBag.register == true)
+                            {
+                                <div class="col-12 d-flex justify-content-center align-items-center alert alert-success" role="alert">
+                                    <p class="text-success">Đăng ký đấu giá thành công</p>
+                                </div>
+                            }
+
+                        }
+                        @if (user == null)
+                        {
+                            <div class="col-12 d-flex justify-content-center align-items-center alert alert-success" role="alert">
+                                <p class="text-success">Bạn vui lòng đăng nhập để đăng ký</p>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="detail-description mb-5">
+        <div class="container">
+            <nav class="justify-content-center">
+                <div class="nav nav-pills" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active"
+                       id="nav-home-tab"
+                       data-toggle="tab"
+                       href="#nav-home"
+                       role="tab"
+                       aria-controls="nav-home"
+                       aria-selected="true">Thông tin tài sản</a>
+                    <a class="nav-item nav-link"
+                       id="nav-profile-tab"
+                       data-toggle="tab"
+                       href="#nav-profile"
+                       role="tab"
+                       aria-controls="nav-profile"
+                       aria-selected="false">Tài liệu liên quan</a>
+                    <a class="nav-item nav-link"
+                       id="nav-contact-tab"
+                       data-toggle="tab"
+                       href="#nav-contact"
+                       role="tab"
+                       aria-controls="nav-contact"
+                       aria-selected="false">Bình luận</a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active"
+                     id="nav-home"
+                     role="tabpanel"
+                     aria-labelledby="nav-home-tab">
+                    @foreach (var item in listAttributes)
+                    {
+                        @Html.Raw(item.Description);
+
+                    }
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-profile"
+                     role="tabpanel"
+                     aria-labelledby="nav-profile-tab">
+                    @foreach (var item in listAttachment)
+                    {
+                        <a href="@item.AttachmentLink.Trim()" alt="link-@item.Name" target="_blank" style="
+    text-decoration: underline;
+">@item.Name</a>
+<br />
+}
+                </div>
+                <div class="tab-pane fade"
+                     id="nav-contact"
+                     role="tabpanel"
+                     aria-labelledby="nav-contact-tab">
+                    <div class="fb-comments" data-href="@Request.Url.ToString()" data-width="500" data-numposts=""></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="going">
+        <div class="container mt-2">
+            <div class="going-title">
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
+
+            </div>
+
+                @if (listOnGoingLot != null)
+                {
+                    <div class="row">
+                        @foreach (var item in listOnGoingLot)
+                        {
+                            <div class="col-12 col-md-6 col-lg-4 p-2">
+                                <div class="going-item">
+                                    <div class="going-item-img">
+                                        <img src="@item.LotImage" class="img-fluid" alt="" />
+                                        <div class="going__overlay"></div>
+                                        <div class="going__play">
+                                            <a href="/phien-dau/@item.SiteTile-@item.ID">
+                                                <h5>Thời kết thúc đăng ký</h5>
+                                                <p>@item.TimeForRegisterEnd</p>
+                                                <h5>Thời gian bắt đầu đấu giá </h5>
+                                                <p>@item.TimeForBidStart</p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="going-content">
+                                        <p>@item.Category.Name</p>
+                                        <h3>
+                                            @item.Name
+                                        </h3>
+
+                                        <div class="going-starting-price mt-1">
+                                            <h4><span>@string.Format(info, "{0:0,0}", @item.StartingPrice) VNĐ</span></h4>
+                                        </div>
+                                        <a class="btn btn-sign-up going_btn" href="/phien-dau/@item.SiteTile-@item.ID">
+                                            Đăng Ký tham gia đấu giá
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                }
+                else
+                {
+                    <div class="row justify-content-center">
+                        <img src="~/Content/Images/Category/noauction1.png" class="img-fluid">
+                        <div class="container container--checkout pb-2">
+                            <div class="checkout">
+                                <div class="empty" style="vertical-align:middle; text-align:center">
+                                    <a href="/" style="text-align:center;">Về Trang Chủ</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+      
+    </section>
+
+</main>
+
+<!-- Modal -->
+@if (user != null && @ViewBag.register == null && @Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
+{
+    <div class="modal fade" id="dangkydaugia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Đăng ký đấu giá</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="h4">Số tiền cần phải nộp</p>
+                    <table class="table m-0">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Phí đăng ký tham gia đấu giá:</th>
+                                <td> @string.Format(info, "{0:0,0}", @Model.ParticipationFee) VNĐ</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tiền đặt trước:</th>
+                                <td>  @string.Format(info, "{0:0,0}", @Model.AdvanceDesposit) VNĐ</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tổng tiền</th>
+                                <td class="color:var(--btn-danger); font-weight: 700;"> @string.Format(info, "{0:0,0}", @ViewBag.total) VNĐ</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <hr />
+                    <p class="h4">Thực hiện Chuyển khoản</p>
+                    <table class="table m-0">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Ngần hàng</th>
+                                <td>Techcombank</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Số tài khoản</th>
+                                <td>19036757562011</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Tên người hưởng</th>
+                                <td>Công ty đấu giá hợp danh Đông Sài Gòn</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Chi Nhánh</th>
+                                <td>Chi nhánh Hồ Chí Minh</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Nội dung chuyển khoản</th>
+                                <td>@Model.ID @user.UserName.ToString()</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a id="loading" class="btn btn-sign-up w-100" href="/dang-ky-dau-gia?lotId=@Model.ID&userID=@user.UserID.ToString()&url=@Request.Url.ToString()"> Đăng ký </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (@Model.TimeForRegisterEnd >= DateTime.Now && @Model.TimeForRegisterStart <= DateTime.Now)
+{
+    <script>
+            var countDownDateEnd = new Date("@Model.TimeForRegisterEnd").getTime();
+            var y = setInterval(function () {
+            // Nhận ngày và giờ hôm nay
+            var now = new Date().getTime();
+            // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+            var distance = countDownDateEnd - now;
+            // Tính toán thời gian cho ngày, giờ, phút và giây
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            hours = `0${hours}`.slice(-2);
+            minutes = `0${minutes}`.slice(-2);
+            seconds = `0${seconds}`.slice(-2);
+
+            // Xuất kết quả trong phần tử có id = "demo"
+            document.getElementById("TimeForRegisterEnd").innerHTML = days + " Ngày " + hours + " Giờ "
+                + minutes + " Phút " + seconds + " Giây ";
+            if (distance < 0) {
+                clearInterval(y);
+
+            }
+            // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+        }, 1000);
+    </script>
+
+
+}
+else if (@Model.TimeForRegisterStart > DateTime.Now)
+{
+    <script>
+
+            var countDownDateEnd = new Date("@Model.TimeForRegisterStart").getTime();
+            var y = setInterval(function () {
+            // Nhận ngày và giờ hôm nay
+            var now = new Date().getTime();
+            // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+            var distance = countDownDateEnd - now;
+            // Tính toán thời gian cho ngày, giờ, phút và giây
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            hours = `0${hours}`.slice(-2);
+            minutes = `0${minutes}`.slice(-2);
+            seconds = `0${seconds}`.slice(-2);
+
+            // Xuất kết quả trong phần tử có id = "demo"
+                document.getElementById("TimeForRegisterStart").innerHTML = days + " Ngày " + hours + " Giờ "
+                + minutes + " Phút " + seconds + " Giây ";
+            if (distance < 0) {
+                clearInterval(y);
+
+            }
+            // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+        }, 1000);
+    </script>
+}
+@if (@Model.TimeForBidStart >= DateTime.Now)
+{
+    <script>
+    var countDownDate = new Date("@Model.TimeForBidStart").getTime();
+
+    var x = setInterval(function () {
+    // Nhận ngày và giờ hôm nay
+    var now = new Date().getTime();
+
+    // Tìm khoảng cách giữa bây giờ và ngày đếm ngược
+    var distance = countDownDate - now;
+    var distanceEnd = countDownDate - now;
+
+    // Tính toán thời gian cho ngày, giờ, phút và giây
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    hours = `0${hours}`.slice(-2);
+    minutes = `0${minutes}`.slice(-2);
+    seconds = `0${seconds}`.slice(-2);
+    // Xuất kết quả trong phần tử có id = "demo"
+    document.getElementById("TimeForBidStart").innerHTML = days + " Ngày " + hours + " Giờ "
+    + minutes + " Phút " + seconds + " Giây ";
+
+    if (distance < 0) {
+    clearInterval(x);
+
+    }
+    // Nếu quá trình đếm ngược kết thúc, hãy viết một số văn bản
+
+    }, 1000);
+
+    </script>
+}
+
+@section Lot{
+
+    <script>
+        $(document).ready(function () {
+            $('#loading').click(function () {
+                $('#loader').css('display', 'block');
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        lightGallery(document.getElementById("lightgallery"), {
+            speed: 300,
+        });
+    </script>
+    <!-- end js danh mục  -->
+    <script>
+        $(".slide-for").slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: "60px",
+            arrows: false,
+            fade: true,
+            asNavFor: ".slide-nav",
+        });
+        $(".slide-nav").slick({
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            prevArrow: false,
+            nextArrow: false,
+            asNavFor: ".slide-for",
+            dots: false,
+            centerMode: false,
+            focusOnSelect: true,
+            centerPadding: "0px",
+            prevArrow: '<i class="bx bx-chevron-left left"></i>',
+            nextArrow: '<i class="bx bx-chevron-right right"></i>',
+        });
+    </script>
+}
+

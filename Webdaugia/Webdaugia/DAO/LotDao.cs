@@ -11,6 +11,7 @@ namespace Webdaugia.DAO
     
     public class LotDao
     {
+        
         AuctionDBContext db = new AuctionDBContext();
         public LotDao()
         {
@@ -31,6 +32,15 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
         }
+        public IEnumerable<Lot> ListAllPaging2(int userid , string searchString, int page, int pageSize)
+        {
+            IQueryable<Lot> model = db.Lots.Where(x => x.HostLot == userid);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
         public IEnumerable<Lot> ListAllPagingRegister(string searchString, int page, int pageSize)
         {
             IQueryable<Lot> model = db.Lots.Where(x=>x.TimeForRegisterStart < DateTime.Now && x.TimeForBidStart > DateTime.Now);
@@ -40,9 +50,78 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
         }
+        public IEnumerable<Lot> ListAllPagingRegister2(int userid,string searchString, int page, int pageSize)
+        {
+            IQueryable<Lot> model = db.Lots.Where(x => x.TimeForRegisterStart < DateTime.Now && x.TimeForBidStart > DateTime.Now && x.HostLot == userid);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<Lot> ListAllPagingEnd(string searchString, int page, int pageSize)
+        {
+            IQueryable<Lot> model = db.Lots.Where(x =>x.TimeForBidEnd < DateTime.Now);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<Lot> ListAllPagingEnd2(int userid, string searchString, int page, int pageSize)
+        {
+            IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidEnd < DateTime.Now && x.HostLot == userid);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<Lot> ListAllPagingEnd30(string searchString, int page, int pageSize)
+        {
+            var date = DateTime.Now.AddDays(-180);
+            IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidEnd < date);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+
+            return model.OrderByDescending(x => x.TimeForBidEnd).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<LotAttachment> ListAllPagingLink(string searchString, int page, int pageSize)
+        {
+ 
+            IQueryable<LotAttachment> model = db.LotAttachments;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Lot.Name.Contains(searchString));
+            }
+
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<User> ListAllPagingUser(string searchString, int page, int pageSize)
+        {
+
+            IQueryable<User> model = db.Users.Where(x => x.Status == 1 || x.Status == 2);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.FullName.Contains(searchString) || x.ID.ToString().Contains(searchString));
+            }
+
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
         public IEnumerable<Lot> ListAllPagingAuction(string searchString, int page, int pageSize)
         {
             IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidStart < DateTime.Now );
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<Lot> ListAllPagingAuction2(int userid,string searchString, int page, int pageSize)
+        {
+            IQueryable<Lot> model = db.Lots.Where(x => x.TimeForBidStart < DateTime.Now && x.HostLot == userid);
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Name.Contains(searchString) || x.Category.Name.Contains(searchString));
@@ -58,24 +137,28 @@ namespace Webdaugia.DAO
             }
             return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
         }
-        //public IEnumerable<RegisterBid> ListAllPagingRegisterOfLot1(string searchString, int page, int pageSize)
-        //{
-        //    var dao = new UserDao();
-        //    //UserLogin userid = (UserLogin)Session["USER"];
-        //    var userid = ((UserLogin)Session["USER"]).UserID;
-        //    var user = dao.getUserById(userid);
-        //    IQueryable<RegisterBid> model = db.RegisterBids.Where(x => x.UserID == );
-        //    if (!string.IsNullOrEmpty(searchString))
-        //    {
-        //        model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));
-        //    }
-        //    return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
-        //}
-        public IEnumerable<Auction> ListAllPagingAuctionOfLot(int id, string searchString, int page, int pageSize)
+        public IEnumerable<RegisterBid> ListAllPagingEndOfLot(int id, string searchString, int page, int pageSize)
         {
-    
-         
-            IQueryable<Auction> model = db.Auctions.Where(x => x.RegisterBid.LotID == id && x.RegisterBid.Status == true);
+            var modelAuctions = db.Auctions.Where(x => x.Status == 1 && x.RegisterBid.LotID == id).FirstOrDefault();
+            IQueryable<RegisterBid> model;
+            if (modelAuctions != null)
+            {
+                 model = db.RegisterBids.Where(x => x.LotID == id && x.Status == 1 || x.Status == 2 && x.ID != modelAuctions.RegisterBidID);
+            }
+            else
+            {
+                model = db.RegisterBids.Where(x => x.LotID == id && x.Status == 1 || x.Status == 2);
+            }
+          
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.User.FullName.Contains(searchString) || x.Lot.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.ID).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<Auction> ListAllPagingAuctionOfLot(int id, string searchString, int page, int pageSize)
+        {       
+            IQueryable<Auction> model = db.Auctions.Where(x => x.RegisterBid.LotID == id && x.RegisterBid.Status == 1);
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.RegisterBid.User.FullName.Contains(searchString) || x.RegisterBid.Lot.Name.Contains(searchString));

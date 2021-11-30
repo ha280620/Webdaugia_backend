@@ -57,6 +57,7 @@ namespace Webdaugia.DAO
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 return false;
             }
         }

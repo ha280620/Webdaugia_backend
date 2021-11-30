@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="~/img/logo-title.png" type="image/x-icon" />
+    <title>Đông Sài Gòn</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="icon" href="~/Content/Client/img/logo-mb.png" />
+    <!-- BOXICON -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+          rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/slick.css" />
+    <link rel="stylesheet" href="~/css/lightgallery.css" />
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="~/css/swiper.css" />
+    <!-- RESET CSS  -->
+    <link rel="stylesheet" href="~/css/reset.css" />
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="~/css/style1.css" />
+    <link rel="stylesheet" href="~/css/taisansapdaugia.css" />
+
+    <!-- info css -->
+    <link href="~/Content/Client/css/info.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+    <!-- SLICK  CSS -->
+    @*<link rel="stylesheet" href="~/Content/Client/css/index.css" />*@
+    <link rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <!--FONT GOOGLE-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        #loader {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100000;
+            display: none;
+            overflow: hidden;
+        }
+
+        .loader-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- BEGIN NAV -->
+    <div id="loader">
+        <!-- <span class="fas fa-spider xoay icon"></span> -->
+        <div class="loader-content">
+            <img class="img-fluid" src="~/img/ben-thanh-icon-animation800x600.gif" alt="" />
+        </div>
+    </div>
+    <header>
+
+        @Html.Action("Header", "Home")
+        @*<div class="container">
+                <nav id="nav" class="navbar navbar-expand-lg navbar-light px-0">
+                    <a class="navbar-brand" href="/">
+                        <img src="~/img/logo-white.png"
+                             class="img-fluid"
+                             alt="logo" />
+                    </a>
+                    <button class="navbar-toggler"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto w-100 justify-content-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"
+                                   href="#"
+                                   id="navbarDropdown"
+                                   role="button"
+                                   data-toggle="dropdown"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">
+                                    Đấu giá
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Tài sàn đang đấu giá</a>
+                                    <a class="dropdown-item" href="#">Tài sản sắp đấu giá</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Liên hệ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Giới thiệu</a>
+                            </li>
+                            @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
+                            @if (user == null)
+                            {
+                                <li class="nav-item" style="width: 30%;">
+                                    <a class="btn btn-sign-in mr-1" href="@Url.Action("DangNhap","Login")">Đăng nhập </a>
+                                    <a class="btn btn-sign-up" href="@Url.Action("DangKi","Login")">Đăng ký</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+                    @if (user != null)
+                    {
+                        <div class="user-info pl-2">
+                            <div class="img-user">
+                                <img class="img-fluid" src="~/img/user-image.jpg" alt="" />
+                            </div>
+                            <div class="user_dropdown">
+                                <div class="my-2 p-0">
+                                    <ul>
+                                        <li><a href="">Thông tin tài khoản</a></li>
+                                        <li>
+                                            <a href="">Đơn hàng</a>
+                                        </li>
+                                        <li><a href="@Url.Action("DangXuat","Login")">Đăng xuất </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </nav>
+            </div>*@
+    </header>
+
+
+    <div>
+        @RenderBody()
+    </div>
+    <!-- END NAV -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-4 pr-5 footer-contact">
+                    <img class="w-100 mb-3" src="~/img/logo-white.png" alt="" />
+                    <p class="mb-3">
+                        Nếu bạn có bất kì câu hỏi nào, hãy liên hệ với chúng tôi quá địa
+                        chỉ <span class="footer-email">dgdongsaigon@gmail.com</span>
+                    </p>
+                    <div class="footer-address mb-3">
+                        <i class="bx bx-map"></i>
+                        <p class="">693 Kha Vạn Cân, Linh Tây, Thủ Đức, TP.HCM</p>
+                    </div>
+                    <div class="footer-address mb-3">
+                        <i class='bx bx-home-alt'></i>
+                        <p class="">693 Lầu 02, Toà nhà Galaxy 09, Số 9 Nguyễn Khoái, Phường 1, Quận 4, TP.HCM</p>
+                    </div>
+                    <div class="footer-address mb-3">
+                        <i class="bx bx-mobile"></i>
+                        <p class="">028 66865120</p>
+                    </div>
+                    <div class="footer-social mb-3">
+                        <a href="#" class="footer-social-item">
+                            <i class="bx bxl-facebook"></i>
+                        </a>
+                        <a href="#" class="footer-social-item">
+                            <i class="bx bxl-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 footer-item">
+                    <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+                    <p>Liên hệ hỗ trợ</p>
+                    <p>Những câu hỏi thường gặp</p>
+                    <p>Chính sách bảo mật thông tin</p>
+                    <p></p>
+                </div>
+                <div class="col-12 col-md-4 footer-item">
+                    <h4>Về chúng tôi</h4>
+                    <p>Giới thiệu</p>
+                    <p>Tuyển dụng</p>
+                    <p>Quy chế hoạt động</p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <p class="m-0">
+                    2021 © Công ty Đấu giá hợp danh Đông Sài Gòn /
+                    <a href="https://www.facebook.com/truongbien.qh">Web design by <span> Zuradel</span></a>
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+
+    @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
+    @if (user != null)
+    {
+        <script src="~/js/userhover.js"></script>
+    }
+    <script type="text/javascript"
+            src="~/js/slick.js"></script>
+    <script src="~/js/lightGallery.js"></script>
+    <!-- begin js danh mục -->
+    <script src="~/js/swiper.js"></script>
+
+    <script>
+        var swiper = new Swiper(".swiper", {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            direction: getDirection(),
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            on: {
+                resize: function () {
+                    swiper.changeDirection(getDirection());
+                },
+            },
+        });
+
+        function getDirection() {
+            var windowWidth = window.innerWidth;
+            var direction = window.innerWidth <= 760 ? "vertical" : "horizontal";
+
+            return direction;
+        }
+    </script>
+    @RenderSection("Lot", required: false)
+    @RenderSection("Category", required: false)
+    @*-------------------------------*@
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "110928377946240");
+        chatbox.setAttribute("attribution", "biz_inbox");
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v11.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+
+
+    @if (user != null)
+    {
+        <script>
+
+            const user_info = document.querySelector(".user-info");
+            const user_dropdown = document.querySelector(".user_dropdown");
+            user_info.addEventListener("mouseenter", () => {
+                user_dropdown.classList.add("active");
+            });
+            user_info.addEventListener("mouseleave", () => {
+                user_dropdown.classList.remove("active");
+            });
+        </script>
+    }
+    @RenderSection("scripts", required: false)
+    @RenderSection("ProductDetail", required: false)
+</body>
+</html>
