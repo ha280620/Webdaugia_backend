@@ -624,6 +624,54 @@ namespace Webdaugia.Areas.Admin.Controllers
                 return Redirect(Url);
             }
         }
+        public ActionResult SendMailLotNew(int LotID, string Url)
+        {
+
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var user = (UserLogin)Session["AD"];
+
+                db = new AuctionDBContext();
+                var lot = db.Lots.Find(LotID);
+                if (user.Role == 2 && lot.HostLot != user.UserID)
+                {
+                    return RedirectToAction("ListLotRegister");
+                }
+                var listUser = db.Users.Where(x => x.RoleID == 3).ToList();
+                if (listUser != null)
+                {
+                    foreach (var item in listUser)
+                    {
+                        try
+                        {
+                            
+                            var domain = HttpContext.Request.Url.GetLeftPart(UriPartial.Authority); 
+                            var img = domain + lot.LotImage;
+                            var link = domain + "/phien-dau/" + lot.SiteTile + "-" + lot.ID;
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/thongbaolotnew.html"));
+                            content = content.Replace("{{TenPhienDauGia}}", lot.Name);
+                            content = content.Replace("{{CustomerName}}", item.FullName);
+                            content = content.Replace("{{hinhanh}}", img.ToString());
+                            content = content.Replace("{{link}}", link.ToString());
+                            content = content.Replace("{{Thoigianbatdau}}", lot.TimeForRegisterStart.ToString());
+                            content = content.Replace("{{Thoiketthuc}}", lot.TimeForRegisterEnd.ToString());
+                            string tb = "Có phiên đấu giá " + lot.Category.Name + " mới có thể bạn quan tâm";
+                            new MailHelper().SendMail(item.Email, tb, content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            return Redirect(Url);
+                        }
+                    }
+                }
+                return Redirect(Url);
+            }
+        }
         public ActionResult SendMailAuction(int LotID, string Url)
         {
 
@@ -750,7 +798,7 @@ namespace Webdaugia.Areas.Admin.Controllers
                 editLot.AdvanceDesposit = lot.AdvanceDesposit;
                 editLot.ViewInTime = lot.ViewInTime;
                 editLot.Location = lot.Location;
-                editLot.HostLot = ((UserLogin)Session["AD"]).UserID;
+
                 editLot.TimeForRegisterStart = lot.TimeForRegisterStart;
                 editLot.TimeForRegisterEnd = lot.TimeForRegisterEnd;
                 editLot.TimeForBidStart = lot.TimeForBidStart;

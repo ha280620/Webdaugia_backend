@@ -1,6 +1,6 @@
 ﻿@model Webdaugia.Models.HomeModel
 @{
-    ViewBag.Title = "ListLotByDate2";
+    ViewBag.Title = " - Tài sản sắp đấu giá" ;
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 @{
@@ -9,7 +9,7 @@
 }
 
 <div class="container">
-    <img src="~/img/incoming1.png" class="img-fluid w-100 rounded" alt="..." />
+    <img src="~/img/incoming1.png" class="img-fluid w-100 rounded" alt="Tài sản sắp đáu giá" />
 </div>
 <br />
 
@@ -26,7 +26,7 @@
                         <div class="col-12 col-md-6 col-lg-4 p-2">
                             <div class="going-item">
                                 <div class="going-item-img">
-                                    <img src="@item.LotImage" class="img-fluid" alt="" />
+                                    <img src="@item.LotImage" class="img-fluid" alt="@item.Name" />
                                     <div class="going__overlay"></div>
                                     <div class="going__play">
                                         <a href="/phien-dau/@item.SiteTile-@item.ID">

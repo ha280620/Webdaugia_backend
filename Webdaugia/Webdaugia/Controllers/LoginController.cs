@@ -395,7 +395,7 @@ namespace Webdaugia.Controllers
                 {
                     ViewBag.Error = "Gửi mail không thành công";
                     Console.WriteLine(ex);
-                    return View("DangNhap");
+                    return View();
                 }
             }
             else

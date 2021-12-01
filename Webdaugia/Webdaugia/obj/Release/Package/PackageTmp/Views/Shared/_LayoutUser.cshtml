@@ -5,27 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="~/img/logo-title.png" type="image/x-icon" />
-    <title>Đông Sài Gòn</title>
+    <title>Đông Sài Gòn @ViewBag.Title </title>
+    <meta name="description" content="@ViewBag.meta" />
+
+    <meta name="keywords" content="đấu giá, dau-gia, dau gia, bat-dong-san, o-to, dau gia o to, dau gia bat dong san, ô tô, Đông Sài Gòn, dong sai gon, Công ty đấu giá" />
+    <meta http-equiv="refresh" content="120">
+    <meta name="author" content="Zuradel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- BOOTSTRAP -->
+
     <link rel="stylesheet" href="~/css/bootstrap.css" />
     <link rel="icon" href="~/Content/Client/img/logo-mb.png" />
     <!-- BOXICON -->
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
           rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
     <link rel="stylesheet" href="~/css/slick.css" />
-    <link rel="stylesheet" href="~/css/lightgallery.css" />
+
     <!-- SWIPER -->
     <link rel="stylesheet" href="~/css/swiper.css" />
     <!-- RESET CSS  -->
     <link rel="stylesheet" href="~/css/reset.css" />
+    <!-- SLICK  CSS -->
+    @*<link rel="stylesheet" href="~/Content/Client/css/index.css" />*@
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/css/slick.css" />
+
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="~/css/style1.css" />
     <link rel="stylesheet" href="~/css/taisansapdaugia.css" />
+    <link rel="stylesheet" href="~/css/lightgallery.css" />
 
     <!-- info css -->
     <link href="~/Content/Client/css/info.css" rel="stylesheet" />
     <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    @RenderSection("huongdan", required: false)
 
     <!-- SLICK  CSS -->
     @*<link rel="stylesheet" href="~/Content/Client/css/index.css" />*@
@@ -163,7 +178,7 @@
                     </div>
                     <div class="footer-address mb-3">
                         <i class='bx bx-home-alt'></i>
-                        <p class="">693 Lầu 02, Toà nhà Galaxy 09, Số 9 Nguyễn Khoái, Phường 1, Quận 4, TP.HCM</p>
+                        <p class="">Lầu 02, Toà nhà Galaxy 09, Số 9 Nguyễn Khoái, Phường 1, Quận 4, TP.HCM</p>
                     </div>
                     <div class="footer-address mb-3">
                         <i class="bx bx-mobile"></i>
@@ -187,7 +202,7 @@
                 </div>
                 <div class="col-12 col-md-4 footer-item">
                     <h4>Về chúng tôi</h4>
-                    <p>Giới thiệu</p>
+                    <a href="/gioi-thieu"><p> Giới thiệu</p></a>
                     <p>Tuyển dụng</p>
                     <p>Quy chế hoạt động</p>
                     <p></p>
@@ -198,7 +213,7 @@
             <div class="container">
                 <p class="m-0">
                     2021 © Công ty Đấu giá hợp danh Đông Sài Gòn /
-                    <a href="https://www.facebook.com/truongbien.qh">Web design by <span> Zuradel</span></a>
+                    <a href="#">Web design by <span> Zuradel</span></a>
                 </p>
             </div>
         </div>
@@ -241,6 +256,7 @@
             return direction;
         }
     </script>
+    @RenderSection("huongdanjs", required: false)
     @RenderSection("Lot", required: false)
     @RenderSection("Category", required: false)
     @*-------------------------------*@
@@ -282,7 +298,7 @@
             });
         </script>
     }
-    @RenderSection("scripts", required: false)
+    @RenderSection("title", required: false)
     @RenderSection("ProductDetail", required: false)
 </body>
 </html>

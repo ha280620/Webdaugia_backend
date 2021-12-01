@@ -1,0 +1,632 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="~/img/logo-title.png" type="image/x-icon" />
+    <title>Đông Sài Gòn - Hướng Dẫn </title>
+
+
+    <meta name="keywords" content="đấu giá, dau-gia, dau gia, bat-dong-san, o-to, dau gia o to, dau gia bat dong san, ô tô, Đông Sài Gòn, dong sai gon, Công ty đấu giá" />
+    <meta http-equiv="refresh" content="120">
+    <meta name="author" content="Zuradel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="~/css/backtotop.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" />
+    <link rel="icon" href="~/Content/Client/img/logo-mb.png" />
+    <!-- BOXICON -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/css/slick.css" />
+
+    <!-- SWIPER -->
+    <link rel="stylesheet" href="~/css/swiper.css" />
+    <!-- RESET CSS  -->
+    <link rel="stylesheet" href="~/css/reset.css" />
+    <link rel="stylesheet" href="~/css/huongdan.css" />
+
+    <!-- SLICK  CSS -->
+    @*<link rel="stylesheet" href="~/Content/Client/css/index.css" />*@
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/css/slick.css" />
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="~/css/style1.css" />
+    <style>
+        .backtotop:after {
+            content: "\eebf";
+            font-family: 'boxicons';
+        }
+    </style>
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+
+
+
+</head>
+<body>
+    <!-- BEGIN NAV -->
+    <header>
+        @Html.Action("Header", "Home")
+    </header>
+    <main>
+        <div class="container clear">
+            <div class="row wrapper">
+
+                <div class="sidepanel">
+
+                    <a class="title" href="#thu-tuc">
+                        Thủ tục đăng ký mua tài sản
+                    </a>
+
+                    <a class="section" href="#thu-tuc-1">Người tham gia đấu giá tài sản</a>
+                    <a class="section" href="#thu-tuc-2">Người không được tham gia đấu giá tài sản</a>
+                    <a class="section" href="#thu-tuc-3">Đăng ký mua tài sản bán đấu giá:</a>
+                    <a class="section" href="#thu-tuc-4">Cấp giấy chứng nhận quyền sở hữu, quyền sử dụng tài sản bán đấu giá:</a>
+
+
+                    <div class="divider left"></div>
+
+                    <a class="title" href="#quy-che">Quy chế bán đấu giá tài sản</a>
+
+                    <a class="section" href="#quy-che-1">Phạm vi áp dụng</a>
+                    <a class="section" href="#quy-che-2">Giải thích từ ngữ</a>
+                    <a class="section" href="#quy-che-3">Nguyên tắc bán đấu giá</a>
+                    <a class="section" href="#quy-che-4">Đối tượng tham gia đấu giá</a>
+                    <a class="section" href="#quy-che-5">Điều kiện được đăng ký tham gia đấu giá</a>
+                    <a class="section" href="#quy-che-6">Những người không được tham gia đấu giá tài sản</a>
+                    <a class="section" href="#quy-che-7">Đăng ký tham gia đấu giá</a>
+                    <a class="section" href="#quy-che-8">Trưng bày và xem tài sản đấu giá</a>
+                    <a class="section" href="#quy-che-9">Bước giá</a>
+                    <a class="section" href="#quy-che-10">Hình thức đấu giá</a>
+                    <a class="section" href="#quy-che-11">Bán đấu giá trong trường hợp đặc biệt</a>
+                    <a class="section" href="#quy-che-12">Quy định chung về cuộc bán đấu giá tài sản</a>
+                    <a class="section" href="#quy-che-13">Trường hợp không tham gia cuộc bán đấu giá</a>
+                    <a class="section" href="#quy-che-14">Trường hợp rút lại giá đã trả</a>
+                    <a class="section" href="#quy-che-15">Trường hợp từ chối mua tài sản bán đấu giá</a>
+                    <a class="section" href="#quy-che-16">Phương thức thanh toán</a>
+                    <a class="section" href="#quy-che-17">Bàn giao tài sản đấu giá</a>
+                    <a class="section" href="#quy-che-18">Một số lưu ý khác</a>
+                    <a class="section" href="#quy-che-19">Xử lý vi phạm đối với người tham gia đấu giá</a>
+
+
+                    <div class="divider left"></div>
+
+
+
+                    <div class="space double"></div>
+
+                </div>
+
+                <div class="right-col">
+
+
+
+                    <div>
+                        <h1 class="h1" id="thu-tuc">
+                            Thủ tục đăng ký mua tài sản
+                        </h1>
+
+
+
+                        <h2 id="thu-tuc-1">1/Người tham gia đấu giá tài sản:</h2>
+
+                        <p>
+                            -   Là cá nhân, tổ chức được phép tham gia đấu giá để mua tài sản bán đấu giá theo quy định của Luật đấu giá tài sản và các quy định khác của pháp luật có liên quan.
+                            Người tham gia đấu giá tài sản có thể ủy quyền bằng văn bản cho người khác thay mặt mình tham gia đấu giá tài sản.
+                        </p>
+
+                        <h2 id="thu-tuc-2">2/Người không được tham gia đấu giá tài sản: </h2>
+
+                        <p>  -  Người không có năng lực hành vi dân sự, người mất hoặc bị hạn chế năng lực hành vi dân sự theo quy định của Bộ Luật dân sự hoặc người tại thời điểm đấu giá không nhận thức, làm chủ được hành vi của mình.</p>
+                        <p>
+                            -   Người không có năng lực hành vi dân sự, người mất hoặc bị hạn chế năng lực hành vi dân sự theo quy định của Bộ Luật dân sự hoặc người tại thời điểm đấu giá không nhận thức, làm chủ được hành vi của mình.
+                        </p>
+                        <p>
+                            -   Người có tài sản bán đấu giá.
+                        </p><p>
+                            -   Người không có quyền mua tài sản bán đấu giá theo quy định của pháp luật.
+                        </p>
+
+                        <h2 id="thu-tuc-3">3/ Đăng ký mua tài sản bán đấu giá:</h2>
+
+                        <p>
+                            -   Người muốn tham gia đấu giá bất động sản hoặc động sản có giá khởi điểm từ mười triệu đồng trở lên phải đăng ký mua trong thời hạn mà Trung tâm đã thông báo.
+                        </p>
+                        <p>
+                            -   Người đã đăng ký mua tài sản bán đấu giá phải nộp một khoản tiền đặt trước do Trung tâm và người có tài sản bán đấu giá thoả thuận quy định, nhưng tối đa không quá 20% của giá khởi điểm.
+                        </p>
+                        <p>
+                            -   Trong trường hợp người đã nộp tiền đặt trước mua được tài sản bán đấu giá thì khoản tiền đặt trước được trừ vào giá mua; nếu không mua được, thì khoản tiền đặt trước được trả lại cho người nộp ngay sau khi cuộc bán đấu giá kết thúc, trừ trường hợp pháp luật có quy định khác.
+                        </p>
+
+                        <p>
+                            -   Trong trường hợp người đăng ký mua tài sản bán đấu giá đã nộp một khoản tiền đặt trước nhưng không tham gia cuộc bán đấu giá mà không có lý do chính đáng thì khoản tiền đặt trước đó thuộc về người bán đấu giá tài sản, trừ trường hợp các bên có thoả thuận khác.
+                        </p>
+                        <h2 id="thu-tuc-4"> 4/ Cấp giấy chứng nhận quyền sở hữu, quyền sử dụng tài sản bán đấu giá:</h2>
+
+
+
+                        <p>
+                            -   Đối với tài sản bán đấu giá, cơ quan Nhà nước có thẩm quyền có trách nhiệm cấp giấy chứng nhận quyền sở hữu, quyền sử dụng tài sản cho người mua được tài sản bán đấu giá.
+                        </p><p>
+                            -   Thời hạn cấp giấy chứng nhận quyền sở hữu, quyền sử dụng đối với tài sản đã bán đấu giá là ba mươi ngày, kể từ ngày nhận đủ hồ sơ.
+                        </p><p>
+                            -   Đối với tài sản bán đấu giá, cơ quan Nhà nước có thẩm quyền có trách nhiệm cấp giấy chứng nhận quyền sở hữu, quyền sử dụng tài sản cho người mua được tài sản bán đấu giá.
+                        </p><p>
+                            -   Thời hạn cấp giấy chứng nhận quyền sở hữu, quyền sử dụng đối với tài sản đã bán đấu giá là ba mươi ngày, kể từ ngày nhận đủ hồ sơ.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="divider" style="width:24%; margin:30px 0;"></div>
+                    <div>
+
+                        <h1 id="quy-che">Quy chế đấu giá</h1>
+
+                        <h2 id="quy-che-1">Điều 1: Phạm vi áp dụng:</h2>
+
+                        <p>
+                            -   Quy chế này áp dụng cho việc bán đấu giá tài sản thông qua Công ty Đấu giá Hợp danh Đông Sài Gòn và/hoặc các Chi nhánh của Công ty Đấu giá Hợp danh Đông Sài Gòn.
+                        </p>
+                        <h2 id="quy-che-2">Điều 2: Giải thích từ ngữ:</h2>
+
+                        <p>
+                            Các từ ngữ trong Quy chế này được hiểu như sau:
+                        </p>
+                        <p>
+                            -   “Bán đấu giá tài sản” là hình thức bán tài sản công khai theo phương thức trả giá lên, có từ 02 người trở lên tham gia đấu giá theo nguyên tắc, trình tự, thủ tục được quy định tại Quy chế này. Phương thức trả giá lên là phương thức trả giá từ thấp đến cao cho đến khi có người trả giá caonhất;
+                        </p>
+                        <p>
+                            -   “Tài sản bán đấu giá” là động sản hoặc bất động sản được phép giao dịch theo quy định của pháp luật.
+                        </p>
+                        <p>
+                            -   “Người bán đấu giá” là Công ty Đấu giá Hợp danh Đông Sài Gòn và/hoặc các Chi nhánh của Công ty Đấu giá Hợp danh Đông Sài Gòn.
+                        </p>
+                        <p>
+                            -   “Người điều hành cuộc bán đấu giá tài sản” là Đấu giá viên do Công ty Đấu giáHợp danh Đông Sài Gòn và/hoặc các Chi nhánh của Công ty Đấu giá Hợp danh Đông Sài Gòn cử ra để điều hành cuộc bán đấugiá;
+
+                        </p>
+                        <p>
+                            -   “Người có tài sản bán đấu giá” là chủ sở hữu tài sản hoặc người được chủ sở hữu ủy quyền bán tài sản, người có trách nhiệm chuyển giao tài sản để bán đấu giá hoặc là cá nhân, tổ chức có quyền bán tài sản của người khác theo quy định của pháp luật;
+                        </p>
+                        <p>
+                            -   “Người tham gia đấu giá tài sản” là cá nhân, đại diện tổ chức có đủ điều kiện tham gia đấu giá để mua tài sản bán đấu giá theo quy định tại Quy chế này và các quy định khác của pháp luật có liênquan;
+                        </p>
+                        <p>
+                            -   “Công ty” hoặc “Công ty Đấu giá” được nhắc trong Quy chế này được hiểu là Công ty Đấu giá Hợp danh Đông Sài Gòn và/hoặc các Chi nhánh của Công ty Đấu giá Hợp danh Đông Sài Gòn.
+                        </p>
+                        <h2 id="quy-che-3">Điều 3: Nguyên tắc bán đấu giá.</h2>
+
+                        <p>
+                            Việc bán đấu giá tài sản được thực hiện theo nguyên tắc công khai, liên tục, khách quan, trung thực, bình đẳng, bảo vệ quyền và lợi ích hợp pháp của các bên tham gia.
+                        </p>
+
+                        <h2 id="quy-che-4">Điều 4: Đối tượng tham gia đấu giá:</h2>
+
+                        <p>
+                            -   Mọi cá nhân, tổ chức có đầy đủ năng lực pháp luật, năng lực hành vi dân sự và không thuộc các trường hợp quy định tại Điều 6 của Quy chế này.
+
+                        </p>
+                        <p>
+                            -   Khách hàng tham gia đấu giá có thể ủy quyền cho tổ chức, cá nhân khác thỏa mãn điều kiện quy định tại khoản 1 điều 4 của Quy chế này tham gia đấu giá. Việc ủy quyền phải được lập thành văn bản có xác nhận của Cơ quan tổ chức có thẩm quyền.
+                        </p>
+                        <h2 id="quy-che-5">Điều 5: Điều kiện được đăng ký tham gia đấu giá:</h2>
+
+                        <p>
+                            -   Các đối tượng quy định tại Điều 4 của Quy chế này được đăng ký tham gia đấu giá khi có đủ các điều kiện sau:
+
+                        </p>
+                        <p>
+                            -   Có đơn đăng ký tham gia đấu giá theo mẫu do Công ty Đấu giá Hợp danh Đông Sài Gòn phát hành, trong đó khách hàng phải cam kết: không thắc mắc, khiếu nại và yêu cầu đòi bồi thường trong các trường hợp: Thời hạn giao tài sản cho khách hàng bị kéo dài hoặc kết quả bán đấu giá tài sản có thể bị hủy bỏ, sửa đổi (đối với các tài sản bán để thi hành án); Khi Cơ quan Thi hành án phải áp dụng biện pháp cưỡng chế giao tài sản hoặc có yêu cầu tạm hoãn, tạm đình chỉ thi hành án của cơ quan có thẩmquyền.
+                        </p>
+                        <p>
+                            -   Mỗi hộ gia đình chỉ được 01 (một) cá nhân tham gia đấu giá; Một tổ chức có nhiều đơn vị trực thuộc thì chỉ được 01 (một) đơn vị tham gia đấu giá; Có 02 (hai) doanh nghiệp trở lên thuộc cùng một tổng công ty thì chỉ được một doanh nghiệp tham gia đấu giá; Tổng công ty với công ty thành viên, công ty mẹ và công ty con, doanh nghiệp liên doanh với một bên góp vốn trong liên doanh thì chỉ được một doanh nghiệp tham gia đấugiá
+                        </p>
+
+                        <h2 id="quy-che-6">Điều 6: Những người không được tham gia đấu giá tài sản:</h2>
+
+                        <p>
+                            -   Người không có năng lực hành vi dân sự, người bị mất hoặc bị hạn chế năng lực hành vi dân sự hoặc người tại thời điểm đấu giá không nhận thức, làm chủ được hành vi củamình.
+
+                        </p>
+                        <p>
+                            -   Người làm việc trong tổ chức bán đấu giá tài sản và cha, mẹ, vợ, chồng, con, anh, chị, em ruột của người đó; Người trực tiếp giám định, định giá tài sản và cha, mẹ, vợ, chồng, con, anh, chị, em ruột của ngườiđó
+                        </p>
+                        <p>
+                            -   Người được chủ sở hữu ủy quyền bán tài sản; Người ra quyết định tịch thu tài sản là tang vật, phương tiện vi phạm hành chính; Người có thẩm quyền quyết định bán tài sản nhà nước; Người ký hợp đồng thuê tổ chức bán đấu giá tài sản để bán đấu giá tài sản nhà nước; Cá nhân, tổ chức có quyền bán tài sản của người khác theo quy định của phápluật.
+                        </p>
+                        <p>
+                            -   Người không có quyền mua tài sản bán đấu giá theo quy định pháp luật ,bao gồm:
+                        </p>
+                        <p>
+                            +   Người không được tham gia mua tài sản để thi hành án theo quy định pháp luật về thi hành án dân sự.
+                        </p><p>
+                            +   Người không đủ điều kiện tham gia mua tài sản đối với một số loại tài sản theo quy định của pháp luật về tài sản đó.
+
+                        </p><p>
+                            +   Người không có đủ điều kiện theo quy định tại Điều 5 của Quy chế này.
+                        </p>
+                        <h2 id="quy-che-7">Điều 7: Đăng ký tham gia đấu giá:</h2>
+
+                        <p>
+                            Các đối tượng có đủ điều kiện theo quy định tại Điều 5 Quy chế này thực hiện đăng ký và hoàn tất thủ tục đăng ký trong thời hạn mà Công ty Đấu giá Hợp danh Đông Sài Gòn đã thông báo côngkhai.
+
+                        </p>
+                        <p>
+                            <b>Hồ sơ đăng ký gồm:</b>
+                        </p>
+                        <p>
+                            -   Đơn đăng ký tham gia đấu giá (theo mẫu và có đóng dấu treo của Công ty  Đấu giá );
+                        </p>
+                        <p>
+                            -   Đối với cá nhân: CMND, Sổ hộ khẩu (mỗi loại 02 bản saoy);
+                        </p><p>
+                            -   Đối với tổ chức: Giấy chứng nhận đăng ký kinh doanh; Giấy chứng nhận mẫu dấu của doanh nghiệp; CMND của người đại diện theo pháp luật của tổ chức (mỗi loại 02 bản sao y); Giấy ủy quyền (nếucó).
+
+                        </p>
+                        <p>
+                            -    <b>Nộp hồ sơ đăng ký tham gia đấu giá:</b> Người tham gia đấu giá trực tiếp hoặc thông qua đại diện theo ủy quyền nộp 01 bộ hồ sơ theo quy định tại điểm a khoản 1 Điều này cho Công ty Đấugiá.
+
+                        </p><p>
+                            -    <b>Thời gian đăng ký:</b> Người tham gia đấu giá nộp hồ sơ đăng ký trong thời hạn đã được niêm yết, thông báo công khai việc bán đấugiá.
+
+                        </p><p>
+                            <b> Khách hàng tham gia đấu giá phải nộp các khoản tiền sau:</b>
+                        </p>
+                        <p>
+                            -   <b>Tiền đặt trước:</b> Mức thu của khoản tiền đặt trước được xác định trong hợp đồng ủy quyền bán đấu giá tài sản do Công ty bán đấu giá và bên ủy quyền bán đấu giá tài sản thỏa thuận, được thể hiện cụ thể ở từng tài sản bán đấu giá nhưng tối thiểu là 5% giá khởi điểm và tối đa không vượt quá 20% giá khởi điểm. Khoản tiền đặt trước được nộp cho Công ty Đấu giá trong thời hạn đăng ký tham gia đấu giá đã được niêm yết.
+                        </p><p>
+                            &nbsp;+   Tiền đặt trước của người trúng đấu giá sẽ được trừ vào tiền mua tài sản.
+                        </p>
+                        <p>
+                            &nbsp;+   Khoản tiền đặt trước sẽ không được hoàn trả lại cho các tổ chức/cá nhân tham gia đấu giá thuộc các trường hợp quy định tại khoản 5 điều này.
+                        </p>
+                        <p>
+                            -   <b>Phí tham gia đấu giá:</b>  Là khoản phí mà các tổ chức/cá nhân tham gia đấu giá phải nộp khi đăng ký tham gia đấu giá. Khoản phí này không được hoàn trả lại.
+                        </p>
+                        <p>
+                            -   <b>Hồ sơ đủ điều kiện tham gia đấu giá:</b> Khi khách hàng đã nộp cho Công ty Đấu giá bộ hồ sơ theo quy định tại Khoản 1 điều này và khoản tiền phí tham gia đấu giá, khoản tiền đặt trước trong thời hạn đã được niêm yết, thông báo công khai.
+                        </p>
+                        <p>
+                            &nbsp;&nbsp; +  Trường hợp khách hàng tham gia đấu giá mua được tài sản bán đấu giá thì khoản tiền đặt trước được trừ vào giá mua. Nếu không mua được tài sản thì khoản tiền đặt trước được trả lại cho người tham gia đấu giá tài sản chậm nhất 03 ngày làm việc sau khi cuộc bán đấu giá kết thúc, trừ trường hợp pháp luật có quy định khác.
+                        </p> <p>
+                            Tổ chức/cá nhân tham gia đấu giá được hoàn trả khoản tiền đặt trước trong các trường hợp sau:
+                        </p><p>
+                            -  Không trúng đấu giá;
+                        </p>
+                        <p>
+                            -  Người đăng ký tham gia đấu giá đã nộp khoản tiền đặt trước nhưng không tham gia cuộc bán đấu giá trong trường hợp bất khả kháng.
+                        </p>
+                        <p>
+                            Tổ chức/cá nhân tham gia đấu giá không được hoàn trả khoản tiền đặt trước trong các trường hợps au:
+
+                        </p><p>
+                            -  Người đăng ký tham gia đấu giá đã nộp khoản tiền đặt trước nhưng đến trễ hoặc không tham gia cuộc bán đấu giá mà không thuộc trường hợp bất khả kháng.
+                        </p>
+                        <p>
+                            -  Người tham gia đấu giá rút lại giá đã trả, bị truất quyền tham gia đấu giá.
+
+                        </p> <p>
+                            -  Tổ chức /cá nhân trúng đấu giá nhưng từ chối nhận tài sản.
+
+                        </p><p>
+                            -  Là người trúng đấu giá nhưng không thanh toán tiền mua tài sản hoặc thanh toán không đúng hạn theo thỏa thuận được ghi nhận tại Biên bản bán đấu giá và Hợp đồng mua bán tài sản bán đấu giá.
+
+                        </p><p>
+                            -  Các trường hợp khác theo quy định của Pháp luật.
+
+                        </p>
+                        <h2 id="quy-che-8">Điều 8: Trưng bày và xem tài sản đấu giá:</h2>
+
+                        <p>
+                            -   Đối với tài sản bán đấu giá là bất động sản thì người tham gia đấu giá tài sản được trực tiếp xem tài sản từ khi niêm yết và thông báo công khai cho đến trước ngày mở cuộc bán đấu giá tài sản 2 ngày.
+                        </p>
+                        <p>
+                            -   Đối với tài sản bán đấu giá là động sản thì ít nhất 02 ngày trước ngày mở cuộc bán đấu giá tài sản, người tham gia đấu giá được tạo điều kiện để xem tài sản bán đấu giá. Trên tài sản hoặc mẫu tài sản phải ghi rõ tên của người có tài sản bán đấu giá và thông tin về tài sảnđó.
+
+                        </p>
+                        <p>
+                            -    Công ty Đấu giá không chịu trách nhiệm trong trường hợp khách hàng không xem thực tế hiện trạng tài sản nhưng vẫn đăng ký tham gia đấugiá.
+                        </p>
+
+                        <h2 id="quy-che-9">Điều 9: Bước giá:</h2>
+
+                        <p>
+                            -   Do Bên có tài sản quy định và thông báo cho tổ chức bán đấu giá bằng văn bản trước ngày tổ chức bán đấu giá tài sản hoặc thỏa thuận tại Hợp đồng dịch vụ bán đấu giá tàisản.
+                        </p>
+                        <p>
+                            -   Đối với tài sản bán đấu giá là động sản thì ít nhất 02 ngày trước ngày mở cuộc bán đấu giá tài sản, người tham gia đấu giá được tạo điều kiện để xem tài sản bán đấu giá. Trên tài sản hoặc mẫu tài sản phải ghi rõ tên của người có tài sản bán đấu giá và thông tin về tài sảnđó.
+
+                        </p>
+                        <h2 id="quy-che-10">Điều 10: Hình thức đấu giá:</h2>
+
+                        <p>
+                            -   <b>Đấu giá trực tiếp bằng lời nói:</b> Người tham gia đấu giá trả giá trực tiếp bằng lời nói liên tục cho đến khi không còn người yêu cầu trả giá tiếp. Người có mức trả giá cao nhất là người trúng đấugiá.
+                        </p>
+                        <p>
+                            &nbsp;&nbsp; +   Khách hàng đầu tiên có quyền trả giá bằng giá khởi điểm (hoặc làm tròn số tiền theo hướng tăng), hoặc trả cao hơn mà không cần theo quy định mức chênh lệch mỗi lần trả giá mà Đấu giá viên điều hành cuộc bán đấu giá quy định, riêng khách hàng thứ hai trở lên phải trả giá đúng theo mức chênh lệch của bước giá đã quy định;
+
+                        </p> <p>
+                            &nbsp;&nbsp; + Các lần trả giá liên tiếp nhau, mỗi lần cách nhau tối đa 30 giây. Nếu sau 03 lần Đấu giá viên nhắc lại giá cao nhất đã trả mà không có người trả giá cao hơn thì Đấu giá viên công bố người mua được tài sản là người trả giá cuối cùng cao nhất. Sau khi Đấu giá viên công bố, người mua được tài sản bán đấu giá được coi là đã chấp nhận giao kết hợp đồng mua bán tài sản bán đấu giá.
+                        </p>
+                        <p>
+                            -   <b>Đấu giá trực tuyến:</b> Người tham gia đấu giá trả giá trực tiếp trên website của công ty liên tục cho đến khi không còn người yêu cầu trả giá tiếp. Người có mức trả giá cao nhất là người trúng đấu giá.
+                        </p>
+                        <p>
+                            &nbsp;&nbsp; +   Khách hàng đầu tiên có quyền trả giá bằng giá khởi điểm (hoặc làm tròn số tiền theo hướng tăng), hoặc trả cao hơn mà không cần theo quy định mức chênh lệch mỗi lần trả giá mà Đấu giá viên điều hành cuộc bán đấu giá quy định, riêng khách hàng thứ hai trở lên phải trả giá đúng theo mức chênh lệch của bước giá đã quy định;
+
+                        </p> <p>
+                            &nbsp;&nbsp; + Sau thời gian kết thúc phiên đấu được quy định trên website, giá cao nhất đã trả mà không có người trả giá cao hơn thì Đấu giá viên công bố người mua được tài sản là người trả giá cuối cùng cao nhất. Sau khi Đấu giá viên công bố, người mua được tài sản bán đấu giá được coi là đã chấp nhận giao kết hợp đồng mua bán tài sản bán đấu giá.
+                        </p>
+                        <p>
+                            -   <b>Đấu giá bằng hình thức bỏ phiếu kín</b> trực tiếp theo từng vòng, liên tục cho đến khi không còn người yêu cầu đấu giá tiếp, người có mức trả giá cao nhất là người trúng đấu giá. Thời gian cho mỗi vòng bỏ phiếu tối đa không quá 05 phút.
+                        </p>
+                        <p>
+                            &nbsp;&nbsp; + Số vòng đấu: Do Đấu giá viên quy định cụ thể cho từng trường hợp. Khách hàng trả giá bằng cách ghi số tiền trả giá vào trong phiếu trả giá (theo mẫu) và ký ghi rõ họ tên để xác nhận mình tham gia trả giá.
+                        </p>
+                        <p>
+                            &nbsp;&nbsp; + <b>
+                                Tiến trình đấu giá:
+                            </b>
+
+                        </p>  <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp; *
+                            Vòng 1: Là vòng bắt buộc tất cả các khách hàng tham gia đều phải trả giá. Từ vòng thứ 2 trở đi, nếu khách hàng không tham gia trả giá thì ghi vào phiếu không tham gia trả giá và được mời ra khỏi phòng đấu giá.
+
+                            Tại vòng 1, các khách hàng tham gia phiên đấu giá có quyền trả giá bằng giá khởi điểm hoặc trả cao hơn mà không cần theo mức chênh lệch mỗi lần trả giá mà Đấu giá viên điều hành cuộc bán đấu giá quy định. Các vòng trả giá tiếp theo khách hàng phải trả giá cao hơn giá đã trả cao nhất của vòng đấu trước cộng thêm tối thiểu một bước giá.
+
+                            Tại vòng đấu cuối cùng, khách hàng trả giá cao nhất sẽ là người trúng đấu giá.
+                        </p> <p>
+                            &nbsp;&nbsp;&nbsp;&nbsp; *
+                            Trong trường hợp tại vòng đấu cuối, có từ hai người trở lên cùng trả giá cao nhất thì đấu giá viên tổ chức bốc thăm để chọn ra người mua được tài sản bán đấu giá.
+
+                        </p><p>
+                            &nbsp;&nbsp;&nbsp;&nbsp; *
+                            Trường hợp ngay tại vòng đấu đầu tiên, sau 05 phút không có người trả giá, đấu giá viên sẽ thông báo cuộc bán đấu giá không thành. Khoản tiền đặt trước của các khách hàng tham gia đấu giá sẽ không được hoàn trảlại.
+
+
+                        </p><p>
+                            Các hình thức đấu giá khác theo quy định của pháp luật và thỏa thuận của người có tài sản bán đấu giá và tổ chức bán đấu giá.
+
+                        </p>
+                        <h2 id="quy-che-11">
+                            Điều 11: Bán đấu giá trong trường hợp đặc biệt:
+                        </h2>
+
+                        <p>
+                            -   Cuộc bán đấu giá tài sản được tiến hành khi có ít nhất 02 người đăng ký mua tài sản hợp lệ theo thời hạn và thủ tục quy định của Công ty.
+                        </p>
+                        <p>
+                            -   Trường hợp đã hết hạn đăng ký tham gia đấu giá tài sản mà chỉ có một người đăng ký mua tài sản bán đấu giá hoặc có nhiều người đăng ký tham gia đấu giánhưng chỉ có một người tham gia cuộc bán đấu giá và trả giá ít nhất bằng giá khởi điểm thì tài sản được bán cho người đó,nếu người có tài sản bán đấu giá đồng ý.
+
+                        </p>
+                        <h2 id="quy-che-12">
+                            Điều 12: Quy định chung về cuộc bán đấu giá tài sản:
+                        </h2>
+
+                        <p>
+                            -   Người tham gia đấu giá tài sản phải đến đúng giờ và tham dự một hoặc hai người (cùng cơ quan đơn vị, hoặc gia đình). Người tham gia đấu giá tài sản hoặc người được ủy quyền hợp pháp mới được quyền trả giá tại cuộc bán đấu giá tài sản. Khi dự cuộc đấu giá phải mang theo giấy chứng minh nhân dân hoặc hộ chiếu và giấy ủy quyền (nếucó).
+
+                        </p>
+                        <p>
+                            &nbsp;&nbsp;+   Trong phòng đấu giá, người tham gia đấu giá phải giữ gìn trật tự, không trao đổi với tổ chức, cá nhân khác, không sử dụng các phương tiện thông tin liên lạc.
+
+                        </p><p>
+                            -   Người tham gia đấu giá tài sản không được tiếp tục tham gia đấu giá và không được hoàn trả khoản tiền đặt trước nếu có các vi phạm sau:
+
+                        </p><p>
+                            &nbsp;&nbsp;+    Trao đổi với người tham gia đấu giá khác, sử dụng các phương tiện thông tin liên lạc trong phòng đấugiá;
+                        </p><p>
+                            &nbsp;&nbsp;+    Người tham gia đấu giá gây mất trật tự, cản trở, phá rối quyền đấu giá của ngườikhác;
+
+                        </p><p>
+                            &nbsp;&nbsp;+    Người tham gia đấu giá có hành vi thông đồng dìm giá, mua chuộc đe dọa người tham gia đấu giá khác.
+                        </p><p>
+                            &nbsp;&nbsp;+    Người điều hành phiên đấu giá tạm ngưng phiên đấu giá, lập biên bản xử lý các trường hợp nêu trên và tiếp tục tổ chức đấu giá hoặc quyết định ngưng phiên đấu giá khi cần thiết.
+
+                        </p>
+
+                        <h2 id="quy-che-13">
+                            Điều 13: Trường hợp không tham gia cuộc bán đấu giá:
+
+                        </h2>
+
+                        <p>
+                            -   Trong trường hợp người đăng ký mua tài sản bán đấu giá đã nộp một khoản tiền đặt trước nhưng không tham gia cuộc bán đấu giá (trừ trường hợp bất khả kháng) thì khoản tiền sẽ không được hoàn trả lại.
+
+                            Những trường hợp sau đây được coi là không tham gia cuộc bán đấu giá:
+                        </p>
+                        <p>
+                            &nbsp;&nbsp;+      Đến trễ hoặc không có mặt tại cuộc bán đấugiá;
+                        </p><p>
+                            &nbsp;&nbsp;+     Có mặt tại cuộc bán đấu giá nhưng: Xin rút không tham gia đấu giá, không xin rút nhưng không chịu phát giá (trừ trường hợp trước đó đã có người trả giá) trả giá dưới giá khởi điểm; trả thấp hoặc cao hơn mức chênh lệch quy định.
+
+                        </p> <h2 id="quy-che-14">
+                            Điều 14: Trường hợp rút lại giá đã trả:
+                        </h2>
+
+                        <p>
+                            -   Tại cuộc bán đấu giá tài sản, người đã trả giá cao nhất mà rút lại giá đã trả trước khi Đấu giá viên điều hành cuộc bán đấu giá công bố người mua được tài sản thì cuộc bán đấu giá vẫn tiếp tục và bắt đầu từ giá của người trả giá liền kề trước đó. Trong trường hợp không có người trả giá tiếp thì cuộc bán đấu giá coi như không thành. Người rút lại giá đã trả bị truất quyền tham gia trả giá tiếp và không được hoàn trả khoản tiền đặt trước.
+                        </p><p>
+                            -   Khoản tiền đặt trước của người rút lại giá đã trả thuộc về tổ chức đấu giá tài sản.
+                        </p>
+                        <h2 id="quy-che-15">
+                            Điều 15: Trường hợp từ chối mua tài sản bán đấu giá:
+                        </h2>
+
+                        <p>
+                            -   Tại cuộc bán đấu giá, khi đấu giá viên điều hành cuộc bán đấu giá tài sản đã công bố người mua được tài sản bán đấu giá mà người này từ chối mua thì tài sản được bán cho người trả giá liền kề nếu giá liền kề đó cộng với khoản tiền đặt trước ít nhất bằng giá đã trả của người từ chối mua.
+                        </p><p>
+                            -   Đối với cuộc đấu giá bằng hình thức bỏ phiếu, trong trường hợp từ chối mua nêu trên mà có từ hai người trở lên cùng trả giá liền kề, nếu giá liền kề đó cộng với khoản tiền đặt trước ít nhất bằng giá đã trả của người từ chối mua thì tài sản được bán cho một trong hai người trả giá liền kề đó, sau khi đấu giá viên tổ chức bốc thăm để chọn ra người mua được tài sản bán đấu giá. Trong trường hợp giá liền kề cộng với khoản tiền đặt trước nhỏ hơn giá đã trả của người từ chối mua thì cuộc bán đấu giá coi như không thành.
+                        </p><p>
+                            -   Trong trường hợp người trả giá liền kề không đồng ý mua thì cuộc bán đấu giá coi như khôngthành.
+                        </p><p>
+                            -   Khoản tiền đặt trước của người từ chối mua theo quy định tại khoản 1Điều này không được hoàn trả lại.
+                        </p>
+                    </div><h2 id="quy-che-16">
+                        Điều 16: Phương thức thanh toán:
+                    </h2>
+
+                    <p>
+                        -   Đối với từng tài sản bán đấu giá, tùy theo giá trị tài sản lớn hay nhỏ hoặc theo thỏa thuận giữa bên có tài sản và Công ty bán đấu giá, Đấu giá viên sẽ quy định thời hạn thanh toán cụ thể đối với từng tài sản bán đấu giá tại Biên bản bán đấu giá và Hợp đồng mua bán tài sản bán đấu giá nhưng không quá 15 ngày kể từ ngày đấu giá thành đối với các tài sản thi hành án. Đối với các sản không phải tài sản thi hành án, thời gian thanh toán tiền mua tài sản do các bên thỏa thuận.
+                    </p>
+                    <p>
+                        -   Đối với từng tài sản bán đấu giá, tùy theo giá trị tài sản lớn hay nhỏ hoặc theo thỏa thuận giữa bên có tài sản và Công ty bán đấu giá, Đấu giá viên sẽ quy định thời hạn thanh toán cụ thể đối với từng tài sản bán đấu giá tại Biên bản bán đấu giá và Hợp đồng mua bán tài sản bán đấu giá nhưng không quá 15 ngày kể từ ngày đấu giá thành đối với các tài sản thi hành án. Đối với các sản không phải tài sản thi hành án, thời gian thanh toán tiền mua tài sản do các bên thỏa thuận.
+                    </p>
+                    <p>
+                        -   Hình thức thanh toán: bằng tiền mặt hoặc chuyển khoản.
+                    </p>
+                    <h2 id="quy-che-17">
+                        Điều 17: Bàn giao tài sản đấu giá:
+                    </h2>
+
+                    <p>
+                        -   Người có tài sản bán đấu giá trực tiếp bàn giao tài sản cho người mua trúng đấu giá tài sản với sự chứng kiến của Công ty Đấu giá.
+
+                    </p>
+                    <p>
+                        -   Thời hạn bàn giao tài sản cho người trúng đấu giá chậm nhất là 30 ngày kể từ ngày người trúng đấu giá thanh toán đầy đủ tiền mua tài sản <i>(trừ trường hợp tài sản bán đấu giá là tài sản thi hành án và phải thực hiện cưỡng chế bàn giao tài sản)</i>.
+
+                    </p>
+                    <p>
+                        -  Tài sản bán đấu giá là bất động sản được bàn giao tại nơi có bất động sản. Tài sản là động sản được bàn giao tại nơi bảo quản tài sản nếu các bên không có thỏa thuận khác.
+
+
+                    </p>
+                    <h2 id="quy-che-18">
+                        Điều 18: Một số lưu ý khác:
+                    </h2>
+
+                    <p>
+                        -   Trường hợp tài sản bán đấu giá là tài sản Thi hành án thì Hợp đồng mua bán tài sản bán đấu giá có thể bị huỷ hoặc sửa đổi khi có quyết định của cơ quan có thẩm quyền; Trong trường hợp kết quả bán đấu giá tài sản bị hủy thì các bên khôi phục lại tình trạng ban đầu, hoàn trả cho nhau tài sản đã nhận; nếu không hoàn trả được bằng hiện vật, thì phải trả bằng tiền.
+
+                    </p>
+                    <p>
+                        -   Trường hợp phải áp dụng biện pháp cưỡng chế giao tài sản hoặc có yêu cầu hoãn, tạm đình chỉ Thi hành án của cơ quan có thẩm quyền thì thời hạn giao tài sản cho người mua được tài sản có thể kéo dài hoặc kết quả bán đấu giá có thể bị hủybỏ.
+
+                    </p>
+                    <p>
+                        -  Hợp đồng mua bán tài sản bán đấu giá đối với tài sản thi hành án có thể bị ngừng thực hiện và hai bên không có trách nhiệm bồi thường thiệt hại cho nhau khi có trường hợp bất khả kháng xảy ra như: Cơ quan, cá nhân có thẩm quyền kháng nghị yêu cầu hoãn, tạm đình chỉ, đình chỉ thi hành án, yêu cầu hủy bỏ kết quả bán đấu giá thành, yêu cầu rút hồ sơ yêu cầu thi hành án để xem xét giải quyết khiếu nại hoặc yêu cầu tạm ngưng thi hành án để giải quyết khiếu nại.
+
+                    </p><h2 id="quy-che-19">
+                        Điều 19: Xử lý vi phạm đối với người tham gia đấu giá:
+
+                    </h2>
+
+                    <p>
+                        -   Người tham gia đấu giá tài sản có hành vi vi phạm các quy định của pháp luật về bán đấu giá thì tùy theo tính chất, mức độ mà bị xử phạt vi phạm hành chính, hoặc bị truy cứu trách nhiệm hình sự; nếu gây thiệt hại thì phải bồi thường theo quy định của phápluật.
+
+                    </p>
+                    <p>
+                        -   Người điều hành cuộc bán đấu giá tài sản có quyền truất quyền tham gia đấu giá đối với người có hành vi quy định tại khoản 1 Điều này và đề nghị cơ quan có thẩm quyền ra quyết định xử phạt hành chính, chuyển hồ sơ cho cơ quan Công an có thẩm quyền đề nghị xử lý theo quy định... Ngoài ra Công ty sẽ không hoàn trả lại khoản tiền đặt trước của người bị truất quyền tham gia đấugiá.
+
+                    </p>
+                    <p>
+                        -  Việc truất quyền tham gia đấu giá tài sản phải được ghi vào biên bản bán đấu giá tài sản.
+
+
+                    </p>
+
+
+
+
+                    <div class="doublespace"></div>
+                    <div class="divider" style="width:24%; margin:30px 0;"></div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+        <a href="#" class="cd-top text-replace js-cd-top backtotop"></a>
+    </main>
+
+
+    <!-- END NAV -->
+    @*  <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 pr-5 footer-contact">
+                        <img class="w-100 mb-3" src="~/img/logo-white.png" alt="" />
+                        <p class="mb-3">
+                            Nếu bạn có bất kì câu hỏi nào, hãy liên hệ với chúng tôi quá địa
+                            chỉ <span class="footer-email">dgdongsaigon@gmail.com</span>
+                        </p>
+
+                        <div class="footer-address mb-3">
+                            <i class='bx bx-home-alt'></i>
+                            <p class="">693 Lầu 02, Toà nhà Galaxy 09, Số 9 Nguyễn Khoái, Phường 1, Quận 4, TP.HCM</p>
+                        </div>
+                        <div class="footer-address mb-3">
+                            <i class="bx bx-mobile"></i>
+                            <p class="">028 66865120</p>
+                        </div>
+                        <div class="footer-social mb-3">
+                            <a href="#" class="footer-social-item">
+                                <i class="bx bxl-facebook"></i>
+                            </a>
+                            <a href="#" class="footer-social-item">
+                                <i class="bx bxl-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 footer-item">
+                        <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+                        <p>Liên hệ hỗ trợ</p>
+                        <p>Những câu hỏi thường gặp</p>
+                        <p>Chính sách bảo mật thông tin</p>
+                        <p></p>
+                    </div>
+                    <div class="col-12 col-md-4 footer-item">
+                        <h4>Về chúng tôi</h4>
+                        <a href="/gioi-thieu"><p> Giới thiệu</p></a>
+                        <p>Tuyển dụng</p>
+                        <p>Quy chế hoạt động</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                    <p class="m-0">
+                        2021 © Công ty Đấu giá hợp danh Đông Sài Gòn /
+                        <a href="#">Web design by <span> Zuradel</span></a>
+                    </p>
+                </div>
+            </div>
+        </footer>*@
+    <script src="~/js/jquery.js"></script>
+    <script src="~/js/popper.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/scroll.js"></script>
+    <script src="~/js/backtotop.js"></script>
+    <script>
+        var scroll = new SmoothScroll('a[href*="#"]', {
+            speed: 300
+        });
+    </script>
+    @{ var user = (Webdaugia.Models.Common.UserLogin)Session["USER"];}
+    @if (user != null)
+    {
+        <script src="~/js/userhover.js"></script>
+    }
+
+    <script src="~/js/lightGallery.js"></script>
+    <!-- begin js danh mục -->
+
+
+</body>
+</html>

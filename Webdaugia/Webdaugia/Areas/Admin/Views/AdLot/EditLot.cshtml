@@ -79,7 +79,7 @@
                 @Html.ValidationMessageFor(model => model.ParticipationFee, "", new { @class = "text-danger" })
             </div>
         </div>
-  
+
         <div class="col-6">
             <label>Chủ tài sản</label>
             <div class="form_control">
@@ -112,7 +112,7 @@
         </div>
 
         <div class="col-6">
-            <label>Ngày bắt đầu dăng ký phiên</label>
+            <label>Ngày bắt đầu đăng ký phiên đấu giá</label>
             <div class="form_control">
                 <input required
                        name="TimeForRegisterStart"
@@ -121,6 +121,7 @@
                 @Html.ValidationMessageFor(model => model.TimeForRegisterStart, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="col-6">
             <label>Ngày kết thúc đăng ký phiên</label>
             <div class="form_control">
@@ -131,7 +132,6 @@
                 @Html.ValidationMessageFor(model => model.TimeForRegisterEnd, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="col-6">
             <label>Ngày bắt đầu phiên đấu giá</label>
             <div class="form_control">
@@ -142,6 +142,7 @@
                 @Html.ValidationMessageFor(model => model.TimeForBidStart, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="col-6">
             <label>Ngày kết thúc phiên đấu giá</label>
             <div class="form_control">

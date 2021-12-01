@@ -49,6 +49,10 @@ namespace Webdaugia.Controllers
         public ActionResult Introduce()
         {
             return View();
+        }        
+        public ActionResult Introduction()
+        {
+            return View();
         }
     }
 }

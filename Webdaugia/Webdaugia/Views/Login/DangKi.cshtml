@@ -42,7 +42,7 @@
         @Html.TextBoxFor(model => model.confirmpassword, htmlAttributes: new { name = "confirmpassword", type = "password", @class = "mb-0 mt-2", placeholder = "Xác nhận mật khẩu" })
         @Html.ValidationMessageFor(model => model.confirmpassword, "", new { @class = "text-danger" })
     </div>
-    <div class="form-button">
+    <div class="form-button w-100" style="margin-top:10px">
         <button  type="submit" class="ibtn" id="loading">
             Đăng ký
         </button>

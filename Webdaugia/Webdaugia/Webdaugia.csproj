@@ -1812,6 +1812,7 @@
     <Content Include="Content\Product\P142.jpg" />
     <Content Include="Content\Product\P143.jpg" />
     <Content Include="Content\Product\P144.jpg" />
+    <Content Include="Content\template\thongbaolotnew.html" />
     <Content Include="Content\template\xacnhansuccess.html" />
     <Content Include="Content\template\thongbaodangky.html" />
     <Content Include="Content\template\sendangky.html" />
@@ -1828,6 +1829,7 @@
     <Content Include="Content\User\User05.jpg" />
     <Content Include="Content\User\User06.jpg" />
     <Content Include="Content\User\User07.jpg" />
+    <Content Include="css\backtotop.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\boxicon.css" />
     <Content Include="css\fonteawesome.css" />
@@ -1839,6 +1841,7 @@
     <Content Include="css\slick.css" />
     <Content Include="css\style1.css" />
     <Content Include="css\swiper.css" />
+    <Content Include="css\huongdan.css" />
     <Content Include="css\taisansapdaugia.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -1854,6 +1857,7 @@
     <Content Include="Content\Images\Category\car.jpg" />
     <Content Include="img\car.png" />
     <Content Include="Content\Images\Category\city.jpg" />
+    <Content Include="img\cd-top-arrow.svg" />
     <Content Include="img\CMNDBack.png" />
     <Content Include="img\CMNDFront.png" />
     <Content Include="img\datnen.png" />
@@ -1893,6 +1897,8 @@
     <Content Include="img\user-image.jpg" />
     <Content Include="img\UserSideBanner.png" />
     <Content Include="img\VisitorSideBanner.png" />
+    <Content Include="js\backtotop.js" />
+    <Content Include="js\scroll.js" />
     <Content Include="js\swiper.js" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\jquery.js" />
@@ -2063,6 +2069,7 @@
     <Content Include="Views\Login\ChangePassCustomer.cshtml" />
     <Content Include="Views\Login\AccountManagement.cshtml" />
     <Content Include="Views\Home\Introduce.cshtml" />
+    <Content Include="Views\Home\Introduction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

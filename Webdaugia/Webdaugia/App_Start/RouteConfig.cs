@@ -56,6 +56,11 @@ namespace Webdaugia
                 defaults: new { controller = "Home", action = "Introduce", id = UrlParameter.Optional }
                );
             routes.MapRoute(
+                name: "Introduction",
+                url: "huong-dan",
+                defaults: new { controller = "Home", action = "Introduction", id = UrlParameter.Optional }
+               );
+            routes.MapRoute(
                name: "Dang Ky Dau Gia",
                url: "dang-ky-dau-gia",
                defaults: new { controller = "Lot", action = "RegisterBid", id = UrlParameter.Optional }

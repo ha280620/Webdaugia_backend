@@ -49,9 +49,13 @@
                             <th align="center">ID Phiên</th>
                             <th align="center">Tên Phiên</th>
                             <th align="center">ID Tài Khoản</th>
+                            <th align="center">Họ Và Tên</th>
+                            <th align="center">Số Điện Thoại</th>
                             <td align="center">Tên Ngân Hàng</td>
                             <td align="center">Tên Người Hưởng</td>
                             <td align="center">Số Tài Khoản</td>
+                            <td align="center">Trạng thái</td>
+                            <td align="center">Thao tác</td>
 
                         </tr>
                     </thead>
@@ -59,7 +63,7 @@
                         @if (Model.Count() == 0)
                         {
                             <tr>
-                                <td colspan="7" style="
+                                <td colspan="11" style="
                             text-align: center;
                             font-size: 2rem;">
                                     Hiện chưa có danh sách tài khoản
@@ -70,47 +74,89 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@count</td>
-                                @{ count++;}
-                                <td align="center">@item.LotID</td>
-                                <td align="center">@item.Lot.Name</td>
-                                <td align="center">@item.UserID</td>
+                    <tr>
+                        <td>@count</td>
+                        @{ count++;}
+                        <td align="center">@item.LotID</td>
+                        <td align="center">@item.Lot.Name</td>
+                        <td align="center">@item.UserID</td>
+                        <td align="center">@item.User.FullName</td>
+                        <td align="center">@item.User.Phone</td>
 
-                                @if (listATM == null)
+                        @if (listATM == null)
+                        {
+
+                            <td align="center">Không có</td>
+                            <td align="center">Không có</td>
+                            <td align="center">Không có</td>
+
+
+
+                        }
+                        else
+                        {
+                            var countatm = 0;
+                            foreach (var atm in listATM)
+                            {
+                                if (atm.UserID == @item.UserID)
                                 {
-
-                                    <td align="center">Không có</td>
-                                    <td align="center">Không có</td>
-                                    <td align="center">Không có</td>
-
-
-
-                                }
-                                else
-                                {
-                                    var countatm = 0;
-                                    foreach (var atm in listATM)
-                                    {
-                                        if (atm.UserID == @item.UserID)
-                                        {
-                                            countatm++;
-                                            <td align="center">@atm.Bank.Name</td>
-                                            <td align="center">@atm.ATMFullName</td>
-                                            <td align="center">@atm.ATMCode</td>
-                                        }
-
-
-                                    }
-                                    if (countatm == 0)
-                                    {
-                                        <td align="center">Không có</td>
-                                        <td align="center">Không có</td>
-                                        <td align="center">Không có</td>
-                                    }
+                                    countatm++;
+                                    <td align="center">@atm.Bank.Name</td>
+                                    <td align="center">@atm.ATMFullName</td>
+                                    <td align="center">@atm.ATMCode</td>
                                 }
 
-                            </tr>
+
+                            }
+                            if (countatm == 0)
+                            {
+                                <td align="center">Không có</td>
+                                <td align="center">Không có</td>
+                                <td align="center">Không có</td>
+                            }
+                        }
+                        @if (item.Status == 1)
+                        {
+
+                            <td align="center">
+                                <div class="payment-status payment-pending">
+                                    <div class="dot"></div>
+
+                                    <span>Chưa trả cọc</span>
+                                </div>
+                            </td>
+                        }
+                        @if (item.Status == 2)
+                        {
+                            <td align="center">
+                                <div class="payment-status payment-paid">
+                                    <div class="dot"></div>
+                                    <span>Đã trả cọc</span>
+                                </div>
+                            </td>
+                        }
+                        <td align="center">
+                            @if (item.Status == 1)
+                            {
+                                <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                    <a class="btn" href="/admin/adlot/ConfirmEndOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName đã trả cọc?')">
+                                        <i class="fas fa-times" style="color: red"></i>
+                                    </a>
+
+                                </div>
+                            }
+                            @if (item.Status == 2)
+                            {
+                                <div style="height:100%; display:flex; align-items:center; justify-content:center">
+                                    <a class="btn" href="/admin/adlot/ConfirmEndOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName chưa trả cọc?')">
+                                        <i class="fas fa-check" style="color: #04D182"></i>
+                                    </a>
+
+                                </div>
+                            }
+
+                        </td>
+                    </tr>
                         }
                     </tbody>
                 </table>

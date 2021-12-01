@@ -1,6 +1,6 @@
 ﻿@model Webdaugia.Models.Login.LoginModel
 @{
-    ViewBag.Title = "DangNhap";
+    ViewBag.Title = " - Đăng nhập";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 <div class="page-links">
@@ -11,26 +11,30 @@
 </div>
 @using (Html.BeginForm("DangNhap", "Login", FormMethod.Post))
 {
-    <div class="form_control">
-        @*@Html.TextBoxFor(model => model.Username)*@
-        <input required name="Username" type="text" placeholder="Tên đăng nhập" />
+<div class="form_control">
+    @*@Html.TextBoxFor(model => model.Username)*@
+    <input name="Username" type="text" placeholder="Tên đăng nhập" />
+   
+</div>
+<div class="form_control">
+    @*@Html.TextBoxFor(model => model.Password)*@
+    <input name="Password"  type="password" placeholder="Mật khẩu" />
+    @*<div class="input-group-append cursor-pointer">
+            <span class="input-group-text">
+                    <i class="fa fa-eye"></i>
+                </span>
+        </div>*@
+   
+</div>
+<div class="row mt-10 mx-0">
+
+    <button type="submit" class="col-12 col-md-6 align-items-center justify-content-center px-0 mx-0 btn btn-primary" id="loading">Đăng Nhập</button>
+
+    <div class="col-12 col-md-6 align-items-center justify-content-center px-0 mx-0 btn " style="background-color:white;">
+        <a class="" style="background-color:white;" href="~/Login/Quenmatkhau">Quên mật khẩu?</a>
     </div>
-    <div class="form_control">
-        @*@Html.TextBoxFor(model => model.Password)*@
-        <input required name="Password" type="password" placeholder="Mật khẩu" />
-        @*<div class="input-group-append cursor-pointer">
-                <span class="input-group-text">
-                        <i class="fa fa-eye"></i>
-                    </span>
-            </div>*@
-    </div>
-    <div class="row mt-10 mx-0">
-        <div class="col-6 pl-0">
-            <button type="submit" class="btn btn-primary btn-block"  id="loading">Đăng Nhập</button>
-        </div>
-        <div class="col-6 d-flex align-items-center justify-content-end pr-0">
-            <a href="~/Login/Quenmatkhau">Quên mật khẩu?</a>
-        </div>
-    </div>
+ 
+
+</div>
 
 }

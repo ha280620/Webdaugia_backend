@@ -13,15 +13,21 @@
     </p>
     <div class="form-group">
         <p class="text-success mb-0">@ViewBag.Success</p>
-        <p class="text-success mb-0">@ViewBag.Error</p>
+        <p class="text-danger mb-0">@ViewBag.Error</p>
         <div class="form_control">
-            @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", @class = "mb-0 mt-2", required = "required", placeholder = "Email" })
+            @Html.TextBoxFor(model => model.email, htmlAttributes: new { name = "email", type = "text", @class = "mb-0 mt-2", placeholder = "Email" })
             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
         </div>
 
     </div>
-    <button  type="submit" class="btn btn-primary" id="loading">
-        Send Reset Link
-    </button>
+    <div class="row mt-10 mx-0">
+        <button class="col-12 col-md-6 align-items-center justify-content-center px-0 mx-0 btn btn-primary ibtn" type="submit" id="loading">
+            Gửi mật khẩu
+        </button>
+        <div class="col-12 col-md-6 align-items-center justify-content-center px-0 mx-0 btn " style="background-color:white;">
+            <a href="@Url.Action("DangNhap", "Login")">Đăng nhập</a>
+        </div>
+    </div>
+  
 }
 

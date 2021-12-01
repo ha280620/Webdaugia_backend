@@ -1,6 +1,7 @@
 ﻿@model  IList<Webdaugia.Models.Lot>
 @{
-    ViewBag.Title = "ListLotByCate";
+    ViewBag.Title = " - " + @ViewBag.CateName;
+
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 @{
@@ -67,7 +68,7 @@ z
                         <div class="col-12 col-md-6 col-lg-4 p-2">
                             <div class="going-item">
                                 <div class="going-item-img">
-                                    <img src="@item.LotImage" class="img-fluid" alt="" />
+                                    <img src="@item.LotImage" class="img-fluid" alt="@item.Name" />
                                     <div class="going__overlay"></div>
                                     <div class="going__play">
                                         <a href="/phien-dang-dien-ra/@item.SiteTile-@item.ID">
@@ -100,7 +101,7 @@ z
             @if (Model.Count == 0)
             {
                 <div class="row justify-content-center">
-                    <img src="~/Content/Images/Category/noauction1.png" class="img-fluid">
+                    <img src="~/Content/Images/Category/noauction1.png" alt="Không có phiên đáu giá" class="img-fluid">
                     <div class="container container--checkout pb-2">
                         <div class="checkout">
                             <div class="empty" style="vertical-align:middle; text-align:center">
