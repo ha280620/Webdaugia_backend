@@ -2063,6 +2063,7 @@
     <Content Include="Views\Login\ChangePassCustomer.cshtml" />
     <Content Include="Views\Login\AccountManagement.cshtml" />
     <Content Include="Views\Home\Introduce.cshtml" />
+    <Content Include="Views\Login\ProfileCustomerAtm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Admin\" />

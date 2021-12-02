@@ -41,6 +41,10 @@ namespace Webdaugia.DAO
         {
             return db.Users.Find(ID);
         }
+        public ATM getAtmById(int UserID)
+        {
+            return db.ATMs.SingleOrDefault(x => x.UserID == UserID);
+        }
         //Update
         public bool Update(User entity)
         {
@@ -50,6 +54,26 @@ namespace Webdaugia.DAO
                 if (userUpdate != null)
                 {
                     db.Users.AddOrUpdate(entity);
+                    db.SaveChanges();
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+        //Update
+        public bool Update(ATM entity)
+        {
+            try
+            {
+                ATM userUpdate = db.ATMs.SingleOrDefault(x => x.ID == entity.ID);
+                if (userUpdate != null)
+                {
+                    db.ATMs.AddOrUpdate(entity);
                     db.SaveChanges();
                 }
                 return true;

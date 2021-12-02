@@ -73,6 +73,11 @@ namespace Webdaugia
              defaults: new { controller = "Login", action = "ProfileCustomer", id = UrlParameter.Optional }
             );
             routes.MapRoute(
+             name: "ProfileCustomerAtm",
+             url: "thong-tin-atm",
+             defaults: new { controller = "Login", action = "ProfileCustomerAtm", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
              name: "ChangePassCustomer",
              url: "thay-doi-mat-khau",
              defaults: new { controller = "Login", action = "ChangePassCustomer", id = UrlParameter.Optional }
@@ -81,6 +86,11 @@ namespace Webdaugia
              name: "AccountManagement",
              url: "quan-ly-tai-khoan",
              defaults: new { controller = "Login", action = "AccountManagement", id = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+             name: "AccountManagement1",
+             url: "quan-ly-tai-khoan1",
+             defaults: new { controller = "Login", action = "AccountManagement1", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

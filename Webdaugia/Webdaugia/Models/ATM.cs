@@ -23,5 +23,6 @@ namespace Webdaugia.Models
         public virtual Bank Bank { get; set; }
 
         public virtual User User { get; set; }
+        public List<Bank> ListBank = new List<Bank>();
     }
 }
