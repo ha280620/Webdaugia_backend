@@ -1,0 +1,117 @@
+﻿@model Webdaugia.Models.ATM
+@{
+    ViewBag.Title = "ProfileCustomerAtm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="header-position"></div>
+<section id="userInfo" style="background-color:#eee">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3" style="margin-bottom:2rem">
+                <div class="userInfo_cata">
+                    <ul class="m-0">
+                        <li><a style="padding-right: 5.4rem !important;" class="p-2" href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                        <li class="active"><a style="padding-right: 5.4rem !important;" class="p-2" href="/thong-tin-atm">Thông tin ATM</a></li>
+                        <li><a style="padding-right: 8.4rem !important;" class="p-2" href="/thay-doi-mat-khau">Đổi mật khẩu</a></li>
+                        <li><a style="padding-right: 5.4rem !important;" class="p-2" href="/quan-ly-tai-khoan">Danh sách đăng ký</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="userInfo_content">
+                    <h2 class="text-left pl-0 pt-0 mb-2">Thông tin</h2>
+                    @using (Html.BeginForm("ProfileCustomerAtm", "Login", FormMethod.Post, new { are = "" }))
+                    {
+                        <div class="row">
+                            <div class="col-11 col-md-9">
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    @if (ViewBag.Fail != null)
+                                    {
+                                        <div class="col-12 mb-2">
+                                            <div class="text-success">@ViewBag.Fail</div>
+                                        </div>}
+                                    @if (ViewBag.Success != null)
+                                    {
+                                        <div class="col-12 mb-2">
+                                            <div class="text-success">@ViewBag.Success</div>
+                                        </div>
+                                    }
+                                    <div class="col-12">
+                                        <div class="form_control">
+                                            <input value="@Model.ATMCode"
+                                                   id="atmATMCode"
+                                                   required
+                                                   name="ATMCode"
+                                                   type="text" />
+                                            <label for="atmATMCode">Số tài khoản</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form_control">
+                                            <input value="@Model.ATMFullName"
+                                                   id="atmATMFullName"
+                                                   required
+                                                   name="ATMFullName"
+                                                   type="text" />
+                                            <label for="atmATMFullName">Tên chủ tài khoản</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+
+                                        <div class="form_control">
+
+                                            @Html.DropDownListFor(model => model.BankId, new SelectList(Model.ListBank, "Id", "Name"), new { @class = "mb-0" })
+                                            <label for="atmtennganhang">Tên ngân hàng</label>
+                                            @*@Html.DropDownListFor(m => m.ListCategory, Model.ListCategory ?? new List<SelectListItem>(), "--Chọn Ngân hàng--")*@
+                                            @*@Html.DropDownList("tennganhang", ViewBag.banks as SelectList, "--Chọn Ngân hàng-- ", new { @Name = "tennganhang" })*@
+                                            @Html.ValidationMessageFor(model => model.BankId, "", new { @class = "text-danger" })
+                                        </div>
+                                        @*<div class="form_control">
+                                            <input value="@Model.BankId"
+                                                   id="BankId"
+                                                   required
+                                                   name="BankId"
+                                                   type="text" />
+                                            <label for="BankId">Tên ngân hàng</label>
+                                        </div>*@
+                                    </div>
+                                </div>
+                                <div class="col-12" >
+                                    <div class="row">
+                                        <div class="col-6 pl-0">
+                                            <button type="submit"
+                                                    class="btn btn-primary w-100 font-weight-bold">
+                                                Lưu lại
+                                            </button>
+                                        </div>
+                                        <div class="col-6 pr-0">
+                                            <button id=""
+                                                    type="button"
+                                                    onclick="handleOffChange()"
+                                                    class="
+                                                          btn btn-outline-primary
+                                                          w-100
+                                                          font-weight-bold
+                                                        ">
+                                                Huỷ
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="col-1">
+                                <div class="btn btn_changes" onclick="handleOnChange()">
+                                    <i class="bx bx-pencil"></i>
+                                </div>
+                            </div>*@
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="~/Content/Client/js/userinfo.js"></script>

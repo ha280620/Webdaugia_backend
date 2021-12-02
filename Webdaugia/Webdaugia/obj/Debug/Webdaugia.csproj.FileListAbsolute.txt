@@ -76,10 +76,6 @@ D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreComp
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
-D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.dll
-D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.dll
-D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.xml
-D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\EntityFramework.SqlServer.xml
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll.config
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.dll
 C:\Users\Nguyen Le QUan\Documents\GitHub\Webdaugia_backend\Webdaugia\Webdaugia\bin\Webdaugia.pdb
@@ -247,3 +243,8 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CoreC
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.pdb
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.dll
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.dll
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.xml
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.xml
+D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache

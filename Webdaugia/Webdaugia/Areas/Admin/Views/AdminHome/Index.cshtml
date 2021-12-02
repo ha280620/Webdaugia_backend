@@ -94,60 +94,92 @@
     </div>-->
     <!-- END CUSTOMERS CHART -->
     <!--</div>-->
-    <div class="col-12">
+
+    <div class="col-6">
         <!-- ORDERS TABLE -->
         <div class="box">
             <div class="box-header">Đơn hàng gần đây</div>
 
             <div class="box-body overflow-scroll">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Khách hàng</th>
-                            <th>Ngày đặt</th>
-                            <th>Tình trạng đặt</th>
-                            <th>Tình trạng thanh toán</th>
-                            <th>Tổng tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+
+                <div>
+                    <canvas id="myChart" width="400" height="200"></canvas>
+                </div>
             </div>
         </div>
-        <!-- END ORDERS TABLE -->
+    </div>
+    <div class="col-6">
+        <!-- ORDERS TABLE -->
+        <div class="box">
+            <div class="box-header">Đăng ký</div>
+
+            <div class="box-body overflow-scroll">
+
+                <div class="row">
+                    <div class="col-6" width="400" height="200">
+                        <canvas id="myChartregister" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // === include 'setup' then 'config' above ===
-    const labels = [
-        'Tháng 4',
-        'Tháng 5',
-        'Tháng 6',
-        'Tháng 7',
-    ];
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Danh thu theo tháng',
-            backgroundColor: 'rgb(255, 99, 132)',
-            fill: false,
-            borderColor: 'rgb(255, 99, 132)',
-            data: [3534314, 1232110, 34435, 23847],
-            tension: 0.1
-        }]
-    };
-    const config = {
-        type: 'line',
-        data,
-        options: {}
-    };
 
-
-    var myChart = new Chart(
-        document.getElementById('customer-chart'),
-        config
-    );
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Bất động sản', 'Đất nền', 'Ô tô', 'Sưu tầm nghệ thuật', 'Tài sản thanh lý', 'Tài sản khác'],
+            datasets: [{
+                label: '# of Votes',
+                data: [@ViewBag.countLot1,@ViewBag.countLot2,@ViewBag.countLot3, @ViewBag.countLot4,@ViewBag.countLot5,@ViewBag.countLot6],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+<script>
+    const ctx3 = document.getElementById('myChartregister').getContext('2d');
+    const myChartregister = new Chart(ctx3, {
+        type: 'polarArea',
+        data: {
+            labels: ['Bất động sản', 'Đất nền', 'Ô tô', 'Sưu tầm nghệ thuật', 'Tài sản thanh lý', 'Tài sản khác'],
+            datasets: [{
+                label: 'My First Dataset',
+                data: [@ViewBag.countregisterbid0,@ViewBag.countregisterbid1,@ViewBag.countregisterbid2,@ViewBag.countregisterbid2,@ViewBag.countregisterbid2],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(75, 192, 192)',
+                    'rgb(255, 205, 86)',
+                    'rgb(201, 203, 207)',
+                    'rgb(54, 162, 235)'
+                ]
+            }]
+        },
+    });
 </script>

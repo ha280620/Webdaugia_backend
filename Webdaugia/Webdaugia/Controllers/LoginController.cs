@@ -436,7 +436,6 @@ namespace Webdaugia.Controllers
             }
             var imguser = db.UsersImages.Where(x => x.UsersID == user.ID).FirstOrDefault();
             ViewBag.imguser = imguser.Image;
-            //var user = dao.getUserById(userid);
             return View(user);
         }
         //Update Profile
@@ -475,7 +474,6 @@ namespace Webdaugia.Controllers
                     }
                     user.Email = collection.Email;
                     user.Phone = collection.Phone;
-                    
                     var result = dao.Update(user);
                     if (result)
                     {
@@ -493,7 +491,64 @@ namespace Webdaugia.Controllers
                 return View();
             }
         }
+        //------------------------------------------------------------------------------
+        [HttpGet]
+        public ActionResult ProfileCustomerAtm()
+        {
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            int userid = ((UserLogin)Session["USER"]).UserID;
+            var dao = new UserDao();
+            var user = dao.getAtmById(userid);
+            db = new AuctionDBContext();
+            user.ListBank = db.Banks.ToList();
+
+            return View(user);
+        }
+        //Update Profile
+        [HttpPost, ActionName("ProfileCustomerAtm")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProfileCustomeratm(ATM collection)
+        {
+
+            if (Session["USER"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            db = new AuctionDBContext();
+            int userid = ((UserLogin)Session["USER"]).UserID;
+            collection.ListBank = db.Banks.ToList();
+            var dao = new UserDao();
+            ATM atm = dao.getAtmById(userid);
+            try
+            {
+                var errors = ModelState.Values.SelectMany(b => b.Errors);
+                if (ModelState.IsValid)
+                {     
+                    atm.BankId = collection.BankId;
+                    atm.ATMCode = collection.ATMCode;
+                    atm.ATMFullName = collection.ATMFullName;
+                    var result = dao.Update(atm);
+                    if (result)
+                    {
+                        ViewBag.Success = "Cập nhật thông tin thành công!";
+                    }
+                    else
+                    {
+                        ViewBag.Fail = "Cập nhật thông tin thất bại!";
+                    }
+                }
+                return View(collection);
+            }
+            catch
+            {
+                return View(collection);
+            }
+        }
         //--------------------------------------------------------------------------------
+
         [HttpGet]
         public ActionResult ChangePassCustomer()
         {
@@ -571,7 +626,6 @@ namespace Webdaugia.Controllers
             var list = data.RegisterBids.Where(l => l.UserID == userid.UserID && l.Lot.Status == true).ToList();
             return View(list);
         }
-
         public ActionResult Index()
         {
             if (Session["USER"] != null)
