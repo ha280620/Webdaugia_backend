@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2021-12-01T09:42:12.6697375Z;True|2021-11-30T23:54:21.0350779+07:00;True|2021-11-29T17:39:56.0109278+07:00;True|2021-11-29T16:37:55.6044169+07:00;False|2021-11-29T16:37:00.1180066+07:00;False|2021-11-29T01:52:37.6310660+07:00;True|2021-11-29T01:41:46.5812498+07:00;True|2021-11-29T01:02:01.2063485+07:00;True|2021-11-29T01:01:29.1586732+07:00;True|2021-11-28T18:31:30.4122007+07:00;False|2021-11-28T18:30:53.4414747+07:00;False|2021-11-28T18:30:34.3388661+07:00;False|2021-11-28T18:30:13.0636728+07:00;False|2021-11-28T18:28:51.7238664+07:00;False|2021-11-28T18:27:51.5597935+07:00;False|2021-11-28T18:25:08.7837339+07:00;False|2021-11-23T22:10:27.4158882+07:00;False|2021-11-23T22:09:52.3214721+07:00;False|2021-11-23T22:08:29.4661949+07:00;</History>
+    <History>True|2021-12-01T10:21:16.6797452Z;True|2021-12-01T16:42:12.6697375+07:00;True|2021-11-30T23:54:21.0350779+07:00;True|2021-11-29T17:39:56.0109278+07:00;True|2021-11-29T16:37:55.6044169+07:00;False|2021-11-29T16:37:00.1180066+07:00;False|2021-11-29T01:52:37.6310660+07:00;True|2021-11-29T01:41:46.5812498+07:00;True|2021-11-29T01:02:01.2063485+07:00;True|2021-11-29T01:01:29.1586732+07:00;True|2021-11-28T18:31:30.4122007+07:00;False|2021-11-28T18:30:53.4414747+07:00;False|2021-11-28T18:30:34.3388661+07:00;False|2021-11-28T18:30:13.0636728+07:00;False|2021-11-28T18:28:51.7238664+07:00;False|2021-11-28T18:27:51.5597935+07:00;False|2021-11-28T18:25:08.7837339+07:00;False|2021-11-23T22:10:27.4158882+07:00;False|2021-11-23T22:09:52.3214721+07:00;False|2021-11-23T22:08:29.4661949+07:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ajax/advanced-Plugins.html">
@@ -4878,10 +4878,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 21:47:15</publishTime>
     </File>
     <File Include="bin/Webdaugia.dll">
-      <publishTime>12/01/2021 16:42:01</publishTime>
+      <publishTime>12/01/2021 17:21:05</publishTime>
     </File>
     <File Include="bin/Webdaugia.pdb">
-      <publishTime>12/01/2021 16:42:01</publishTime>
+      <publishTime>12/01/2021 17:21:05</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/09/2021 21:47:16</publishTime>
@@ -5541,7 +5541,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/01/2021 16:42:00</publishTime>
     </File>
     <File Include="Content/template/thongbaolotnew.html">
-      <publishTime>12/01/2021 16:42:00</publishTime>
+      <publishTime>12/01/2021 17:18:11</publishTime>
     </File>
     <File Include="Content/template/xacnhansuccess.html">
       <publishTime>11/29/2021 16:42:53</publishTime>
