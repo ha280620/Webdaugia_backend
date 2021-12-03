@@ -372,6 +372,10 @@ namespace Webdaugia.Controllers
         [ActionName("Quenmatkhau")]
         public ActionResult Quenmatkhau(string email)
         {
+            if(email == "")
+            {
+                ViewBag.Error = "Vui lòng nhập email";
+            }
             var emailexist = IsEmailExist(email);
             if (emailexist)
             {
@@ -441,7 +445,7 @@ namespace Webdaugia.Controllers
         //Update Profile
         [HttpPost, ActionName("ProfileCustomer")]
         [ValidateAntiForgeryToken]
-        public ActionResult ProfileCustomera(User collection)
+        public ActionResult ProfileCustomer(User collection)
         {
             if (Session["USER"] == null)
             {
@@ -499,9 +503,14 @@ namespace Webdaugia.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+
             int userid = ((UserLogin)Session["USER"]).UserID;
             var dao = new UserDao();
             var user = dao.getAtmById(userid);
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             db = new AuctionDBContext();
             user.ListBank = db.Banks.ToList();
 

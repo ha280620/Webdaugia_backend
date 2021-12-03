@@ -132,7 +132,7 @@
                                         <th class="border-0" scope="row">
                                             Số lượng người tham gia
                                         </th>
-                                        <td class="border-0">@ViewBag.listRegisterBid <i class="bx bxs-user"></i></td>
+                                        <td class="border-0"> <span class="text-success time-register">@ViewBag.listRegisterBid</span> <i class="bx bxs-user"> <a href="/phien-dau/@Model.SiteTile-@Model.ID">(Xem chi tiết)</a></i></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -317,8 +317,8 @@
     <section id="going">
         <div class="container">
             <div class="going-title">
-                <i class="bx bxs-circle mr-2"></i>
-                <h3>Tài sản đang đấu giá</h3>
+                <i class="bx bxs-right-arrow mr-2"></i>
+                <h3>Tài sản sắp đấu giá</h3>
 
             </div>
 

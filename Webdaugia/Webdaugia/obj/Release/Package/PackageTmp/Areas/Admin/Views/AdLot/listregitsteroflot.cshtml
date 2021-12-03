@@ -17,8 +17,8 @@
 
                 <div class="col-6 col-sm-12">
                     <div class="row">
-                        <h3 class="col-6 col-sm-12" style="display:flex; align-items:center">Tiền đặt cọc + phí: <span class="text-success" style="display:contents">@string.Format(info, "{0:0,0}", @ViewBag.tiencoc) đ</span>  </h3>
-                        <div class="col-6 col-sm-12" >
+                        <h3 class="col-8 col-sm-12" style="display:flex; align-items:center">Tiền đặt cọc + phí: <span class="text-success" style="display:contents">@string.Format(info, "{0:0,0}", @ViewBag.tiencoc) đ</span>  </h3>
+                        <div class="col-4 col-sm-12" >
                             <a href="/admin/adlot/SendMailRegister?LotID=@ViewBag.LotId&Url=@Request.Url.ToString()" class="btn btn-success" style="display:grid">
                                 <i class='bx bx-mail-send'></i>
                                 Gửi mail
@@ -79,11 +79,11 @@
                             <tr>
                                 <td>@count</td>
                                 @{ count++;}
-                                <td width="250px" align="center">@item.LotID</td>
-                                <td width="250px" align="center">@item.Lot.Name</td>
-                                <td width="250px" align="center">@item.User.ID</td>
-                                <td width="250px" align="center">@item.User.FullName</td>
-                                <td width="250px" align="center">@item.User.Phone</td>
+                                <td  align="center">@item.LotID</td>
+                                <td  align="center">@item.Lot.Name</td>
+                                <td  align="center">@item.User.ID</td>
+                                <td  align="center">@item.User.FullName</td>
+                                <td  align="center">@item.User.Phone</td>
                                 @if (item.Status != 0)
                                 {
 
@@ -104,27 +104,35 @@
                                         </div>
                                     </td>
                                 }
-                                <td align="center">
-                                    @if (item.Status != 0)
-                                    {
-                                        <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                            <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName này chưa nộp tiền')">
-                                                <i class="fas fa-check" style="color: #04D182"></i>
-                                            </a>
+                            <td align="center" style="height:100%; display:flex; align-items:center; justify-content:center">
+                                @if (item.Status != 0)
+                                {
+                          
+                                        <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName này chưa nộp tiền')">
+                                            <i class="fas fa-check" style="color: #04D182"></i>
+                                        </a>
 
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div style="height:100%; display:flex; align-items:center; justify-content:center">
-                                            <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName này đã nộp tiền')">
-                                                <i class="fas fa-times" style="color: red"></i>
-                                            </a>
+                           
+                                }
+                                else
+                                {
+                                 
+                                        <a class="btn" href="/admin/adlot/ConfirmRegitsterOfLot?LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()" onclick="return confirm('Bạn xác nhận tài khoản @item.UserID - @item.User.FullName này đã nộp tiền')">
+                                            <i class="fas fa-times" style="color: red"></i>
+                                        </a>
 
-                                        </div>
-                                    }
+                           
+                                }
+                                @if (item.Status == 1)
+                                {
+                                  
+                                        <a class="btn" href="/admin/adlot/SendMailRegisterUser?UserID=@item.UserID&LotId=@item.LotID&UserId=@item.UserID&Url=@Request.Url.ToString()"  style="margin-left:10px" onclick="return confirm('Bạn muốn gửi mail thông báo cho tài khoản @item.UserID - @item.User.FullName này đăng ký thành công')">
+                                            <i class='bx bx-mail-send' style="color: #0c4da1; font-size:1.5rem"></i>
+                                        </a>
 
-                                </td>
+                                }
+
+                            </td>
                             </tr>
                         }
                     </tbody>

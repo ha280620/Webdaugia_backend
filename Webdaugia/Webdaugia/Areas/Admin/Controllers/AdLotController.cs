@@ -134,15 +134,19 @@ namespace Webdaugia.Areas.Admin.Controllers
                 long? totalMoney = 0;
                 long? Money = db.Lots.Where(x => x.ID == id).SingleOrDefault().AdvanceDesposit;
                 var model = dao.ListAllPagingEndOfLot(id, searchString, page, pageSize);
-                foreach (var item in model)
+                if(model != null)
                 {
-                    totalMoney += item.Lot.AdvanceDesposit;
-                    var atm = listATM.Where(x => x.UserID == item.UserID).FirstOrDefault();
-                    if (atm != null)
+                    foreach (var item in model)
                     {
-                        listATMEnd.Add(atm);
+                        totalMoney += item.Lot.AdvanceDesposit;
+                        var atm = listATM.Where(x => x.UserID == item.UserID).FirstOrDefault();
+                        if (atm != null)
+                        {
+                            listATMEnd.Add(atm);
+                        }
                     }
                 }
+                
                 ViewBag.searchString = searchString;
                 ViewBag.listATM = listATMEnd;
                 ViewBag.totalMoney = totalMoney;
@@ -620,6 +624,47 @@ namespace Webdaugia.Areas.Admin.Controllers
                             return Redirect(Url);
                         }
                     }
+                }
+                return Redirect(Url);
+            }
+        }
+        public ActionResult SendMailRegisterUser(int UserID,int LotID, string Url)
+        {
+
+            if (Session["AD"] == null)
+            {
+                return RedirectToAction("Index", "AdLogin");
+            }
+            else
+            {
+                var user = (UserLogin)Session["AD"];
+
+                db = new AuctionDBContext();
+                var lot = db.Lots.Find(LotID);
+                if (user.Role == 2 && lot.HostLot != user.UserID)
+                {
+                    return RedirectToAction("ListLotRegister");
+                }
+                var userRegister = db.RegisterBids.Where(x => x.LotID == LotID && x.Status == 1 && x.UserID == UserID).FirstOrDefault();
+                if (userRegister != null)
+                {
+                   
+                        try
+                        {
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/content/template/dangthanhcong.html"));
+                            content = content.Replace("{{TenPhienDauGia}}", lot.Name);
+                            content = content.Replace("{{CustomerName}}", userRegister.User.FullName);
+                            content = content.Replace("{{Thoigianbatdau}}", lot.TimeForBidStart.ToString());
+                            content = content.Replace("{{Thoiketthuc}}", lot.TimeForBidEnd.ToString());
+                            string tb = "Đăng ký tham giá phiên đấu giá " + lot.Name + " thành công";
+                            new MailHelper().SendMail(userRegister.User.Email, tb, content);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                            return Redirect(Url);
+                        }
+               
                 }
                 return Redirect(Url);
             }

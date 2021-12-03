@@ -179,7 +179,7 @@
                                         {
 
 
-                                            <td class="text-success time-register">Đấu giá đã bắt đầu <a href="/phien-dang-dien-ra/@Model.SiteTile-@Model.ID">Vào ngay</a></td>
+                                            <td class="text-success time-register">Đấu giá đã bắt đầu <a href="/phien-dang-dien-ra/@Model.SiteTile-@Model.ID">(Vào ngay)</a></td>
                                         }
                                         else if (@Model.TimeForBidStart >= DateTime.Now)
                                         {
@@ -189,7 +189,7 @@
                                         }
                                         else
                                         {
-                                            <td class="text-danger time-register">Đấu giá đã kết thúc</td>
+                                            <td class="text-danger time-register">Đấu giá đã kết thúc <a href="/phien-dang-dien-ra/@Model.SiteTile-@Model.ID">(Vào xem)</a></td>
                                         }
 
 

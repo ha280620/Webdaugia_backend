@@ -143,11 +143,11 @@ namespace Webdaugia.DAO
             IQueryable<RegisterBid> model;
             if (modelAuctions != null)
             {
-                 model = db.RegisterBids.Where(x => x.LotID == id && x.Status == 1 || x.Status == 2 && x.ID != modelAuctions.RegisterBidID);
+                 model = db.RegisterBids.Where(x => x.LotID == id && x.ID != modelAuctions.RegisterBidID && ( x.Status == 1 || x.Status == 2));
             }
             else
             {
-                model = db.RegisterBids.Where(x => x.LotID == id && x.Status == 1 || x.Status == 2);
+                model = db.RegisterBids.Where(x => x.LotID == id &&( x.Status == 1 || x.Status == 2));
             }
           
             if (!string.IsNullOrEmpty(searchString))

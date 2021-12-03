@@ -237,13 +237,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/29/2021 00:55:52</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/listregitsteroflot.cshtml">
-      <publishTime>11/29/2021 22:19:41</publishTime>
+      <publishTime>12/03/2021 22:15:22</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/ListUserEndOfLot.cshtml">
       <publishTime>11/29/2021 22:45:59</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdminHome/Index.cshtml">
-      <publishTime>11/23/2021 15:19:50</publishTime>
+      <publishTime>12/03/2021 01:10:23</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdProduct/CreateCategory.cshtml">
       <publishTime>11/26/2021 20:47:10</publishTime>
@@ -264,7 +264,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/29/2021 01:52:11</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Shared/_Layout.cshtml">
-      <publishTime>11/30/2021 16:08:00</publishTime>
+      <publishTime>12/04/2021 00:59:18</publishTime>
     </File>
     <File Include="Areas/Admin/Views/web.config">
       <publishTime>11/22/2021 20:33:13</publishTime>
@@ -4878,10 +4878,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 21:47:15</publishTime>
     </File>
     <File Include="bin/Webdaugia.dll">
-      <publishTime>12/01/2021 17:21:05</publishTime>
+      <publishTime>12/04/2021 01:16:33</publishTime>
     </File>
     <File Include="bin/Webdaugia.pdb">
-      <publishTime>12/01/2021 17:21:05</publishTime>
+      <publishTime>12/04/2021 01:16:33</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/09/2021 21:47:16</publishTime>
@@ -5148,7 +5148,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2021 15:26:02</publishTime>
     </File>
     <File Include="Content/Client/js/userinfo.js">
-      <publishTime>11/28/2021 17:58:56</publishTime>
+      <publishTime>12/03/2021 00:51:01</publishTime>
     </File>
     <File Include="Content/Images/Category/batdongsan.png">
       <publishTime>11/26/2021 11:59:47</publishTime>
@@ -5973,10 +5973,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/01/2021 15:47:25</publishTime>
     </File>
     <File Include="Views/Login/AccountManagement.cshtml">
-      <publishTime>11/29/2021 22:08:24</publishTime>
+      <publishTime>12/03/2021 00:40:54</publishTime>
     </File>
     <File Include="Views/Login/ChangePassCustomer.cshtml">
-      <publishTime>11/29/2021 19:55:37</publishTime>
+      <publishTime>12/03/2021 00:24:20</publishTime>
     </File>
     <File Include="Views/Login/DangKi.cshtml">
       <publishTime>12/01/2021 00:14:48</publishTime>
@@ -5985,7 +5985,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/01/2021 00:37:38</publishTime>
     </File>
     <File Include="Views/Login/ProfileCustomer.cshtml">
-      <publishTime>11/29/2021 19:56:02</publishTime>
+      <publishTime>12/03/2021 00:52:07</publishTime>
+    </File>
+    <File Include="Views/Login/ProfileCustomerAtm.cshtml">
+      <publishTime>12/03/2021 00:54:34</publishTime>
     </File>
     <File Include="Views/Login/Quenmatkhau.cshtml">
       <publishTime>12/01/2021 00:29:38</publishTime>
@@ -5994,22 +5997,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/30/2021 23:21:49</publishTime>
     </File>
     <File Include="Views/Lot/IncomingLot.cshtml">
-      <publishTime>11/30/2021 15:04:39</publishTime>
+      <publishTime>12/04/2021 01:04:50</publishTime>
     </File>
     <File Include="Views/Lot/ListEndingLot.cshtml">
       <publishTime>11/29/2021 21:38:57</publishTime>
     </File>
     <File Include="Views/Lot/ListLotByCate.cshtml">
-      <publishTime>11/29/2021 21:38:57</publishTime>
+      <publishTime>12/03/2021 01:24:57</publishTime>
     </File>
     <File Include="Views/Lot/ListLotByDate1.cshtml">
       <publishTime>11/29/2021 21:38:57</publishTime>
     </File>
     <File Include="Views/Lot/ListLotByDate2.cshtml">
-      <publishTime>11/29/2021 21:38:57</publishTime>
+      <publishTime>12/04/2021 01:02:10</publishTime>
     </File>
     <File Include="Views/Lot/OnGoingLot.cshtml">
-      <publishTime>11/30/2021 15:04:43</publishTime>
+      <publishTime>12/04/2021 01:12:13</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>11/08/2021 22:04:42</publishTime>
@@ -6030,7 +6033,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/08/2021 22:04:42</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/01/2021 16:42:03</publishTime>
+      <publishTime>12/03/2021 01:14:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

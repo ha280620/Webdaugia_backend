@@ -14,9 +14,6 @@ function handleOnChange(){
     email.disabled = false;
     address.disabled = false;
     gender.disabled = false;
-    atmcode.disabled = false;
-    atmname.disabled = false;
-    
     user_save.style.display = "block";
 }
 function handleOffChange(){

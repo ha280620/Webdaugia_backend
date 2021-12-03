@@ -95,12 +95,12 @@
     <!-- END CUSTOMERS CHART -->
     <!--</div>-->
 
-    <div class="col-6">
+    <div class="col-8  col-md-12 col-sm-12">
         <!-- ORDERS TABLE -->
         <div class="box">
-            <div class="box-header">Đơn hàng gần đây</div>
+            <div class="box-header">Số lượng phiên đấu giá</div>
 
-            <div class="box-body overflow-scroll">
+            <div class="box-body">
 
                 <div>
                     <canvas id="myChart" width="400" height="200"></canvas>
@@ -108,18 +108,16 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-4  col-md-12 col-sm-12">
         <!-- ORDERS TABLE -->
-        <div class="box">
-            <div class="box-header">Đăng ký</div>
+        <div class="box" style="height:100%">
+            <div class="box-header">Số lượng đăng ký phiên đấu giá</div>
 
-            <div class="box-body overflow-scroll">
+            <div class="box-body">
 
-                <div class="row">
-                    <div class="col-6" width="400" height="200">
-                        <canvas id="myChartregister" width="400" height="200"></canvas>
-                    </div>
-                </div>
+           
+                        <canvas id="myChartregister" ></canvas>
+                
             </div>
         </div>
     </div>
@@ -133,7 +131,7 @@
         data: {
             labels: ['Bất động sản', 'Đất nền', 'Ô tô', 'Sưu tầm nghệ thuật', 'Tài sản thanh lý', 'Tài sản khác'],
             datasets: [{
-                label: '# of Votes',
+                label: 'Số lượng phiên đấu giá',
                 data: [@ViewBag.countLot1,@ViewBag.countLot2,@ViewBag.countLot3, @ViewBag.countLot4,@ViewBag.countLot5,@ViewBag.countLot6],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -171,13 +169,14 @@
             labels: ['Bất động sản', 'Đất nền', 'Ô tô', 'Sưu tầm nghệ thuật', 'Tài sản thanh lý', 'Tài sản khác'],
             datasets: [{
                 label: 'My First Dataset',
-                data: [@ViewBag.countregisterbid0,@ViewBag.countregisterbid1,@ViewBag.countregisterbid2,@ViewBag.countregisterbid2,@ViewBag.countregisterbid2],
+                data: [@ViewBag.countregisterbid0, @ViewBag.countregisterbid1,@ViewBag.countregisterbid2,@ViewBag.countregisterbid3,@ViewBag.countregisterbid4,@ViewBag.countregisterbid5],
                 backgroundColor: [
                     'rgb(255, 99, 132)',
                     'rgb(75, 192, 192)',
                     'rgb(255, 205, 86)',
                     'rgb(201, 203, 207)',
-                    'rgb(54, 162, 235)'
+                    'rgb(54, 162, 235)',
+                    'rgba(255, 159, 64, 0.2)',
                 ]
             }]
         },
