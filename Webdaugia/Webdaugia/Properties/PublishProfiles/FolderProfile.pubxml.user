@@ -207,7 +207,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/28/2021 14:43:21</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/CreateLot.cshtml">
-      <publishTime>11/28/2021 20:12:24</publishTime>
+      <publishTime>12/14/2021 13:01:24</publishTime>
     </File>
     <File Include="Areas/Admin/Views/AdLot/EditLink.cshtml">
       <publishTime>11/28/2021 14:51:46</publishTime>
@@ -4878,10 +4878,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/09/2021 21:47:15</publishTime>
     </File>
     <File Include="bin/Webdaugia.dll">
-      <publishTime>12/04/2021 01:16:33</publishTime>
+      <publishTime>12/14/2021 13:01:56</publishTime>
     </File>
     <File Include="bin/Webdaugia.pdb">
-      <publishTime>12/04/2021 01:16:33</publishTime>
+      <publishTime>12/14/2021 13:01:56</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>11/09/2021 21:47:16</publishTime>
@@ -5961,13 +5961,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/26/2021 11:58:10</publishTime>
     </File>
     <File Include="Views/Home/Header.cshtml">
-      <publishTime>11/30/2021 19:04:23</publishTime>
+      <publishTime>12/14/2021 10:38:33</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>11/29/2021 21:21:54</publishTime>
     </File>
     <File Include="Views/Home/Introduce.cshtml">
-      <publishTime>11/30/2021 17:17:52</publishTime>
+      <publishTime>12/14/2021 10:51:01</publishTime>
     </File>
     <File Include="Views/Home/Introduction.cshtml">
       <publishTime>12/01/2021 15:47:25</publishTime>
