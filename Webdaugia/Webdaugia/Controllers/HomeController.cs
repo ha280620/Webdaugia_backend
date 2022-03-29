@@ -23,6 +23,8 @@ namespace Webdaugia.Controllers
             homemodel.listOnGoingLot = listOnGoingLot;
             var listReadyLot = db.Lots.Where(x => x.TimeForRegisterEnd >= DateTime.Now && x.TimeForRegisterStart < DateTime.Now && x.Status == true).ToList();
             homemodel.listReadyLot = listReadyLot;
+            var listEndingLot = db.Lots.Where(x => x.TimeForBidEnd < DateTime.Now && x.Status == true).OrderByDescending(x => x.TimeForBidEnd).Take(9).ToList();
+            homemodel.listEndingLot = listEndingLot;
             var listCategory = db.Categories.Where(x=>x.Status == true).ToList();
             homemodel.listCategory = listCategory;
             return View(homemodel);

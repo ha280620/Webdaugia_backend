@@ -248,3 +248,4 @@ D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.dll
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.xml
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\bin\PagedList.Mvc.xml
 D:\git\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.AssemblyReference.cache
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Debug\Webdaugia.csproj.CopyComplete

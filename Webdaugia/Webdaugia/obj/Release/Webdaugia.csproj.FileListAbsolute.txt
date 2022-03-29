@@ -80,3 +80,4 @@ D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Release\Webdaugia.csproj.Cor
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Release\Webdaugia.dll
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Release\Webdaugia.pdb
 D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Release\Webdaugia.csproj.AssemblyReference.cache
+D:\Github\Webdaugia_backend\Webdaugia\Webdaugia\obj\Release\Webdaugia.csproj.CopyComplete
